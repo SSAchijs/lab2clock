@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd
 import pyaging as pya
 
-from bench.phenoage import INPUTS
+from lab2clock.clock_spec import FIELD_NAMES
 
 OUT = Path(__file__).resolve().parents[1] / "tests" / "data" / "phenoage_reference.csv"
 
@@ -30,7 +30,7 @@ def main() -> None:
         adata = pya.pp.df_to_adata(df, verbose=False)
         pya.pred.predict_age(adata, ["phenoage"], dir=tmp, verbose=False)
 
-    out = df[list(INPUTS)].copy()
+    out = df[list(FIELD_NAMES)].copy()
     out["phenoage_pyaging"] = adata.obs["phenoage"].to_numpy()
     out.index.name = "sample"
     OUT.parent.mkdir(parents=True, exist_ok=True)

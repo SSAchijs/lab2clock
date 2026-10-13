@@ -36,6 +36,8 @@ pyaging 0.5.7 expects these 10 features, by column name. Units come from `pyagin
 | `white_blood_cell_count` | 10^3 cells/uL | none | 4.9 to 12.3 |
 | `age` | years | none | 27 to 77 |
 
+In code, this table lives in `lab2clock/clock_spec.py`. It is the single source of truth for names, units and transforms, and every other module imports from it.
+
 Traps for anyone converting a lab report:
 
 - **CRP goes in raw, in mg/dL.** pyaging 0.5.0 replaced the old pre-logged `log_crp` input with `c_reactive_protein` and moved the log into the clock. Most labs print hs-CRP in mg/L, so a printed value must be divided by 10. If it is left in mg/L, PhenoAge rises by about 2.4 years (ln 10 × 0.0954 / 0.090165), for every patient.

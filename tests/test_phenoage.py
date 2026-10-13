@@ -4,7 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from bench.phenoage import INPUTS, phenoage
+from bench.phenoage import phenoage
+from lab2clock.clock_spec import FIELD_NAMES
 
 REFERENCE = Path(__file__).parent / "data" / "phenoage_reference.csv"
 
@@ -15,7 +16,7 @@ def load_reference():
         return [
             (
                 row["sample"],
-                {name: float(row[name]) for name in INPUTS},
+                {name: float(row[name]) for name in FIELD_NAMES},
                 float(row["phenoage_pyaging"]),
             )
             for row in rows

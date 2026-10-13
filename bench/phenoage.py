@@ -25,21 +25,6 @@ COEFFICIENTS = {
     "age": 0.0804,  # years
 }
 
-# Keyword arguments of `phenoage`, in pyaging's feature order. CRP is taken raw
-# and logged here, as pyaging does.
-INPUTS = (
-    "albumin",
-    "creatinine",
-    "glucose",
-    "c_reactive_protein",
-    "lymphocyte_percent",
-    "mean_cell_volume",
-    "red_cell_distribution_width",
-    "alkaline_phosphatase",
-    "white_blood_cell_count",
-    "age",
-)
-
 # Gompertz shape parameter (supplementary methods, p. 2).
 GAMMA = 0.0076927
 # Mortality horizon of the score, in months.
