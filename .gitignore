@@ -5,4 +5,7 @@ __pycache__/
 .DS_Store
 .ruff_cache/
 .pytest_cache/
+.cursor/
+.claude/
 Lab Report Extraction Build Plan.md
+.env
