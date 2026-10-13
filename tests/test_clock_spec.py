@@ -39,6 +39,11 @@ def test_units_are_ascii():
         assert field.unit.isascii(), field.name
 
 
+@pytest.mark.parametrize("name", MARKERS)
+def test_every_marker_has_an_error_tier(name):
+    assert BY_NAME[name].error is not None
+
+
 @pytest.mark.parametrize("field", FIELDS, ids=FIELD_NAMES)
 def test_limits_are_ordered_and_warn_sits_inside_error(field):
     for limits in (field.warn, field.error):
@@ -48,3 +53,20 @@ def test_limits_are_ordered_and_warn_sits_inside_error(field):
     if field.warn is not None and field.error is not None:
         assert field.error[0] <= field.warn[0]
         assert field.warn[1] <= field.error[1]
+
+
+@pytest.mark.parametrize(
+    ("name", "slip"),
+    [
+        # 90 umol/L converted again as if it were mg/dL.
+        ("creatinine", 90 * 88.42),
+        # White cells printed per uL (6500) instead of per 10^3 uL (6.5).
+        ("white_blood_cell_count", 6500),
+        # A lymphocyte share above the whole.
+        ("lymphocyte_percent", 150),
+        ("glucose", -1),
+    ],
+)
+def test_error_tier_rejects_impossible_values(name, slip):
+    low, high = BY_NAME[name].error
+    assert not low <= slip <= high
