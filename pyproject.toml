@@ -1,0 +1,11 @@
+[project]
+name = "lab2clock"
+version = "0.1.0"
+description = "Lab report in, clock inputs out"
+readme = "README.md"
+authors = [
+    { name = "Sebastian van der Chijs", email = "123059409+SSAchijs@users.noreply.github.com" }
+]
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = []
