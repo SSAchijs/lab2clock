@@ -29,6 +29,9 @@ select = ["E", "F", "I", "B", "UP"]
 testpaths = ["tests"]
 
 [dependency-groups]
+clock = [
+    "pyaging>=0.5.7",
+]
 dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.0",
