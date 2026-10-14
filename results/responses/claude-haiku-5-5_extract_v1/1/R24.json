@@ -1,0 +1,154 @@
+{
+  "key": "8cdad4ad9680cc97212aaffbd0a287382d785b87871fa351abf25d75afeaf12b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "pdf",
+  "files": {
+    "R24.pdf": "a92be88986a6a5e5b56cfc02aff8192f6cec77d7cff185c5f4e8c8ab22f37b62"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "WBC",
+        "value": "6.5",
+        "unit": "x10^3/uL",
+        "page": 1
+      },
+      {
+        "name": "RBC",
+        "value": "4.67",
+        "unit": "x10^6/uL",
+        "page": 1
+      },
+      {
+        "name": "Hemoglobin",
+        "value": "14.0",
+        "unit": "g/dL",
+        "page": 1
+      },
+      {
+        "name": "Hematocrit",
+        "value": "40.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MCV",
+        "value": "87.2",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "RDW-CV",
+        "value": "14.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Platelets",
+        "value": "321",
+        "unit": "x10^3/uL",
+        "page": 1
+      },
+      {
+        "name": "Neutrophils %",
+        "value": "35.5 L",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Lymphocytes %",
+        "value": "54.0 H",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Lymphocytes (Absolute)",
+        "value": "3.5",
+        "unit": "x10^3/uL",
+        "page": 1
+      },
+      {
+        "name": "Sodium",
+        "value": "135",
+        "unit": "mmol/L",
+        "page": 2
+      },
+      {
+        "name": "Potassium",
+        "value": "3.7",
+        "unit": "mmol/L",
+        "page": 2
+      },
+      {
+        "name": "BUN",
+        "value": "12",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Creatinine",
+        "value": "0.84",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Glucose",
+        "value": "114 H",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Total Protein",
+        "value": "7.4",
+        "unit": "g/dL",
+        "page": 2
+      },
+      {
+        "name": "Albumin",
+        "value": "3.9",
+        "unit": "g/dL",
+        "page": 2
+      },
+      {
+        "name": "Total Bilirubin",
+        "value": "0.2",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Alkaline Phosphatase",
+        "value": "68",
+        "unit": "IU/L",
+        "page": 2
+      },
+      {
+        "name": "ALT",
+        "value": "25",
+        "unit": "U/L",
+        "page": 2
+      },
+      {
+        "name": "hs-CRP",
+        "value": "0.58 H",
+        "unit": "mg/dL",
+        "page": 2
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4945,
+    "output_tokens": 672
+  }
+}

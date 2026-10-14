@@ -1,0 +1,154 @@
+{
+  "key": "e44a6807fc011316356adf19669fa8fbab0f27c643400dcc1b89acf4ab4a5d81",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "pdf",
+  "files": {
+    "R07.pdf": "3cbdc31c5420272516ae82bcc31e3fa6ef3494d423588d771f91a99591167540"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞计数",
+        "value": "5.5",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "5.18",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "144",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积",
+        "value": "43.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "83.7",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度",
+        "value": "13.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板计数",
+        "value": "209",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "65.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "25.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞绝对值",
+        "value": "1.4",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "钠",
+        "value": "142",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钾",
+        "value": "4.1",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "3.6",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "68",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "4.4",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "75",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白",
+        "value": "39",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "12.0",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "101",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "27",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "超敏C反应蛋白",
+        "value": "1.0",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3408,
+    "output_tokens": 671
+  }
+}
