@@ -68,6 +68,17 @@ flowchart TD
     D -. "anything that fails a check" .-> F["Withheld and listed, never guessed"]
 ```
 
+## How I built it
+
+I wrote the plan and split it into small tasks, each built with Claude Code
+or by hand and checked before the next. The design rule came first: the model
+only copies the page, and names, units and arithmetic live in tested code,
+because reports from different countries follow different standards and that
+part has to be deterministic. Models also checked me: a Claude pass over my
+hand-checked labels found four unit errors I had missed, and a critique of
+the published results by another model found gaps I then closed (listed in
+METHODS.md). Throughout, I kept the code as small as the job allows.
+
 ## If you are building something similar
 
 1. **Score what reaches the output, not what the model copied.** Count wrong and missing separately; only a wrong value hurts the user.
