@@ -3,209 +3,237 @@
   "split": "test",
   "conditions": {
     "layout": "table",
-    "language": "en",
-    "unit_system": "si"
+    "language": "zh",
+    "unit_system": "si",
+    "photo": true,
+    "previous": false,
+    "missing": null,
+    "planted": null
   },
-  "degradation": null,
+  "degradation": {
+    "seed": 1856395514
+  },
   "identity": {
-    "name": "Michael Peterson",
-    "patient_id": "MRN-87607777",
-    "specimen_id": "CN5583449",
+    "name": "官凤兰",
+    "patient_id": "7607777558",
+    "specimen_id": "344916402621",
     "date_of_birth": "2004-02-03",
     "collected": "2025-10-08",
     "reported": "2025-10-09",
-    "physician": "Dr. Kelly Thomas",
-    "facility": "Russell Medical Laboratory"
+    "physician": "刘龙",
+    "facility": "巢湖市人民医院"
   },
+  "previous_collected": null,
   "rows": [
     {
-      "name": "WBC",
+      "name": "白细胞计数",
       "value": "3.3",
       "unit": "10^9/L",
       "page": 1,
       "analyte": "white_blood_cell_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "RBC",
+      "name": "红细胞计数",
       "value": "4.88",
       "unit": "10^12/L",
       "page": 1,
       "analyte": null,
       "decimals": 2,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Hemoglobin",
+      "name": "血红蛋白",
       "value": "148",
       "unit": "g/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Hematocrit",
+      "name": "红细胞压积",
       "value": "43.9",
       "unit": "%",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "MCV",
+      "name": "平均红细胞体积",
       "value": "89.9",
       "unit": "fL",
       "page": 1,
       "analyte": "mean_cell_volume",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "RDW-CV",
+      "name": "红细胞分布宽度",
       "value": "12.3",
       "unit": "%",
       "page": 1,
       "analyte": "red_cell_distribution_width",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Platelets",
+      "name": "血小板计数",
       "value": "188",
       "unit": "10^9/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Neutrophils %",
+      "name": "中性粒细胞百分比",
       "value": "45.5",
       "unit": "%",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Lymphocytes %",
+      "name": "淋巴细胞百分比",
       "value": "42.4",
       "unit": "%",
       "page": 1,
       "analyte": "lymphocyte_percent",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Lymphocytes (Absolute)",
+      "name": "淋巴细胞绝对值",
       "value": "1.4",
       "unit": "10^9/L",
       "page": 1,
       "analyte": "lymphocyte_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Sodium",
+      "name": "钠",
       "value": "140",
       "unit": "mmol/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Potassium",
+      "name": "钾",
       "value": "4.0",
       "unit": "mmol/L",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Urea",
+      "name": "尿素",
       "value": "7.5",
       "unit": "mmol/L",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Creatinine",
+      "name": "肌酐",
       "value": "58",
       "unit": "µmol/L",
       "page": 1,
       "analyte": "creatinine",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Glucose",
+      "name": "葡萄糖",
       "value": "4.5",
       "unit": "mmol/L",
       "page": 1,
       "analyte": "glucose",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Total Protein",
+      "name": "总蛋白",
       "value": "71",
       "unit": "g/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Albumin",
+      "name": "白蛋白",
       "value": "44",
       "unit": "g/L",
       "page": 1,
       "analyte": "albumin",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Total Bilirubin",
+      "name": "总胆红素",
       "value": "13.7",
       "unit": "µmol/L",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Alkaline Phosphatase",
+      "name": "碱性磷酸酶",
       "value": "52",
       "unit": "U/L",
       "page": 1,
       "analyte": "alkaline_phosphatase",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "ALT",
+      "name": "丙氨酸氨基转移酶",
       "value": "13",
       "unit": "U/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "hs-CRP",
+      "name": "超敏C反应蛋白",
       "value": "1.0",
       "unit": "mg/L",
       "page": 1,
       "analyte": "c_reactive_protein",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     }
   ]
 }

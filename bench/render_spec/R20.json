@@ -2,9 +2,13 @@
   "report": "R20",
   "split": "test",
   "conditions": {
-    "layout": "table",
+    "layout": "multi_page",
     "language": "en",
-    "unit_system": "si"
+    "unit_system": "mixed",
+    "photo": false,
+    "previous": true,
+    "missing": null,
+    "planted": "wbc_per_ul"
   },
   "degradation": null,
   "identity": {
@@ -17,15 +21,17 @@
     "physician": "Dr. Teresa Mcmillan",
     "facility": "Ford Medical Laboratory"
   },
+  "previous_collected": "2024-07-25",
   "rows": [
     {
       "name": "WBC",
-      "value": "10.0",
+      "value": "10000",
       "unit": "10^9/L",
       "page": 1,
       "analyte": "white_blood_cell_count",
-      "decimals": 1,
-      "planted": null
+      "decimals": 0,
+      "planted": "wbc_per_ul",
+      "previous": "9.2"
     },
     {
       "name": "RBC",
@@ -34,7 +40,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 2,
-      "planted": null
+      "planted": null,
+      "previous": "5.20"
     },
     {
       "name": "Hemoglobin",
@@ -43,7 +50,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "132"
     },
     {
       "name": "Hematocrit",
@@ -52,7 +60,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "43.9"
     },
     {
       "name": "MCV",
@@ -61,7 +70,8 @@
       "page": 1,
       "analyte": "mean_cell_volume",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "87.9"
     },
     {
       "name": "RDW-CV",
@@ -70,7 +80,8 @@
       "page": 1,
       "analyte": "red_cell_distribution_width",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "12.5"
     },
     {
       "name": "Platelets",
@@ -79,7 +90,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "275"
     },
     {
       "name": "Neutrophils %",
@@ -88,7 +100,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "65.8"
     },
     {
       "name": "Lymphocytes %",
@@ -97,7 +110,8 @@
       "page": 1,
       "analyte": "lymphocyte_percent",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "26.7"
     },
     {
       "name": "Lymphocytes (Absolute)",
@@ -106,106 +120,118 @@
       "page": 1,
       "analyte": "lymphocyte_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "3.0"
     },
     {
       "name": "Sodium",
       "value": "141",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "149"
     },
     {
       "name": "Potassium",
       "value": "3.8",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "4.1"
     },
     {
       "name": "Urea",
       "value": "5.7",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "6.0"
     },
     {
       "name": "Creatinine",
-      "value": "65",
-      "unit": "µmol/L",
-      "page": 1,
+      "value": "0.74",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "creatinine",
-      "decimals": 0,
-      "planted": null
+      "decimals": 2,
+      "planted": null,
+      "previous": "0.76"
     },
     {
       "name": "Glucose",
-      "value": "4.9",
-      "unit": "mmol/L",
-      "page": 1,
+      "value": "89",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "glucose",
-      "decimals": 1,
-      "planted": null
+      "decimals": 0,
+      "planted": null,
+      "previous": "93"
     },
     {
       "name": "Total Protein",
       "value": "68",
       "unit": "g/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "63"
     },
     {
       "name": "Albumin",
       "value": "40",
       "unit": "g/L",
-      "page": 1,
+      "page": 2,
       "analyte": "albumin",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "39"
     },
     {
       "name": "Total Bilirubin",
       "value": "3.4",
       "unit": "µmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "3.4"
     },
     {
       "name": "Alkaline Phosphatase",
       "value": "90",
       "unit": "U/L",
-      "page": 1,
+      "page": 2,
       "analyte": "alkaline_phosphatase",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "87"
     },
     {
       "name": "ALT",
       "value": "17",
       "unit": "U/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "16"
     },
     {
       "name": "hs-CRP",
-      "value": "7.2",
-      "unit": "mg/L",
-      "page": 1,
+      "value": "0.72",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "c_reactive_protein",
-      "decimals": 1,
-      "planted": null
+      "decimals": 2,
+      "planted": null,
+      "previous": "0.74"
     }
   ]
 }

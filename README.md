@@ -87,7 +87,19 @@ Each report has two files. `bench/truth/R07.json` holds what is true about the p
 uv run python -m bench.spec
 ```
 
-A printed value is the truth converted into the display unit by lab2clock's own conversion table and rounded half up to the display decimals, as a lab rounds. The tests feed every render spec's rows through the whole pipeline, as a perfect reader would, and require each value to come back to the truth within half a printed step, in every layout, language and unit system. Until the variation matrix assigns conditions, every report is printed in English, SI units and the single-table layout.
+A printed value is the truth converted into the display unit by lab2clock's own conversion table and rounded half up to the display decimals, as a lab rounds. The tests feed every render spec's rows through the whole pipeline, as a perfect reader would, and require each value to come back to the truth within half a printed step, in every layout, language and unit system. Each report's conditions come from the variation matrix, `bench/matrix.csv`, one row per report. Across the twenty test reports every condition appears at least three times, so each gets a failure rate rather than an anecdote:
+
+| Condition | Test reports | Development reports |
+| --- | --- | --- |
+| Units: US / SI / mixed | 7 / 7 / 6 | 2 / 2 / 1 |
+| Layout: table / two-column / multi-page | 7 / 7 / 6 | 2 / 2 / 1 |
+| Chinese (always SI) | 3 | 1 |
+| Photo-degraded | 5 | 1 |
+| Planted implausible value | 3 | 1 |
+| Missing marker | 3 | 1 |
+| Previous-results column | 4 | 1 |
+
+A planted value is a real kind of slip that lands outside the error tier, so the expected outcome is an error on that marker: an MCV with its decimal point moved (89.3 printed 8.93), a lymphocyte percent times ten, or a white-cell count printed per µL under a 10^9/L unit. A white-cell slip also breaks the lymphocyte cross-check, which cannot tell which of the two is wrong, so the correctly printed percent is withheld too. Planted and missing conditions never touch the marker a patient was drawn for. A previous result is within 10% of the current one, rounded the same way, and dated 90 to 365 days earlier. The tests check the counts, and that a perfect reader of every report gets every marker back to the truth except those its conditions break, which must fail as errors.
 
 Each report prints a full blood count and metabolic panel, not only the nine markers: twelve more results, such as haemoglobin, platelets, sodium and ALT, all from the same NHANES respondent, so the whole page is one real person. They are distractors a reader must skip, except the absolute lymphocyte count, which the cross-check compares with the printed percent. All 7,523 NHANES blood counts pass that cross-check at the printed rounding.
 

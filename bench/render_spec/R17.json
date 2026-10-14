@@ -2,11 +2,17 @@
   "report": "R17",
   "split": "test",
   "conditions": {
-    "layout": "table",
+    "layout": "multi_page",
     "language": "en",
-    "unit_system": "si"
+    "unit_system": "us",
+    "photo": true,
+    "previous": false,
+    "missing": null,
+    "planted": null
   },
-  "degradation": null,
+  "degradation": {
+    "seed": 580923722
+  },
   "identity": {
     "name": "Sarah Aguirre",
     "patient_id": "MRN-84652055",
@@ -17,33 +23,37 @@
     "physician": "Dr. Colin Nunez",
     "facility": "Johnson Medical Laboratory"
   },
+  "previous_collected": null,
   "rows": [
     {
       "name": "WBC",
       "value": "6.5",
-      "unit": "10^9/L",
+      "unit": "x10^3/uL",
       "page": 1,
       "analyte": "white_blood_cell_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "RBC",
       "value": "4.41",
-      "unit": "10^12/L",
+      "unit": "x10^6/uL",
       "page": 1,
       "analyte": null,
       "decimals": 2,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Hemoglobin",
-      "value": "145",
-      "unit": "g/L",
+      "value": "14.5",
+      "unit": "g/dL",
       "page": 1,
       "analyte": null,
-      "decimals": 0,
-      "planted": null
+      "decimals": 1,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Hematocrit",
@@ -52,7 +62,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "MCV",
@@ -61,7 +72,8 @@
       "page": 1,
       "analyte": "mean_cell_volume",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "RDW-CV",
@@ -70,16 +82,18 @@
       "page": 1,
       "analyte": "red_cell_distribution_width",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Platelets",
       "value": "207",
-      "unit": "10^9/L",
+      "unit": "x10^3/uL",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Neutrophils %",
@@ -88,7 +102,8 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Lymphocytes %",
@@ -97,115 +112,128 @@
       "page": 1,
       "analyte": "lymphocyte_percent",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Lymphocytes (Absolute)",
       "value": "1.9",
-      "unit": "10^9/L",
+      "unit": "x10^3/uL",
       "page": 1,
       "analyte": "lymphocyte_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Sodium",
       "value": "136",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Potassium",
       "value": "4.0",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
-      "name": "Urea",
-      "value": "5.4",
-      "unit": "mmol/L",
-      "page": 1,
+      "name": "BUN",
+      "value": "15",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": null,
-      "decimals": 1,
-      "planted": null
+      "decimals": 0,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Creatinine",
-      "value": "57",
-      "unit": "µmol/L",
-      "page": 1,
+      "value": "0.64",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "creatinine",
-      "decimals": 0,
-      "planted": null
+      "decimals": 2,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Glucose",
-      "value": "4.9",
-      "unit": "mmol/L",
-      "page": 1,
+      "value": "88",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "glucose",
-      "decimals": 1,
-      "planted": null
+      "decimals": 0,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Total Protein",
-      "value": "76",
-      "unit": "g/L",
-      "page": 1,
+      "value": "7.6",
+      "unit": "g/dL",
+      "page": 2,
       "analyte": null,
-      "decimals": 0,
-      "planted": null
+      "decimals": 1,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Albumin",
-      "value": "42",
-      "unit": "g/L",
-      "page": 1,
+      "value": "4.2",
+      "unit": "g/dL",
+      "page": 2,
       "analyte": "albumin",
-      "decimals": 0,
-      "planted": null
+      "decimals": 1,
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Total Bilirubin",
-      "value": "5.1",
-      "unit": "µmol/L",
-      "page": 1,
+      "value": "0.3",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "Alkaline Phosphatase",
       "value": "55",
-      "unit": "U/L",
-      "page": 1,
+      "unit": "IU/L",
+      "page": 2,
       "analyte": "alkaline_phosphatase",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "ALT",
       "value": "5",
       "unit": "U/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": null
     },
     {
       "name": "hs-CRP",
-      "value": "0.5",
-      "unit": "mg/L",
-      "page": 1,
+      "value": "0.05",
+      "unit": "mg/dL",
+      "page": 2,
       "analyte": "c_reactive_protein",
-      "decimals": 1,
-      "planted": null
+      "decimals": 2,
+      "planted": null,
+      "previous": null
     }
   ]
 }

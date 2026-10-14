@@ -16,21 +16,24 @@ rounds.
 
     uv run python -m bench.spec
 
-regenerates both folders from bench/patients.csv. The variation matrix sets each
-report's conditions; until it exists, every report gets BASELINE.
+regenerates both folders from bench/patients.csv, with each report's conditions
+from the variation matrix, bench/matrix.csv.
 """
 
 import json
 from dataclasses import dataclass
+from datetime import date, timedelta
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from typing import Literal
 
+import numpy as np
 import pandas as pd
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from bench.identity import Identity, identity
 from bench.sample import OUT as PATIENTS
+from bench.sample import SEED
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
 from lab2clock.stage1 import RawItem, RawReport
@@ -40,10 +43,25 @@ from lab2clock.units import normalise_unit
 BENCH = Path(__file__).resolve().parent
 TRUTH = BENCH / "truth"
 RENDER_SPEC = BENCH / "render_spec"
+MATRIX = BENCH / "matrix.csv"
 
 Layout = Literal["table", "two_column", "multi_page"]
 Language = Literal["en", "zh"]
 UnitSystem = Literal["si", "us", "mixed"]
+
+# Each planted error is a slip that puts the printed value outside the error
+# tier, so the expected outcome is unambiguous: an error on that marker.
+# Planted kind -> (marker, power of ten the printed decimal point moves by).
+PLANTED: dict[str, tuple[str, int]] = {
+    # 89.3 fL printed 8.93: below the 30 fL floor.
+    "mcv_decimal": ("mean_cell_volume", -1),
+    # 30.7 % printed 307: above 100 %.
+    "lymphocyte_percent_x10": ("lymphocyte_percent", 1),
+    # 9.8 x 10^9/L printed 9800, a count per uL under the 10^9/L unit: above
+    # the 1500 ceiling.
+    "wbc_per_ul": ("white_blood_cell_count", 3),
+}
+Planted = Literal["mcv_decimal", "lymphocyte_percent_x10", "wbc_per_ul"]
 
 
 class Truth(BaseModel):
@@ -68,13 +86,37 @@ class Truth(BaseModel):
 
 
 class Conditions(BaseModel):
-    """How one report is printed: the tags errors are sliced by."""
+    """How one report is printed: the tags errors are sliced by.
+
+    photo: rendered and then degraded like a phone photo.
+    previous: a previous-results column beside the current one.
+    missing: a marker left off the report.
+    planted: a slip printed in place of one marker's value.
+    """
 
     model_config = ConfigDict(extra="forbid")
 
     layout: Layout
     language: Language
     unit_system: UnitSystem
+    photo: bool = False
+    previous: bool = False
+    missing: str | None = None
+    planted: Planted | None = None
+
+    @model_validator(mode="after")
+    def _coherent(self) -> "Conditions":
+        # Chinese labs print SI units.
+        if self.language == "zh" and self.unit_system != "si":
+            raise ValueError("a Chinese report prints SI units")
+        # A two-column list has no room for a second result column.
+        if self.previous and self.layout == "two_column":
+            raise ValueError("a two-column report has no previous column")
+        if self.missing is not None and self.missing not in MARKERS:
+            raise ValueError(f"missing must be a marker, not {self.missing!r}")
+        if self.planted and PLANTED[self.planted][0] == self.missing:
+            raise ValueError("cannot plant an error in a missing marker")
+        return self
 
 
 class PrintedRow(RawItem):
@@ -83,12 +125,14 @@ class PrintedRow(RawItem):
     analyte: the clock marker the row feeds, lymphocyte_count for the absolute
         count the cross-check reads, or None for a distractor.
     decimals: digits printed after the decimal mark.
-    planted: None, or why the printed value differs from the truth.
+    planted: None, or the planted kind when the printed value is a slip.
+    previous: the previous result, as printed, when the report has that column.
     """
 
     analyte: str | None
     decimals: int = Field(ge=0)
-    planted: str | None = None
+    planted: Planted | None = None
+    previous: str | None = None
 
 
 class Degradation(BaseModel):
@@ -109,6 +153,7 @@ class RenderSpec(BaseModel):
     conditions: Conditions
     degradation: Degradation | None = None
     identity: Identity
+    previous_collected: date | None = None
     rows: list[PrintedRow]
 
     def stage1(self) -> RawReport:
@@ -308,6 +353,15 @@ def display(marker: str, unit_system: UnitSystem) -> tuple[str, int]:
     return DISPLAY[unit_system][marker]
 
 
+def shifted(printed: str, power: int) -> tuple[str, int]:
+    """`printed` with its decimal point moved `power` places, and its decimals.
+
+    The digits stay as printed, as in a real slip: 89.3 moved -1 is 8.93.
+    """
+    text = format(Decimal(printed).scaleb(power), "f")
+    return text, len(text.partition(".")[2])
+
+
 def rounded(value: float, decimals: int) -> str:
     """`value` rounded half up to `decimals`, as a lab rounds."""
     # Drop float noise (0.2259999999 is 0.226) before rounding.
@@ -352,9 +406,24 @@ def truth(patient: pd.Series) -> Truth:
     )
 
 
+# A previous result differs from the current one by up to this share.
+PREVIOUS_DRIFT = 0.10
+# And was collected this many days before it.
+PREVIOUS_DAYS = (90, 365)
+
+
+def report_rng(report: str) -> np.random.Generator:
+    """A random generator for one report, the same on every run."""
+    return np.random.default_rng([SEED, int(report[1:])])
+
+
 def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
+    rng = report_rng(patient.name)
+    who = identity(patient.name, int(patient["age"]), conditions.language)
     rows = []
     for key in (*CBC, *CHEMISTRY):
+        if key == conditions.missing:
+            continue
         if key in EXTRAS:
             row = extra_row(key, patient, conditions)
         else:
@@ -369,14 +438,47 @@ def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
             )
         if conditions.layout == "multi_page" and key in CHEMISTRY:
             row.page = 2
+        if conditions.previous:
+            # From the correct printed value, even where a slip is planted.
+            drift = 1 + rng.uniform(-PREVIOUS_DRIFT, PREVIOUS_DRIFT)
+            row.previous = rounded(float(row.value) * drift, row.decimals)
+        if conditions.planted and PLANTED[conditions.planted][0] == key:
+            row.value, row.decimals = shifted(row.value, PLANTED[conditions.planted][1])
+            row.planted = conditions.planted
         rows.append(row)
+    previous_collected = None
+    if conditions.previous:
+        days = int(rng.integers(PREVIOUS_DAYS[0], PREVIOUS_DAYS[1] + 1))
+        previous_collected = who.collected - timedelta(days=days)
+    degradation = None
+    if conditions.photo:
+        degradation = Degradation(seed=int(rng.integers(2**31)))
     return RenderSpec(
         report=patient.name,
         split=patient["split"],
         conditions=conditions,
-        identity=identity(patient.name, int(patient["age"]), conditions.language),
+        degradation=degradation,
+        identity=who,
+        previous_collected=previous_collected,
         rows=rows,
     )
+
+
+def load_matrix(path: Path = MATRIX) -> dict[str, Conditions]:
+    """Per report, its conditions from the variation matrix."""
+    matrix = pd.read_csv(path, index_col="report", dtype=str, keep_default_na=False)
+    conditions = {}
+    for report, row in matrix.iterrows():
+        conditions[report] = Conditions(
+            layout=row["layout"],
+            language=row["language"],
+            unit_system=row["unit_system"],
+            photo=row["photo"] == "yes",
+            previous=row["previous"] == "yes",
+            missing=row["missing"] or None,
+            planted=row["planted"] or None,
+        )
+    return conditions
 
 
 def write(model: BaseModel, folder: Path) -> None:
@@ -387,9 +489,12 @@ def write(model: BaseModel, folder: Path) -> None:
 
 def main() -> None:
     patients = pd.read_csv(PATIENTS, index_col="report")
-    for _, patient in patients.iterrows():
+    matrix = load_matrix()
+    if list(matrix) != list(patients.index):
+        raise ValueError("the matrix must list every report, in order")
+    for report, patient in patients.iterrows():
         write(truth(patient), TRUTH)
-        write(render_spec(patient, BASELINE), RENDER_SPEC)
+        write(render_spec(patient, matrix[report]), RENDER_SPEC)
     print(f"wrote {len(patients)} reports to {TRUTH} and {RENDER_SPEC}")
 
 

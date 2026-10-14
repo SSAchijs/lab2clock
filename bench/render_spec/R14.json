@@ -2,210 +2,236 @@
   "report": "R14",
   "split": "test",
   "conditions": {
-    "layout": "table",
-    "language": "en",
-    "unit_system": "si"
+    "layout": "multi_page",
+    "language": "zh",
+    "unit_system": "si",
+    "photo": false,
+    "previous": true,
+    "missing": null,
+    "planted": null
   },
   "degradation": null,
   "identity": {
-    "name": "Joseph Bradley",
-    "patient_id": "MRN-47013100",
-    "specimen_id": "JL9786954",
+    "name": "张玉兰",
+    "patient_id": "7013100978",
+    "specimen_id": "695445286091",
     "date_of_birth": "1959-01-14",
     "collected": "2025-05-23",
     "reported": "2025-05-25",
-    "physician": "Dr. Megan Burnett",
-    "facility": "Mcmillan Medical Laboratory"
+    "physician": "陈艳",
+    "facility": "荆门市人民医院"
   },
+  "previous_collected": "2025-02-15",
   "rows": [
     {
-      "name": "WBC",
+      "name": "白细胞计数",
       "value": "7.5",
       "unit": "10^9/L",
       "page": 1,
       "analyte": "white_blood_cell_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "7.2"
     },
     {
-      "name": "RBC",
+      "name": "红细胞计数",
       "value": "4.40",
       "unit": "10^12/L",
       "page": 1,
       "analyte": null,
       "decimals": 2,
-      "planted": null
+      "planted": null,
+      "previous": "4.69"
     },
     {
-      "name": "Hemoglobin",
+      "name": "血红蛋白",
       "value": "120",
       "unit": "g/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "110"
     },
     {
-      "name": "Hematocrit",
+      "name": "红细胞压积",
       "value": "37.9",
       "unit": "%",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "36.5"
     },
     {
-      "name": "MCV",
+      "name": "平均红细胞体积",
       "value": "86.2",
       "unit": "fL",
       "page": 1,
       "analyte": "mean_cell_volume",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "88.1"
     },
     {
-      "name": "RDW-CV",
+      "name": "红细胞分布宽度",
       "value": "18.6",
       "unit": "%",
       "page": 1,
       "analyte": "red_cell_distribution_width",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "17.9"
     },
     {
-      "name": "Platelets",
+      "name": "血小板计数",
       "value": "170",
       "unit": "10^9/L",
       "page": 1,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "160"
     },
     {
-      "name": "Neutrophils %",
+      "name": "中性粒细胞百分比",
       "value": "65.6",
       "unit": "%",
       "page": 1,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "71.0"
     },
     {
-      "name": "Lymphocytes %",
+      "name": "淋巴细胞百分比",
       "value": "19.3",
       "unit": "%",
       "page": 1,
       "analyte": "lymphocyte_percent",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "19.4"
     },
     {
-      "name": "Lymphocytes (Absolute)",
+      "name": "淋巴细胞绝对值",
       "value": "1.4",
       "unit": "10^9/L",
       "page": 1,
       "analyte": "lymphocyte_count",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "1.3"
     },
     {
-      "name": "Sodium",
+      "name": "钠",
       "value": "143",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "146"
     },
     {
-      "name": "Potassium",
+      "name": "钾",
       "value": "5.6",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "5.8"
     },
     {
-      "name": "Urea",
+      "name": "尿素",
       "value": "12.5",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "13.4"
     },
     {
-      "name": "Creatinine",
+      "name": "肌酐",
       "value": "102",
       "unit": "µmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": "creatinine",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "110"
     },
     {
-      "name": "Glucose",
+      "name": "葡萄糖",
       "value": "14.9",
       "unit": "mmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": "glucose",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "16.2"
     },
     {
-      "name": "Total Protein",
+      "name": "总蛋白",
       "value": "65",
       "unit": "g/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "64"
     },
     {
-      "name": "Albumin",
+      "name": "白蛋白",
       "value": "33",
       "unit": "g/L",
-      "page": 1,
+      "page": 2,
       "analyte": "albumin",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "33"
     },
     {
-      "name": "Total Bilirubin",
+      "name": "总胆红素",
       "value": "3.4",
       "unit": "µmol/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "3.1"
     },
     {
-      "name": "Alkaline Phosphatase",
+      "name": "碱性磷酸酶",
       "value": "115",
       "unit": "U/L",
-      "page": 1,
+      "page": 2,
       "analyte": "alkaline_phosphatase",
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "123"
     },
     {
-      "name": "ALT",
+      "name": "丙氨酸氨基转移酶",
       "value": "21",
       "unit": "U/L",
-      "page": 1,
+      "page": 2,
       "analyte": null,
       "decimals": 0,
-      "planted": null
+      "planted": null,
+      "previous": "21"
     },
     {
-      "name": "hs-CRP",
+      "name": "超敏C反应蛋白",
       "value": "3.5",
       "unit": "mg/L",
-      "page": 1,
+      "page": 2,
       "analyte": "c_reactive_protein",
       "decimals": 1,
-      "planted": null
+      "planted": null,
+      "previous": "3.7"
     }
   ]
 }

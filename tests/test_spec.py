@@ -11,6 +11,10 @@ from bench.spec import (
     BASELINE,
     CBC,
     CHEMISTRY,
+    MATRIX,
+    PLANTED,
+    PREVIOUS_DAYS,
+    PREVIOUS_DRIFT,
     RENDER_SPEC,
     TRUTH,
     Conditions,
@@ -19,8 +23,10 @@ from bench.spec import (
     RenderSpec,
     Truth,
     UnitSystem,
+    load_matrix,
     printed_value,
     render_spec,
+    shifted,
     truth,
 )
 from lab2clock.assemble import assemble
@@ -31,11 +37,13 @@ from lab2clock.units import normalise_unit
 
 REPORTS = [f"R{i:02d}" for i in range(1, 26)]
 
+# Chinese reports print SI units only.
 ALL_CONDITIONS = [
     Conditions(layout=layout, language=language, unit_system=units)
     for layout, language, units in itertools.product(
         get_args(Layout), get_args(Language), get_args(UnitSystem)
     )
+    if language == "en" or units == "si"
 ]
 
 
@@ -67,7 +75,8 @@ def test_committed_files_match_a_fresh_build(patients, report):
     # Catches a hand edit, or a change to the builder without regenerating.
     patient = patients.loc[report]
     assert load(Truth, TRUTH, report) == truth(patient)
-    assert load(RenderSpec, RENDER_SPEC, report) == render_spec(patient, BASELINE)
+    conditions = load_matrix()[report]
+    assert load(RenderSpec, RENDER_SPEC, report) == render_spec(patient, conditions)
 
 
 @pytest.mark.parametrize("report", REPORTS)
@@ -86,15 +95,28 @@ def test_truth_holds_the_sampled_patient(patients, report):
 
 
 def assert_round_trip(spec: RenderSpec, t: Truth):
+    """Every marker comes back to the truth, bar those the conditions break.
+
+    A planted slip and a missing marker must each raise an error on their
+    marker. A planted white-cell count also breaks the lymphocyte cross-check,
+    which cannot tell which of the two is wrong.
+    """
     out = assemble(spec.stage1(), age=t.age)
-    assert out["ok"], out["issues"]
-    assert out["missing"] == []
+    planted = {row.analyte for row in spec.rows if row.planted}
+    expected = planted | {spec.conditions.missing} - {None}
+    allowed = set(expected)
+    if "white_blood_cell_count" in planted:
+        allowed.add("lymphocyte_percent")
+    errored = {i["analyte"] for i in out["issues"] if i["severity"] == "error"}
+    assert expected <= errored <= allowed, out["issues"]
+    assert out["ok"] == (not expected)
+    assert set(out["missing"]) == errored
     # Exactly the distractors stay unmapped.
     distractors = [row.name for row in spec.rows if row.analyte is None]
     assert [item["name"] for item in out["unmapped"]] == distractors
     for row in spec.rows:
         assert match(row.name, row.unit) == row.analyte
-        if row.analyte not in MARKERS:
+        if row.analyte not in MARKERS or row.analyte in errored:
             continue
         # Rounding to the printed decimals moves a value by at most half a step.
         step = convert(row.analyte, 10.0**-row.decimals, normalise_unit(row.unit))
@@ -204,3 +226,113 @@ def test_every_report_prints_the_same_extras(patients):
 def test_absolute_lymphocytes_feed_the_cross_check(patients):
     rows = render_spec(patients.iloc[0], BASELINE).rows
     assert [r.analyte for r in rows].count(LYMPHOCYTE_COUNT) == 1
+
+
+# The variation matrix.
+
+
+@pytest.fixture(scope="module")
+def matrix():
+    return pd.read_csv(MATRIX, index_col="report", keep_default_na=False)
+
+
+def test_matrix_lists_every_report_with_its_split(matrix, patients):
+    assert list(matrix.index) == REPORTS
+    assert list(matrix["split"]) == list(patients["split"])
+
+
+def test_every_matrix_row_is_valid_conditions():
+    assert len(load_matrix()) == len(REPORTS)
+
+
+def counts(rows, column):
+    return rows[column].value_counts().to_dict()
+
+
+def test_test_set_spreads_each_condition_at_least_three_times(matrix):
+    test = matrix[matrix["split"] == "test"]
+    assert counts(test, "unit_system") == {"us": 7, "si": 7, "mixed": 6}
+    assert counts(test, "layout") == {"table": 7, "two_column": 7, "multi_page": 6}
+    assert counts(test, "language")["zh"] == 3
+    assert counts(test, "photo")["yes"] == 5
+    assert counts(test, "previous")["yes"] == 4
+    assert (test["missing"] != "").sum() == 3
+    assert (test["planted"] != "").sum() == 3
+    # One of each planted kind, and three different missing markers.
+    assert set(test["planted"]) - {""} == set(PLANTED)
+    assert (test["missing"] != "").sum() == len(set(test["missing"]) - {""})
+
+
+def test_dev_set_has_one_of_each_condition(matrix):
+    dev = matrix[matrix["split"] == "dev"]
+    assert set(dev["unit_system"]) == set(get_args(UnitSystem))
+    assert set(dev["layout"]) == set(get_args(Layout))
+    for column in ("photo", "previous", "missing", "planted"):
+        assert (dev[column] != "").sum() == 1, column
+    assert (dev["language"] == "zh").sum() == 1
+
+
+def test_conditions_spare_the_values_a_patient_was_drawn_for(matrix, patients):
+    forced = {"high_crp": "c_reactive_protein", "high_glucose": "glucose"}
+    for report, row in matrix.iterrows():
+        marker = forced.get(patients.loc[report, "reason"])
+        if marker is None:
+            continue
+        planted = PLANTED[row["planted"]][0] if row["planted"] else None
+        assert marker not in {row["missing"], planted}, report
+
+
+@pytest.mark.parametrize("report", REPORTS)
+def test_committed_conditions_are_printed(report):
+    spec = load(RenderSpec, RENDER_SPEC, report)
+    c = spec.conditions
+    analytes = [row.analyte for row in spec.rows]
+    assert (spec.degradation is not None) == c.photo
+    assert (spec.previous_collected is not None) == c.previous
+    assert all((row.previous is not None) == c.previous for row in spec.rows)
+    if c.missing:
+        assert c.missing not in analytes
+    planted = [row for row in spec.rows if row.planted]
+    assert [row.planted for row in planted] == ([c.planted] if c.planted else [])
+    if c.previous:
+        days = (spec.identity.collected - spec.previous_collected).days
+        assert PREVIOUS_DAYS[0] <= days <= PREVIOUS_DAYS[1]
+
+
+@pytest.mark.parametrize("report", REPORTS)
+def test_previous_results_stay_near_the_current_ones(report):
+    spec = load(RenderSpec, RENDER_SPEC, report)
+    for row in spec.rows:
+        if row.previous is None or row.planted:
+            continue
+        current, previous = float(row.value), float(row.previous)
+        # Within the drift, plus a printed step either side for rounding.
+        step = 10.0**-row.decimals
+        assert abs(previous - current) <= PREVIOUS_DRIFT * current + 2 * step
+
+
+@pytest.mark.parametrize(
+    ("printed", "power", "expected"),
+    [
+        ("89.3", -1, ("8.93", 2)),
+        ("30.7", 1, ("307", 0)),
+        ("9.8", 3, ("9800", 0)),
+        ("10.0", 3, ("10000", 0)),
+    ],
+)
+def test_a_slip_moves_the_decimal_point_and_keeps_the_digits(printed, power, expected):
+    assert shifted(printed, power) == expected
+
+
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"language": "zh", "unit_system": "us"},
+        {"layout": "two_column", "previous": True},
+        {"missing": "hemoglobin"},
+        {"missing": "mean_cell_volume", "planted": "mcv_decimal"},
+    ],
+)
+def test_incoherent_conditions_are_refused(fields):
+    with pytest.raises(ValidationError):
+        Conditions(**{**BASELINE.model_dump(), **fields})
