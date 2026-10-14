@@ -5,6 +5,7 @@ import pytest
 
 from bench import nhanes
 from bench.nhanes import (
+    DISTRACTORS,
     FILES,
     REQUIRED,
     UNITS,
@@ -115,7 +116,7 @@ def test_download_reuses_a_cached_file(tmp_path, monkeypatch):
 
 def test_converts_to_clock_units():
     clock = to_clock_units(build(frames({1: ADULT})))
-    assert list(clock.columns) == [*FIELD_NAMES, "crp_below_lod"]
+    assert list(clock.columns) == [*FIELD_NAMES, "crp_below_lod", *DISTRACTORS]
     row = clock.loc[1]
     assert row["age"] == 52
     assert row["albumin"] == pytest.approx(42)

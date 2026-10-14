@@ -28,11 +28,29 @@
       "planted": null
     },
     {
-      "name": "Lymphocytes %",
-      "value": "36.3",
+      "name": "RBC",
+      "value": "4.72",
+      "unit": "10^12/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 2,
+      "planted": null
+    },
+    {
+      "name": "Hemoglobin",
+      "value": "164",
+      "unit": "g/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Hematocrit",
+      "value": "47.4",
       "unit": "%",
       "page": 1,
-      "analyte": "lymphocyte_percent",
+      "analyte": null,
       "decimals": 1,
       "planted": null
     },
@@ -55,12 +73,66 @@
       "planted": null
     },
     {
-      "name": "Albumin",
-      "value": "37",
-      "unit": "g/L",
+      "name": "Platelets",
+      "value": "72",
+      "unit": "10^9/L",
       "page": 1,
-      "analyte": "albumin",
+      "analyte": null,
       "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Neutrophils %",
+      "value": "50.4",
+      "unit": "%",
+      "page": 1,
+      "analyte": null,
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Lymphocytes %",
+      "value": "36.3",
+      "unit": "%",
+      "page": 1,
+      "analyte": "lymphocyte_percent",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Lymphocytes (Absolute)",
+      "value": "1.8",
+      "unit": "10^9/L",
+      "page": 1,
+      "analyte": "lymphocyte_count",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Sodium",
+      "value": "141",
+      "unit": "mmol/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Potassium",
+      "value": "4.7",
+      "unit": "mmol/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Urea",
+      "value": "5.0",
+      "unit": "mmol/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 1,
       "planted": null
     },
     {
@@ -82,11 +154,47 @@
       "planted": null
     },
     {
+      "name": "Total Protein",
+      "value": "66",
+      "unit": "g/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Albumin",
+      "value": "37",
+      "unit": "g/L",
+      "page": 1,
+      "analyte": "albumin",
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Total Bilirubin",
+      "value": "23.9",
+      "unit": "µmol/L",
+      "page": 1,
+      "analyte": null,
+      "decimals": 1,
+      "planted": null
+    },
+    {
       "name": "Alkaline Phosphatase",
       "value": "65",
       "unit": "U/L",
       "page": 1,
       "analyte": "alkaline_phosphatase",
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "ALT",
+      "value": "62",
+      "unit": "U/L",
+      "page": 1,
+      "analyte": null,
       "decimals": 0,
       "planted": null
     },

@@ -1,8 +1,9 @@
 """The 25 patients behind the fake reports, sampled from NHANES with a fixed seed.
 
 Each patient is one real respondent: age and the nine markers in clock units,
-from bench.nhanes. Five are for prompt development and twenty for the scored
-test set, so the prompt is never tuned on a report it is scored on.
+plus the distractor results printed beside them, from bench.nhanes. Five are for
+prompt development and twenty for the scored test set, so the prompt is never
+tuned on a report it is scored on.
 
 A purely random sample rarely contains the large values that exercise different
 paths: a random 20 has fewer than three CRPs above 10 mg/L about 65% of the
@@ -23,7 +24,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from bench.nhanes import CLOCK_OUT
+from bench.nhanes import CLOCK_OUT, DISTRACTORS
 from lab2clock.clock_spec import FIELD_NAMES
 
 OUT = Path(__file__).resolve().parent / "patients.csv"
@@ -94,7 +95,8 @@ def sample(clock: pd.DataFrame, seed: int = SEED) -> pd.DataFrame:
 
     out = pd.DataFrame(rows)
     out.index = pd.Index([f"R{i:02d}" for i in range(1, len(out) + 1)], name="report")
-    values = clock.loc[out["SEQN"], list(FIELD_NAMES)].set_index(out.index)
+    columns = [*FIELD_NAMES, *DISTRACTORS]
+    values = clock.loc[out["SEQN"], columns].set_index(out.index)
     return pd.concat([out, values], axis=1)
 
 

@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
 
+from bench.nhanes import DISTRACTORS
 from bench.sample import (
     AGES,
     OUT,
@@ -17,7 +18,7 @@ def pool(n: int = 300, n_high_crp: int = 10, n_high_glucose: int = 10):
     rows = {}
     for i in range(n):
         rows[1000 + i] = {
-            **{name: 1.0 for name in FIELD_NAMES},
+            **{name: 1.0 for name in (*FIELD_NAMES, *DISTRACTORS)},
             "age": 20 + i % 61,  # 20 to 80
             "glucose": 12.0 if i < n_high_glucose else 5.0,
             "c_reactive_protein": 2.0 if n - i <= n_high_crp else 0.2,
@@ -57,6 +58,10 @@ def test_committed_sample_meets_each_minimum(committed, split):
 def test_committed_reasons_are_true(committed):
     assert high_crp(committed[committed["reason"] == "high_crp"]).all()
     assert high_glucose(committed[committed["reason"] == "high_glucose"]).all()
+
+
+def test_committed_sample_has_every_distractor(committed):
+    assert not committed[list(DISTRACTORS)].isna().any().any()
 
 
 def test_committed_values_are_clock_inputs_within_the_error_tier(committed):

@@ -18,6 +18,11 @@ page beside each .xpt file. Two codebook facts shape the table:
   it are filled with 0.15 / sqrt(2) and coded LBDHRPLC = 1, kept here as
   crp_below_lod so the substitution stays visible.
 
+The table also keeps twelve results that are not clock inputs, from the same
+files: the rest of a blood count and a metabolic panel. The reports print them
+as distractors, so every row on a report is one real person's result. They are
+not required, so they do not change who counts as complete.
+
 Downloads are cached in bench/data/nhanes/ and checked against a SHA-256, so a
 silently revised file fails instead of changing the truth. Needs network access
 to wwwn.cdc.gov on the first run:
@@ -80,6 +85,29 @@ class Variable:
     unit: str
 
 
+# Printed on the reports as distractors, never clock inputs. NHANES's SI
+# columns are kept where it publishes them.
+DISTRACTOR_VARIABLES: tuple[Variable, ...] = (
+    Variable("CBC_J", "LBXRBCSI", "red_blood_cell_count", "million cells/uL"),
+    Variable("CBC_J", "LBXHGB", "hemoglobin", "g/dL"),
+    Variable("CBC_J", "LBXHCT", "hematocrit", "%"),
+    Variable("CBC_J", "LBXPLTSI", "platelet_count", "1000 cells/uL"),
+    Variable("CBC_J", "LBXNEPCT", "neutrophil_percent", "%"),
+    # Printed beside the percent; the cross-check compares the two.
+    Variable("CBC_J", "LBDLYMNO", "lymphocyte_count", "1000 cells/uL"),
+    Variable("BIOPRO_J", "LBXSNASI", "sodium", "mmol/L"),
+    Variable("BIOPRO_J", "LBXSKSI", "potassium", "mmol/L"),
+    Variable("BIOPRO_J", "LBXSBU", "urea_nitrogen", "mg/dL"),
+    Variable("BIOPRO_J", "LBDSBUSI", "urea_nitrogen_si", "mmol/L"),
+    Variable("BIOPRO_J", "LBXSTP", "total_protein", "g/dL"),
+    Variable("BIOPRO_J", "LBDSTPSI", "total_protein_si", "g/L"),
+    Variable("BIOPRO_J", "LBXSTB", "total_bilirubin", "mg/dL"),
+    Variable("BIOPRO_J", "LBDSTBSI", "total_bilirubin_si", "umol/L"),
+    Variable("BIOPRO_J", "LBXSATSI", "alanine_aminotransferase", "U/L"),
+)
+
+DISTRACTORS: tuple[str, ...] = tuple(v.column for v in DISTRACTOR_VARIABLES)
+
 VARIABLES: tuple[Variable, ...] = (
     Variable("DEMO_J", "RIDAGEYR", "age", "years"),
     Variable("BIOPRO_J", "LBXSAL", "albumin", "g/dL"),
@@ -98,6 +126,7 @@ VARIABLES: tuple[Variable, ...] = (
     Variable("BIOPRO_J", "LBDSGLSI", "glucose_si", "mmol/L"),
     # 1 when CRP was below the detection limit and filled with LLOD / sqrt(2).
     Variable("HSCRP_J", "LBDHRPLC", "crp_below_lod", "code"),
+    *DISTRACTOR_VARIABLES,
 )
 
 UNITS: dict[str, str] = {v.column: v.unit for v in VARIABLES}
@@ -193,7 +222,8 @@ def load(cache: Path = CACHE) -> pd.DataFrame:
 
 
 def to_clock_units(table: pd.DataFrame) -> pd.DataFrame:
-    """The ten clock inputs in the clock's units, plus crp_below_lod.
+    """The ten clock inputs in the clock's units, plus crp_below_lod and the
+    distractors in their published units.
 
     Each published unit goes through lab2clock's unit normaliser and conversion
     table, exactly as a printed unit on a report would.
@@ -205,7 +235,8 @@ def to_clock_units(table: pd.DataFrame) -> pd.DataFrame:
         unit = normalise_unit(UNITS[marker])
         clock[marker] = table[marker].map(lambda v, m=marker, u=unit: convert(m, v, u))
     clock["crp_below_lod"] = table["crp_below_lod"]
-    return clock[[*FIELD_NAMES, "crp_below_lod"]]
+    clock[list(DISTRACTORS)] = table[list(DISTRACTORS)]
+    return clock[[*FIELD_NAMES, "crp_below_lod", *DISTRACTORS]]
 
 
 def check_si(table: pd.DataFrame, clock: pd.DataFrame) -> None:

@@ -89,6 +89,8 @@ uv run python -m bench.spec
 
 A printed value is the truth converted into the display unit by lab2clock's own conversion table and rounded half up to the display decimals, as a lab rounds. The tests feed every render spec's rows through the whole pipeline, as a perfect reader would, and require each value to come back to the truth within half a printed step, in every layout, language and unit system. Until the variation matrix assigns conditions, every report is printed in English, SI units and the single-table layout.
 
+Each report prints a full blood count and metabolic panel, not only the nine markers: twelve more results, such as haemoglobin, platelets, sodium and ALT, all from the same NHANES respondent, so the whole page is one real person. They are distractors a reader must skip, except the absolute lymphocyte count, which the cross-check compares with the printed percent. All 7,523 NHANES blood counts pass that cross-check at the printed rounding.
+
 The identity is made by [Faker](https://faker.readthedocs.io/) from a seed, in the report's language: a patient name, patient and specimen numbers, dates, a physician and a facility. It is distractor text, as on a real report, and involves no real person. The date of birth is drawn so the patient is exactly the truth's age on the collection date, and no identity text maps to a clock marker.
 
 ## Usage

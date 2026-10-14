@@ -9,6 +9,8 @@ from pydantic import ValidationError
 from bench.sample import OUT as PATIENTS
 from bench.spec import (
     BASELINE,
+    CBC,
+    CHEMISTRY,
     RENDER_SPEC,
     TRUTH,
     Conditions,
@@ -24,7 +26,7 @@ from bench.spec import (
 from lab2clock.assemble import assemble
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
-from lab2clock.synonyms import match
+from lab2clock.synonyms import LYMPHOCYTE_COUNT, match
 from lab2clock.units import normalise_unit
 
 REPORTS = [f"R{i:02d}" for i in range(1, 26)]
@@ -86,9 +88,14 @@ def test_truth_holds_the_sampled_patient(patients, report):
 def assert_round_trip(spec: RenderSpec, t: Truth):
     out = assemble(spec.stage1(), age=t.age)
     assert out["ok"], out["issues"]
-    assert out["missing"] == [] and out["unmapped"] == []
+    assert out["missing"] == []
+    # Exactly the distractors stay unmapped.
+    distractors = [row.name for row in spec.rows if row.analyte is None]
+    assert [item["name"] for item in out["unmapped"]] == distractors
     for row in spec.rows:
         assert match(row.name, row.unit) == row.analyte
+        if row.analyte not in MARKERS:
+            continue
         # Rounding to the printed decimals moves a value by at most half a step.
         step = convert(row.analyte, 10.0**-row.decimals, normalise_unit(row.unit))
         got = out["inputs"][row.analyte]["value"]
@@ -176,3 +183,24 @@ def test_stage1_view_drops_what_the_reader_cannot_see():
     spec = load(RenderSpec, RENDER_SPEC, "R01")
     item = spec.stage1().items[0].model_dump()
     assert set(item) == {"name", "value", "unit", "page"}
+
+
+# Extra rows.
+
+
+def test_us_report_calls_urea_bun(patients):
+    conditions = BASELINE.model_copy(update={"unit_system": "us"})
+    rows = {row.name: row for row in render_spec(patients.iloc[0], conditions).rows}
+    assert rows["BUN"].unit == "mg/dL"
+    assert "Urea" not in rows
+
+
+def test_every_report_prints_the_same_extras(patients):
+    for _, patient in patients.iterrows():
+        rows = render_spec(patient, BASELINE).rows
+        assert len(rows) == len(CBC) + len(CHEMISTRY)
+
+
+def test_absolute_lymphocytes_feed_the_cross_check(patients):
+    rows = render_spec(patients.iloc[0], BASELINE).rows
+    assert [r.analyte for r in rows].count(LYMPHOCYTE_COUNT) == 1
