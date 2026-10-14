@@ -169,6 +169,21 @@ This writes `results/responses/oracle/R01.json` and so on, one stage-1 report ea
 
 The scorer converts the printed value with lab2clock's own conversion table. That table is checked independently elsewhere, by its tests against the factors labs publish and by `bench.nhanes` against the SI columns NHANES computed itself, so the oracle run is free to look for wiring bugs instead.
 
+Every marker that is not fully correct is blamed on the first stage that went wrong, in pipeline order, so each error points to the stage to fix:
+
+| Stage | What went wrong |
+| --- | --- |
+| omitted | the printed row was not transcribed |
+| value | its value was misread |
+| unit | its unit was misread |
+| mapping | its name did not map to its marker, or another row was mapped to it |
+| conversion | it was read and mapped correctly, but parsed, normalised or converted wrongly |
+| flag | the checks withheld a correct value, or let a planted one through |
+
+To tell a misread name from a skipped row, the scorer lines up the transcribed rows with the printed ones without using the core's synonym dictionary. It matches by name and page first, then by value and unit for a row whose name was misread. A misread lymphocyte count makes the cross-check withhold a percent that was read correctly, so that error is blamed on the misread count, not on the check. A misread can also leave the clock input right, as when `10^9/L` is renamed `K/uL`, so a marker can carry a stage-1 error and still be correct end to end.
+
+The tests inject one error of each kind into the oracle's output and check that it is blamed on its stage and on its marker alone. Run unchanged, the oracle scores every marker of every report correct.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
