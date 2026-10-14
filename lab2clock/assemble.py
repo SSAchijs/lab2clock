@@ -10,7 +10,7 @@ Every input carries the row it was read from, exactly as printed, so anyone
 auditing an output can see what the report said.
 """
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from typing import Any
 
 from lab2clock.checks import (
@@ -138,6 +138,7 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
     }
 
     derived = None
+    inconsistent = None
     if "lymphocyte_percent" not in found:
         derived = _derive(rows, issues)
         # A failed derivation has its own error, so it is not also missing.
@@ -156,6 +157,7 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
             percent, count, white_cells = (row.reading for row in checked)
             if issue := lymphocyte_consistency(percent, count, white_cells):
                 issues.append(issue)
+                inconsistent = issue
 
     values = {analyte: row.value for analyte, row in rows.items() if analyte in MARKERS}
     if derived is not None:
@@ -163,6 +165,12 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
     for analyte, value in values.items():
         if issue := plausibility(analyte, value):
             issues.append(issue)
+    # The cross-check cannot tell a misread percent from a misread white-cell
+    # count, so neither is trusted, unless the percent is implausible itself.
+    if inconsistent and "lymphocyte_percent" not in _errored(
+        [issue for issue in issues if issue.check == "plausibility"]
+    ):
+        issues.append(replace(inconsistent, analyte="white_blood_cell_count"))
 
     issues += missing(found)
     if age is None:

@@ -1,0 +1,94 @@
+{
+  "key": "2047ec61f9498d7140c70e022c757370e1a2b683420355b9c20aba8ebf989d5b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1654075467337107315.png": "90e13ea21b1f9ac1ec3c384fd4c52e6c704bffc5ad1aac3cb64f0e6e2571d3fd"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "中性粒细胞计数",
+        "value": "5.52",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞计数",
+        "value": "1.32",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞计数",
+        "value": "0.34",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞计数",
+        "value": "0.04",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞计数",
+        "value": "0.01",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "4.12",
+        "unit": "×10^12/L",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "89",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞比容",
+        "value": "0.278",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "67.5",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白量",
+        "value": "21.6",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "320",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3834,
+    "output_tokens": 856
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "key": "34e53917d74f00421e106352cbe3fd77c6cb097520761fc84e113b00002e8f43",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1631412915476432853.png": "2cc19bcb3ef2ba92289d6ad5ae8201a57bc36bca586f63b7fddfeb6aab2562c7"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "63.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "ALB",
+        "value": "36.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "A/G",
+        "value": "1.4",
+        "unit": ":1",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "门冬氨酸氨基转移酶",
+        "value": "12",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "100",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰基转移酶",
+        "value": "4 ↓",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "胆碱脂酶",
+        "value": "8331",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "0.194",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "8.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "结合胆红素",
+        "value": "1.9",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "非结合胆红素",
+        "value": "6.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "血清总胆汁酸",
+        "value": "0.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "单胺氧化酶",
+        "value": "5.28",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乙肝表面抗原",
+        "value": "143.40 ↑",
+        "unit": "IU/mL",
+        "page": 1
+      },
+      {
+        "name": "乙肝表面抗体",
+        "value": "2.51",
+        "unit": "mIU/mL",
+        "page": 1
+      },
+      {
+        "name": "乙肝e抗原",
+        "value": "0.534",
+        "unit": "s/co",
+        "page": 1
+      },
+      {
+        "name": "乙肝e抗体",
+        "value": "0.01 ↓",
+        "unit": "s/co",
+        "page": 1
+      },
+      {
+        "name": "乙肝核心抗体",
+        "value": "10.04 ↑",
+        "unit": "s/co",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1982,
+    "output_tokens": 1668
+  }
+}

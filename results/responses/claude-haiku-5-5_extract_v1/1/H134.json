@@ -1,0 +1,190 @@
+{
+  "key": "75c077a00ec0329b118f4c6b1b914adb333a2337891b1e2f1dea518f0b1f5efb",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1673155686192672176.png": "27459ae8ba35db62a0b90fc78efc9b3a47d9e017e64c02f21eccb9885a62b3cc"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "N-乙酰-B-D-氨基葡萄糖",
+        "value": "5.30",
+        "unit": "u/L",
+        "page": 1
+      },
+      {
+        "name": "ACR",
+        "value": "2.56",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "Normal 3.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿胆红素",
+        "value": "阴性(-)",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "潜血",
+        "value": "阴性 (-)",
+        "unit": "Ery/uL",
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "阴性 (-)",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]定性",
+        "value": "阴性 (-)",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "阴性 (-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "阴性 (-)",
+        "unit": "Len/uL",
+        "page": 1
+      },
+      {
+        "name": "尿葡萄糖",
+        "value": "阴性 (-)",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿比重",
+        "value": "1.025",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酸碱度",
+        "value": "6.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "抗坏血酸",
+        "value": "0.60",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿微白蛋白定性",
+        "value": "阴性 (-)",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "0.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "8.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "鳞状上皮细胞",
+        "value": "3.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "非鳞状上皮细胞",
+        "value": "1.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "透明管型",
+        "value": "0.00",
+        "unit": "LPF",
+        "page": 1
+      },
+      {
+        "name": "病理管型",
+        "value": "0.00",
+        "unit": "LPF",
+        "page": 1
+      },
+      {
+        "name": "白细胞团",
+        "value": "0.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "0.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "粘液丝",
+        "value": "3.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "精子",
+        "value": "0.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "结晶",
+        "value": "0.00",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "细菌",
+        "value": "0.00",
+        "unit": "uL",
+        "page": 1
+      },
+      {
+        "name": "尿转铁蛋白",
+        "value": "0.22",
+        "unit": "mg/dl",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5758,
+    "output_tokens": 2211
+  }
+}

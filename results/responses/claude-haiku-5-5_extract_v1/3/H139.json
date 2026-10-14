@@ -1,0 +1,88 @@
+{
+  "key": "d78475612debc36cf7ce85cdeb7a80a0c91fcf655f0c8d29931487cc2b9494d7",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1676527045122582841.png": "3d7f92e7f140f41fea6a0b6291b27cbaedb5d0b3ce6601a7404506c117393606"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷草转氨酶",
+        "value": "22",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "29",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "74.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "42.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "32.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白",
+        "value": "1.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "8.3",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶",
+        "value": "[illegible]",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "74",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "胆碱酯酶",
+        "value": "[illegible]",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3362,
+    "output_tokens": 615
+  }
+}

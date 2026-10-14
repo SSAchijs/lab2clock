@@ -1,0 +1,88 @@
+{
+  "key": "eae8d01413fe5a671385075d47942270b6eee40c0d743a95092b6ab8fb8cfdb7",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1652478992956273126.png": "f78998d9e860e40ef0ea4f146b45d69279e9dc86e65101fef4c358167e917410"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "上皮细胞",
+        "value": "2+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "2+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "过氧化氢浓度",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "唾液酸苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "β 葡萄糖醛酸酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙酰氨基葡萄糖苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH",
+        "value": "5.40",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2241,
+    "output_tokens": 676
+  }
+}

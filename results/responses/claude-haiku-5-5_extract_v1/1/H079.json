@@ -1,0 +1,70 @@
+{
+  "key": "6ffd8465cca724673172fa80131be0f53dbed4097e3a269da986d74cb8b7c51f",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1645708239717712127.png": "9a3ccc70e1df4f33727a85213bcee4fcb49ce9fe64e8ed913b12eef3e61c6f0e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷丙转氨酶",
+        "value": "17",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "7.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "r–",
+        "value": "15",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "9.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "222↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "75.0",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3752,
+    "output_tokens": 1046
+  }
+}

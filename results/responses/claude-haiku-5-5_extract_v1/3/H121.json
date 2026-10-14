@@ -1,0 +1,82 @@
+{
+  "key": "32d215d5f252a20f37860b1a7d16aefa0353b3c9a88e50cdfb817989b5f213aa",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1665116743518956931.png": "48e65cf8fedd259e035e5dc3c39bf8b61b93653b606f96bbda7e8df0b99a0903"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "乳酸脱氢酶(L-P)",
+        "value": "167",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "4.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "5.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "8.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "53.40",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶",
+        "value": "78",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "4.63",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "■油三酯",
+        "value": "1.48",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "5.2",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4340,
+    "output_tokens": 705
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "key": "7a4f289d6b68e21a650ca7e9843b7b3e0e03457b0bba69796e2ebfe8b039e25b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1661611056156810294.png": "b98e939767ce55631e8a1b6af5e2aaa85cbe69df97dbbcd9d88f8e7936be60d0"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "嗜碱性粒细胞百分数",
+        "value": "0.1",
+        "unit": "(%)",
+        "page": 1
+      },
+      {
+        "name": "Rh(D)血型",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "平均RBC血红蛋白浓度",
+        "value": "340",
+        "unit": "(g/L)",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分数",
+        "value": "15.1↓",
+        "unit": "(%)",
+        "page": 1
+      },
+      {
+        "name": "血小板体积分布宽度",
+        "value": "16.2",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "79.5↑",
+        "unit": "(%)",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞数目",
+        "value": "1.41",
+        "unit": "(10^9/L)",
+        "page": 1
+      },
+      {
+        "name": "红细胞总数",
+        "value": "4.84",
+        "unit": "(10^12/L)",
+        "page": 1
+      },
+      {
+        "name": "单核细胞数目",
+        "value": "0.48",
+        "unit": "(10^9/L)",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分数",
+        "value": "0.20↓",
+        "unit": "(%)",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3830,
+    "output_tokens": 948
+  }
+}

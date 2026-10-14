@@ -43,7 +43,7 @@ def test_typical_values_pass(analyte, value):
 @pytest.mark.parametrize(
     ("analyte", "value"),
     [
-        ("glucose", 0),
+        ("glucose", 0.1),
         ("albumin", 0.5),
         ("lymphocyte_percent", 100),
         ("white_blood_cell_count", 1360),
@@ -71,6 +71,23 @@ def test_impossible_values_fail(analyte, value):
     assert issue.check == "plausibility"
     assert issue.severity == "error"
     assert issue.analyte == analyte
+
+
+@pytest.mark.parametrize(
+    "analyte",
+    ["glucose", "white_blood_cell_count", "albumin", "creatinine", "mean_cell_volume"],
+)
+def test_a_zero_no_living_person_has_fails(analyte):
+    # A lab prints a detection limit, not 0; a urine test's "-" read as 0
+    # must not reach the clock as a blood value.
+    issue = plausibility(analyte, 0)
+    assert (issue.check, issue.severity) == ("plausibility", "error")
+
+
+@pytest.mark.parametrize("analyte", ["c_reactive_protein", "lymphocyte_percent"])
+def test_a_zero_that_can_be_real_does_not_fail(analyte):
+    issue = plausibility(analyte, 0)
+    assert issue is None or issue.severity == "warning"
 
 
 @pytest.mark.parametrize(

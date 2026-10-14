@@ -1,0 +1,172 @@
+{
+  "key": "c81a7be9b1cb0d3c095a2b918bbf3c93db90a6a372e5550384eaf13f7c88ca3b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1636027392076789617.png": "72e50da73b4768ccd7335e12190a96c81657ab343aec61484b083f6b4f02185c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "空腹血糖(GLU)",
+        "value": "4.17",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "维生素C",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿液颜色",
+        "value": "黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿液透明度",
+        "value": "透明",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酸碱度(PH)",
+        "value": "5.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿亚硝酸盐(NIT)",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿葡萄糖(GLU)",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿比重(SG)",
+        "value": "1.025",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿隐血（RBC）",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿蛋白质(PRO)",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆红素(BIL)",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "(UBG)",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酮体(KET)",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿白细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿白细胞（镜检）",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿红细胞（镜检）",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿结晶（镜检）",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "颗粒管型（镜检）",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "透明管型（镜检）",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清尿素测定(Urea)",
+        "value": "6.42",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清肌酐测定(CREA)",
+        "value": "75.2",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清尿酸测定",
+        "value": "288",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清α羟基酸脱氢酶测定(α-HBDH)",
+        "value": "119",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清肌酸激酶测定(CK)",
+        "value": "74",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5438,
+    "output_tokens": 1669
+  }
+}

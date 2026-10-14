@@ -1,0 +1,52 @@
+{
+  "key": "f9c2ad2920cddd87cf5ab323ba238f4d066cadb9c3282b0f11b6e59b02f13d47",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1627906208663685008.png": "3b2d768302d84c64f5688a9309db1bd0cf1843e96113b103b7cb9e7e0a911b63"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "[redacted]",
+        "value": "44.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "10.5",
+        "unit": "L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "7.0",
+        "unit": "L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "98↑",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1547,
+    "output_tokens": 838
+  }
+}

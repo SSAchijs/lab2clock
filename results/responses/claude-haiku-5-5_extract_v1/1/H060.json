@@ -1,0 +1,88 @@
+{
+  "key": "6318abda83ec550886bd9ba6e3174bbd0abe4aef10d4b0b4019dea3ccb6a3ada",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1632284364655331577.png": "73172996438fdc4ec6b252dde01e595c54308a39fe62a6f91a4527e40eb84955"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "有核红细胞绝对值",
+        "value": "0.00",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞百分比",
+        "value": "0.00",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "4.49",
+        "unit": "×10^12/L",
+        "page": 1
+      },
+      {
+        "name": "大血小板比率",
+        "value": "20.50",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.20",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "白细胞计数",
+        "value": "8.46",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "92.70",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "大血小板绝对值",
+        "value": "44.00",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分比",
+        "value": "0.70",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百分比",
+        "value": "0.10",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2642,
+    "output_tokens": 341
+  }
+}

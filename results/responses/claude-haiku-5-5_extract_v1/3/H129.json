@@ -1,0 +1,154 @@
+{
+  "key": "1f2c6f558b1067b6d667290a22265b452fc54374749af65ce398e35c37d114b6",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1669983190849466131.png": "e8b3914d40e36128920dd78d33a813b7324ef165d5f0a567d150fde751936f5f"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "尿酮体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酸碱度",
+        "value": "6.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿蛋白",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿白细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆红素",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿比重",
+        "value": "1.015",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿隐血",
+        "value": "弱阳性 ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿葡萄糖",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿亚硝酸盐",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "阴性",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "1.4",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "2.8",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "0.6",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "管型",
+        "value": "0.1",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "细菌",
+        "value": "3.4",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "病理管型",
+        "value": "0.0",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "小圆上皮细胞",
+        "value": "0.4",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "类酵母菌",
+        "value": "0.4",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "(name obscured)",
+        "value": "0.0",
+        "unit": "个/μL",
+        "page": 1
+      },
+      {
+        "name": "红细胞信息",
+        "value": "未提示",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "电导率",
+        "value": "16.3",
+        "unit": "mS/cm",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3713,
+    "output_tokens": 1413
+  }
+}

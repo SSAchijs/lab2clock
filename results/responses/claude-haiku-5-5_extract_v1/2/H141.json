@@ -1,0 +1,88 @@
+{
+  "key": "1de7babddf0368ec2ec97a5a5f5316f790c5d336dfcd44983951dd37a52a9274",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1676978536623714675.png": "eace84e736b284f5d24967bc0b8b3369e512f2a6e9afef44d67f6a03d32c6be7"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞数",
+        "value": "6.20",
+        "unit": "X10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞%.",
+        "value": "22.50",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞%",
+        "value": "6.10",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞%.",
+        "value": "70.10",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞%",
+        "value": "0.90",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞%",
+        "value": "0.40",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞#",
+        "value": "1.40",
+        "unit": "X10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞#",
+        "value": "0.38",
+        "unit": "X10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞#",
+        "value": "4.34",
+        "unit": "X10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性",
+        "value": "0.06",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3530,
+    "output_tokens": 1095
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "key": "efe4a7720efec6f86b61468ef2a7999643e870e1a257af098d88a5052e35e46a",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1648918882173747200.jpeg": "0445b6e82545a56d6ecca3b3983fa37c2d5611c7716ba51cdd85c36dac8b5a7e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "胱抑素CII",
+        "value": "0.69",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "391.5",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "4.48",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "77.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "乙肝表面抗原",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "37.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "110.9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]草/[redacted]",
+        "value": "0.51",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "21.9",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3834,
+    "output_tokens": 743
+  }
+}

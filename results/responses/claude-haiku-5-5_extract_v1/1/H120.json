@@ -1,0 +1,70 @@
+{
+  "key": "305c5fb91a67a938694c3feff2ea90a8d351d4d77c5bddcd73eb73b2af6667dd",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1664889395086388171.png": "d69ee9a4be27956c7c83bf2625affd87726775ae60d106e9cce6f9de373b3e74"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞总数",
+        "value": "5.60",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "177 ↑",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血小板数目",
+        "value": "199.0",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞数目",
+        "value": "2.54",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞数目",
+        "value": "2.61",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞数目",
+        "value": "0.32",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸细胞数目",
+        "value": "0.10",
+        "unit": "10^9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3796,
+    "output_tokens": 250
+  }
+}

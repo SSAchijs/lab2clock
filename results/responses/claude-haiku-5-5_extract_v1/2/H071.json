@@ -1,0 +1,82 @@
+{
+  "key": "fe195cb7a2056a15e75a7283eb3129c2ac41c3948d3f76ba536f29c11435a86e",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1637592706727908440.png": "ea26a6c63d13f5403ca248eb2f3c403743522b342bed6bd930a9f2bb04ad49d6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "1.62",
+        "unit": "10~9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "0.168",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞绝对值",
+        "value": "6.49",
+        "unit": "10~9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "0.673",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单核细胞绝对值",
+        "value": "0.69",
+        "unit": "10~9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分比",
+        "value": "0.072",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞绝对值",
+        "value": "0.81",
+        "unit": "10~9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分比",
+        "value": "0.084",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞绝对值",
+        "value": "0.04",
+        "unit": "10~9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4014,
+    "output_tokens": 660
+  }
+}

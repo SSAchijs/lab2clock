@@ -136,3 +136,20 @@ def test_the_committed_set_is_every_eligible_report():
         assert set(found) <= set(MARKERS)
         assert re.fullmatch("[0-9a-f]{64}", row["sha256"])
         assert row["sha256"] != medrepbench.EMPTY_SHA256
+
+
+def test_the_held_out_set_is_apart_from_the_scored_set():
+    held = medrepbench.read_set(medrepbench.HELDOUT)
+    scored = {row["image"] for row in medrepbench.read_set()}
+    assert held and not scored & {row["image"] for row in held}
+    assert [row["report"] for row in held] == [
+        f"H{i:03d}" for i in range(1, len(held) + 1)
+    ]
+    for row in held:
+        assert row["markers"] and set(row["markers"].split(";")) <= set(MARKERS)
+        assert row["sha256"] != medrepbench.EMPTY_SHA256
+
+
+def test_every_held_out_report_has_labelled_rows():
+    held = {row["report"] for row in medrepbench.read_set(medrepbench.HELDOUT)}
+    assert set(medrepbench.read_labelled(medrepbench.HELDOUT_LABELLED)) == held

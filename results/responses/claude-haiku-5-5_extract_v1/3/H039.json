@@ -1,0 +1,106 @@
+{
+  "key": "d112289d04911feff9537b6fa178dcba617703684739853bc0bc697feedd3a2b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1685246904208412672.jpg": "9145e6d2b952ad8ef64c0cb8b74e75b65aa94ba3461042a0796ddd2fe2cd5deb"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "PH值",
+        "value": "4.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "I",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乳酸杆菌",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓细胞",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白带上皮细胞",
+        "value": "++++ ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "细菌",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "颜色",
+        "value": "白色稀糊状",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "BV",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2642,
+    "output_tokens": 785
+  }
+}

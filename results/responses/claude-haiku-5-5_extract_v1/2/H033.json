@@ -1,0 +1,220 @@
+{
+  "key": "609c27972edda9747aad5148495e8a1e8c7107c90d458dab49357edcddbf4499",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1675159666292183040.png": "b0a33842a39d47fb1449f1016543a75b72956de558b6d791ec044c6d08769de7"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "原始血细胞",
+        "value": "0.08",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "原始粒细胞",
+        "value": "0.64",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "早幼粒细胞",
+        "value": "1.57",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "6.49",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "晚幼",
+        "value": "7.90",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杆状核",
+        "value": "23.72",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "分叶核",
+        "value": "9.44",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "0.38",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "晚幼",
+        "value": "0.49",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杆状核",
+        "value": "1.25",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "分叶核",
+        "value": "0.86",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "0.02",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "晚幼",
+        "value": "0.06",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杆状核",
+        "value": "0.06",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "分叶核",
+        "value": "0.03",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "原始红细胞",
+        "value": "0.57",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "早幼红细胞",
+        "value": "0.92",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "中幼红细胞",
+        "value": "7.41",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "晚幼红细胞",
+        "value": "10.75",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "原始淋巴细胞",
+        "value": "0.05",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "幼稚淋巴细胞",
+        "value": "0.47",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "成熟淋巴细胞",
+        "value": "22.78",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "原始单核细胞",
+        "value": "0.01",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "幼稚单核细胞",
+        "value": "0.14",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "成熟单核细胞",
+        "value": "3.00",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "原始浆细胞",
+        "value": "0.004",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "幼稚浆细胞",
+        "value": "0.104",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "成熟浆细胞",
+        "value": "0.71",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "网状细胞",
+        "value": "0.16",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "吞噬细胞",
+        "value": "0.03",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "组织嗜碱细胞",
+        "value": "0.03",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "分类不明细胞",
+        "value": "0.05",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3400,
+    "output_tokens": 2147
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "key": "309f477f3580b304a270dc93af80e4ba7295e5adfd6d3b96a6a2a6890300d4ab",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1653460278535903249.png": "60318e4303e6f05d5e909e8a38dde76e1ad3882afd8cd23b84062b21039dde96"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "WBC 白细胞",
+        "value": "3.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "RBC 红细胞",
+        "value": "10.5 ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "SQEP 鳞状上皮",
+        "value": "10.5",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "NSE 非鳞状上皮",
+        "value": "1.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "HYAL 透明管型",
+        "value": "0.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "GRAN 颗粒管型",
+        "value": "0.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "MUCS 黏液丝",
+        "value": "12.4",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "BACT 细菌",
+        "value": "15.7",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "BYST 酵母样菌",
+        "value": "1.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "CAOX 草酸钙晶体",
+        "value": "0.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "AMOR 无定形结晶",
+        "value": "0.0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "PH PH值",
+        "value": "6.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "SG 尿比重",
+        "value": "1.020",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PRO 尿蛋白",
+        "value": "2+ !",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "GLU 尿葡萄糖",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "KET 尿酮体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "BIL 尿胆红素",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "UBG 尿胆原",
+        "value": "正常",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "NIT 亚硝酸盐",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "LEU 尿白细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "BLD 尿隐血",
+        "value": "弱阳 !",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "VC 维生素C",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3122,
+    "output_tokens": 1553
+  }
+}

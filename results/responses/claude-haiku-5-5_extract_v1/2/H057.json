@@ -1,0 +1,82 @@
+{
+  "key": "5761e571d5933caff971da528da55b7c22d882c018a694e51c221a8d16370a05",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1631264324315539076.png": "46999b0d28325e0eb82f829a1ce699af4c668311d4c0656c6a769fa33630bd0b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "未成熟粒细胞比值",
+        "value": "0.2",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度CV",
+        "value": "16 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "未成熟粒细胞绝对值",
+        "value": "0.01",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.410",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "★血红蛋白",
+        "value": "137",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积",
+        "value": "43.20",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞平均体积",
+        "value": "84.0",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "317 ↓",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分比",
+        "value": "6.70",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3908,
+    "output_tokens": 1110
+  }
+}

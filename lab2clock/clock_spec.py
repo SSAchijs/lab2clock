@@ -32,6 +32,10 @@ class Field:
         marker can be near zero in real patients, so only a negative value fails.
         inf means no published extreme was found, so there is no high limit.
         None (age only) means no check.
+    zero: whether a printed 0 can be a real result. It cannot for a
+        concentration, count or size a living person always has, where a lab
+        prints a detection limit such as <0.5 rather than 0; a 0 there is a
+        placeholder, or a urine test's "-" read as 0, so it is an error.
 
     The error tier catches impossible values, not every unit slip. Glucose left
     in mg/dL (95 read as 95 mmol/L) stays within it but warns. CRP left in mg/L
@@ -44,6 +48,7 @@ class Field:
     transform: str | None = None
     warn: Range | None = None
     error: Range | None = None
+    zero: bool = False
 
 
 # In pyaging's feature order.
@@ -67,9 +72,10 @@ FIELDS: tuple[Field, ...] = (
         transform="ln, floored at 0.01",
         warn=(0.02, 5.65),
         error=(0, 80),
+        zero=True,
     ),
     # A share of white cells, so bounded by definition.
-    Field("lymphocyte_percent", "%", warn=(10.4, 57.5), error=(0, 100)),
+    Field("lymphocyte_percent", "%", warn=(10.4, 57.5), error=(0, 100), zero=True),
     # Low: 35.4 fL in NHANES 2017-2018 (SEQN 101844, RDW 26%), below the 44.5 fL
     # published in HbE/beta-thalassemia with iron deficiency (Goretti 2022,
     # doi:10.1016/j.amsu.2022.103826). High: 136.9 fL in pernicious anemia

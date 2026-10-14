@@ -186,9 +186,20 @@ def test_misread_percent_fails_cross_check():
     rows = [*without("Lymphocytes"), ("Lymphocytes", "30.7", "%")]
     output = assemble(report(*rows, ("Lymph#", "2.10", "10^9/L")), age=52)
     assert output["ok"] is False
-    assert output["missing"] == ["lymphocyte_percent"]
-    [issue] = output["issues"]
-    assert issue["check"] == "consistency"
+    # Either could be the misread one, so neither reaches the clock.
+    assert set(output["missing"]) == {"lymphocyte_percent", "white_blood_cell_count"}
+    assert {issue["check"] for issue in output["issues"]} == {"consistency"}
+
+
+def test_misread_white_cells_fail_cross_check_and_are_withheld():
+    # A white-cell count of 5.70 hidden under a pen line, guessed as 5.16: the
+    # count and percent printed beside it give 5.72 to 5.77.
+    rows = [row for row in COMPLETE if row[0] not in ("WBC", "Lymphocytes")]
+    rows += [("WBC", "5.16", "10^9/L"), ("Lymphocytes", "29.4", "%")]
+    rows += [("Lymph#", "1.69", "10^9/L")]
+    output = assemble(report(*rows), age=52)
+    assert "white_blood_cell_count" not in output["inputs"]
+    assert "lymphocyte_percent" not in output["inputs"]
 
 
 # Command line.

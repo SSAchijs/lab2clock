@@ -1,0 +1,76 @@
+{
+  "key": "5108521b46ff2008e2b9c248736e5e6d20d6ca345010be507815ebe3812df830",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1661231078284956552.png": "55a6043dd611ebd9ee57dbe118e6fcfdc324148e80924ff1f50cacf9982ee8c0"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "钠",
+        "value": "140.0",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "氯",
+        "value": "105.0",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总钙",
+        "value": "2.43 ↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "无机磷",
+        "value": "1.94",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "1.38 ↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "15.0",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "104.3 ↓",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖(空腹)",
+        "value": "5.90",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3882,
+    "output_tokens": 270
+  }
+}

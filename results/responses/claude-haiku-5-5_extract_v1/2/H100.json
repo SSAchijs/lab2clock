@@ -1,0 +1,88 @@
+{
+  "key": "6c228531eede0e05f8d99b5d9cb710d557b374cb473182805dad10a1f89d47e7",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1657094951632451513.png": "465e0a4754266f9a2bfb55f70caec0c864b6863b1d86c6fe0bbf7e37d102be4b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "颜色（大便）",
+        "value": "黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "性状",
+        "value": "[redacted]",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "不消化食物",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓细胞",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "吞噬细胞",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌孢子",
+        "value": "未查见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血试验（大便）",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2672,
+    "output_tokens": 842
+  }
+}

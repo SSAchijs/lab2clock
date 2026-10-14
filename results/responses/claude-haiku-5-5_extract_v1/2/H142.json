@@ -1,0 +1,100 @@
+{
+  "key": "ea0b00c8985e86264615512d42438d4d3e57b762a79b64eef5f1aee8c3d2a2d9",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1679988946653883929.png": "ee00a3fdd7bd8babc2b4eafacc8e788534de947b11e8b6d4e3a7cc4a7b563e3a"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "磷测定",
+        "value": "1.05",
+        "unit": "mmo/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "13.5",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天冬氨酸氨基转移酶",
+        "value": "15.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "76.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-[redacted]基转移酶",
+        "value": "18.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "15.00",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "4.50",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "10.50",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "81.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "53.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "27.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "1.94",
+        "unit": "--",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3869,
+    "output_tokens": 932
+  }
+}

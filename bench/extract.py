@@ -38,7 +38,8 @@ every time from one it makes by chance.
 reads every development report three times with Claude Haiku 5.5, into
 results/responses/claude-haiku-5-5_extract_v1/1/ to 3/. With --split real it
 reads the MedRepBench reports, M01 to M39, each sent as the one image it came
-as, behind the same frozen-prompt lock as the test set.
+as, behind the same frozen-prompt lock as the test set; --split heldout reads
+the held-out ones, H001 onwards, the same way.
 """
 
 import argparse
@@ -181,10 +182,11 @@ def synthetic_jobs(specs: list[RenderSpec]) -> list[Job]:
     return [Job(s.report, s.split, lambda s=s: report_input(s)) for s in specs]
 
 
-def real_jobs() -> list[Job]:
+def real_jobs(split: str = "real") -> list[Job]:
+    path = medrepbench.HELDOUT if split == "heldout" else medrepbench.SET
     return [
-        Job(row["report"], "real", lambda image=row["image"]: real_input(image))
-        for row in medrepbench.read_set()
+        Job(row["report"], split, lambda image=row["image"]: real_input(image))
+        for row in medrepbench.read_set(path)
     ]
 
 
@@ -260,7 +262,7 @@ def run(
     is seen while the prompt can still change. With more than one worker,
     reports are read side by side; each is still one call, saved on its own.
     """
-    scored = any(job.split in {"test", "real"} for job in jobs)
+    scored = any(job.split in {"test", "real", "heldout"} for job in jobs)
     if scored and not prompts.is_frozen(prompt):
         raise SystemExit(
             f"{prompt.version} is not frozen; tune it on the development reports, "
@@ -291,7 +293,9 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Read the reports with a model.")
     parser.add_argument("model", choices=sorted(MODELS))
-    parser.add_argument("--split", choices=["dev", "test", "real"], required=True)
+    parser.add_argument(
+        "--split", choices=["dev", "test", "real", "heldout"], required=True
+    )
     parser.add_argument("--runs", type=int, default=RUNS)
     parser.add_argument(
         "--workers", type=int, default=1, help="reports read side by side"
@@ -299,8 +303,8 @@ def main() -> None:
     args = parser.parse_args()
     load_env()
     model, prompt = MODELS[args.model].id, prompts.load()
-    if args.split == "real":
-        jobs = real_jobs()
+    if args.split in ("real", "heldout"):
+        jobs = real_jobs(args.split)
     else:
         specs = [
             RenderSpec.model_validate_json(path.read_text())

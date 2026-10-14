@@ -1,0 +1,106 @@
+{
+  "key": "e945c7ee815a9ccfddccc6b147e968cb49695eb549682b1e3020c4b3600e9291",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1645234285182939101.png": "6a6638e1a7620faa88d4be59a51a21614a329bce0c4c7d227f0b6d2e90c46993"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "HCV - RNA检测",
+        "value": "<5.000E+02",
+        "unit": "IU/ml",
+        "page": 1
+      },
+      {
+        "name": "血清总胆汁酸测定(TBA)",
+        "value": "1.9",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "血清丙氨酸氨基转移酶测定(ALT)",
+        "value": "16",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血清天门冬氨酸氨基转移酶测定(AST)",
+        "value": "21",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血清总蛋白测定(TP)",
+        "value": "78.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血清白蛋白测定(Alb)",
+        "value": "46.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血清球蛋白(计算值)",
+        "value": "31.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "■■■/球■■(计算值)",
+        "value": "1.46",
+        "unit": "/",
+        "page": 1
+      },
+      {
+        "name": "血清总胆红素测定(T-Bil)",
+        "value": "11.8",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "血清直接胆红素测定(D-Bil)(结合■■■)",
+        "value": "3.3",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "血清间接胆红素(I-Bil)(计算值)(非结合胆红素)",
+        "value": "8.5",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "血清碱性磷酸酶测定(ALP)",
+        "value": "99",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血清γ-谷氨酰基转移酶测定(γ-GT)",
+        "value": "22",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5720,
+    "output_tokens": 1226
+  }
+}

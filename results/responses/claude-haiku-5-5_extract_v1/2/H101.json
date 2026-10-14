@@ -1,0 +1,100 @@
+{
+  "key": "e2f9525c7d148f4ba59ad31d163def180fd053165ceb83b35ca0ce3981327328",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1657151171719177609.png": "be4a94be731de5c0872928f2b3c5bded9ab4343feb3460e60c70374bc0492e1d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "颜色(Color)",
+        "value": "淡黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清晰度(Clarity)",
+        "value": "清晰",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞(RBC)",
+        "value": "19",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "白细胞(WBC)",
+        "value": "204",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "结晶(CRYSTAL)",
+        "value": "0",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "透明管型",
+        "value": "0",
+        "unit": "个/LPF",
+        "page": 1
+      },
+      {
+        "name": "病理管型(CAST)",
+        "value": "0",
+        "unit": "个/LPF",
+        "page": 1
+      },
+      {
+        "name": "非鳞状上皮细胞",
+        "value": "0",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "鳞状上皮细胞",
+        "value": "1",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "酵母菌",
+        "value": "0",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "精子",
+        "value": "0",
+        "unit": "个/ul",
+        "page": 1
+      },
+      {
+        "name": "白细胞(LEU)",
+        "value": "3+",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3470,
+    "output_tokens": 810
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "key": "d3b14629fcde4773856ff669a246d7844c9ad8527bd13221ca6e446811b05bae",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1673854260588683264.jpeg": "3d60e5c061a51e62569dfd28d10e9542ac09c4b2b3b2fc82ec57c305331b2da4"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "γ█████转移酶 ☆ GGT",
+        "value": "17",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆Urea",
+        "value": "7.2",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆Crea",
+        "value": "75",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆UA",
+        "value": "223",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆Na",
+        "value": "142",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆ Ca",
+        "value": "2.31",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆ K",
+        "value": "3.1↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆ Cl",
+        "value": "105",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "Mg",
+        "value": "1.02",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "CO2",
+        "value": "24",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HR/☆Pi",
+        "value": "1.01",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "I.I",
+        "value": "(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "L.I",
+        "value": "(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "Os",
+        "value": "295",
+        "unit": "mOsm/kg",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3869,
+    "output_tokens": 1416
+  }
+}

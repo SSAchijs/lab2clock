@@ -1,0 +1,88 @@
+{
+  "key": "423838b1a2b251e1b39b4e0c4342c8647f57d3548fbf055660c8c4ae80c9bfba",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1659192943073212988.png": "4dcbdc2293ec228308ed794e69ac9df7a72c70c0e58c2d6443e43ee32bc1ae3a"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "卵磷脂小体",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "生精细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "支原体",
+        "value": "弱阳性 ±",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[obscured]原体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[obscured]螺旋体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "念珠菌",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[obscured]克[obscured]脊血杆菌",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "加德纳杆菌",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2705,
+    "output_tokens": 1251
+  }
+}

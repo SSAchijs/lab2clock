@@ -1,0 +1,46 @@
+{
+  "key": "3a9c253d4c574f7bd090f435cd65008367fccea1ad8a2e895af0c14dcaa8a94c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1675242859099765234.png": "93c41969b09430695a741dc51feedb270a804c329dd6a9b2b0fe6db1ca9f1a53"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "ASO",
+        "value": "64.2",
+        "unit": "IU/mL",
+        "page": 1
+      },
+      {
+        "name": "CRP",
+        "value": "3.16",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "RF",
+        "value": "<12.5",
+        "unit": "IU/mL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2075,
+    "output_tokens": 98
+  }
+}

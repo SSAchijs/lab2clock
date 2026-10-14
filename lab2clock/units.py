@@ -87,8 +87,9 @@ UNITS: dict[str, tuple[str, ...]] = {
 
 _SUPERSCRIPT_DIGITS = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 
-# Every way the exponent of 10 is printed: 10^9, ×10⁹, 10E9, 10*9, *10~9, E+9.
-_POWER_OF_TEN = re.compile(r"^[x×*]?(?:10(?:\^|\*{1,2}|e\+?|~)|e\+)(\d+)")
+# Every way the exponent of 10 is printed: 10^9, ×10⁹, 10E9, 10*9, *10~9,
+# *10`9, E+9.
+_POWER_OF_TEN = re.compile(r"^[x×*]?(?:10(?:\^|\*{1,2}|e\+?|~|`)|e\+)(\d+)")
 
 
 def _key(printed: str) -> str:

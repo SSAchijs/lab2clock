@@ -1,0 +1,82 @@
+{
+  "key": "5650604c4685b1c1116faa02f0378fde27d587b9a6747676975616c5d16f87b5",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1663096649095249920.jpg": "2912ff014d9e50d8e1fc32c2c27a24e226f300fa80b474f6d7f6eb33482dff2d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "直接胆红素",
+        "value": "2.32",
+        "unit": "umol/l",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "[redacted] ↑",
+        "unit": "u/l",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "36 ↑",
+        "unit": "u/l",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "67.30",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "40.50",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "26.80",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "白球比",
+        "value": "1.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "87",
+        "unit": "u/l",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰转肽酶",
+        "value": "80 ↑",
+        "unit": "u/l",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5070,
+    "output_tokens": 1069
+  }
+}

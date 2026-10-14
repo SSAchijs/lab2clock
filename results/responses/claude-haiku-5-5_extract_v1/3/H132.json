@@ -1,0 +1,94 @@
+{
+  "key": "d6884aa40a3778756f11380ca75a94bdc46178ca286d93c166fa7c59a526bd8c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1670600070273675280.png": "b70995323ba7dfac2a358f7244e39181aca9d758ce2a986cb68b1d00acbdd86f"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "68.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "4.3",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "6.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶(ALT)",
+        "value": "25",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "1.7",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "249",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "26.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "21",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰转肽酶",
+        "value": "35",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted] (溴甲酚绿法)",
+        "value": "41.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "1.54",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5026,
+    "output_tokens": 960
+  }
+}

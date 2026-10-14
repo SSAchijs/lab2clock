@@ -1,0 +1,82 @@
+{
+  "key": "8cfae3eedbb2c939b039389f541457e494becc4f878329f61c1dbfed3e2af718",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1655489738047234048.png": "c2c0728854808c0df6e032f36b155eec646a001393e58025b5213c22a3da21a6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "66.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "1.62",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "6.1",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "[illegible/redacted]",
+        "value": "48.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "12.9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血清总胆汁酸",
+        "value": "6.27",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白",
+        "value": "2.6 ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "18.5 ↓",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "4.48",
+        "unit": "µmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2960,
+    "output_tokens": 769
+  }
+}

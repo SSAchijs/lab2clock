@@ -1,0 +1,76 @@
+{
+  "key": "b0f56aadbda920e65d685c2af32ebbdb135fc859c114753c8eb8a8c951c649e4",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1672491840094657523.png": "53c89c06d10ebf9f2dd105b9c0cff99f41986c15316217cac091850355f31c82"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "细胞量",
+        "value": ">40%",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "颈管细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "化生细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫感染",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "念珠菌感染",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "疱疹感染",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "HPV感染",
+        "value": "可见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2037,
+    "output_tokens": 515
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "key": "e26c41fe2dc88f0997416fdcd6bb4a9a9ccc3693b71f24b4911c8a8a15c21c08",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1650337454995534764.png": "bee0cb6ebcc7dd86ae0993fe05bcc2d6970f56c170f1d17a9b37b2144ef9fc50"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素",
+        "value": "11.9",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.6",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "9.3",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1.7",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "81.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "47.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "34.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]与球[redacted]比",
+        "value": "1.35",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "15",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基移酶",
+        "value": "27",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰基转移酶",
+        "value": "11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "73",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "204",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶",
+        "value": "98",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶同工酶质量",
+        "value": "3.28",
+        "unit": "ng/mL",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "4.27",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]油三酯",
+        "value": "1.24",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "高密度脂蛋白胆固醇",
+        "value": "1.12",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3834,
+    "output_tokens": 1262
+  }
+}

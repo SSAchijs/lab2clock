@@ -1,0 +1,64 @@
+{
+  "key": "0c860c4982c6a63a25abb0b3dd3d1e336146935075b4e1702ecf43947db82d48",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1669170843447505990.png": "6911a52450246128be3b1ad09f9e0df43e5235562cf18b58c994c552bbcd5284"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "嗜碱细胞绝对值(BASO#)",
+        "value": "0.01",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸细胞绝对值(EO#)",
+        "value": "0.04",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度CV(RDW-CV)",
+        "value": "11.2↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板压积(PCT)",
+        "value": "0.13",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "定量C-反应蛋白(CRP)",
+        "value": "1.52",
+        "unit": "mg/l",
+        "page": 1
+      },
+      {
+        "name": "血清淀粉样蛋白(SAA)",
+        "value": "26.42↑",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1238,
+    "output_tokens": 688
+  }
+}

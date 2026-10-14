@@ -1,0 +1,52 @@
+{
+  "key": "43034ede2a61ba0c91bec94e6434432a561741ae797928b10dde3b9651b61c87",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1649684304781640961.png": "0b585c68fc75942a439e3cb30a5b22a31f1725f6a615419953e62a842a7f7f5c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "念珠菌",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "11-16/HP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "少许",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2372,
+    "output_tokens": 122
+  }
+}

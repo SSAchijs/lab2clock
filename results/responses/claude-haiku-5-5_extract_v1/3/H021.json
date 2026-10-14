@@ -1,0 +1,94 @@
+{
+  "key": "5e853ee78525999975ca92051a5ba1444fd3c75e4c32889f623e4a54beefca0e",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1665759317276573696.png": "66881a5e870b7677619b63983418e5ecf9aae1cec1ce13c4fdebd6141f938d39"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "嗜碱粒细胞绝对值",
+        "value": "0.00",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "4.80",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板",
+        "value": "281",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板体积分布宽度",
+        "value": "16.40",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白",
+        "value": "0.94",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞百分比",
+        "value": "0.00",
+        "unit": "/100WBC",
+        "page": 1
+      },
+      {
+        "name": "血小板平均体积",
+        "value": "7.50 L",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.21",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞计数",
+        "value": "0.00",
+        "unit": "10^3/ul",
+        "page": 1
+      },
+      {
+        "name": "淀粉样蛋白A",
+        "value": "<4.80",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血",
+        "value": "326.0",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4256,
+    "output_tokens": 966
+  }
+}

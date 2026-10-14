@@ -1,0 +1,34 @@
+{
+  "key": "bb74c9594100aa2163d67fe3b8cd6b8db2fe573ea1203c42d2e3a33666dc2367",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1629256489939907520.png": "4a9467bff5a33b8ca4791765b621caa4964d53410ff4f45137b483a52bb1405a"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "空腹葡萄糖",
+        "value": "6.07H",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3454,
+    "output_tokens": 46
+  }
+}

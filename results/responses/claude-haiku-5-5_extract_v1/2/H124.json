@@ -1,0 +1,34 @@
+{
+  "key": "dc4e56a9f7d95454365ea688ef67eaf596eedeffd0d4c92adcc20ece6a6cd2b7",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1666263392050631034.png": "39ec3b3b23b56faa2f9ea1dcf595ccc9ef343c8822ad0966a69372a64c3f71fb"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "C反应蛋白(单项)",
+        "value": "3.56",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4622,
+    "output_tokens": 46
+  }
+}

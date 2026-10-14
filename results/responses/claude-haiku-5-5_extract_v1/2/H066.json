@@ -1,0 +1,100 @@
+{
+  "key": "423123287510b82bfd3b0b46992d705383adb1aaf387acf483d5c29d4daa7a65",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1636702564895214944.png": "6eebe9c114ae72e963838d283156ffa372828f09a3c1b3724fd1846c22567f3b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "隐血",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "颜色",
+        "value": "黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "性状",
+        "value": "[obscured]",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "虫卵",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "巨噬细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脂肪球",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "淀粉颗粒",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "食物残渣",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酵母菌",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "其他",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5734,
+    "output_tokens": 798
+  }
+}

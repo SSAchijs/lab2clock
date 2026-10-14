@@ -1,0 +1,106 @@
+{
+  "key": "491aba9d186f5a8d10517c874f8cad5c90537d48cc3b6ce20214de8285494490",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1652515834760961733.png": "073c79fd74e6c2575531b4d4d1ac0633ff82e3387c788f39788514723f9a9536"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白测定",
+        "value": "73.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "██测定",
+        "value": "44.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白测定",
+        "value": "29.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白比值",
+        "value": "1.50",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶测定",
+        "value": "62 H",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "41 H",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素测定",
+        "value": "11.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素测定",
+        "value": "3.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素测定",
+        "value": "7.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰基转移酶",
+        "value": "19",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶测定",
+        "value": "53",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "█胆酸测定",
+        "value": "0.64",
+        "unit": "ug/mL",
+        "page": 1
+      },
+      {
+        "name": "胆汁酸测定",
+        "value": "1.0",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4796,
+    "output_tokens": 457
+  }
+}

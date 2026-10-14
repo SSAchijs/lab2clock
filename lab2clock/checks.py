@@ -82,6 +82,13 @@ def plausibility(analyte: str, value: float) -> Issue | None:
     None, which it is until the NHANES percentiles are computed.
     """
     field = BY_NAME[analyte]
+    if value == 0 and field.error is not None and not field.zero:
+        return Issue(
+            "plausibility",
+            "error",
+            analyte,
+            f"0 {field.unit} is not a result a living person can have",
+        )
     for severity, limits in (("error", field.error), ("warning", field.warn)):
         if limits is None:
             continue

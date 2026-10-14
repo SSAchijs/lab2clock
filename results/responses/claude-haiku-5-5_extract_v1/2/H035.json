@@ -1,0 +1,118 @@
+{
+  "key": "b9f84542301d6fcf56b665d5e52923603931d6dafa76695a0987265b476e5c77",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1676226293388439552.png": "5f35ccd716389c78b717af952c24b3a60a5292c48548c5eee0fd72c3e30e2ed8"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "[redacted]",
+        "value": "– ",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血",
+        "value": "–",
+        "unit": "Cell/ul",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "–",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "颜色",
+        "value": "黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "VC",
+        "value": "+2",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "–",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "–",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "7.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "+–",
+        "unit": "Cell/ul",
+        "page": 1
+      },
+      {
+        "name": "比重",
+        "value": "1.020",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "镜检白细胞",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "–",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "透明度",
+        "value": "微浑浊",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "镜检红细胞",
+        "value": "0",
+        "unit": "/Hp",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3728,
+    "output_tokens": 896
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "key": "e8fd55cb3b71dc98f3ad0a16d46cdc5ba9a484b79890c90ae28cd8563c8c6c99",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1651582778759708685.png": "028c496bd2ecbdf6cfabb1de21147915af3376756493c25dfb6420fd3789668e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "消洁度",
+        "value": "III度",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "鳞状上皮细胞",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "基底上皮细胞",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "真菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "阴道毛滴虫",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "双球菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[obscured]",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乳酸杆菌",
+        "value": "少许",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "小杆菌",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球杆菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杂菌",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "过氧化氢",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "唾液酸苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "B葡萄糖醛酸酶",
+        "value": "阴性(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙酰氨基葡萄糖苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "4.4",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5796,
+    "output_tokens": 1038
+  }
+}

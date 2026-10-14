@@ -1,0 +1,106 @@
+{
+  "key": "e5e4501a1be5bdceda35b749ee72bc5a2ed0d80a7cc831f9a682e61e2a1b9c00",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1637536909768567033.png": "fbd4f0dae9388070328fbef0adbf327a143cb3a5fc8799f4b2a895744baafd4c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "前白蛋白",
+        "value": "偏低 192",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "4.03",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "[obscured]油三脂",
+        "value": "0.69",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "载脂蛋白A1",
+        "value": "1.65",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[obscured]/[obscured]",
+        "value": "1.06",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "71",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "2.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖测定",
+        "value": "4.75",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "高密度脂蛋白",
+        "value": "1.64",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "低密度脂蛋白",
+        "value": "2.17",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "低密度/高密度脂蛋白",
+        "value": "1.32",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "载脂蛋白B",
+        "value": "0.58",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "载脂蛋白A1/B",
+        "value": "2.84",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2672,
+    "output_tokens": 1337
+  }
+}

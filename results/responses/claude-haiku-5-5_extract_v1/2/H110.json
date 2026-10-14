@@ -1,0 +1,106 @@
+{
+  "key": "db1ce10a7ed59a202764cae0fa5f36b3bb3a9786a20db10b44d5c1cc48d81229",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1661923669171723560.png": "9097c44e87193ef86655fcd323e174c670e98956b13c3d15d16eb5e498024573"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞",
+        "value": "6.3",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞比率",
+        "value": "59.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞比率",
+        "value": "35.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞比率",
+        "value": "4.5",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞比率",
+        "value": "0.70",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞比率",
+        "value": "0.23",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞数",
+        "value": "3.7",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞数",
+        "value": "2.2",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞数",
+        "value": "0.3",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞数",
+        "value": "0.044 ↓",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞数",
+        "value": "0.014",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "4.24",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "129.6",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3720,
+    "output_tokens": 453
+  }
+}

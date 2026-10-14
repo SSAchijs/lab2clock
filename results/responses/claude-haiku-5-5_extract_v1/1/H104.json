@@ -1,0 +1,202 @@
+{
+  "key": "1234e4511823a8c2da7ade6b192dcc43c9544d5cf9d0a8ff54f99fece184b009",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1659065027837711766.png": "ff62c774c2973378457c5a8d85ef809ee75216dc2db650f0f4003bd49839e665"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "亚硝酸盐",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "浊度",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH",
+        "value": "6.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞LEU",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿蛋白",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "比重",
+        "value": "1.027",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "normal",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "unreadable (redacted row)",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "COLOR 颜色",
+        "value": "稻黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "WBC 白细胞",
+        "value": "0.40",
+        "unit": "μL",
+        "page": 1
+      },
+      {
+        "name": "RBC 红细胞",
+        "value": "0.50",
+        "unit": "/μL",
+        "page": 1
+      },
+      {
+        "name": "EC 上皮细胞",
+        "value": "0.00",
+        "unit": "/μL",
+        "page": 1
+      },
+      {
+        "name": "Squa. EC 鳞状上皮",
+        "value": "0.00",
+        "unit": "/μL",
+        "page": 1
+      },
+      {
+        "name": "NonSEC 非鳞状上皮",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "CAST 管型",
+        "value": "0.13",
+        "unit": "/μL",
+        "page": 1
+      },
+      {
+        "name": "Hy. CAST 透明管型",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "P. CAST 病理管型",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "MUCUS 粘液丝",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "BACT 细菌",
+        "value": "3.40",
+        "unit": "/μL",
+        "page": 1
+      },
+      {
+        "name": "BACT-info 细菌信息",
+        "value": "未提示",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "YLC 酵母菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "XTAL 结晶",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "NLRBC 完整红细胞数",
+        "value": "0.40",
+        "unit": "μL",
+        "page": 1
+      },
+      {
+        "name": "NLRBC% 完整红细胞百分比",
+        "value": "80.00",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "RBC-info 红细胞信息",
+        "value": "未提示",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "Cond 电导率",
+        "value": "19.30",
+        "unit": "mS/cm",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5782,
+    "output_tokens": 2547
+  }
+}

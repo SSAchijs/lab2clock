@@ -1,0 +1,106 @@
+{
+  "key": "d8e4fd308b8a1e5902ae22106cec03f32b992f15bdab4bc127664f8f26ce64ba",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1637416797032789437.png": "2dbd6f226387d54d66e7cc246b474c09ec96764fda46c47ad20b168c0b5f2479"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "滴虫",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "念珠菌孢子",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "念珠菌假菌丝",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "G-双球菌（胞内）",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "G-双球菌（胞外）",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "G+球菌",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "G-短杆菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "阴道乳酸杆菌",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "+",
+        "unit": "/HP",
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "II°",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "G+球菌",
+        "value": "（+）",
+        "unit": null,
+        "page": 2
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1984,
+    "output_tokens": 2006
+  }
+}

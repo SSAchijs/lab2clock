@@ -1,0 +1,52 @@
+{
+  "key": "0947e4b96143c4430237b6d0a3c8bbc1776662ed6b564ef84609bbaecdf99ef0",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1667842963229966336.jpeg": "4a6fc157cbe9527ee84868be41fe836f871b7b9f8358ad6d95b85d630ceb6d40"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "尿素(Urea)",
+        "value": "6.92",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐(Cr)",
+        "value": "79.00",
+        "unit": "µmol/l",
+        "page": 1
+      },
+      {
+        "name": "尿酸(UA)",
+        "value": "277.00",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "估算肾小球滤过率",
+        "value": "86.79",
+        "unit": "ml/min/1",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1950,
+    "output_tokens": 495
+  }
+}

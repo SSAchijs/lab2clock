@@ -1,0 +1,52 @@
+{
+  "key": "7147a74308d92f34d05197dd57ec29d51ed1f1131e050df2d62e4859dd34f12f",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1633500729739899011.png": "9fa9449ca7253a4b01a3ea54ca976d02e1672a93392f163b7bff48fb7388f442"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖",
+        "value": "5.80",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "糖",
+        "value": "1.61",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "空腹胰岛素",
+        "value": "24.11",
+        "unit": "pmol/L",
+        "page": 1
+      },
+      {
+        "name": "空腹C肽",
+        "value": "0.461",
+        "unit": "nmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2366,
+    "output_tokens": 650
+  }
+}

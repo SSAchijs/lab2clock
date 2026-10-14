@@ -1,0 +1,94 @@
+{
+  "key": "30f0b904f1c84233548d0f432ad1665ee1c4ed14ff1d3fdb8d7524c7c0b469ba",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1675140980415327046.png": "99d1b8c2f8c443fef8ecb5d5491420f34959c7cfc61264ea14eaaf5a515588ff"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素(TBIL)",
+        "value": "9.56",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素(DBIL)",
+        "value": "3.58",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素(IBIL)",
+        "value": "5.98",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶(ALT)",
+        "value": "37",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶(AST)",
+        "value": "22",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草/谷丙(AST/ALT)",
+        "value": "0.59",
+        "unit": "Ratio",
+        "page": 1
+      },
+      {
+        "name": "总蛋白(TP)",
+        "value": "76.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白(ALB)",
+        "value": "49.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(GLB)",
+        "value": "26.70",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白(A/G)",
+        "value": "1.85",
+        "unit": "Ratio",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶(ALP)",
+        "value": "100",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3908,
+    "output_tokens": 421
+  }
+}

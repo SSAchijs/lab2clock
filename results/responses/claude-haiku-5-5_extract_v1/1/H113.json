@@ -1,0 +1,106 @@
+{
+  "key": "c37c046ba438d6fd8ff364074e47904bf04395bafb49519d951bb2b6f6447fac",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1662430758508595477.png": "6881cc317ebb57db9ec80a19501cfc8811168fa8b7552898eee521a3bce1d66b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "颜色",
+        "value": "黄色",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "性状",
+        "value": "略稀",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "RBC",
+        "value": "未见/HP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "WBC",
+        "value": "未见/HP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓细胞",
+        "value": "未见/HP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脂肪球",
+        "value": "未见/HP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "蛔虫卵",
+        "value": "未见/LP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "钩虫卵",
+        "value": "未见/LP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "未见/LP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "未见/LP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "绦虫卵",
+        "value": "未见/LP",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "真菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2399,
+    "output_tokens": 1376
+  }
+}

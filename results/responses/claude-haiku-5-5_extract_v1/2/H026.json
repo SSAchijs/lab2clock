@@ -1,0 +1,88 @@
+{
+  "key": "658ffb73acb2de9ed16db2750d54eea86d0054c0f42b8298eabdacf38ef9e52f",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1669468857153753090.png": "7f517a47c7831fbfaf40433d35baf9f90d17f89e75c135d20ffc812fec0f0997"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "平均血红蛋白含量",
+        "value": "28.4",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "326",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血小板计数",
+        "value": "313",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "16.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.6",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.33",
+        "unit": "ml/L",
+        "page": 1
+      },
+      {
+        "name": "RBC分布宽度-CV值",
+        "value": "11.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "RBC分布宽度-SD值",
+        "value": "37.0",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞计数",
+        "value": "0.00",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞百分比",
+        "value": "0.0",
+        "unit": "/100WBC",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4256,
+    "output_tokens": 899
+  }
+}

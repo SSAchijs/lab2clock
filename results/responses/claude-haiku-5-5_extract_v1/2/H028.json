@@ -1,0 +1,88 @@
+{
+  "key": "4d6073291b0dfc31da9d12193a8cdcaafe9f67a6400a297a6ad14f474b3e8015",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1672100998929453057.png": "1c13fc3876f577e9234a2d9778cc31ee4e7e78b1213106ec475b629585be6a7f"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷草转氨酶(AST生化)",
+        "value": "15.1",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶(ALT生化)",
+        "value": "4.8 偏低",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "ALT/AST比值(生化)",
+        "value": "0.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总蛋白(TP生化)",
+        "value": "68.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(GLB生化)",
+        "value": "24.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted](ALB生化)",
+        "value": "43.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]球[redacted](A/G生化)",
+        "value": "1.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶(GGT生化)",
+        "value": "7.4 偏低",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素(T-Bil生化)",
+        "value": "15.67",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素(DBi",
+        "value": "3.85",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2672,
+    "output_tokens": 810
+  }
+}

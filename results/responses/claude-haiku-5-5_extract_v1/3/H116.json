@@ -1,0 +1,76 @@
+{
+  "key": "76ed953cc1a0374daf99fc9868fe79baa2617dd21455206a86eb9c2df3db1f4c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1663139452573798435.png": "fc9a929571f6c6dc36501310e7b84a1c2fa05f6093cf7b71ee1546125c8732bc"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素",
+        "value": "21",
+        "unit": "[μmol/L]",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "5.7",
+        "unit": "[μmol/L]",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "15.3",
+        "unit": "[μmol/L]",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1.8",
+        "unit": "[μmol/L]",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "77.1",
+        "unit": "[g/L]",
+        "page": 1
+      },
+      {
+        "name": "[redacted](BCG法)",
+        "value": "42",
+        "unit": "[g/L]",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "35.1",
+        "unit": "[g/L]",
+        "page": 1
+      },
+      {
+        "name": "[redacted]/球比值",
+        "value": "1.2",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3869,
+    "output_tokens": 640
+  }
+}

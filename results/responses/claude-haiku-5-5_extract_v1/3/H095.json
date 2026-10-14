@@ -1,0 +1,46 @@
+{
+  "key": "c267aae1ff7b848bddbc91045c141efa2bb87b7bb0e9ad7f7d8a65521d7ad312",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1654785552023423402.png": "7fd9dfa92c1629129bd707aa352492afc1b309cbc1048f291934c6e6089d9429"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "碱性磷酸酶",
+        "value": "365.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "磷",
+        "value": "1.57 ↑",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "血钙",
+        "value": "2.37",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3401,
+    "output_tokens": 106
+  }
+}

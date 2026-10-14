@@ -1,0 +1,118 @@
+{
+  "key": "70e8bda272c68e2cc38d6812873e742c7e48b96ef4b01d8e504e73a9882e1a52",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1662815934943955937.png": "1e1faa170cb8f8e112a8e653cd8caf8c019a3a504eac48f93a31293d30b2efaa"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "66.42",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "37.08↓",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "29.34",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白球比例",
+        "value": "1.26",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "20.94",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "7.30↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "13.64",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "62.36↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "50.72↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "133.81↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰基转移酶",
+        "value": "201.47↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "5.59",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单胺氧化酶",
+        "value": "5.92",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "α-L-岩藻糖苷酶",
+        "value": "17.53",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷胱[redacted]肽还原酶",
+        "value": "62.00",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2542,
+    "output_tokens": 1626
+  }
+}

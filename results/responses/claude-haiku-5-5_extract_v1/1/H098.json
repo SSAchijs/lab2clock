@@ -1,0 +1,88 @@
+{
+  "key": "4caaa834f9ce6908dd81b6bcdfc92a84e56ebbc01639e4aa3fedbe4c20f793b6",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1655704776904985960.png": "6be148db97134868d6f82dba8e0fa61a973dcb01f7b266ece00e982cba97bb7a"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞总数",
+        "value": "6.53",
+        "unit": "E+9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞总数",
+        "value": "0.03",
+        "unit": "E+9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百分数",
+        "value": "0.5",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞总数",
+        "value": "3.21",
+        "unit": "E+9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分数",
+        "value": "49.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞总数",
+        "value": "0.14",
+        "unit": "E+9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分数",
+        "value": "2.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞总数",
+        "value": "2.78",
+        "unit": "E+9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分数",
+        "value": "42.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞总数",
+        "value": "0.37",
+        "unit": "E+9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4847,
+    "output_tokens": 368
+  }
+}

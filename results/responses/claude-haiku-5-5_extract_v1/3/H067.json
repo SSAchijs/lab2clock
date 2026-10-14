@@ -1,0 +1,88 @@
+{
+  "key": "fcecd2cbeab4e5b62c499c6d5bf403fa00acab859cef075f22985874a70a290d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1637194130459201465.png": "29592d1a51dab8b0fcde44ac67d3b1ef5f49ad27520748bf1e2ed7cc2e90273d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "61.7",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "35.4",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "217",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "10.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "血清总胆汁酸",
+        "value": "7.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰基转移酶",
+        "value": "36",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "63",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "27",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "23",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3606,
+    "output_tokens": 715
+  }
+}

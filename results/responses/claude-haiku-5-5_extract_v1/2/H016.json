@@ -1,0 +1,88 @@
+{
+  "key": "aedb507baf6badc404d6dd70de56bb959f9ca97ec69712fde26a68b14842579d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1660566273921908736.png": "dfa9b01d20961f65e40a9584ae968cd86b9a8ab39e1058ab31b265dcb0131ff4"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "*白细胞计数",
+        "value": "7.74",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "*血红蛋白",
+        "value": "139.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "*血小板计数",
+        "value": "227",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分数",
+        "value": "76.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分数",
+        "value": "18.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分数",
+        "value": "5.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百…",
+        "value": "0.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百…",
+        "value": "0.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "5.89",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞",
+        "value": "1.46",
+        "unit": "10^9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2372,
+    "output_tokens": 1171
+  }
+}

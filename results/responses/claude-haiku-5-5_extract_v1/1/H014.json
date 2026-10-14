@@ -1,0 +1,106 @@
+{
+  "key": "2d412c5093d5a0efd8b3e9a60cac0d819e1af8fa085ea3d820e4473fe2abfbf2",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1656224008159940609.jpeg": "8a45b24d222b347226f08f89ed563944785101602507829e01fe7cc51c136f2f"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "颜色(Color)",
+        "value": "浅黄色(Light yellow)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "浊度(Turbidity)",
+        "value": "清澈(Clear)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "葡萄糖(GLU)",
+        "value": "阴性(NEG)",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "(BIL)",
+        "value": "阴性(NEG)",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "(URO)",
+        "value": "阴性(NEG)",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "酸碱度(pH)",
+        "value": "6.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体(KET)",
+        "value": "阴性(NEG)",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "比重(SG)",
+        "value": "1.017",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血(ERY)",
+        "value": "阴性(NEG)",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "(LEU)",
+        "value": "阴性(NEG)",
+        "unit": "Leu/µL",
+        "page": 1
+      },
+      {
+        "name": "尿蛋白(PRO)",
+        "value": "阴性(NEG)",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐(NIT)",
+        "value": "阴性(NEG)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "显微镜结果(VM Result)",
+        "value": "正常(Normal)",
+        "unit": "/LPF",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5758,
+    "output_tokens": 2229
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "key": "46e148d1df3ba51e79b0105af4de1aaf3b949141446fdecc61c464c65e52ba7d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1645765192010952961.png": "777405c66f88783e831bd797b0c345bee7fc5c661594d4a718ca40f1d82caa22"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素(TBIL)",
+        "value": "10.6",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素(DBIL)",
+        "value": "3.7",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素(IBIL)",
+        "value": "6.9",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白(TP)",
+        "value": "77",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "(ALB)",
+        "value": "49.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(GLB)",
+        "value": "27.7",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "/球(A/G)(ALB/GLB)",
+        "value": "1.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶(ALT)",
+        "value": "81↑",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3036,
+    "output_tokens": 1021
+  }
+}

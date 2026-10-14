@@ -1,0 +1,136 @@
+{
+  "key": "07006bdf162daaca74d91f8f7565918d4bf8351be495cc16ba185b73655dc408",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1666050955821506560.png": "7374fc089526a2379035caf59edf952036c5fe19b8aad67bd04c19625acd12b6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "22.9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "24.7",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天/丙",
+        "value": "1.08",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "18.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "15.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1.5",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "72.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "ALB",
+        "value": "47.7",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "299",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "74",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "5'-核苷酸酶",
+        "value": "2.3",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰基转移酶",
+        "value": "24",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "CK",
+        "value": "163",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "169",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "a羟丁酸脱氢酶",
+        "value": "115",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "a岩藻糖苷酶",
+        "value": "19.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "腺苷脱氨酶",
+        "value": "5.1",
+        "unit": "U/L",
+        "page": 2
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2770,
+    "output_tokens": 1922
+  }
+}

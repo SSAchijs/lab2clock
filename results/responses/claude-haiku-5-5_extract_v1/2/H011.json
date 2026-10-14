@@ -1,0 +1,130 @@
+{
+  "key": "4a6a05c7cb3e6e4a3ebac2e9c01c3c867ce2a884129d7c55a810a77840c3717d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1650653877402492928.png": "1569fda6a1bae8b78f2a33713c841062224138408cf56538a5932a6310b93f6c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "25",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "门冬氨酸转移酶",
+        "value": "28",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "56",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "r-谷氨酰基转移酶",
+        "value": "21",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "胆碱酯酶",
+        "value": "[redacted]",
+        "unit": "[redacted]",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "10.1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "3.12",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "301",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "75.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "45.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "30.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白球比例",
+        "value": "1.49",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "7.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "α-L-岩藻糖苷酶",
+        "value": "26.1",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "单胺氧化酶",
+        "value": "6",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST/ALT",
+        "value": "1.12",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3557,
+    "output_tokens": 1052
+  }
+}

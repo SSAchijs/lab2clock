@@ -32,6 +32,7 @@ from lab2clock.units import UNITS, UnitError, normalise_unit
         ("x10^9/L", "10^3/uL"),
         ("×10^9/L", "10^3/uL"),
         ("*10~9/L", "10^3/uL"),
+        ("*10`9/L", "10^3/uL"),
         ("/uL", "/uL"),
         ("/ul", "/uL"),
         ("/μL", "/uL"),

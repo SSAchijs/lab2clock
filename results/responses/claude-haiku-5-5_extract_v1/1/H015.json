@@ -1,0 +1,130 @@
+{
+  "key": "1e7fc81efdc33c49b7544e8077c4c223d3048f2d066863bffd50c63740243cee",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1657963060224339968.jpeg": "90469778ef651569bd04164ceccd189644b11a96297cd0e2b890ae7b37875842"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞",
+        "value": "0",
+        "unit": "个/μl",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "0",
+        "unit": "个/μl",
+        "page": 1
+      },
+      {
+        "name": "细菌",
+        "value": "3",
+        "unit": "个/μl",
+        "page": 1
+      },
+      {
+        "name": "未分类结晶",
+        "value": "6",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "磷状上皮细胞",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "非磷状上皮细胞",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "透明管型",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "病理管型",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "白细胞团",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "粘液丝",
+        "value": "60 ↑",
+        "unit": "个/μl",
+        "page": 1
+      },
+      {
+        "name": "杂质",
+        "value": "0",
+        "unit": "ul",
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "Normal 17",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "Neg",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "Neg",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿潜血",
+        "value": "Neg",
+        "unit": "Ery/ul",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "Neg",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3908,
+    "output_tokens": 996
+  }
+}

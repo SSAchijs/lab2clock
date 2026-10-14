@@ -37,6 +37,17 @@ rebuilds that file from the labels, and
     uv run python -m bench.medrepbench
 
 fetches the labels and every image in it, each checked against its hash.
+
+The held-out set is every other labelled report that prints at least one
+marker and has an image, H001 onwards. It was chosen after the core's
+dictionary, units and checks were changed in the light of errors on the
+scored set, so those changes are tested on reports they were not fitted to.
+bench/medrepbench_heldout.csv and bench/medrepbench_heldout_labels.csv fix it,
+also CC BY-NC 4.0, and
+
+    uv run python -m bench.medrepbench heldout
+
+rebuilds them.
 """
 
 import csv
@@ -67,6 +78,12 @@ SET = Path(__file__).resolve().parent / "medrepbench.csv"
 # Their labelled marker rows, committed, so the real set is scored without
 # the dataset.
 LABELLED = Path(__file__).resolve().parent / "medrepbench_labels.csv"
+
+# The held-out reports and their labelled marker rows, chosen after the core
+# was changed in the light of the scored set, to test those changes on
+# reports nobody had looked at.
+HELDOUT = Path(__file__).resolve().parent / "medrepbench_heldout.csv"
+HELDOUT_LABELLED = Path(__file__).resolve().parent / "medrepbench_heldout_labels.csv"
 
 # The hand check of 10 reports' labels; see bench.audit.
 AUDIT = Path(__file__).resolve().parent / "medrepbench_audit.csv"
@@ -155,18 +172,28 @@ def markers(items: str) -> list[str]:
     return [marker for marker in MARKERS if marker in found]
 
 
-def eligible(labelled: pd.DataFrame, hashes: dict[str, str]) -> pd.DataFrame:
-    """Every labelled report with enough markers and an image to read, each
-    given an ID, M01 onwards, in image order."""
+def eligible(
+    labelled: pd.DataFrame,
+    hashes: dict[str, str],
+    min_markers: int = MIN_MARKERS,
+    exclude: frozenset[str] = frozenset(),
+    ids: str = "M{:02d}",
+) -> pd.DataFrame:
+    """Every labelled report with enough markers and an image to read, and
+    not excluded, each given an ID, M01 onwards, in image order."""
     rows = []
     for image, items in zip(labelled["image"], labelled["items"], strict=True):
         found = markers(items)
-        if len(found) >= MIN_MARKERS and hashes[image] != EMPTY_SHA256:
+        if (
+            len(found) >= min_markers
+            and hashes[image] != EMPTY_SHA256
+            and image not in exclude
+        ):
             rows.append(
                 {"image": image, "sha256": hashes[image], "markers": ";".join(found)}
             )
     chosen = pd.DataFrame(rows).sort_values("image", ignore_index=True)
-    chosen.insert(0, "report", [f"M{i:02d}" for i in range(1, len(chosen) + 1)])
+    chosen.insert(0, "report", [ids.format(i) for i in range(1, len(chosen) + 1)])
     return chosen
 
 
@@ -181,14 +208,29 @@ def labelled_rows(labelled: pd.DataFrame, chosen: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def select(cache: Path = CACHE) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """The scored reports, and their labelled marker rows."""
+def _labelled_and_hashes(cache: Path) -> tuple[pd.DataFrame, dict[str, str]]:
     labelled = pd.read_csv(labels(cache)).dropna(subset=["items"])
     names = list(labelled["image"])
     hashes = {}
     for start in range(0, len(names), 400):
         hashes |= published(names[start : start + 400])
+    return labelled, hashes
+
+
+def select(cache: Path = CACHE) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """The scored reports, and their labelled marker rows."""
+    labelled, hashes = _labelled_and_hashes(cache)
     chosen = eligible(labelled, hashes)
+    return chosen, labelled_rows(labelled, chosen)
+
+
+def select_heldout(cache: Path = CACHE) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """The held-out reports, and their labelled marker rows: every labelled
+    report outside the scored set that prints at least one marker and has an
+    image to read."""
+    labelled, hashes = _labelled_and_hashes(cache)
+    scored = frozenset(row["image"] for row in read_set())
+    chosen = eligible(labelled, hashes, 1, scored, "H{:03d}")
     return chosen, labelled_rows(labelled, chosen)
 
 
@@ -213,15 +255,23 @@ def read_audit(path: Path = AUDIT) -> list[dict[str, str]]:
 
 
 def main() -> None:
-    if sys.argv[1:] == ["select"]:
-        chosen, rows = select()
-        chosen.to_csv(SET, index=False, lineterminator="\n")
-        rows.to_csv(LABELLED, index=False, lineterminator="\n")
-        print(f"wrote {len(chosen)} reports to {SET}, {len(rows)} rows to {LABELLED}")
+    commands = {
+        "select": (select, SET, LABELLED),
+        "heldout": (select_heldout, HELDOUT, HELDOUT_LABELLED),
+    }
+    if sys.argv[1:] and sys.argv[1:][0] in commands and len(sys.argv) == 2:
+        choose, set_path, rows_path = commands[sys.argv[1]]
+        chosen, rows = choose()
+        chosen.to_csv(set_path, index=False, lineterminator="\n")
+        rows.to_csv(rows_path, index=False, lineterminator="\n")
+        print(
+            f"wrote {len(chosen)} reports to {set_path}, "
+            f"{len(rows)} rows to {rows_path}"
+        )
     elif sys.argv[1:]:
-        raise SystemExit("usage: python -m bench.medrepbench [select]")
+        raise SystemExit("usage: python -m bench.medrepbench [select | heldout]")
     print(f"labels: {labels()}")
-    chosen = read_set()
+    chosen = read_set() + (read_set(HELDOUT) if HELDOUT.exists() else [])
     for row in chosen:
         image(row["image"], row["sha256"])
     print(f"{len(chosen)} images in {CACHE / 'censored'}")

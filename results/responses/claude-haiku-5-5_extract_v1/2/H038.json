@@ -1,0 +1,76 @@
+{
+  "key": "368d75602402aece08f9c656534087b4335e08645f9c446643755d5e4f7612b1",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1685216895872430083.png": "9eed064fcd615c4b281172d2a1e3e921459d8585c4751f1a0ee098822123628a"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "阴道清洁度",
+        "value": "illegible",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "中量",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杂菌",
+        "value": "中量",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "阴性双球菌",
+        "value": "未检出",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "未检出",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "未检出",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酸碱度",
+        "value": "3.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "未检出",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2010,
+    "output_tokens": 751
+  }
+}

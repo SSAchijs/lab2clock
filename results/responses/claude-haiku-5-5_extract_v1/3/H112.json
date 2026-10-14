@@ -1,0 +1,88 @@
+{
+  "key": "6399675c33dcf35d04af22ad0924bd0114229b52b970e8d964ef59c2200ccecc",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1662293884181185497.png": "c760ceeeed0de55fda85c659147dfdef758cf4964928675ff4cfcaac6316722b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "尿素(BUN)",
+        "value": "2.84",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸(UA)",
+        "value": "200.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐(CREA)",
+        "value": "45.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "血清胱抑素C测定(CysC)",
+        "value": "0.50 ↓",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "β2-微球蛋白(B2-MG)",
+        "value": "1.80",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "免疫球蛋白G(IgG)",
+        "value": "11.21",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "免疫球蛋白M(IgM)",
+        "value": "1.46",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "免疫球蛋白A(IgA)",
+        "value": "3.46",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "补体C3(C3)",
+        "value": "0.84",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "补体C4(C4)",
+        "value": "0.10",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2169,
+    "output_tokens": 878
+  }
+}

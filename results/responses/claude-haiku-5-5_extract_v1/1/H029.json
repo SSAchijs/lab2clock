@@ -1,0 +1,64 @@
+{
+  "key": "9f0677575ae66da9b8087037eae56e5676a701d30c649636193ee4676a88ecc6",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1673348346327797760.jpg": "d901b4ccf7f129b2d1364099e58b1e51810621b98c93e0f5a32c2c7cec3535ef"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "淋巴细胞",
+        "value": "6.33",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "粒细胞",
+        "value": "62.17",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单核细胞",
+        "value": "6.76",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "CD45弱表达细胞",
+        "value": "0.33",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "CD45阴性表达细胞",
+        "value": "21.86",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞",
+        "value": "1.17",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3188,
+    "output_tokens": 358
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "key": "0fc1bcb1fd9e161613d618b3e92f91d03a39b327d928d37fdc89da9c8a1d2fe3",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1638562606439276544.png": "4ea4fafc76ae17240e8ba2480acaf325408eee6bebc844049f74e9b17c15116c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "*总胆红素",
+        "value": "4.3",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "0.5 ↓",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "3.8",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "*总蛋白",
+        "value": "75.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "*[redacted]",
+        "value": "46.9",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "28.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "1.67",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "*天冬氨酸氨基转移酶",
+        "value": "20",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "*丙氨酸氨基转氨酶",
+        "value": "16",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "AST:ALT",
+        "value": "1.25",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "*碱性磷酸酶",
+        "value": "60",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "*γ-谷氨酰转肽酶",
+        "value": "15",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1.7",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "*胆碱脂酶",
+        "value": "[redacted]",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "腺苷脱氨酶",
+        "value": "< 5.0",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4886,
+    "output_tokens": 1307
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "key": "8985c0cd1695862eaa6c30bd81d6639b48fcc3332f1cbd8248a3fdd9b07582b3",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1682553511726047235.jpg": "f4a75ec4d390122b531e080b9a3e6f00f8ae766eabefe65729be7c20d2beded3"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "TBIL 总胆红素",
+        "value": "20.8",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "DBIL 直接胆红素",
+        "value": "6.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "IDB 间接胆红素",
+        "value": "14.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "ALT 谷丙转氨酶",
+        "value": "28.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST 谷草转氨酶",
+        "value": "25.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "ALP 碱性磷酸酶",
+        "value": "54.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "GGT γ-谷氨酰转肽酶",
+        "value": "15.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "BUN 尿素",
+        "value": "4.3",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "UA 尿酸",
+        "value": "316.0",
+        "unit": "umol/l",
+        "page": 1
+      },
+      {
+        "name": "CREA 肌酐",
+        "value": "85.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "β2 β2MG",
+        "value": "1.72",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "RBP 视黄醇结合蛋白",
+        "value": "29.7",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5783,
+    "output_tokens": 448
+  }
+}

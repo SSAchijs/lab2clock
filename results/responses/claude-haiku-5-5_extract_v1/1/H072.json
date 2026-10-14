@@ -1,0 +1,112 @@
+{
+  "key": "11eba8bafef1e20a5544f12212446ba47de66f722b8dccc2f66a9e8c604da0b5",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1639031509868960186.png": "ad588abdbf2ff42c8a17a71eddb3f53a13d53c83232751e351f29b82a94ce4fd"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "76.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "49.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "18",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "21",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "73",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰转肽酶",
+        "value": "12",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "15.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "5.9",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "1.88",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "26.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "9.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "0.8",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "胆碱酯酶",
+        "value": "[redacted]",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "0.208",
+        "unit": "g/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3796,
+    "output_tokens": 979
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "key": "d72963e8c09a9e7fc6327d7cd9ce1360477ad40e4efbcebb7ba76e51c9535171",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1639482934263418825.png": "1e7cf047a70b5ad972f6efea9712b6ec74ade76de89679bf93e71e31e7370d4f"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞",
+        "value": "阴性(–)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "比重",
+        "value": "1.018",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酸碱度",
+        "value": "5.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "阴性(–)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "阳性(++)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "阴性(–)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆元",
+        "value": "阴性(–)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "阴性(–)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "阳性(++)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "潜血",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4932,
+    "output_tokens": 692
+  }
+}

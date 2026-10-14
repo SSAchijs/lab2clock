@@ -1,0 +1,130 @@
+{
+  "key": "80ace98b4bb0b1b0198ae0e36ec9e684a0eedf940f31bff067e5077a57980d01",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1655792034557444565.png": "f0298db7c74d4009d94b18d2576e50aff54d9a35bc0b539daa1e43ea9a1458d6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "ALT",
+        "value": "24",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST",
+        "value": "44",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "TBIL",
+        "value": "20.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "DBIL",
+        "value": "3.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "ALP",
+        "value": "unreadable",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "GGT",
+        "value": "11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "MAO",
+        "value": "3.00",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "CHE",
+        "value": "unreadable",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "5-NT",
+        "value": "5",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "TBA",
+        "value": "2.1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "AFU",
+        "value": "18.60",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "CO2",
+        "value": "26.90",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "UREA",
+        "value": "5.38",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "CREA",
+        "value": "69.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "eGFR",
+        "value": "87.20",
+        "unit": "mL/min*1.73m2",
+        "page": 1
+      },
+      {
+        "name": "UA",
+        "value": "260.9",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "AMM",
+        "value": "20.0",
+        "unit": "umol/l",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5782,
+    "output_tokens": 2913
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "key": "9965ada1a255061cfe7d3455afd8f63f5f276b6c896042344f2ecd9bc3a5a2d1",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1655180601154353900.png": "1ef19cfe7d9738dcd04f7561e049c19404259f07c12cecd12be812194aa17cdf"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷草转氨酶",
+        "value": "34.4",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "270.50 ↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "α-羟丁酸脱氢酶",
+        "value": "240.9 ↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶",
+        "value": "121.9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶同工酶MB",
+        "value": "16.8",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白",
+        "value": "10.98 ↑",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5783,
+    "output_tokens": 231
+  }
+}

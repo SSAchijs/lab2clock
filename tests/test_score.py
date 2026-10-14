@@ -1,7 +1,7 @@
 import pytest
 
 import lab2clock.assemble as assemble_module
-from bench import oracle, prompts, responses
+from bench import medrepbench, oracle, prompts, responses
 from bench.prompts import Prompt
 from bench.responses import Failure, Response
 from bench.score import (
@@ -15,6 +15,8 @@ from bench.score import (
     expected_input,
     metrics,
     read_results,
+    real_expected,
+    real_inputs,
     real_labels,
     real_metrics,
     same_input,
@@ -272,12 +274,16 @@ def test_a_missed_flag(monkeypatch):
     assert o.expected is None and o.got is not None
 
 
-def test_a_misread_count_is_blamed_for_the_percent_it_withholds():
+def test_a_misread_count_is_blamed_for_the_inputs_it_withholds():
     spec = load(RenderSpec, RENDER_SPEC, "R07")
     count = next(row for row in spec.rows if row.analyte == "lymphocyte_count")
-    marker, o = only_error(outcomes("R07", edit("R07", count.name, value="4.1")))
+    result = outcomes("R07", edit("R07", count.name, value="4.1"))
     assert count.value != "4.1"
-    assert (marker, o.error, o.got) == ("lymphocyte_percent", "value", None)
+    wrong = {m: (o.error, o.got) for m, o in result.items() if o.error}
+    assert wrong == {
+        "lymphocyte_percent": ("value", None),
+        "white_blood_cell_count": ("value", None),
+    }
 
 
 def test_a_planted_slip_corrected_by_the_reader_is_a_misread():
@@ -385,10 +391,16 @@ def test_one_row_per_marker_per_report_per_run():
     rows = score_responses()
     assert all(list(row) == list(COLUMNS) for row in rows)
     keys = [(row["extractor"], row["run"], row["report"]) for row in rows]
-    labelled = {r: len(rows) for r, rows in real_labels().items()}
+    labels = real_labels() | real_labels(medrepbench.HELDOUT_LABELLED)
+    labelled = {r: len(rows) for r, rows in labels.items()}
+    printed = [
+        (row["extractor"], row["run"], row["report"])
+        for row in rows
+        if row["printed"] or row["split"] not in ("real", "heldout")
+    ]
     for key in set(keys):
         report = key[2]
-        assert keys.count(key) == labelled.get(report, 9)
+        assert printed.count(key) == labelled.get(report, 9)
     oracle_reports = {k for k in set(keys) if k[:2] == ("oracle", "1")}
     assert len(oracle_reports) == 25
 
@@ -485,10 +497,11 @@ def read(*items):
     )
 
 
-def test_a_real_row_read_as_printed_is_correct_and_has_no_end_to_end_score():
+def test_a_real_row_read_as_printed_is_correct_and_reaches_the_clock():
     rows = labelled(("white_blood_cell_count", "白细胞", "6.72", "10^9/L"))
     [o] = score_real("M01", rows, read(("白细胞", "6.72", "10^9/L")))
-    assert (o.correct, o.error, o.expected, o.got) == (True, None, None, None)
+    assert (o.correct, o.error, o.expected, o.got) == (True, None, 6.72, 6.72)
+    assert real_inputs([o]) == [(True, "right")]
 
 
 def test_a_real_row_under_another_name_is_found_by_value_and_unit():
@@ -554,3 +567,71 @@ def test_a_real_row_under_another_name_and_a_noisy_label_unit_is_found_by_value(
 @pytest.mark.parametrize("got", ["50.68 +", "32.38 -", "50.68+"])
 def test_a_plus_or_minus_flag_is_not_part_of_the_value(got):
     assert same_value(got, got.rstrip("+- "))
+
+
+def test_a_real_crp_is_expected_in_the_clocks_unit():
+    [row] = labelled(("c_reactive_protein", "C反应蛋白", "16.0↑", "mg/L"))
+    assert real_expected(row) == pytest.approx(1.6)
+
+
+@pytest.mark.parametrize(
+    "row",
+    [
+        ("white_blood_cell_count", "白细胞(WBC)", "5.70", None),
+        ("red_cell_distribution_width", "RDW", "36.40", "fL"),
+    ],
+)
+def test_a_label_that_cannot_say_the_clock_input_expects_none(row):
+    [row] = labelled(row)
+    assert real_expected(row) is None
+
+
+def test_what_reaches_the_clock_from_a_real_report():
+    rows = labelled(
+        ("albumin", "白蛋白", "40.1", "g/L"),
+        ("glucose", "葡萄糖", "5.2", "mmol/L"),
+        ("creatinine", "肌酐", "71", "umol/L"),
+        ("mean_cell_volume", "平均红细胞体积", "88.2", None),
+    )
+    response = read(
+        ("白蛋白", "40.7", "g/L"),  # misread, and delivered
+        ("葡萄糖", "5.2", "mmol/L"),
+        ("平均红细胞体积", "88.2", "fL"),  # the label gives no unit to check
+        ("碱性磷酸酶", "81", "U/L"),  # no label row names it
+    )
+    outcomes = score_real("M01", rows, response)
+    assert real_inputs(outcomes) == [
+        (True, "wrong"),
+        (True, "right"),
+        (True, "missing"),
+        (True, "unverified"),
+        (False, "unverified"),
+    ]
+    extra = outcomes[-1]
+    assert (extra.marker, extra.printed, extra.got) == (
+        "alkaline_phosphatase",
+        False,
+        81,
+    )
+
+
+def test_an_unlabelled_delivery_does_not_count_toward_the_stage_1_rates():
+    rows = labelled(("glucose", "葡萄糖", "5.2", "mmol/L"))
+    response = read(("葡萄糖", "5.2", "mmol/L"), ("碱性磷酸酶", "81", "U/L"))
+    rates = real_metrics(score_real("M01", rows, response))
+    assert (rates["both"].k, rates["both"].n) == (1, 1)
+
+
+def test_one_of_two_labelled_rows_for_a_marker_makes_its_input_right():
+    rows = labelled(
+        ("c_reactive_protein", "超敏C反应蛋白", ">5.0", "mg/l"),
+        ("c_reactive_protein", "C反应蛋白", "5.5", "mg/l"),
+    )
+    # Only the CRP row is read, so the core delivers it, unduplicated.
+    outcomes = score_real("M01", rows, read(("C反应蛋白", "5.5", "mg/l")))
+    assert real_inputs(outcomes) == [(True, "right")]
+
+
+def test_nothing_reaches_the_clock_from_an_invalid_real_response():
+    rows = labelled(("glucose", "葡萄糖", "5.2", "mmol/L"))
+    assert real_inputs(score_real("M01", rows, None)) == [(True, "missing")]

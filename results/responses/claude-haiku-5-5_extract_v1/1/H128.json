@@ -1,0 +1,82 @@
+{
+  "key": "c1264514ed569a8ce01f9f207a8f230896e7a74b0f1b0def1fc3396704675e9c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1669531491102439608.png": "b00b1374ca6fede3e51a522f180d35c07084ecf872034358259619e947738f93"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "碱性磷酸酶",
+        "value": "81.86",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血清铁",
+        "value": "19.00",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "钾",
+        "value": "4.04",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钠",
+        "value": "141.68",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "氯",
+        "value": "107.44",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钙",
+        "value": "2.39",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "磷",
+        "value": "1.31",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "镁",
+        "value": "0.83",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "血糖(空腹)",
+        "value": "4.86",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2297,
+    "output_tokens": 282
+  }
+}

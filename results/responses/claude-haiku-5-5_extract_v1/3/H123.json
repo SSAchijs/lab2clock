@@ -1,0 +1,70 @@
+{
+  "key": "8de31b326fa7e87eaf85eca4c738f6fe15cded2a87b68d8f26f8737304fa6d32",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1666009142044744787.png": "531db86a2a0946e50dc578766858def31f2c1ac52c4f567756020e60610ea2e8"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "C反应蛋白",
+        "value": "< 0.84",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "类风湿因子",
+        "value": "< 11....",
+        "unit": "IU/ml",
+        "page": 1
+      },
+      {
+        "name": "抗链球菌溶血素O",
+        "value": "520.0 ↑",
+        "unit": "IU/ml",
+        "page": 1
+      },
+      {
+        "name": "补体C3",
+        "value": "0.930",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "补体C4",
+        "value": "0.120",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "抗肺炎支原体抗体",
+        "value": "<",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血清总IgE",
+        "value": "38.9",
+        "unit": "IU/mL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3462,
+    "output_tokens": 742
+  }
+}

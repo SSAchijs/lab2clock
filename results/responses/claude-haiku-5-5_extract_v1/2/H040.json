@@ -1,0 +1,52 @@
+{
+  "key": "3c67d67eebdeaf67067ec84437a1e2df9c9f7bbe9b0f48e32770a34d8c580316",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1686991983306682368.jpg": "0d7fe9954e0008bf39f9ad2bd0683518d9042719aedf042181ab9c984945de91"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "【川渝HR】尿酸(UA)",
+        "value": "282.0",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "抗链球菌溶血素O(ASO)",
+        "value": "783↑",
+        "unit": "IU/ml",
+        "page": 1
+      },
+      {
+        "name": "类风湿因子(RF)",
+        "value": "5.4",
+        "unit": "IU/ml",
+        "page": 1
+      },
+      {
+        "name": "C-反应蛋白(CRP)",
+        "value": "29.78↑",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2910,
+    "output_tokens": 767
+  }
+}

@@ -34,6 +34,8 @@ from lab2clock.values import ParsedValue, ValueParseError, parse_value
         ("12.3 H*", ParsedValue(12.3, flags=("H", "*"), decimals=1)),
         ("8.9↑", ParsedValue(8.9, flags=("↑",), decimals=1)),
         ("2.1 ↓", ParsedValue(2.1, flags=("↓",), decimals=1)),
+        ("50.68 +", ParsedValue(50.68, flags=("+",), decimals=2)),
+        ("32.38 -", ParsedValue(32.38, flags=("-",), decimals=2)),
         # Censored values.
         ("<0.5", ParsedValue(0.5, censored=True, decimals=1)),
         ("< 0,5", ParsedValue(0.5, censored=True, decimals=1)),
@@ -75,6 +77,10 @@ def test_parses(printed, expected):
         "1.2 X",
         "1'234 567",
         "5.6 mmol/L",
+        # Semi-quantitative urine results, not numbers with a flag.
+        "3+",
+        "2+",
+        "1-",
     ],
 )
 def test_refuses(printed):

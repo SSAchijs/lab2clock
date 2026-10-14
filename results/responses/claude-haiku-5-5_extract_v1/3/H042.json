@@ -1,0 +1,64 @@
+{
+  "key": "98aa4c0a917276b43dd9a95929b75907c5104b29296373f23fb10bfca651623b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1688419827263045632.jpg": "637b7d8affec990b17723e946ea04166064f543d89fda47cbf2ebe670abcb9bb"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "尿素氮",
+        "value": "5.42",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "67",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "486 ↑",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "二氧化碳",
+        "value": "24.9",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "β-2微球蛋白",
+        "value": "1.23",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "胱氨酸蛋白酶抑制剂C",
+        "value": "0.67",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3302,
+    "output_tokens": 213
+  }
+}

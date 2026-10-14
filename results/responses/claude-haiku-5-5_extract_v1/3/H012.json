@@ -1,0 +1,94 @@
+{
+  "key": "496c5377fc80f615f953b87c1dec0068e7f6eebbf24fb465a3eeb8e5e6b105d3",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1653933341033226240.png": "64c4b8aedc8bf028a49792e9759f7accc97d3195201d54ebe87c0aae6a3bd074"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "血红蛋白浓度",
+        "value": "133",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积",
+        "value": "43.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "97.8",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血红蛋白含量",
+        "value": "30.2",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血红蛋白浓度",
+        "value": "309",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度变异系数",
+        "value": "12.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度标准差",
+        "value": "57.3",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板数目",
+        "value": "228",
+        "unit": "x10^9/L",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.7",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "16.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.244",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2375,
+    "output_tokens": 1031
+  }
+}

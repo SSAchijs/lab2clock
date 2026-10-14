@@ -1,0 +1,130 @@
+{
+  "key": "b507ffbacd181a7746ffbc97bc6fbfdb7bc2471d5bad87465a72bc117ca9e113",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1688790533668438018.jpg": "2c77edbf6d8f2fcbb72994a69ed051ef7803e1a89549e8b6a5b4d00ea7af440c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "酸碱度",
+        "value": "6.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿蛋白",
+        "value": "-",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "尿蛋白",
+        "value": "-",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "维生素C",
+        "value": "-",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "维生素C",
+        "value": "-",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "滴虫感染",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "念珠菌感染",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "<4.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "胺臭味实验",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "淋球菌筛查",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "II",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "沙眼衣原体筛查",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "促甲状腺激素",
+        "value": "1.66",
+        "unit": "mIU/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3062,
+    "output_tokens": 1431
+  }
+}

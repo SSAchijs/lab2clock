@@ -1,0 +1,106 @@
+{
+  "key": "336c82bad4e02f1c4018d63f12279a03b3dd90629c0cf6384d604165707ea17a",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1658487412914724895.png": "e2a97dd8e1564965bc353b3d42d6fb9726e6a2c6eabcd32d06ee97be78f74dca"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "线索细胞",
+        "value": "阴性(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "β-葡萄糖醛酸",
+        "value": "阴性(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "弱阳性(±)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "1/2视野",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "唾液酸苷酶",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "β-N-乙酰氨基葡萄糖苷酶",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "Ⅳ度",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杆菌",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "未发现",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "真菌",
+        "value": "未发现",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酸碱度",
+        "value": "5.1",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "过氧化氢",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "++++",
+        "unit": "/HPF",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2816,
+    "output_tokens": 920
+  }
+}

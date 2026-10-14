@@ -1,0 +1,100 @@
+{
+  "key": "51856fd534c6639e484d8b1552c959ff0bf64de9cf87b1ef290903b9fcea7be8",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1654513607910451705.png": "247fee59fcf6b02042b972fffbb552f3ed5034ef990da8cf6a3f0f4dfc9e5183"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "血小板",
+        "value": "287",
+        "unit": "x10^9/L",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.1",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.29",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "15.70",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞绝对值",
+        "value": "2.03",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "24.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞绝对值",
+        "value": "0.50",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分比",
+        "value": "6.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "5.76",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "69.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞绝对值",
+        "value": "0.03",
+        "unit": "x10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分比",
+        "value": "0.4",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3316,
+    "output_tokens": 406
+  }
+}

@@ -129,3 +129,44 @@ def test_every_analyte_has_english_and_chinese_names():
     for names in SYNONYMS.values():
         assert any(name.isascii() for name in names)
         assert any(not name.isascii() for name in names)
+
+
+@pytest.mark.parametrize(
+    ("printed", "unit", "expected"),
+    [
+        # An abbreviation beside the full name, with or without a space.
+        ("ALP 碱性磷酸酶", "U/L", "alkaline_phosphatase"),
+        ("CRP C反应蛋白", "mg/l", "c_reactive_protein"),
+        ("hs-CRP 超敏C反应蛋白", "mg/l", "c_reactive_protein"),
+        ("MCV红细胞平均体积", "fL", "mean_cell_volume"),
+        ("*MCV 红细胞平均体积", "fl", "mean_cell_volume"),
+        ("LYMPH%淋巴细胞比率", "%", "lymphocyte_percent"),
+        # A unit in brackets after the name is skipped.
+        ("淋巴细胞百分比(LYM%)(%)", "%", "lymphocyte_percent"),
+        ("白细胞(WBC)(*10^9/L)", "*10^9/L", "white_blood_cell_count"),
+        # A part printed for both lymphocyte forms still follows the unit.
+        ("LYMPH# 淋巴细胞", "10^9/L", LYMPHOCYTE_COUNT),
+    ],
+)
+def test_compound_names_match_when_every_part_agrees(printed, unit, expected):
+    assert match(printed, unit) == expected
+
+
+@pytest.mark.parametrize(
+    ("printed", "unit"),
+    [
+        # One unknown part leaves the name unmapped: urine creatinine.
+        ("尿肌酐(CREA)", "umol/L"),
+        ("前白蛋白(ALB)", "mg/L"),
+        # RDW-SD stays out, however it is combined.
+        ("RDW-SD 红细胞分布宽度", "%"),
+        ("RDW 红细胞分布宽度SD", "fl"),
+        ("红细胞分布宽度(SD)", "fl"),
+        # Two parts naming different analytes.
+        ("WBC 红细胞", "10^9/L"),
+        # A bare lymphocyte name with no unit is still undecidable.
+        ("LYM 淋巴细胞", None),
+    ],
+)
+def test_compound_names_stay_unmapped_when_a_part_disagrees(printed, unit):
+    assert match(printed, unit) is None

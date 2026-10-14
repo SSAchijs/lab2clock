@@ -1,0 +1,34 @@
+{
+  "key": "b2e349b4ce3f54d03a0b80f9123bba533fb379c0aa3d63032a8f075c7805ec44",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1634966646152243144.png": "dd93a4d4551e47e0c423f00dab791a65392e6291c075d909dc3d70d71b2b48c2"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖",
+        "value": "8.00 ↑",
+        "unit": "mmol/l",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5774,
+    "output_tokens": 46
+  }
+}

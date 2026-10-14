@@ -1,0 +1,94 @@
+{
+  "key": "ac95eb201c231dfea5809361de669d49230d9a39a2e83a1b8c25b92a382d9b72",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1627974605849543060.png": "80e87f0d66b06e5a960456424bfeb3af2c02782103a43bfa0a0c9ed56a4c6a6e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "尿比重",
+        "value": "1.020",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酸碱度",
+        "value": "6.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "2+ *",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿潜血",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿蛋白",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿葡萄糖",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿维生素C",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1687,
+    "output_tokens": 778
+  }
+}

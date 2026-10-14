@@ -1,0 +1,70 @@
+{
+  "key": "585a2365f3c378c305761c120a9d0e47858124422166afe88af2e4d9fd9cf793",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1676541316283225657.png": "dffcd39f27c681bd347eae73837ec2ea001106e6296262c960b5ae340a7623b8"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "红细胞分布宽度SD",
+        "value": "38.40",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度CV",
+        "value": "12.00",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板",
+        "value": "176.00",
+        "unit": "9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "8.10↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "8.60",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.15",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "大型血小板比率",
+        "value": "13.10",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3878,
+    "output_tokens": 762
+  }
+}

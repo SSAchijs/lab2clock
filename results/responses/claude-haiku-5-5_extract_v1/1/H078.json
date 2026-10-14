@@ -1,0 +1,106 @@
+{
+  "key": "26b061dca1ea65ecafdf709e563520771e375fbd5eedd1a28821c9a6c3efc2aa",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1645622074019221319.png": "bb8c1653f6f1e6423f4461bd09d0a5268d644b9d0e078e18383f46e4dda7bd5e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞总数",
+        "value": "17",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "上皮细胞总数",
+        "value": "9",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "鳞状上皮细胞",
+        "value": "9",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "非鳞状上皮细胞",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "管型",
+        "value": "0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "结晶总数",
+        "value": "0",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "酵母样真菌数",
+        "value": "4",
+        "unit": "/ul",
+        "page": 1
+      },
+      {
+        "name": "粘液丝",
+        "value": "12",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "细菌",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓球",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "0-2",
+        "unit": "/hp",
+        "page": 1
+      },
+      {
+        "name": "均一形(%)",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "变异形(%)",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2672,
+    "output_tokens": 373
+  }
+}

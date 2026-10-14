@@ -1,0 +1,148 @@
+{
+  "key": "a42f8c4b69cfc54b2075d473e272dddabfd8e725f2d9192aaadbfaf0c44a0a84",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1675135595823611904.jpeg": "1aac18f67cd130b5c62079a24fc13a572bfec5c91e2bbb0208f958c3a47b474d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "[name not printed]",
+        "value": "清",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "6.00",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "1.008",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "2",
+        "unit": "/uL",
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "7.3",
+        "unit": "mS/cm",
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "3",
+        "unit": "/uL",
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "13",
+        "unit": "/uL",
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "1",
+        "unit": "/uL",
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "正常",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name not printed]",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2590,
+    "output_tokens": 1744
+  }
+}

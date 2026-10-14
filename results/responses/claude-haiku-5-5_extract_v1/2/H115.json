@@ -1,0 +1,82 @@
+{
+  "key": "f619636d2e5ac8b5ba0479403e611ea3831c4d4ca37410d7e6ac1f7e7198a573",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1663036143408616272.png": "908f1eb28877ba0fb09271314c6d897ff94858b1d308c74a0792baad5ad6f55b"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "清洁度",
+        "value": "III°",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "阴道毛滴虫",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杂菌",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "湿片找线索细胞",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓细胞",
+        "value": "未见",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3674,
+    "output_tokens": 407
+  }
+}

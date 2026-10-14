@@ -1,0 +1,106 @@
+{
+  "key": "1f6aca2c009bceac006c76277945255309cda8a578ec92e380bedbd2471a91b1",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1675413656391634944.jpg": "99b728927565e5fc7f9ef6d679df018a3a357167bfa2d0b10dcd1d96d755957c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "丙氨酸基转移酶(陕HR)(ALT)",
+        "value": "52.73↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶(陕HR)(AST)",
+        "value": "38.36",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]草/[redacted](AST/ALT)",
+        "value": "0.73",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶(GGT)",
+        "value": "39.57",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶(ALP)",
+        "value": "55.98",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "胆碱酯酶(CHE)",
+        "value": "[illegible]",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白(陕HR)(TP)",
+        "value": "75.78",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted](陕HR)(ALB)",
+        "value": "46.56",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(GLOB)",
+        "value": "29.22",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白球比(A/G)",
+        "value": "1.59",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素(陕HR)(TBIL)",
+        "value": "17.99",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素(DBIL)",
+        "value": "6.43",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素(IBIL)",
+        "value": "11.56",
+        "unit": "μmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3080,
+    "output_tokens": 1090
+  }
+}

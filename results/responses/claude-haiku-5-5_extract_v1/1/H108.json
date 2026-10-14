@@ -1,0 +1,100 @@
+{
+  "key": "402744d2d001b6c2cd8a899d598bfb20c63f7a5b71d6ec90c13e40ad3ec22d5d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1661582570414366569.png": "9d15740e7b8878811eae5a77557ba33c5b0ca43c746403d010fe385149bb8fcd"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "清洁度",
+        "value": "Ⅲ°",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "+++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "未找到",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "未找到",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "+",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "过氧化氢",
+        "value": "阳性(+)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "弱阳性(±)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "唾液酸苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "β葡萄糖醛酸酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙酰氨基葡萄糖苷酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "4.6",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "细菌性阴道病RV试验",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1310,
+    "output_tokens": 903
+  }
+}

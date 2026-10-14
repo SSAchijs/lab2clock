@@ -1,0 +1,106 @@
+{
+  "key": "e9f569892ec88d958ddbf9dce58a4a682eb66b173e24eaf6191e43eb4029975c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1654075007722141659.png": "9f3c87ef7c99f4dc528d476891e5c43defdcb2176b5964da2c0d692f547b43dc"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷丙转氨酶",
+        "value": "47 ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "8.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.4",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "5.9",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "31",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]转移酶",
+        "value": "19",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "72",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "43",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "1.48",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "3.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "79",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "29",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2582,
+    "output_tokens": 795
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "key": "0cf1aae27df23153165f7d7926cf20200b91e0a8a8422084c07536aec41ebb9b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1663400254100529067.png": "da40f6239055c442638aa8345d46d3f74dab7d21f5b3ef5a06344a316cdc3fca"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "(a)",
+        "value": "327.89↑",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "C-反应蛋白",
+        "value": "0.1",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "同型半胱氨酸",
+        "value": "10.31",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶",
+        "value": "141",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶-MB亚型",
+        "value": "17",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "154",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "a-羟酸脱氢酶",
+        "value": "89",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血管紧素转换酶",
+        "value": "16.8",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "超氧化物歧化酶",
+        "value": "218.04↑",
+        "unit": "U/ml",
+        "page": 1
+      },
+      {
+        "name": "血清淀粉样蛋白",
+        "value": "2.3",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "估算肾小球",
+        "value": "125.77",
+        "unit": "ml/min/1.73m2",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3644,
+    "output_tokens": 1262
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "key": "7aa0a215003d8e7024fc494f2c7e7aed95ab92383f63609ee330dd7763b5c35b",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1670507430203995695.png": "e9a626f7303a827fd052cf83630551e7f6ff3492e948cbd8a570c17c70980c27"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "肌酐测定",
+        "value": "63",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "血清胱抑素C测定",
+        "value": "0.77",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "血清尿酸测定",
+        "value": "446 H",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "C-反应蛋白测定",
+        "value": "3.10",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "抗链球菌溶血素O测定",
+        "value": "40.10",
+        "unit": "IU/mL",
+        "page": 1
+      },
+      {
+        "name": "类风湿因子测定",
+        "value": "6.60",
+        "unit": "IU/mL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4058,
+    "output_tokens": 871
+  }
+}

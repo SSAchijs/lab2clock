@@ -1,0 +1,94 @@
+{
+  "key": "d50b80bec9f220800129f9e09e6ffa29d821a76146f010a42810befb874bba4f",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1670122423657356496.png": "0227a2a543f75f6253b8e85af1075d61ba8d8634699f0be023b25da209d2c624"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "直接胆红素",
+        "value": "5.5",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "6.0",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "1.6",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "53↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "185↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST:ALT",
+        "value": "0.29",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "100",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "Gamma–谷氨酰转肽酶",
+        "value": "67↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "腺苷脱氨酶",
+        "value": "10",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "GPDA",
+        "value": "99",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "Alpha–L岩藻糖苷酶",
+        "value": "27",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4932,
+    "output_tokens": 1050
+  }
+}

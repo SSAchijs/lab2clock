@@ -1,0 +1,94 @@
+{
+  "key": "708acb74a7bb66a47bb77e57032dd2b110c983500efcf22e9184d5188d10dc33",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1664705037393675917.png": "56c5f5bc478650d80967eb737d1bb213213f06bfb27d896474e58f5e199dc07d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖",
+        "value": "-",
+        "unit": "mmol/l",
+        "page": 1
+      },
+      {
+        "name": "尿潜血",
+        "value": "1+",
+        "unit": "cell/ul",
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "3+",
+        "unit": "cell/ul",
+        "page": 1
+      },
+      {
+        "name": "蛋白质",
+        "value": "+-",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "-",
+        "unit": "umol/l",
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "-",
+        "unit": "umol/l",
+        "page": 1
+      },
+      {
+        "name": "胆红素",
+        "value": "-",
+        "unit": "umol/l",
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "-",
+        "unit": "mmol/l",
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "6.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "比重",
+        "value": "1.020",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "维生素C",
+        "value": "-",
+        "unit": "mmol/l",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3332,
+    "output_tokens": 1064
+  }
+}

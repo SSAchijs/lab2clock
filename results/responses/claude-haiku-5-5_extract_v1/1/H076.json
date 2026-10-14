@@ -1,0 +1,82 @@
+{
+  "key": "89e9a277b2f98b636895932d482ffa377a2731428ed734704c53f317b98c2925",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1644916945724222949.png": "02761d1d12a927c61bcb8306d3315130cba3c7d80f3d7813150a2d48063d2fae"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "淋巴细胞比率",
+        "value": "33.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分比",
+        "value": "8.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分比",
+        "value": "↑9.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百分比",
+        "value": "0.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "5.20",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "157",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积",
+        "value": "↑49.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "96.0",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白含量",
+        "value": "30.2",
+        "unit": "pg",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3245,
+    "output_tokens": 721
+  }
+}

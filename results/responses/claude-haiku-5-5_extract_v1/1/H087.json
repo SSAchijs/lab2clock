@@ -1,0 +1,112 @@
+{
+  "key": "eba9ba1e70199acbfb244b0e67c500d953afd6eb30339993e614b179fac4a2db",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1652250660881388764.png": "7f2f0e91eca4af56ea24b6ae3d102f212c05ae159291db0a3d79cb5c317b4410"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "氯",
+        "value": "103.1",
+        "unit": "mmol/l",
+        "page": 1
+      },
+      {
+        "name": "总钙",
+        "value": "2.45",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "磷",
+        "value": "1.59↑",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "镁",
+        "value": "0.78",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "二氧化碳结合力",
+        "value": "22.3",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "5.3",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "34.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "胱抑素C",
+        "value": "0.74",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "视黄醇结合蛋白",
+        "value": "31.4",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "336.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "4.02",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素/肌酐",
+        "value": "0.156",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "阴离子间隙",
+        "value": "13.6",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "渗透压",
+        "value": "277",
+        "unit": "mOsm/KgH2O",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3869,
+    "output_tokens": 834
+  }
+}

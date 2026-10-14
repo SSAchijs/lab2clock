@@ -1,0 +1,82 @@
+{
+  "key": "349442d5d6550c052030fc0d55e1fd28c2ab85c2b411a8957a5fd11de625d697",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1673714701843980288.jpg": "4f22b6a377a12894865e5c029ee9fb881624b14c4d53a3193c4648b8ae5d9a8c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞计数",
+        "value": "11.41 x10^9/L ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞%",
+        "value": "68.4 %",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞%",
+        "value": "24.1 %",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单核细胞%",
+        "value": "4.2 %",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞%",
+        "value": "3.0 %",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞%",
+        "value": "0.3 %",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "7.80 x10^9/L ↑",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "4.85 x10^12/L",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "139 g/L",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4214,
+    "output_tokens": 330
+  }
+}

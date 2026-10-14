@@ -1,0 +1,76 @@
+{
+  "key": "03d55f4a8fc1778a311430b874ef97343b9b83c6f622e845d1a3a879e78c2158",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1632842113105268372.png": "2af127f0da97ea97c1c88f9a6898004a0dfd13e2c8a5f21c5e1a9a36d98bf271"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆固醇（CHOL）",
+        "value": "4.52",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "油三脂(TG)",
+        "value": "0.93",
+        "unit": "mmol /L",
+        "page": 1
+      },
+      {
+        "name": "高密度脂蛋白胆固醇(HDL-C)",
+        "value": "1.48",
+        "unit": "mmol /L",
+        "page": 1
+      },
+      {
+        "name": "低密度脂蛋白胆固醇(LDL-C)",
+        "value": "2.49",
+        "unit": "mmol /L",
+        "page": 1
+      },
+      {
+        "name": "载脂蛋白-A(APO-A)",
+        "value": "1.57",
+        "unit": "g /L",
+        "page": 1
+      },
+      {
+        "name": "载脂蛋白-B(APO-B)",
+        "value": "0.77",
+        "unit": "g /L",
+        "page": 1
+      },
+      {
+        "name": "脂蛋白a(LPa)",
+        "value": "723",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖(GLU)",
+        "value": "4.90",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3882,
+    "output_tokens": 734
+  }
+}

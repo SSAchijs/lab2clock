@@ -1,0 +1,88 @@
+{
+  "key": "f2a7e7084d26bc240c8bff5628c394449a72d0c29a43d231e68c704f07d92f25",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1646786902000599040.png": "4b58d8cab7203195dba21281b7e3f86c16da04b4ae61ed00e532ece4d94b604d"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总蛋白",
+        "value": "69.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "22.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "12 偏低",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "16.8",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "█离胆红素",
+        "value": "14.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "404",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "5.37",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "5.45 偏高",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肾小球滤过率(估算值)－肌酐",
+        "value": "92",
+        "unit": "ml/(min×1.73m^2)",
+        "page": 1
+      },
+      {
+        "name": "肌酐（计算）",
+        "value": "1",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3431,
+    "output_tokens": 1212
+  }
+}

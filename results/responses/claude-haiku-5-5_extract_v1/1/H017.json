@@ -1,0 +1,76 @@
+{
+  "key": "eaa149df0e0da9d24bd1b600fa1ab044bc7a5dc4e968ffdfc6db64380424ffde",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1660904642388340737.png": "4dc940e70a4a0e8627e549ee1c7ccc9e8e571ac3517c5aa711caec08ea728c10"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "血小板压积",
+        "value": "0.48",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.40",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "11.70",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "大型血小板比率",
+        "value": "27.60",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白",
+        "value": "37.33 ↑",
+        "unit": "mg/l",
+        "page": 1
+      },
+      {
+        "name": "降钙素原",
+        "value": "<0.2",
+        "unit": "ng/ml",
+        "page": 1
+      },
+      {
+        "name": "全血淀粉样蛋白A",
+        "value": "59.09 ↑",
+        "unit": "mg/l",
+        "page": 1
+      },
+      {
+        "name": "网织红细胞百分比",
+        "value": "0.96",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2582,
+    "output_tokens": 594
+  }
+}

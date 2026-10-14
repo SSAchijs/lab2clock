@@ -52,6 +52,14 @@ went wrong, in pipeline order, so each error says which stage to fix:
 A misread can leave the clock input right, as a unit renamed from 10^9/L to
 K/uL does, so a marker can carry an error and still be correct end to end.
 
+The real reports have labels, not a truth, so they are scored twice. At stage
+1, each labelled marker row against the item read from it. End to end, each
+labelled marker against what the core delivered for it: right when it is the
+labelled value in the clock's unit, wrong when it is not, missing when nothing
+was delivered, and unverified when the label cannot say, having no unit. A
+wrong delivery is the error that matters most, since it reaches the clock
+looking like any other value; a missing one only leaves the clock without it.
+
     uv run python -m bench.score
 
 scores every response in results/responses/<extractor>/<run>/ against its
@@ -76,10 +84,11 @@ from bench.responses import RESPONSES
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
 from lab2clock.clock_spec import MARKERS
-from lab2clock.conversions import convert
+from lab2clock.conversions import ConversionError, convert
 from lab2clock.stage1 import RawItem, RawReport
 from lab2clock.synonyms import LYMPHOCYTE_COUNT, match
-from lab2clock.units import normalise_unit
+from lab2clock.units import UnitError, normalise_unit
+from lab2clock.values import ValueParseError, parse_value
 
 # Relative tolerance for an end-to-end value.
 TOLERANCE = 0.005
@@ -158,9 +167,10 @@ Stage = Literal["invalid", "omitted", "value", "unit", "mapping", "conversion", 
 _READING_CHECKS = {"value", "unit", "conversion"}
 
 # Per marker, the rows the checks compare it with. A misread count can make
-# the cross-check withhold a correctly read percent.
+# the cross-check withhold a correctly read percent and white-cell count.
 _CROSS_CHECKED: dict[str, tuple[str, ...]] = {
     "lymphocyte_percent": (LYMPHOCYTE_COUNT, "white_blood_cell_count"),
+    "white_blood_cell_count": (LYMPHOCYTE_COUNT, "lymphocyte_percent"),
 }
 
 
@@ -442,7 +452,7 @@ class Labelled(NamedTuple):
     page: None = None
 
 
-def real_labels() -> dict[str, list[Labelled]]:
+def real_labels(path: Path = medrepbench.LABELLED) -> dict[str, list[Labelled]]:
     """Per real report, its labelled marker rows, with the hand-checked
     corrections applied: a label found wrong is scored as what is printed."""
     fixes = {}
@@ -456,7 +466,7 @@ def real_labels() -> dict[str, list[Labelled]]:
             )
             fixes[label] = (row["printed_value"], row["printed_unit"])
     out = {}
-    for report, rows in medrepbench.read_labelled().items():
+    for report, rows in medrepbench.read_labelled(path).items():
         out[report] = []
         for row in rows:
             value, unit = fixes.get(
@@ -469,36 +479,122 @@ def real_labels() -> dict[str, list[Labelled]]:
     return out
 
 
+def real_expected(row: Labelled) -> float | None:
+    """A labelled row's value in the clock's unit, or None when the label
+    cannot say: it has no unit, or a unit with no conversion, such as an RDW
+    in fL, which is the RDW-SD and not the clock's RDW."""
+    if row.unit is None:
+        return None
+    try:
+        return convert(
+            row.marker, parse_value(row.value).value, normalise_unit(row.unit)
+        )
+    except (ValueParseError, UnitError, ConversionError):
+        return None
+
+
 def score_real(
     report: str, rows: list[Labelled], response: RawReport | None
 ) -> list[Outcome]:
-    """Score stage 1 on a real report: each labelled marker row against the
-    item read from it. There is no truth behind the labels, so nothing is
-    scored end to end, and expected and got stay empty."""
+    """Score a real report: each labelled marker row against the item read
+    from it, at stage 1, and against the clock input the core delivered.
+
+    correct and error are the stage-1 score. expected is the labelled value in
+    the clock's unit, when the label says enough to give it; got is what the
+    core delivered for the row's marker. A marker the core delivered that no
+    label row names gets a row of its own, unprinted, which the labels cannot
+    verify.
+    """
     items = response.items if response else []
     # The labels' units are noisy (g/1 for g/l, fl. for fL), so a row read
     # under another name is also found by its value alone.
     aligned = _align(dict(enumerate(rows)), items, loose=True)
+    inputs = assemble(response)["inputs"] if response else {}
     outcomes = []
     for r, row in enumerate(rows):
         item = items[aligned[r]] if r in aligned else None
         error = "invalid" if response is None else _misread(row, item)
+        delivered = inputs.get(row.marker)
         outcomes.append(
             Outcome(
                 report,
                 row.marker,
                 True,
-                None,
-                None,
+                real_expected(row),
+                delivered["value"] if delivered else None,
                 error is None,
                 error,
-                printed_value=row.value,
+                printed_value=row.value or None,
                 printed_unit=row.unit,
                 read_value=item.value if item else None,
                 read_unit=item.unit if item else None,
             )
         )
+    labelled = {row.marker for row in rows}
+    for marker in MARKERS:
+        if marker in inputs and marker not in labelled:
+            source = inputs[marker].get("source") or {}
+            outcomes.append(
+                Outcome(
+                    report,
+                    marker,
+                    False,
+                    None,
+                    inputs[marker]["value"],
+                    False,
+                    None,
+                    read_value=source.get("value"),
+                    read_unit=source.get("unit"),
+                )
+            )
     return outcomes
+
+
+RealInput = Literal["right", "wrong", "missing", "unverified", "text"]
+
+
+def _number(printed: str | None) -> bool:
+    try:
+        parse_value(printed or "")
+    except ValueParseError:
+        return False
+    return True
+
+
+def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
+    """Per marker of each real report, whether a label row names it, and
+    what reached the clock.
+
+    right: the delivered input is a labelled value of the marker, within the
+    tolerance; a report may label two rows for one marker, such as CRP and
+    hs-CRP. wrong: it is none of them, though the labels give at least one,
+    or the labels print no number for it at all, as a urine test prints
+    "Negative" under the name of a blood marker, so nothing should have been
+    delivered. missing: nothing was delivered for a labelled number.
+    unverified: something was delivered that no label can check. text: the
+    labels print no number, and rightly nothing was delivered.
+    """
+    by_marker: dict[tuple[str, str], list[Outcome]] = {}
+    for o in outcomes:
+        by_marker.setdefault((o.report, o.marker), []).append(o)
+    out: list[tuple[bool, RealInput]] = []
+    for group in by_marker.values():
+        got = group[0].got
+        expected = [o.expected for o in group if o.expected is not None]
+        printed = group[0].printed
+        text = printed and not any(_number(o.printed_value) for o in group)
+        if text:
+            kind: RealInput = "text" if got is None else "wrong"
+        elif got is None:
+            kind = "missing"
+        elif not expected:
+            kind = "unverified"
+        elif any(same_input(got, e) for e in expected):
+            kind = "right"
+        else:
+            kind = "wrong"
+        out.append((printed, kind))
+    return out
 
 
 def real_metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
@@ -508,7 +604,7 @@ def real_metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
     on 9% of units, so the value rate is the one to trust, and the unit rate
     is a lower bound on how often the unit was read correctly.
     """
-    outcomes = list(outcomes)
+    outcomes = [o for o in outcomes if o.printed]
     value = [
         o.read_value is not None and same_value(o.read_value, o.printed_value)
         for o in outcomes
@@ -575,9 +671,10 @@ def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
             "form": response.form,
             "run": run,
         }
-        if path.stem.startswith("M"):
-            real = real if real is not None else real_labels()
-            context["split"] = "real"
+        if path.stem.startswith(("M", "H")):
+            if real is None:
+                real = real_labels() | real_labels(medrepbench.HELDOUT_LABELLED)
+            context["split"] = "real" if path.stem.startswith("M") else "heldout"
             outcomes = score_real(path.stem, real[path.stem], response.report)
         else:
             spec = RenderSpec.model_validate_json((RENDER_SPEC / path.name).read_text())
@@ -644,13 +741,21 @@ _METRICS = {
 }
 
 # The scored set first; the development set only tuned the prompt; the real
-# set is scored at stage 1 only.
-_SPLITS = {"test": 0, "dev": 1, "real": 2}
+# sets after them, the held-out one last.
+_SPLITS = {"test": 0, "dev": 1, "real": 2, "heldout": 3}
+_REAL_SPLITS = {"real", "heldout"}
 
 _REAL_METRICS = {
     "value": "Value as printed",
     "unit": "Unit as labelled",
     "both": "Value and unit",
+}
+
+_REAL_INPUTS: dict[str, str] = {
+    "right": "Right",
+    "wrong": "Wrong",
+    "missing": "Missing",
+    "unverified": "Unverified",
 }
 
 
@@ -684,12 +789,21 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
     ]
     names = {v: k for k, v in _SPLITS.items()}
     stages = list(get_args(Stage))
-    accuracy, real, errors = [], [], []
+    accuracy, real, real_end, errors = [], [], [], []
     for (extractor, prompt, split, run), outcomes in groups:
         label = [extractor, prompt or "–", names[split], run]
-        if names[split] == "real":
+        if names[split] in _REAL_SPLITS:
             rates = real_metrics(outcomes)
-            real.append(label[:2] + [run] + [_rate(rates[n]) for n in _REAL_METRICS])
+            real.append(label + [_rate(rates[n]) for n in _REAL_METRICS])
+            inputs = real_inputs(outcomes)
+            labelled = [kind for printed, kind in inputs if printed]
+            numbers = [kind for kind in labelled if kind != "text"]
+            unlabelled = [kind for printed, kind in inputs if not printed]
+            real_end.append(
+                label
+                + [_rate(Rate(numbers.count(k), len(numbers))) for k in _REAL_INPUTS]
+                + [str(labelled.count("text")), str(len(unlabelled))]
+            )
         else:
             rates = metrics(outcomes)
             accuracy.append(label + [_rate(rates[name]) for name in _METRICS])
@@ -700,10 +814,30 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
     if real:
         real_section = [
             "## Real-world set",
-            "Stage 1 on the MedRepBench reports, per labelled marker row. The "
-            "hand check found the labels right on every value but wrong on some "
-            "units (see the README), so the unit rate is a lower bound.",
-            _table(["Extractor", "Prompt", "Run", *_REAL_METRICS.values()], real),
+            "Stage 1 on the MedRepBench reports, per labelled marker row: real is "
+            "the scored set, heldout the reports set aside to test changes made "
+            "after it was scored. The hand check found the labels right on every "
+            "value but wrong on some units (see the README), so the unit rate is a "
+            "lower bound.",
+            _table([*label, *_REAL_METRICS.values()], real),
+            "End to end on the same reports, per labelled marker: what reached the "
+            "clock. Right and wrong are judged against the labelled value in the "
+            "clock's unit; a value delivered for a marker whose label prints text, "
+            "such as a urine test's Negative, is wrong. Unverified is a value "
+            "delivered for a marker whose label has no unit, or an RDW labelled in "
+            "fL, which no label can check. The rates are over the markers labelled "
+            "with a number, or delivered; the last two columns count markers "
+            "labelled only with text and rightly not delivered, and values "
+            "delivered for a marker no label names.",
+            _table(
+                [
+                    *label,
+                    *_REAL_INPUTS.values(),
+                    "Text, rightly not delivered",
+                    "Delivered, not labelled",
+                ],
+                real_end,
+            ),
         ]
     return (
         "\n\n".join(

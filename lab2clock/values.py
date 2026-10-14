@@ -45,8 +45,11 @@ class ParsedValue:
     decimals: int = 0
 
 
-# Trailing flags. Letters may be wrapped in brackets, as in 1.2 (H).
-_FLAG = re.compile(r"\s*(\((?:HH|LL|H|L)\)|HH|LL|H|L|[*!↑↓])$")
+# Trailing flags. Letters may be wrapped in brackets, as in 1.2 (H). Chinese
+# reports also flag a high or low result with + or -, set apart from it, as
+# in 50.68 +. Attached, as in 3+, it is a semi-quantitative urine result, not
+# a number, so it is not a flag.
+_FLAG = re.compile(r"\s*(\((?:HH|LL|H|L)\)|HH|LL|H|L|[*!↑↓])$|\s+([+-])$")
 _COMPARATOR = re.compile(r"^(<=|>=|<|>|≤|≥)\s*")
 _NUMBER = re.compile(r"^[+-]?\d[\d.,' ]*$")
 
@@ -96,7 +99,7 @@ def parse_value(printed: str) -> ParsedValue:
     while match := _FLAG.search(text):
         if match.start() == 0:
             break  # A flag with no number before it, such as a lone "H".
-        flags.insert(0, match.group(1).strip("()"))
+        flags.insert(0, (match.group(1) or match.group(2)).strip("()"))
         text = text[: match.start()]
 
     censored = False

@@ -1,0 +1,70 @@
+{
+  "key": "23a23e76e2669c11244dbd2cd1300f92670fe9c2cb08fbc6401836bec2461f32",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1647141907818214383.png": "6666c2effc628b504a090134132f1f5157786ba5d8c2b9f02bf6c7450c640fa0"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "血小板分布宽度(PDW)",
+        "value": "9.8 ↓",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板数目Δ(PLT)",
+        "value": "307 ↑",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积(HCT)",
+        "value": "45.50 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞数目Δ(RBC)",
+        "value": "5.38 ↑",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分比(MONO%)",
+        "value": "8.50 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比(LYMPH%)",
+        "value": "41.30 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比(NEUT%)",
+        "value": "49.40 ↓",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4586,
+    "output_tokens": 305
+  }
+}

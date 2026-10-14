@@ -1,0 +1,88 @@
+{
+  "key": "83d622c3a41e8882783f8c494ec6f4f663e96948bde4630fc0ff2014bc704f2d",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1646918650224228901.png": "b255316e54f010b922095afcb0cfdfa902de75549bc129a418c1c2032bdfa7f4"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "[name cut off in image]",
+        "value": "9.38",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "36.41",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "3.88",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "61.89",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "38.34",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "23.55",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "1.6",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "318.09↑",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "17.76↑",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "[name cut off in image]",
+        "value": "300.33↑",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2012,
+    "output_tokens": 800
+  }
+}

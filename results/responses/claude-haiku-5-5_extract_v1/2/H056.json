@@ -1,0 +1,148 @@
+{
+  "key": "99881bbf47f4fa1fe6347c314defea91481ae19121786e8a64acc130b09b00f3",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1631182687044690385.png": "543ec523a745681f02b2a00344068a9c451ee81a0ab8130f31085f392ff23978"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "乙肝表面抗原",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙肝表面抗体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙肝e抗原",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙肝e抗体",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "乙肝核心抗体",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "15.00",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "25.00",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "(redacted)",
+        "value": "1.67",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "87.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "(redacted)",
+        "value": "14.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "腺苷脱氨酶",
+        "value": "14.60",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "3.60",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "78.40",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "(redacted)",
+        "value": "45.20",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "33.2",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "(redacted)",
+        "value": "1.36",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "14.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "4.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "10.00",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "210.00",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2789,
+    "output_tokens": 3738
+  }
+}

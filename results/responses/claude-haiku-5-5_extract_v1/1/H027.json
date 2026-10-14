@@ -1,0 +1,124 @@
+{
+  "key": "780861eb9188878e4d93727cff654784e64c2ebb786bf6997558b48618475c4c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1672059479246692353.jpg": "b95c0d4a03e1f70d4d99297270c45ae1b8febad51c808e4e9ec0ba3d1966a732"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "血红蛋白浓度 HGB",
+        "value": "112",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积 HCT",
+        "value": "32.70 ↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积 MCV",
+        "value": "83.9",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血红蛋白含量 MCH",
+        "value": "28.6",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血红蛋白浓度 MCHC",
+        "value": "341",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度变异系数 RDW-CV",
+        "value": "13.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板数目 PLT",
+        "value": "437 ↑",
+        "unit": "*10~9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板压积 PCT",
+        "value": "0.4",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积 MPV",
+        "value": "8.2",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度 PDW",
+        "value": "15.5",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "大血小板比率 P-LCR",
+        "value": "13.6",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "大血小板数目 P-LCC",
+        "value": "60.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "未成熟粒细胞数目 IMG#",
+        "value": "0.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "未成熟粒细胞百分比 IMG%",
+        "value": "0.1",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度标准差 RDW-SD",
+        "value": "41.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "有核红细胞数目 NRBC#",
+        "value": "0",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4840,
+    "output_tokens": 1504
+  }
+}

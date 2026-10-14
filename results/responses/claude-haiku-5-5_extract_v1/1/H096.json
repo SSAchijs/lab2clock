@@ -1,0 +1,118 @@
+{
+  "key": "f14236257f9d3d43b2bb1d0e5a07ba6d998aa6bed198b05085c3b75b4d705548",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1654846538481765398.png": "62e01c19861ff0345c2ce6178fb4d1c3b824e3b2e99e4358a0417e08f1078abe"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞",
+        "value": "0-5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "清洁度(Ⅰ)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "↓少量",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杆菌",
+        "value": "大量",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杂菌",
+        "value": "少量",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "真菌",
+        "value": "无",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "孢子",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "芽生孢子",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "pH值",
+        "value": "4.0",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "唾液酸苷酶",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2672,
+    "output_tokens": 893
+  }
+}

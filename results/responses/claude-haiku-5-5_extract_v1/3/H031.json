@@ -1,0 +1,112 @@
+{
+  "key": "298c7b57808520a52a4cb056ca8d7418986052d6430958ab7db0d2603199318c",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1673854260588683264.jpeg": "3d60e5c061a51e62569dfd28d10e9542ac09c4b2b3b2fc82ec57c305331b2da4"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "γ[redacted]转移酶",
+        "value": "17",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "7.2",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "75",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "223",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "钠",
+        "value": "142",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钙",
+        "value": "2.31",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钾",
+        "value": "3.1 ↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "氯",
+        "value": "105",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "镁",
+        "value": "1.02",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "二氧化碳",
+        "value": "24",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "无机磷",
+        "value": "1.01",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "标本黄疸指数",
+        "value": "(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "L.I",
+        "value": "(-)",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "渗透压",
+        "value": "295",
+        "unit": "mOsm/kg",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3869,
+    "output_tokens": 1455
+  }
+}

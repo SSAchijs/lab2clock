@@ -1,0 +1,94 @@
+{
+  "key": "605a558815b32f157d1c2ee0d8c6300c525c45415b4e1f17a6eb6005af9d35bf",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1640547279801716736.png": "4813e77f7aa2b69263df694f9684f83c17b403a6721e617d85d9dca9e6305970"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "嗜碱性粒细胞绝…",
+        "value": "0.03",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "*红细胞压积",
+        "value": "0.362",
+        "unit": "L/L",
+        "page": 1
+      },
+      {
+        "name": "*平均红细胞体积",
+        "value": "65.50",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "*平均红细胞血红…",
+        "value": "20.20",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "*平均红细胞血红…",
+        "value": "309.00",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度",
+        "value": "14.70",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.50",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.15",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "15.70",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "有核红细胞计数",
+        "value": "0.00",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "*红细胞计数",
+        "value": "5.52",
+        "unit": "10^12/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4256,
+    "output_tokens": 769
+  }
+}

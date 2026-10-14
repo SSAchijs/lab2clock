@@ -1,0 +1,244 @@
+{
+  "key": "b2042992377d621df424f4a9deff9495a4bd1d689875a904c630d6688baa71ec",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1665647488310116475.png": "8008366718714f77d0ace077d5bcbff4e9b3dd5c13b817a537054f5bcb3dee41"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "颜色",
+        "value": "淡黄",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "PH值",
+        "value": "7.3",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "精液量",
+        "value": "6",
+        "unit": "毫升",
+        "page": 1
+      },
+      {
+        "name": "液化时间",
+        "value": "30",
+        "unit": "分钟",
+        "page": 1
+      },
+      {
+        "name": "黏稠度",
+        "value": "一般",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "检测精子总数",
+        "value": "64",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "活动精子总数",
+        "value": "23",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "精子密度",
+        "value": "24.788",
+        "unit": "百万/毫升",
+        "page": 1
+      },
+      {
+        "name": "A+B级个数",
+        "value": "14",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "A+B级比例",
+        "value": "21.876",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "A级（快速前向运动）个数",
+        "value": "7",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "A级（快速前向运动）比例",
+        "value": "10.938",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "B级（慢速或呆滞前向运动）个数",
+        "value": "7",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "B级（慢速或呆滞前向运动）比例",
+        "value": "10.938",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "C级个数",
+        "value": "9",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "C级比例",
+        "value": "14.063",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "D级（极慢或不动）个数",
+        "value": "41",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "D级（极慢或不动）比例",
+        "value": "64.063",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均大小",
+        "value": "11.572",
+        "unit": "微",
+        "page": 1
+      },
+      {
+        "name": "平均长",
+        "value": "11.852",
+        "unit": "微",
+        "page": 1
+      },
+      {
+        "name": "正常个数",
+        "value": "42",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "正常比例",
+        "value": "65.625",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "畸形个数",
+        "value": "22",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "畸形比例",
+        "value": "34.375",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "头部畸形个数",
+        "value": "5",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "头部畸形比例",
+        "value": "7.813",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "体部畸形个数",
+        "value": "5",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "体部畸形比例",
+        "value": "7.813",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "尾部畸形个数",
+        "value": "6",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "尾部畸形比例",
+        "value": "9.375",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "混合畸形个数",
+        "value": "6",
+        "unit": "个",
+        "page": 1
+      },
+      {
+        "name": "混合畸形比例",
+        "value": "9.375",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "上皮细胞",
+        "value": "/",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "/",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "2-4",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "生精细胞",
+        "value": "/",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5758,
+    "output_tokens": 2183
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "key": "a61c6d6a963083d71dbc0d9e0ad3b5dfb598ac4c554f67e175fd9d4cfe7ab1e4",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1644994147233701888.png": "1cfcdbb76c462bafc34ce34c4af0bee18256a564a043154c93a0f8cece4f5c93"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "★丙氨酸氨基转移酶",
+        "value": "13",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "胆酸（CG）",
+        "value": "3.09↑",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "★天门冬氨酸氨基转移酶",
+        "value": "22",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "★[obscured]",
+        "value": "64.9",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "★[obscured](溴甲酚绿法)",
+        "value": "41.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "23.4",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[obscured]",
+        "value": "1.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "4.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "1.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "2.8",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4138,
+    "output_tokens": 1455
+  }
+}

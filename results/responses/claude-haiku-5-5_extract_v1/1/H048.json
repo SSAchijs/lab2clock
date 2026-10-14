@@ -1,0 +1,100 @@
+{
+  "key": "7e5329ec827000fce129a140d12f9f27eaabb5ed235d51980bd30373693086c5",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1701245897102360576.png": "b9b01ef124def4d96297803db5dff7ec28e3f7aba3f32670fbc188a3ff406054"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "直接胆红素(DBIL)",
+        "value": "7.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素（IBIL)",
+        "value": "15.6",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白（TP)",
+        "value": "71.1",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "(ALB)",
+        "value": "44.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(GLOB)",
+        "value": "26.3",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白球比例(A/G)",
+        "value": "1.7",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿素(UREA)",
+        "value": "5.28",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐(CREA)",
+        "value": "42",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "甘油三脂(TG)",
+        "value": "0.34",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇(CHOL)",
+        "value": "3.25",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "高密度脂蛋白(HDL-C)",
+        "value": "1.06",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "低密度脂蛋白(LDL-C)",
+        "value": "1.71",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4214,
+    "output_tokens": 1078
+  }
+}

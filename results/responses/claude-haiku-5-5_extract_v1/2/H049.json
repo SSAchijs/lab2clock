@@ -1,0 +1,94 @@
+{
+  "key": "f2923d6cddf0eb6ef62fc21d1e51cf9a5b0596e4138ced40885779523e511b0e",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1702716094482038784.jpg": "bab18fcdb8bc6a02e257e9258319c8da35f6105a41f3ff8aa937e9407f1899e7"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "(WBC)",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞 (RBC)",
+        "value": "—",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "滴虫",
+        "value": "—",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "霉菌",
+        "value": "—",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "杂菌",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "清洁度",
+        "value": "III度",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "线索细胞",
+        "value": "++",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "脓细胞",
+        "value": "—",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "分泌物唾液苷酶",
+        "value": "阳性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "白细胞酯酶",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "过氧化氢浓度",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2777,
+    "output_tokens": 1041
+  }
+}

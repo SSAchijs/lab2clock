@@ -1,0 +1,94 @@
+{
+  "key": "163e4d86483986f5f449aa9c2a781d388d8556e7f938d3362da802441d68f6ff",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1641210142088649152.png": "24e82a445395c58a97662318f7eff35a6bcb213973de128d036cb25d67e399d7"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "pH",
+        "value": "5.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "亚硝酸盐",
+        "value": "-",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "0",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "维C",
+        "value": "0.6",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿比重",
+        "value": "1.030",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "隐血",
+        "value": "10",
+        "unit": "Cell/uL",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿胆原",
+        "value": "Normal",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "0",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "0",
+        "unit": "Cell/uL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5243,
+    "output_tokens": 1816
+  }
+}

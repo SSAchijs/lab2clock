@@ -1,0 +1,58 @@
+{
+  "key": "2e71a4fc32262141bdcb72d788b417460f55de01f3d872e4212b436cde928cf8",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1651154387947405407.png": "a7e825c97456813facc9a0d67bc32ef48b981a0e311ec986c40df663a35716cb"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖",
+        "value": "5.64",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "26.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶",
+        "value": "23",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "低密度脂蛋白胆固醇",
+        "value": "2.79",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "5.1",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3830,
+    "output_tokens": 511
+  }
+}
