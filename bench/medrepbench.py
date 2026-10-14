@@ -19,16 +19,35 @@ every time:
 At this revision 387 of the images are empty files, 133 of them with labels.
 Fetching one fails, since there is nothing on it to read.
 
-    uv run python -m bench.medrepbench [IMAGE ...]
+The scored set is every labelled report that prints at least three of the
+nine clock markers, as the core's synonym dictionary maps its item names, and
+whose image is not empty. Fewer markers would give too little clock-relevant
+data per call. At this revision that is 39 reports, all of them, so nothing is
+left to sample: the set follows from the labels, the dictionary and the
+revision alone. bench/medrepbench.csv fixes it, committed: each report's image
+name, the image's SHA-256 and the markers it prints, which is metadata about
+the dataset, not its content.
 
-fetches the labels, and the named images if any.
+    uv run python -m bench.medrepbench select
+
+rebuilds that file from the labels, and
+
+    uv run python -m bench.medrepbench
+
+fetches the labels and every image in it, each checked against its hash.
 """
 
+import csv
 import hashlib
 import json
 import sys
 import urllib.request
 from pathlib import Path
+
+import pandas as pd
+
+from lab2clock.clock_spec import MARKERS
+from lab2clock.synonyms import match
 
 REPO = "MedRepBench/MedRepBench"
 REVISION = "e7f968085012e6760895c531cedf344f812e54ff"
@@ -39,6 +58,12 @@ CACHE = Path(__file__).resolve().parent / "data" / "medrepbench"
 
 LABELS = "datasets-meta-zhCN.csv"
 LABELS_SHA256 = "f918df98f68124fe344641aa7e986ec596e1d1078d61a2fc05fe2755b13a9fba"
+
+# The scored reports, committed.
+SET = Path(__file__).resolve().parent / "medrepbench.csv"
+
+# A report is scored only if it prints at least this many clock markers.
+MIN_MARKERS = 3
 
 # The SHA-256 of zero bytes, which Hugging Face lists for an empty image.
 EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
@@ -97,11 +122,54 @@ def image(name: str, sha256: str, cache: Path = CACHE) -> Path:
     return fetch(f"censored/{name}", sha256, cache)
 
 
+def markers(items: str) -> list[str]:
+    """The clock markers a report's labelled items map to, in clock order."""
+    found = set()
+    for item in json.loads(items):
+        marker = match(item["item_name"], item["item_unit"] or None)
+        if marker in MARKERS:
+            found.add(marker)
+    return [marker for marker in MARKERS if marker in found]
+
+
+def eligible(labelled: pd.DataFrame, hashes: dict[str, str]) -> pd.DataFrame:
+    """Every labelled report with enough markers and an image to read."""
+    rows = []
+    for image, items in zip(labelled["image"], labelled["items"], strict=True):
+        found = markers(items)
+        if len(found) >= MIN_MARKERS and hashes[image] != EMPTY_SHA256:
+            rows.append(
+                {"image": image, "sha256": hashes[image], "markers": ";".join(found)}
+            )
+    return pd.DataFrame(rows).sort_values("image", ignore_index=True)
+
+
+def select(cache: Path = CACHE) -> pd.DataFrame:
+    labelled = pd.read_csv(labels(cache)).dropna(subset=["items"])
+    names = list(labelled["image"])
+    hashes = {}
+    for start in range(0, len(names), 400):
+        hashes |= published(names[start : start + 400])
+    return eligible(labelled, hashes)
+
+
+def read_set(path: Path = SET) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as file:
+        return list(csv.DictReader(file))
+
+
 def main() -> None:
+    if sys.argv[1:] == ["select"]:
+        chosen = select()
+        chosen.to_csv(SET, index=False, lineterminator="\n")
+        print(f"wrote {len(chosen)} reports to {SET}")
+    elif sys.argv[1:]:
+        raise SystemExit("usage: python -m bench.medrepbench [select]")
     print(f"labels: {labels()}")
-    names = sys.argv[1:]
-    for name, sha256 in published(names).items():
-        print(f"image: {image(name, sha256)}")
+    chosen = read_set()
+    for row in chosen:
+        image(row["image"], row["sha256"])
+    print(f"{len(chosen)} images in {CACHE / 'censored'}")
 
 
 if __name__ == "__main__":

@@ -1,8 +1,12 @@
 import hashlib
+import json
+import re
 
+import pandas as pd
 import pytest
 
 from bench import medrepbench
+from lab2clock.clock_spec import MARKERS
 
 
 @pytest.fixture
@@ -67,3 +71,68 @@ def test_the_data_is_kept_where_git_ignores_it():
     ignored = (root / ".gitignore").read_text().splitlines()
     assert medrepbench.CACHE.relative_to(root).parts[:2] == ("bench", "data")
     assert "bench/data/" in ignored
+
+
+# The scored set.
+
+
+def items(*names_units):
+    return json.dumps(
+        [
+            {
+                "item_name": n,
+                "item_value": "1",
+                "item_unit": u,
+                "item_range": "",
+                "is_abnormal": "0",
+            }
+            for n, u in names_units
+        ],
+        ensure_ascii=False,
+    )
+
+
+def test_markers_are_mapped_by_the_core_dictionary_in_clock_order():
+    report = items(
+        ("白细胞计数", "10^9/L"),
+        ("白蛋白", "g/L"),
+        ("前白蛋白", "mg/L"),
+        ("淋巴细胞", ""),
+    )
+    # Prealbumin is a lookalike, and a lymphocyte row without a unit could be
+    # the count or the percent, so neither maps.
+    assert medrepbench.markers(report) == ["albumin", "white_blood_cell_count"]
+
+
+def test_a_report_needs_three_markers_and_an_image():
+    three = items(("白蛋白", "g/L"), ("肌酐", "umol/L"), ("葡萄糖", "mmol/L"))
+    two = items(("白蛋白", "g/L"), ("肌酐", "umol/L"))
+    labelled = pd.DataFrame(
+        {
+            "image": ["b.png", "a.png", "empty.png", "few.png"],
+            "items": [three, three, three, two],
+        }
+    )
+    hashes = {
+        "a.png": "aa",
+        "b.png": "bb",
+        "empty.png": medrepbench.EMPTY_SHA256,
+        "few.png": "ff",
+    }
+    chosen = medrepbench.eligible(labelled, hashes)
+    assert list(chosen["image"]) == ["a.png", "b.png"]
+    assert list(chosen["sha256"]) == ["aa", "bb"]
+    assert set(chosen["markers"]) == {"albumin;creatinine;glucose"}
+
+
+def test_the_committed_set_is_every_eligible_report():
+    rows = medrepbench.read_set()
+    assert len(rows) == 39
+    images = [row["image"] for row in rows]
+    assert images == sorted(set(images))
+    for row in rows:
+        found = row["markers"].split(";")
+        assert len(found) >= medrepbench.MIN_MARKERS
+        assert set(found) <= set(MARKERS)
+        assert re.fullmatch("[0-9a-f]{64}", row["sha256"])
+        assert row["sha256"] != medrepbench.EMPTY_SHA256

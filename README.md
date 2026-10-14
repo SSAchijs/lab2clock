@@ -247,11 +247,16 @@ The synthetic reports show how stage 1 does when every condition is known. [MedR
 
 The dataset is licensed CC BY-NC 4.0, so none of it is committed: redistributing it inside this MIT repository would muddy the licensing, and a script is enough to reproduce it. `bench/medrepbench.py` fetches it into `bench/data/medrepbench/`, which git ignores, from one pinned revision of the dataset. The labels are checked against a pinned SHA-256, and each image against the SHA-256 Hugging Face publishes for it. The images total 2 GB, so only the ones scored are fetched.
 
-```bash
-uv run python -m bench.medrepbench [IMAGE ...]
-```
-
 At the pinned revision, 819 reports have item labels, but 387 of the images are empty files, 133 of them labelled ones. So 686 labelled reports have an image to read. Fetching an empty image fails rather than score a model on a blank page.
+
+The scored set is every labelled report that prints at least three of the nine clock markers, matched by the core's synonym dictionary, and has an image. With fewer markers, a call yields too little clock-relevant data. Only 39 reports qualify: most labelled reports are other tests, such as urinalysis, coagulation or hormones, and most that print a marker print one or two. So all 39 are scored, not a sample of 40, and no seed is needed: the set follows from the labels, the dictionary and the revision alone. They print 146 marker values, which at 85% accuracy gives a margin of about ±5.8 points. The dictionary is not why there are so few. The names it leaves unmapped that look like markers are lookalikes it excludes on purpose, such as platelet distribution width (血小板分布宽度), RDW-SD, prealbumin (前白蛋白) and urine tests, or a lymphocyte row with no unit, which could be the count or the percent.
+
+`bench/medrepbench.csv` fixes the set, committed: each report's image name, the image's SHA-256 and the markers it prints. That is metadata about the dataset, not its content.
+
+```bash
+uv run python -m bench.medrepbench select   # rebuild bench/medrepbench.csv from the labels
+uv run python -m bench.medrepbench          # fetch the labels and the 39 images
+```
 
 ## Usage
 
