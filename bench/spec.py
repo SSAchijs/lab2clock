@@ -32,8 +32,8 @@ import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from bench.identity import Identity, identity
-from bench.sample import OUT as PATIENTS
 from bench.sample import SEED
+from bench.sample import load as load_patients
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
 from lab2clock.stage1 import RawItem, RawReport
@@ -488,7 +488,7 @@ def write(model: BaseModel, folder: Path) -> None:
 
 
 def main() -> None:
-    patients = pd.read_csv(PATIENTS, index_col="report")
+    patients = load_patients()
     matrix = load_matrix()
     if list(matrix) != list(patients.index):
         raise ValueError("the matrix must list every report, in order")

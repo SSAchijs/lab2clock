@@ -4,10 +4,10 @@ import pytest
 from bench.nhanes import DISTRACTORS
 from bench.sample import (
     AGES,
-    OUT,
     SPLITS,
     high_crp,
     high_glucose,
+    load,
     sample,
 )
 from lab2clock.clock_spec import BY_NAME, FIELD_NAMES, MARKERS
@@ -28,7 +28,7 @@ def pool(n: int = 300, n_high_crp: int = 10, n_high_glucose: int = 10):
 
 @pytest.fixture(scope="module")
 def committed():
-    return pd.read_csv(OUT, index_col="report")
+    return load()
 
 
 # The committed sample.

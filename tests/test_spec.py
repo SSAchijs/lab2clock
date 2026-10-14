@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 from pydantic import ValidationError
 
-from bench.sample import OUT as PATIENTS
+from bench.sample import load as load_patients
 from bench.spec import (
     BASELINE,
     CBC,
@@ -49,7 +49,7 @@ ALL_CONDITIONS = [
 
 @pytest.fixture(scope="module")
 def patients():
-    return pd.read_csv(PATIENTS, index_col="report")
+    return load_patients()
 
 
 def load(model, folder, report):

@@ -100,8 +100,19 @@ def sample(clock: pd.DataFrame, seed: int = SEED) -> pd.DataFrame:
     return pd.concat([out, values], axis=1)
 
 
+def load(path: Path = OUT) -> pd.DataFrame:
+    """The committed patients, with every float read back exactly.
+
+    pandas' default float parser can be off in the last digit, and differently
+    on Linux and macOS; round_trip reads back exactly what was written.
+    """
+    return pd.read_csv(path, index_col="report", float_precision="round_trip")
+
+
 def main() -> None:
-    clock = pd.read_csv(CLOCK_OUT, comment="#", index_col="SEQN")
+    clock = pd.read_csv(
+        CLOCK_OUT, comment="#", index_col="SEQN", float_precision="round_trip"
+    )
     patients = sample(clock)
     patients.to_csv(OUT)
     print(f"wrote {len(patients)} patients to {OUT}")
