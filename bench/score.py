@@ -21,6 +21,22 @@ the expected value alike, but the table is checked independently already: its
 tests compare every factor with the rounded factors labs publish, and
 bench.nhanes compares it with the SI columns NHANES computed itself.
 
+The metrics, over the nine markers of every report scored:
+
+- value accuracy: the share of markers delivered correctly, or correctly
+  withheld.
+- stage-1 accuracy: the share of printed marker rows transcribed correctly,
+  value and unit, as the real-world set is scored.
+- report accuracy: the share of reports with all nine markers correct. One
+  wrong input corrupts the clock, so this is what a user experiences.
+- flag precision and recall: of the printed markers the pipeline withheld,
+  the share that had to be, and of those that had to be, the share it
+  withheld. A marker has to be withheld when its printed value is a planted
+  slip, or when a planted slip breaks its cross-check.
+
+Each comes with a Wilson 95% interval. Near 100% on a small sample, the usual
+normal-approximation interval runs past 100%; Wilson's stays inside 0 to 100%.
+
 Every marker that is not fully correct is attributed to the first stage that
 went wrong, in pipeline order, so each error says which stage to fix:
 
@@ -39,7 +55,10 @@ K/uL does, so a marker can carry an error and still be correct end to end.
 import math
 import re
 import unicodedata
+from collections.abc import Iterable
 from dataclasses import dataclass
+from itertools import groupby
+from statistics import NormalDist
 from typing import Literal
 
 from bench.spec import RenderSpec
@@ -137,6 +156,7 @@ _CROSS_CHECKED: dict[str, tuple[str, ...]] = {
 class Outcome:
     """How one marker of one report came out.
 
+    printed: whether the report prints a row for the marker.
     expected: the printed value in the clock's unit, or None when the marker
         must be withheld: missing, planted, or knocked out by a planted
         white-cell count.
@@ -147,6 +167,7 @@ class Outcome:
 
     report: str
     marker: str
+    printed: bool
     expected: float | None
     got: float | None
     correct: bool
@@ -264,7 +285,9 @@ def score_report(spec: RenderSpec, response: RawReport, age: float) -> list[Outc
             error = "mapping"
         if error is None and not correct:
             error = _attribute_core(marker, out, item, delivered, spec, item_for)
-        outcomes.append(Outcome(spec.report, marker, expected, got, correct, error))
+        outcomes.append(
+            Outcome(spec.report, marker, row is not None, expected, got, correct, error)
+        )
     return outcomes
 
 
@@ -292,3 +315,61 @@ def _attribute_core(marker, out, item, delivered, spec, item_for) -> Stage:
     if marker in withheld(spec):
         return "flag"
     return "conversion"
+
+
+# Metrics.
+
+_Z95 = NormalDist().inv_cdf(0.975)
+
+_STAGE1: set[Stage] = {"omitted", "value", "unit"}
+
+
+@dataclass(frozen=True)
+class Rate:
+    """k successes out of n, with a Wilson score interval."""
+
+    k: int
+    n: int
+
+    @property
+    def value(self) -> float | None:
+        return self.k / self.n if self.n else None
+
+    @property
+    def interval(self) -> tuple[float, float] | None:
+        return wilson(self.k, self.n)
+
+
+def wilson(k: int, n: int, z: float = _Z95) -> tuple[float, float] | None:
+    """The Wilson score interval for k out of n, or None when n is 0."""
+    if n == 0:
+        return None
+    p = k / n
+    denominator = 1 + z**2 / n
+    centre = (p + z**2 / (2 * n)) / denominator
+    half = z * math.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / denominator
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
+    """Every metric over the outcomes of one run of one extractor."""
+    outcomes = list(outcomes)
+    printed = [o for o in outcomes if o.printed]
+    by_report = [
+        all(o.correct for o in group)
+        for _, group in groupby(
+            sorted(outcomes, key=lambda o: o.report), key=lambda o: o.report
+        )
+    ]
+    # Printed markers only: a missing marker has no printed value to flag.
+    must = [o for o in printed if o.expected is None]
+    flagged = [o for o in printed if o.got is None]
+    return {
+        "value_accuracy": Rate(sum(o.correct for o in outcomes), len(outcomes)),
+        "stage1_accuracy": Rate(
+            sum(o.error not in _STAGE1 for o in printed), len(printed)
+        ),
+        "report_accuracy": Rate(sum(by_report), len(by_report)),
+        "flag_precision": Rate(sum(o.expected is None for o in flagged), len(flagged)),
+        "flag_recall": Rate(sum(o.got is None for o in must), len(must)),
+    }

@@ -4,11 +4,15 @@ import lab2clock.assemble as assemble_module
 from bench import oracle
 from bench.score import (
     TOLERANCE,
+    Outcome,
+    Rate,
     expected_input,
+    metrics,
     same_input,
     same_unit,
     same_value,
     score_report,
+    wilson,
     withheld,
 )
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
@@ -266,3 +270,96 @@ def test_a_misread_count_is_blamed_for_the_percent_it_withholds():
 def test_a_planted_slip_corrected_by_the_reader_is_a_misread():
     marker, o = only_error(outcomes("R10", edit("R10", "MCV", value="90.1")))
     assert (marker, o.error, o.correct) == ("mean_cell_volume", "value", False)
+
+
+# Metrics.
+
+
+@pytest.mark.parametrize(
+    "k, n, low, high",
+    [
+        # At 100%, the lower bound is n / (n + z^2), and the upper is 100%.
+        (20, 20, 20 / (20 + 1.959964**2), 1.0),
+        (0, 10, 0.0, 1.959964**2 / (10 + 1.959964**2)),
+        (5, 10, 0.2366, 0.7634),
+        (171, 180, 0.9078, 0.9734),
+    ],
+)
+def test_wilson_interval(k, n, low, high):
+    assert wilson(k, n) == pytest.approx((low, high), abs=1e-4)
+
+
+def test_wilson_stays_inside_zero_to_one_where_the_normal_interval_does_not():
+    # The normal approximation at 19 of 20 runs past 100%.
+    p, n = 19 / 20, 20
+    assert p + 1.96 * (p * (1 - p) / n) ** 0.5 > 1
+    low, high = wilson(19, 20)
+    assert 0 < low < high < 1
+
+
+def test_a_rate_of_nothing_has_no_value():
+    assert Rate(0, 0).value is None and Rate(0, 0).interval is None
+
+
+def all_outcomes():
+    return [o for report in REPORTS for o in outcomes(report).values()]
+
+
+def test_the_oracle_scores_100_percent_on_every_metric():
+    result = metrics(all_outcomes())
+    for name, rate in result.items():
+        assert rate.k == rate.n > 0, name
+    assert result["value_accuracy"].n == 25 * 9
+    assert result["report_accuracy"].n == 25
+    # 4 missing markers print no row.
+    assert result["stage1_accuracy"].n == 25 * 9 - 4
+    # mcv in R03 and R10, lymphocyte percent in R09, and in R20 the white-cell
+    # count with the percent it knocks out.
+    assert result["flag_recall"].n == 5
+
+
+def outcome(report, marker="albumin", **fields):
+    defaults = dict(printed=True, expected=40.0, got=40.0, correct=True, error=None)
+    return Outcome(report, marker, **{**defaults, **fields})
+
+
+def test_one_wrong_marker_fails_its_whole_report():
+    result = metrics(
+        [
+            outcome("R01"),
+            outcome("R01", "glucose", got=50.0, correct=False, error="conversion"),
+            outcome("R02"),
+            outcome("R02", "glucose"),
+        ]
+    )
+    assert (result["value_accuracy"].k, result["value_accuracy"].n) == (3, 4)
+    assert (result["report_accuracy"].k, result["report_accuracy"].n) == (1, 2)
+
+
+def test_a_wrong_input_with_a_correct_transcription_counts_only_end_to_end():
+    result = metrics([outcome("R01", got=4.0, correct=False, error="conversion")])
+    assert result["stage1_accuracy"].k == 1
+    assert result["value_accuracy"].k == 0
+
+
+def test_a_renamed_unit_counts_only_at_stage_1():
+    result = metrics([outcome("R01", error="unit")])
+    assert result["stage1_accuracy"].k == 0
+    assert result["value_accuracy"].k == 1
+
+
+def test_flags_count_false_alarms_and_misses():
+    result = metrics(
+        [
+            # Caught.
+            outcome("R01", "mean_cell_volume", expected=None, got=None),
+            # Missed: a planted slip delivered.
+            outcome("R01", expected=None, got=0.4, correct=False, error="flag"),
+            # False alarm: a correct value withheld.
+            outcome("R01", "glucose", got=None, correct=False, error="flag"),
+            # A missing marker is neither.
+            outcome("R01", "creatinine", printed=False, expected=None, got=None),
+        ]
+    )
+    assert (result["flag_precision"].k, result["flag_precision"].n) == (1, 2)
+    assert (result["flag_recall"].k, result["flag_recall"].n) == (1, 2)

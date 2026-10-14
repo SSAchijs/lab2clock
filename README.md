@@ -184,6 +184,18 @@ To tell a misread name from a skipped row, the scorer lines up the transcribed r
 
 The tests inject one error of each kind into the oracle's output and check that it is blamed on its stage and on its marker alone. Run unchanged, the oracle scores every marker of every report correct.
 
+The metrics, each with a Wilson 95% interval:
+
+| Metric | Share of | Correct when |
+| --- | --- | --- |
+| Value accuracy | the nine markers of every report | the input is right, or correctly withheld |
+| Stage-1 accuracy | printed marker rows | the value and unit are transcribed correctly |
+| Report accuracy | reports | all nine markers are correct |
+| Flag precision | printed markers the pipeline withheld | the marker had to be withheld |
+| Flag recall | printed markers that had to be withheld | the pipeline withheld it |
+
+Report accuracy is the number that matters most to a user, because one wrong input corrupts the clock. Stage-1 accuracy is the one the real-world set can also be scored on. A marker has to be withheld when its printed value is a planted slip, or when a planted slip breaks its cross-check. A missing marker counts toward neither flag metric, since nothing was printed to flag. The intervals are Wilson intervals because, near 100% on a sample this small, the usual normal-approximation interval runs past 100%: at 19 of 20 its upper end is 104.6%, while Wilson's is 99.1%.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
