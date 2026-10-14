@@ -251,3 +251,23 @@ def test_a_saved_response_read_from_other_inputs_stops_the_run(tmp_path):
     responses.write("R01", saved.model_copy(update={"key": "stale"}), path.parent)
     with pytest.raises(SystemExit, match="different inputs"):
         extract.run(client(), MODEL, prompts.load(), [r01], 1, tmp_path)
+
+
+# The test set waits for the frozen prompt.
+
+
+def test_no_test_report_is_read_before_the_prompt_is_frozen(tmp_path, monkeypatch):
+    monkeypatch.setattr(prompts, "FROZEN", tmp_path / "frozen.json")
+    test = [s for s in specs() if s.split == "test"][:1]
+    fake = client()
+    with pytest.raises(SystemExit, match="not frozen"):
+        extract.run(fake, MODEL, prompts.load(), test, 1, tmp_path)
+    assert fake.messages.calls == []
+    prompts.freeze(prompts.load())
+    assert extract.run(fake, MODEL, prompts.load(), test, 1, tmp_path) == (1, 0)
+
+
+def test_development_reports_are_read_before_the_freeze(tmp_path, monkeypatch):
+    monkeypatch.setattr(prompts, "FROZEN", tmp_path / "frozen.json")
+    dev = [s for s in specs() if s.split == "dev"][:1]
+    assert extract.run(client(), MODEL, prompts.load(), dev, 1, tmp_path) == (1, 0)

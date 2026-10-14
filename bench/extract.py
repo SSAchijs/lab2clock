@@ -209,7 +209,16 @@ def run(
     number: int,
     root: Path = RESPONSES,
 ) -> tuple[int, int]:
-    """Read every report not already saved; how many were read and cached."""
+    """Read every report not already saved; how many were read and cached.
+
+    A test report is read only with the frozen prompt, so the test set is
+    never seen while the prompt can still change.
+    """
+    if any(spec.split == "test" for spec in specs) and not prompts.is_frozen(prompt):
+        raise SystemExit(
+            f"{prompt.version} is not frozen; tune it on the development reports, "
+            "then freeze it with python -m bench.prompts freeze"
+        )
     out = root / extractor(model, prompt) / str(number)
     read_count = cached = 0
     for spec in specs:

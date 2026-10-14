@@ -43,3 +43,23 @@ def test_a_response_records_its_prompt_and_reads_back(tmp_path):
 def test_a_version_without_its_hash_is_refused(prompt, sha):
     with pytest.raises(ValidationError, match="needs its hash"):
         Response(prompt=prompt, prompt_sha256=sha, report=REPORT)
+
+
+# The freeze.
+
+
+def test_only_the_exact_frozen_prompt_is_frozen(tmp_path):
+    path = tmp_path / "frozen.json"
+    prompt = prompts.load()
+    assert not prompts.is_frozen(prompt, path)
+    prompts.freeze(prompt, path)
+    assert prompts.is_frozen(prompt, path)
+    assert not prompts.is_frozen(Prompt(prompt.version, prompt.text + " "), path)
+    assert not prompts.is_frozen(Prompt("extract_v2", prompt.text), path)
+
+
+def test_a_prompt_is_frozen_once(tmp_path):
+    path = tmp_path / "frozen.json"
+    prompts.freeze(prompts.load(), path)
+    with pytest.raises(SystemExit, match="never refrozen"):
+        prompts.freeze(prompts.load(), path)
