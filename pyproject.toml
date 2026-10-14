@@ -32,6 +32,10 @@ select = ["E", "F", "I", "B", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = [
+    # PyMuPDF's SWIG bindings, on import; not ours to fix.
+    "ignore:builtin type .* has no __module__ attribute:DeprecationWarning",
+]
 
 [dependency-groups]
 bench = [
@@ -39,6 +43,7 @@ bench = [
     "jinja2>=3.1.6",
     "pandas>=3.0.6",
     "playwright>=1.64.0",
+    "pymupdf>=1.28.2",
 ]
 clock = [
     "pyaging>=0.5.7",

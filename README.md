@@ -132,6 +132,14 @@ uv run python -m bench.pdf
 
 This renders the HTML and writes `bench/data/reports/R01.pdf` and so on, each at its report's page size (Letter or A4). Before printing, every font a report declares must load, or the run stops rather than printing in a fallback font.
 
+`bench/raster.py` turns each PDF into one PNG per page with [PyMuPDF](https://pymupdf.readthedocs.io/), the starting point for the photo-degraded reports:
+
+```bash
+uv run python -m bench.raster
+```
+
+This writes `bench/data/images/R01-1.png`, `R03-1.png`, `R03-2.png` and so on: 32 pages from 25 reports. Pages are rendered at 200 DPI, where the smallest printed text (7.5pt) is about 21 pixels tall, on white without transparency, and the same PDF always gives the same bytes.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
