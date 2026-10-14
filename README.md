@@ -150,6 +150,16 @@ uv run python -m bench.degrade
 
 This writes `bench/data/photos/R05-1.jpg` and so on, and `steps.json` with the steps drawn for each page. Every step comes from the degradation seed in the report's render spec and the page number, so a photo regenerates byte for byte, and each page of a multi-page report is photographed differently. The ranges keep every value legible; the tests check that ink still stands well clear of paper at the harshest end of every range at once. Augraphy was not used: it draws from global random state, which makes exact regeneration harder to guarantee.
 
+## Oracle
+
+Before any paid model reads a report, `bench/oracle.py` reads it perfectly. The oracle is a stage-1 extractor that takes each render spec and returns exactly what a flawless reader would copy from the page: every row's name, value, unit and page, in printed order, and nothing else. In the two-column layout it includes the flag, as in `146 H`. The self-check has already proved that every PDF prints its spec row by row, so the spec is a faithful record of the page.
+
+```bash
+uv run python -m bench.oracle
+```
+
+This writes `results/responses/oracle/R01.json` and so on, one stage-1 report each. The scorer will read every extractor's responses from that same folder. The responses are committed so they can be scored on a fresh clone, and the tests fail if any of them differs from a fresh run. The oracle, run through the code stages and scored, must reach 100%. If it falls short, the bug is in the generator, the core or the scorer, and it has been found for free.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):

@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 from pydantic import ValidationError
 
+from bench import oracle
 from bench.sample import load as load_patients
 from bench.spec import (
     BASELINE,
@@ -103,7 +104,7 @@ def assert_round_trip(spec: RenderSpec, t: Truth):
     marker. A planted white-cell count also breaks the lymphocyte cross-check,
     which cannot tell which of the two is wrong.
     """
-    out = assemble(spec.stage1(), age=t.age)
+    out = assemble(oracle.extract(spec), age=t.age)
     planted = {row.analyte for row in spec.rows if row.planted}
     expected = planted | {spec.conditions.missing} - {None}
     allowed = set(expected)
@@ -201,12 +202,6 @@ def test_render_spec_refuses_unknown_keys():
     spec["rows"][0]["colour"] = "red"
     with pytest.raises(ValidationError):
         RenderSpec.model_validate(spec)
-
-
-def test_stage1_view_drops_what_the_reader_cannot_see():
-    spec = load(RenderSpec, RENDER_SPEC, "R01")
-    item = spec.stage1().items[0].model_dump()
-    assert set(item) == {"name", "value", "unit", "page"}
 
 
 # Extra rows.

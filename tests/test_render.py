@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from bench import fonts
+from bench import fonts, oracle
 from bench.render import LABELS, OUT, day, font_faces, render_html
 from bench.spec import RENDER_SPEC, RenderSpec
 
@@ -89,7 +89,7 @@ def test_two_column_prints_the_flag_in_the_result_cell():
     i, row = next((i, r) for i, r in enumerate(spec.rows) if r.flag)
     assert f"{row.value} {row.flag}" in printed[i]
     # And the perfect reader's value says the same.
-    assert spec.stage1().items[i].value == f"{row.value} {row.flag}"
+    assert oracle.extract(spec).items[i].value == f"{row.value} {row.flag}"
 
 
 def test_every_layout_is_rendered():

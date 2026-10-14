@@ -1,0 +1,130 @@
+{
+  "items": [
+    {
+      "name": "WBC",
+      "value": "7.8",
+      "unit": "x10^3/uL",
+      "page": 1
+    },
+    {
+      "name": "RBC",
+      "value": "5.48",
+      "unit": "x10^6/uL",
+      "page": 1
+    },
+    {
+      "name": "Hemoglobin",
+      "value": "12.5",
+      "unit": "g/dL",
+      "page": 1
+    },
+    {
+      "name": "Hematocrit",
+      "value": "37.2",
+      "unit": "%",
+      "page": 1
+    },
+    {
+      "name": "MCV",
+      "value": "67.9 L",
+      "unit": "fL",
+      "page": 1
+    },
+    {
+      "name": "RDW-CV",
+      "value": "16.9 H",
+      "unit": "%",
+      "page": 1
+    },
+    {
+      "name": "Platelets",
+      "value": "249",
+      "unit": "x10^3/uL",
+      "page": 1
+    },
+    {
+      "name": "Neutrophils %",
+      "value": "58.3",
+      "unit": "%",
+      "page": 1
+    },
+    {
+      "name": "Lymphocytes %",
+      "value": "33.3",
+      "unit": "%",
+      "page": 1
+    },
+    {
+      "name": "Lymphocytes (Absolute)",
+      "value": "2.6",
+      "unit": "x10^3/uL",
+      "page": 1
+    },
+    {
+      "name": "Sodium",
+      "value": "139",
+      "unit": "mmol/L",
+      "page": 1
+    },
+    {
+      "name": "Potassium",
+      "value": "4.0",
+      "unit": "mmol/L",
+      "page": 1
+    },
+    {
+      "name": "BUN",
+      "value": "11",
+      "unit": "mg/dL",
+      "page": 1
+    },
+    {
+      "name": "Creatinine",
+      "value": "0.80",
+      "unit": "mg/dL",
+      "page": 1
+    },
+    {
+      "name": "Glucose",
+      "value": "92",
+      "unit": "mg/dL",
+      "page": 1
+    },
+    {
+      "name": "Total Protein",
+      "value": "7.6",
+      "unit": "g/dL",
+      "page": 1
+    },
+    {
+      "name": "Albumin",
+      "value": "3.8",
+      "unit": "g/dL",
+      "page": 1
+    },
+    {
+      "name": "Total Bilirubin",
+      "value": "0.4",
+      "unit": "mg/dL",
+      "page": 1
+    },
+    {
+      "name": "Alkaline Phosphatase",
+      "value": "120",
+      "unit": "IU/L",
+      "page": 1
+    },
+    {
+      "name": "ALT",
+      "value": "10",
+      "unit": "U/L",
+      "page": 1
+    },
+    {
+      "name": "hs-CRP",
+      "value": "1.56 H",
+      "unit": "mg/dL",
+      "page": 1
+    }
+  ]
+}

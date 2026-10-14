@@ -36,7 +36,7 @@ from bench.sample import SEED
 from bench.sample import load as load_patients
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
-from lab2clock.stage1 import RawItem, RawReport
+from lab2clock.stage1 import RawItem
 from lab2clock.synonyms import LYMPHOCYTE_COUNT
 from lab2clock.units import normalise_unit
 
@@ -165,20 +165,6 @@ class RenderSpec(BaseModel):
     identity: Identity
     previous_collected: date | None = None
     rows: list[PrintedRow]
-
-    def stage1(self) -> RawReport:
-        """What a perfect reader returns for this report.
-
-        A two-column list prints the flag in the result cell (146 H), so it is
-        part of the value as printed; the other layouts give it its own column.
-        """
-        items = []
-        for row in self.rows:
-            item = RawItem(**row.model_dump(include=set(RawItem.model_fields)))
-            if row.flag and self.conditions.layout == "two_column":
-                item.value = f"{row.value} {row.flag}"
-            items.append(item)
-        return RawReport(items=items)
 
 
 # Per marker, the name printed in each language. Each maps to its marker in
