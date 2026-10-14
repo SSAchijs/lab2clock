@@ -290,6 +290,18 @@ def check_error_tier(clock: pd.DataFrame) -> None:
             )
 
 
+def check_blood_floor(clock: pd.DataFrame) -> None:
+    """Raise if the scorer would judge a real adult's value not blood."""
+    from bench.score import BLOOD_FLOOR
+
+    for marker, floor in BLOOD_FLOOR.items():
+        if floor > clock[marker].min() / 2:
+            raise ValueError(
+                f"BLOOD_FLOOR[{marker!r}] = {floor:g} is above half the lowest "
+                f"NHANES value, {clock[marker].min():g}"
+            )
+
+
 def check_warning_tier(clock: pd.DataFrame) -> None:
     """Raise unless clock_spec holds the warning limits computed from `clock`."""
     computed = warning_limits(clock)
@@ -313,7 +325,10 @@ def main() -> None:
     print(f"wrote {len(table)} adults to {OUT} and {CLOCK_OUT}")
     check_error_tier(clock)
     check_warning_tier(clock)
-    print("clock_spec's plausibility tiers agree with NHANES")
+    check_blood_floor(clock)
+    print(
+        "clock_spec's plausibility tiers and the scorer's blood floor agree with NHANES"
+    )
 
 
 if __name__ == "__main__":

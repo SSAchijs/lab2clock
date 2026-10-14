@@ -269,3 +269,9 @@ def test_a_urine_white_cell_count_per_microlitre_fails(value):
     # 1 to 40 cells/uL under the blood name 白细胞 converts to these.
     issue = plausibility("white_blood_cell_count", value)
     assert (issue.check, issue.severity) == ("plausibility", "error")
+
+
+def test_an_rdw_sd_read_as_the_rdw_cv_fails():
+    # The RDW-SD runs 37 to 54 fL; read as a percent it breaks PhenoAge.
+    issue = plausibility("red_cell_distribution_width", 38.2)
+    assert (issue.check, issue.severity) == ("plausibility", "error")

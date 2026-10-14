@@ -26,3 +26,11 @@ def test_the_frozen_code_lets_urine_counts_through_and_the_current_does_not():
     # Undone on the way out.
     assert "white_blood_cell_count" not in urine_white_cells("3+", "cell/ul")
     assert BY_NAME["white_blood_cell_count"].error[0] == 0.05
+
+
+def test_the_frozen_code_reads_a_urine_count_and_an_rdw_sd_as_blood():
+    assert "white_blood_cell_count" not in urine_white_cells("204", "个/ul")
+    with frozen.frozen_code():
+        assert urine_white_cells("204", "个/ul")["white_blood_cell_count"]
+        assert BY_NAME["red_cell_distribution_width"].error[1] == float("inf")
+    assert BY_NAME["red_cell_distribution_width"].error[1] == 35

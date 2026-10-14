@@ -6,6 +6,7 @@ import pytest
 import lab2clock.__main__ as cli
 from lab2clock import read
 from lab2clock.read import ReadError, content, read_report, request
+from lab2clock.stage1 import RawReport
 
 PDF = b"%PDF-1.7 report"
 PNG = b"\x89PNG\r\n\x1a\n page"
@@ -167,3 +168,21 @@ def test_a_value_below_a_limit_gives_an_age_range(tmp_path, monkeypatch, capsys)
     assert age["years"] is None and low < high
     # The top is the age at the limit itself: CRP 5.00 mg/L is 0.5 mg/dL.
     assert "CRP <5.00" in age["note"]
+
+
+@pytest.mark.parametrize(
+    ("name", "value", "unit"),
+    [
+        # 112 mg/dL with its unit misread: the formula has no answer for it.
+        ("Glucose", "112", "mmol/L"),
+        # Creatinine in mg/dL read as umol/L: 9 years too young.
+        ("Creatinine", "0.98", "umol/L"),
+    ],
+)
+def test_no_age_estimate_from_a_value_most_adults_never_have(name, value, unit):
+    rows = [(n, value, unit) if n == name else (n, v, u) for n, v, u in ROWS]
+    items = [{"name": n, "value": v, "unit": u, "page": 1} for n, v, u in rows]
+    output = cli.assemble(RawReport.model_validate({"items": items}), age=52)
+    age = cli.estimate(output)
+    assert age["years"] is None and "range" not in age
+    assert value in age["note"]

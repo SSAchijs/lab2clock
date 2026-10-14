@@ -6,6 +6,38 @@ Lab report in, clock inputs out.
 
 This file documents every step in detail. For the results and what they mean, see the [README](README.md).
 
+## At a glance
+
+How the evaluation stays honest:
+
+- **Known truth first.** 25 synthetic reports are built from real [NHANES](https://www.cdc.gov/nchs/nhanes/) adults. They cover US, SI and mixed units, three layouts, Chinese, phone photos and planted errors. An "oracle", a reader that returns exactly what was printed, must score 100% before any model is scored, so this set checks the code. Both models also score 100% on it.
+- **Real reports with checked labels.** The 181 real reports are from [MedRepBench](https://huggingface.co/datasets/MedRepBench/MedRepBench). I checked a random sample of 44 labels by hand against the images and found nothing wrong; a second pass by Claude then caught four unit errors I had missed, and I confirmed each against the image. 4 of 44 is 9%, so a disagreement with a label is not blamed on the model by default.
+- **A frozen prompt and repeated reads.** The prompt is frozen and hashed. Each report is read three times, because neither model accepts a temperature setting.
+- **A held-out set, and its score from before the fixes made from it.** See [Held-out set](#held-out-set).
+- **Every change after seeing results is disclosed,** with what prompted it: [Changes made after seeing results](#changes-made-after-seeing-results).
+- **Reproducible without a key.** Every raw response is committed, and CI fails if a fresh run of any of these differs from what is committed:
+
+```bash
+uv run python -m bench.score    # results/results.csv and results/summary.md
+uv run python -m bench.figure   # docs/results-*.svg, the README's figure
+uv run python -m bench.frozen   # results/frozen.md, the held-out set before fixes made from it
+```
+
+More lessons, beside the three in the README:
+
+- **Keep the LLM out of the arithmetic.** Units, conversions and plausibility checks belong in code you can test. When a check fails, withhold the value.
+- **Look at the images.** Every "wrong" value the scorer still reports turned out to be the dataset's label, and one real error had been filed as "unverified", the class for a value whose label has no unit to check it against.
+- **Try the cheap model first.** Claude Haiku 5.5 matched Claude Opus 5.5 at about a thirtieth of the cost per report.
+
+The repository:
+
+| Path | What it holds |
+| --- | --- |
+| [`lab2clock/`](lab2clock) | The tool: reading, name matching, units, checks, the command line |
+| [`bench/`](bench) | The evaluation: synthetic reports, MedRepBench, model calls, scoring, the figure |
+| [`prompts/`](prompts) | The frozen prompt |
+| [`results/`](results) | Every model response, the scored results and the summary tables |
+
 ## Target clock
 
 The target is the original PhenoAge clock (`phenoage` in pyaging), from:
@@ -344,21 +376,21 @@ uv run python -m bench.medrepbench heldout   # rebuild the held-out set from the
 uv run python -m bench.extract cheap --split heldout --workers 8
 ```
 
-Haiku copied 94% of the printed numbers exactly, as on the 39. Scored with the code as it was before the held-out set was read, 66% of the labelled markers with a blood value reached the clock right (319 of 483 over three runs), 28% went missing and 4% were wrong (21). That score is in [`results/frozen.md`](results/frozen.md), made by `bench/frozen.py`, which undoes the four code changes listed below and scores the same responses with the current scorer. About 40% of the missing markers are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
+Haiku copied 94% of the printed numbers exactly, as on the 39. Scored with the code as it was before the held-out set was read, 66% of the labelled markers with a blood value reached the clock right (317 of 479 over three runs), 27% went missing and 5% were wrong (23). That score is in [`results/frozen.md`](results/frozen.md), made by `bench/frozen.py`, which undoes every code change made since that set was read (listed below) and scores the same responses with the current scorer. About 40% of the missing markers are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
 
-Many held-out reports are urine tests, which print results such as `Negative`, `3+`, `-` or a count per µL under the same names as blood markers (白细胞, 葡萄糖). Eighteen of the 21 wrong inputs came from seven of them:
+Many held-out reports are urine tests, which print results such as `Negative`, `3+`, `-` or a count per µL under the same names as blood markers (白细胞, 葡萄糖). Twenty of the 23 wrong inputs came from eight of them:
 
-- **H015, H045, H078, H104, H129**: urine white-cell counts of 0 to 17 per µL, delivered as blood counts of 0 to 0.017 × 10⁹/L, in most runs.
+- **H015, H045, H078, H101, H104, H129**: urine white-cell counts of 0 to 204 per µL, delivered as blood counts of 0 to 0.204 × 10⁹/L, in most runs. H101 is a urinalysis with a reference range of 0–28 per µL.
 - **H074**, in one run: a `-` copied as `0`, delivered as a blood glucose and white-cell count of 0.
 - **H118**, in every run: a `3+` read as the number 3 with a `+` flag, by the flag rule added after the 39 were scored.
 
 The other three are H056's alkaline phosphatase in each run, a wrong label: the report prints 87.0, which is what was delivered, and the label took 14.3 from another column.
 
-The scorer first counted the urine counts as right. It converts each label with the code's own parser and conversion table, so a urine count read as a blood count matched its label exactly. A label is now a blood value only if it is a number that blood could have, inside the clock's error tier; a label that prints text or an impossible number gives no blood value, and anything delivered for it is wrong.
+The scorer first counted the urine counts as right. It converted each label with the code's own parser and conversion table, so a urine count read as a blood count matched its label exactly. A first fix judged labels by the code's own limits, which still let H101's 204 per µL pass as 0.204, above the code's floor: the scorer and the code shared the mistake again. A label is now a blood value only if it is a number at least half the lowest value among the 4,894 NHANES adults (`BLOOD_FLOOR` in `bench/score.py`, which `bench.nhanes` checks against the data), a rule the code does not use. A label that prints text or a number below that gives no blood value, and anything delivered for it is wrong.
 
-Four code changes followed: a value of exactly 0 is refused for markers a living person cannot have at 0, since a lab prints a detection limit such as `<0.1` instead; `+` or `-` is a flag only when set apart from the number, so `3+` is not a number; a white-cell count below 0.05 × 10⁹/L is refused, a guard against urine counts rather than a published extreme; and a value printed above a limit is withheld (see the review below). With them, the held-out reports put 69% on the clock right (`results/summary.md`) and no real wrong value. That number flatters the code, because the fixes were made from these reports, so the held-out set is now used up: any further change needs new reports to be tested on.
+Code changes followed: a value of exactly 0 is refused for markers a living person cannot have at 0, since a lab prints a detection limit such as `<0.1` instead; `+` or `-` is a flag only when set apart from the number, so `3+` is not a number; a white-cell count printed in cells per µL below 1,000 is set aside as a urine count, since a blood count in those units runs to thousands; and a white-cell count below 0.05 × 10⁹/L is refused. With them, the held-out reports put 69% on the clock right (`results/summary.md`) and no real wrong value. That number flatters the code, because the fixes were made from these reports, so the held-out set is now used up: any further change needs new reports to be tested on.
 
-One gap remains: a heavy urine infection, over 50 white cells per µL, printed under the blood marker's name would pass the floor with a warning. Ruling it out needs to know which panel each row is printed in.
+One gap remains: a urine count of 1,000 per µL or more, which a heavy infection can give, printed under the blood marker's name, would pass as a blood count. Ruling it out needs to know which panel each row is printed in.
 
 ### Changes made after seeing results
 
@@ -370,12 +402,13 @@ Every change made after a set's responses were read, so a reader can judge how m
 | the 39 real reports | end-to-end scoring of the real set | scorer |
 | the 39 real reports | the cross-check withholds the white cell count too | code |
 | the 39 real reports | compound names; five Chinese names; `+` and `-` flags in values; the unit `*10`9/L` | code |
-| the held-out reports | a label that prints text, or a number no blood could have, gives no blood value; anything delivered for it is wrong | scorer |
-| the held-out reports | a 0 is refused for markers that cannot be 0; `+` and `-` are flags only when set apart; a white-cell count below 0.05 × 10⁹/L is refused | code |
+| the held-out reports | a label that prints text, or a number below half the NHANES minimum, gives no blood value; anything delivered for it is wrong | scorer |
+| the held-out reports | a 0 is refused for markers that cannot be 0; `+` and `-` are flags only when set apart; a white-cell count below 0.05 × 10⁹/L is refused; one below 1,000 per µL is set aside as urine | code |
 | a review of the published results | a value printed as a limit keeps its direction: above a limit it is withheld, below one it warns and the age estimate is a range | code |
 | a review of the published results | a delivered limit is scored as its own class, not as right | scorer |
+| a review of the published results | an RDW above 35% is refused as an RDW-SD; no age estimate when an input is outside the range of 99% of adults | code |
 
-The held-out rates with the code frozen before that set was read are in [`results/frozen.md`](results/frozen.md); `bench/frozen.py` undoes the four code changes made from it, the two held-out rows and the limit rule in the table above, and scores the same responses with the current scorer.
+The held-out rates with the code frozen before that set was read are in [`results/frozen.md`](results/frozen.md); `bench/frozen.py` undoes every code change in the table made after it was read, other than the age estimate, which does not change what reaches the clock, and scores the same responses with the current scorer.
 
 ### License of the derived files
 

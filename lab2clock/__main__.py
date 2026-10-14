@@ -5,7 +5,8 @@ order, which Claude reads first; or a stage-1 JSON file (- for standard
 input), which is used as it is. Prints the output JSON.
 
 --age-estimate adds the PhenoAge the clock inputs give, when all ten are
-there, or the range they allow when one was printed below a limit. It is a
+there and none is outside the range of 99% of adults, or the range they allow
+when one was printed below a limit. It is a
 model estimate from one blood test, not a diagnosis.
 
 Exit status: 0 when the report is ok, 1 when it has errors (the output is still
@@ -73,6 +74,26 @@ def estimate(output: dict[str, Any]) -> dict[str, Any] | None:
     """
     if not output["ok"]:
         return None
+    unusual = sorted(
+        {
+            issue["analyte"]
+            for issue in output["issues"]
+            if issue["check"] == "plausibility" and issue["severity"] == "warning"
+        }
+    )
+    if unusual:
+        # Unusual values are often unit slips the range checks cannot tell
+        # from real extremes, and some push the formula past its domain.
+        listed = ", ".join(
+            f"{name} {output['inputs'][name]['source']['value']} "
+            f"{output['inputs'][name]['source']['unit'] or ''}".strip()
+            for name in unusual
+        )
+        return {
+            "years": None,
+            "note": "No estimate: outside the range of 99% of adults, so check "
+            f"the unit printed: {listed}.",
+        }
     inputs = {name: field["value"] for name, field in output["inputs"].items()}
     below = [
         name for name, field in output["inputs"].items() if field.get("limit") == "<"

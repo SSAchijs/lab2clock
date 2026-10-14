@@ -27,11 +27,12 @@ class Field:
         ten inputs, rounded outwards. bench/nhanes.py computes them and fails
         if these differ. None (age only) means no check.
     error: (low, high) outside which a value has never been measured in any
-        patient, except the white-cell count's low, which guards against urine
-        counts (see its comment). Each high limit sits just above the most
-        extreme published value found, rounded up; the source is cited beside
-        it. A low of 0 means the marker can be near zero in real patients, so
-        only a negative value fails.
+        patient, except the white-cell count's low and the RDW's high, which
+        guard against urine counts and the RDW-SD (see their comments). Each
+        other high limit sits just above the most extreme published value
+        found, rounded up; the source is cited beside it. A low of 0 means the
+        marker can be near zero in real patients, so only a negative value
+        fails.
         inf means no published extreme was found, so there is no high limit.
         None (age only) means no check.
     zero: whether a printed 0 can be a real result. It cannot for a
@@ -83,8 +84,11 @@ FIELDS: tuple[Field, ...] = (
     # doi:10.1016/j.amsu.2022.103826). High: 136.9 fL in pernicious anemia
     # (Akinola 2026, doi:10.7759/cureus.101860).
     Field("mean_cell_volume", "fL", warn=(64.5, 102.8), error=(30, 150)),
-    # High: no published extreme found.
-    Field("red_cell_distribution_width", "%", warn=(12.0, 20.1), error=(0, inf)),
+    # High: a guard, not a published extreme. The RDW-SD, printed in fL and
+    # sometimes under the RDW's name or with a % unit, runs 37 to 54; read as
+    # the clock's RDW-CV it breaks the formula. The highest of the 4,894
+    # NHANES adults is 29.2, so 35 refuses an RDW-SD and keeps every real one.
+    Field("red_cell_distribution_width", "%", warn=(12.0, 20.1), error=(0, 35)),
     # 11,900 U/L in benign transient hyperphosphatasemia of infancy (Eymann
     # 2010, doi:10.1515/jpem.2010.148).
     Field("alkaline_phosphatase", "U/L", warn=(32, 200), error=(0, 12000)),

@@ -1,15 +1,17 @@
 """The held-out score with the code as it was before that set was read.
 
 The held-out reports were set aside to test the fixes made on the 39 scored
-ones. After their results were seen, four more changes were made to the code
-because of what they showed, so scoring them with the current code flatters
-it: the set has been used to tune it. This module scores the same responses
-with those four changes undone:
+ones. After their results were seen, more changes were made to the code,
+most because of what they showed, so scoring them with the current code
+flatters it: the set has been used to tune it. This module scores the same
+responses with every code change since then undone:
 
 - a value of exactly 0 refused for markers that cannot be 0;
 - + or - read as a flag only when set apart from the number, so 3+ is not 3;
 - a value printed above a limit withheld, one below it warned about;
-- a white-cell count below 0.05 x 10^9/L refused, as a urine count per uL.
+- a white-cell count below 0.05 x 10^9/L refused;
+- a white-cell count printed below 1,000 per uL set aside as a urine count;
+- an RDW above 35% refused as an RDW-SD.
 
 Everything else is the current code, and the scorer is the current one, so
 the classes match summary.md's. The result is the honest held-out number, and
@@ -25,6 +27,7 @@ import dataclasses
 import re
 from collections.abc import Iterator
 from contextlib import contextmanager
+from math import inf
 from pathlib import Path
 
 import lab2clock.assemble as assemble
@@ -50,21 +53,23 @@ _OLD_FLAG = re.compile(r"\s*(\((?:HH|LL|H|L)\)|HH|LL|H|L|[*!↑↓+-])$")
 
 @contextmanager
 def frozen_code() -> Iterator[None]:
-    """The current code with the four held-out fixes undone, restored after."""
+    """The current code with the held-out fixes undone, restored after."""
     fields = dict(BY_NAME)
-    flag, check = values._FLAG, assemble.limit
+    flag, check, urine = values._FLAG, assemble.limit, assemble._urine_count
     try:
         for name, field in fields.items():
             if field.error is not None:
+                high = inf if name == "red_cell_distribution_width" else field.error[1]
                 BY_NAME[name] = dataclasses.replace(
-                    field, zero=True, error=(min(field.error[0], 0), field.error[1])
+                    field, zero=True, error=(min(field.error[0], 0), high)
                 )
         values._FLAG = _OLD_FLAG
         assemble.limit = lambda *args: None
+        assemble._urine_count = lambda row: False
         yield
     finally:
         BY_NAME.update(fields)
-        values._FLAG, assemble.limit = flag, check
+        values._FLAG, assemble.limit, assemble._urine_count = flag, check, urine
 
 
 def outcomes(directory: Path = RESPONSES) -> dict[str, list[list[Outcome]]]:

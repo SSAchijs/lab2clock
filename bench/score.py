@@ -83,7 +83,6 @@ from bench import medrepbench, responses
 from bench.responses import RESPONSES
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
-from lab2clock.checks import plausibility
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import ConversionError, convert
 from lab2clock.stage1 import RawItem, RawReport
@@ -567,16 +566,32 @@ def _number(printed: str | None) -> bool:
     return True
 
 
+# Per marker, in the clock's unit, the lowest value a label may have and still
+# be a blood value: half the lowest among the 4,894 NHANES adults, rounded
+# down. Below it a label is a urine result under a blood marker's name, such
+# as a white-cell count of 204 per uL, 0.204 x 10^9/L. The scorer's rule
+# shares no limit with the code's checks, so a limit the code gets wrong
+# cannot also make the scorer call its delivery right. bench.nhanes fails if
+# one is above half the NHANES minimum.
+BLOOD_FLOOR = {
+    "albumin": 10,
+    "creatinine": 11,
+    "glucose": 1.3,
+    "c_reactive_protein": 0.005,
+    "lymphocyte_percent": 2.5,
+    "mean_cell_volume": 17,
+    "red_cell_distribution_width": 5.6,
+    "alkaline_phosphatase": 8,
+    "white_blood_cell_count": 0.95,
+}
+
+
 def _blood(o: Outcome) -> bool:
     """Whether a labelled row prints a number blood could have: not text such
-    as Negative, and not a value outside the clock's error tier, such as a
-    urine white-cell count of 17 per uL read as 0.017 x 10^9/L."""
+    as Negative, and not below the marker's BLOOD_FLOOR."""
     if not _number(o.printed_value):
         return False
-    if o.expected is None:
-        return True
-    issue = plausibility(o.marker, o.expected)
-    return issue is None or issue.severity != "error"
+    return o.expected is None or o.expected >= BLOOD_FLOOR[o.marker]
 
 
 def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
@@ -587,7 +602,7 @@ def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
     tolerance; a report may label two rows for one marker, such as CRP and
     hs-CRP. wrong: it is none of them, though the labels give at least one,
     or the labels give no blood value for it at all, as a urine test prints
-    "Negative" or 17 per uL under the name of a blood marker, so nothing
+    "Negative" or 204 per uL under the name of a blood marker, so nothing
     should have been delivered. missing: nothing was delivered for a labelled
     blood value. unverified: something was delivered that no label can check.
     not_blood: the labels give no blood value, and rightly nothing was

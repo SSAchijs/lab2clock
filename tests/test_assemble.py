@@ -256,3 +256,22 @@ def test_the_cli_refuses_an_age_that_is_not_one(age, capsys):
         main([str(EXAMPLE), "--age", age])
     assert exit.value.code == 2
     assert "--age" in capsys.readouterr().err
+
+
+def test_a_urine_white_cell_count_is_not_the_blood_marker():
+    # 204 per uL from a urinalysis, under the blood marker's name.
+    output = assemble(report(*without("WBC"), ("白细胞(WBC)", "204", "个/ul")), age=52)
+    assert "white_blood_cell_count" not in output["inputs"]
+    assert "white_blood_cell_count" in output["missing"]
+    assert any(i["check"] == "specimen" for i in output["issues"])
+    assert output["unmapped"][0]["value"] == "204"
+
+
+def test_a_blood_count_beside_a_urine_count_still_counts():
+    output = assemble(report(*COMPLETE, ("白细胞(WBC)", "204", "个/ul")), age=52)
+    assert output["inputs"]["white_blood_cell_count"]["value"] == 7.0
+
+
+def test_a_blood_count_per_microlitre_is_read():
+    output = assemble(report(*without("WBC"), ("WBC", "6500", "/uL")), age=52)
+    assert output["inputs"]["white_blood_cell_count"]["value"] == 6.5

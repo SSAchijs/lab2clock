@@ -66,6 +66,18 @@ def _read(item: RawItem, analyte: str) -> _Row:
     return _Row(item, analyte, unit, parsed, convert(analyte, parsed.value, unit))
 
 
+def _urine_count(row: _Row) -> bool:
+    """Whether a white-cell row is a urine count: printed in cells per uL, as
+    urine tests print it, and below 1,000. A blood count in those units runs
+    to thousands (6,500 /uL); a urine count is 0 to a few hundred, and the
+    two share the name 白细胞."""
+    return (
+        row.analyte == "white_blood_cell_count"
+        and row.unit == "/uL"
+        and row.parsed.value < 1000
+    )
+
+
 def _errored(issues: list[Issue]) -> set[str]:
     return {issue.analyte for issue in issues if issue.severity == "error"}
 
@@ -119,12 +131,27 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
         if analyte is None:
             unmapped.append(item.model_dump())
             continue
-        found.add(analyte)
         try:
             row = _read(item, analyte)
         except (UnitError, ValueParseError, ConversionError) as error:
+            found.add(analyte)
             issues.append(Issue(_ROW_CHECKS[type(error)], "error", analyte, str(error)))
             continue
+        if _urine_count(row):
+            # Not this marker at all, so a blood count on the same report still
+            # counts, and without one the marker is missing.
+            unmapped.append(item.model_dump())
+            issues.append(
+                Issue(
+                    "specimen",
+                    "warning",
+                    analyte,
+                    f"{item.value} {item.unit}: a white-cell count below 1,000 per "
+                    "uL is a urine count, not the blood marker",
+                )
+            )
+            continue
+        found.add(analyte)
         read.setdefault(analyte, []).append(row)
 
     issues += duplicates(
