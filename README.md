@@ -241,6 +241,18 @@ uv run python -m bench.extract cheap --split dev
 
 This reads every development report three times with Claude Haiku 5.5, into `results/responses/claude-haiku-5-5_extract_v1/1/` to `3/`; `frontier` reads with Claude Opus 5.5. On a one-page PDF, Opus 5.5 used about 3,300 input and 650 output tokens ($0.026) and Haiku 5.5 about 3,300 and 960 ($0.0008), so three runs of the 20 test reports cost roughly $1.60 and $0.05.
 
+## Real-world set
+
+The synthetic reports show how stage 1 does when every condition is known. [MedRepBench](https://huggingface.co/datasets/MedRepBench/MedRepBench) ([arXiv 2508.16674](https://arxiv.org/abs/2508.16674)) shows how far that carries over to real ones: 1,925 de-identified Chinese medical report images, each labelled with the items printed on it (name, value, unit, reference range and abnormal flag). Those labels record what was printed, which is exactly stage 1's contract.
+
+The dataset is licensed CC BY-NC 4.0, so none of it is committed: redistributing it inside this MIT repository would muddy the licensing, and a script is enough to reproduce it. `bench/medrepbench.py` fetches it into `bench/data/medrepbench/`, which git ignores, from one pinned revision of the dataset. The labels are checked against a pinned SHA-256, and each image against the SHA-256 Hugging Face publishes for it. The images total 2 GB, so only the ones scored are fetched.
+
+```bash
+uv run python -m bench.medrepbench [IMAGE ...]
+```
+
+At the pinned revision, 819 reports have item labels, but 387 of the images are empty files, 133 of them labelled ones. So 686 labelled reports have an image to read. Fetching an empty image fails rather than score a model on a blank page.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
