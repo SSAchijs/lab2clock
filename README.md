@@ -81,13 +81,15 @@ A purely random draw rarely contains large values: twenty random adults have few
 
 ### Truth and render spec
 
-Each report has two files. `bench/truth/R07.json` holds what is true about the patient: age and the nine markers in clock units, unrounded. `bench/render_spec/R07.json` holds what the report prints: its conditions (layout, language, unit system) and every row as printed, in the same shape stage 1 returns. Stage 1 is scored against the rows, because a reader can only be asked to copy what was printed. The truth is needed where the printout cannot say what the patient really has: what a planted wrong value or a missing marker should have been, and how far the lab's rounding alone moves the clock. The conditions let errors be sliced by condition.
+Each report has two files. `bench/truth/R07.json` holds what is true about the patient: age and the nine markers in clock units, unrounded. `bench/render_spec/R07.json` holds what the report prints: its conditions (layout, language, unit system), a fake identity for its header, and every row as printed, in the same shape stage 1 returns. Stage 1 is scored against the rows, because a reader can only be asked to copy what was printed. The truth is needed where the printout cannot say what the patient really has: what a planted wrong value or a missing marker should have been, and how far the lab's rounding alone moves the clock. The conditions let errors be sliced by condition.
 
 ```bash
 uv run python -m bench.spec
 ```
 
 A printed value is the truth converted into the display unit by lab2clock's own conversion table and rounded half up to the display decimals, as a lab rounds. The tests feed every render spec's rows through the whole pipeline, as a perfect reader would, and require each value to come back to the truth within half a printed step, in every layout, language and unit system. Until the variation matrix assigns conditions, every report is printed in English, SI units and the single-table layout.
+
+The identity is made by [Faker](https://faker.readthedocs.io/) from a seed, in the report's language: a patient name, patient and specimen numbers, dates, a physician and a facility. It is distractor text, as on a real report, and involves no real person. The date of birth is drawn so the patient is exactly the truth's age on the collection date, and no identity text maps to a clock marker.
 
 ## Usage
 

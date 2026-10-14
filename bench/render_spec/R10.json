@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Carol Taylor",
+    "patient_id": "MRN-42195855",
+    "specimen_id": "BR5141668",
+    "date_of_birth": "1968-08-24",
+    "collected": "2025-07-29",
+    "reported": "2025-07-30",
+    "physician": "Dr. Bruce Wilson",
+    "facility": "Garcia Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

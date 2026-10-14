@@ -190,6 +190,18 @@ wheels = [
 ]
 
 [[package]]
+name = "faker"
+version = "40.43.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/33/6c/b8793efc2f00a912ef17cf0b61b717cddf34607499efcb8a32238c119368/faker-40.43.0.tar.gz", hash = "sha256:02fae4327c03a4a6315e1b428a3878f435bfc276c93435ea349b95c0c9372361", size = 2032713, upload-time = "2026-10-09T20:06:29.652Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/81/ed/0d6d0d6467ae3d009fb82fb411867c7fcfeadbdd25602cab0d7a7963f400/faker-40.43.0-py3-none-any.whl", hash = "sha256:9dd7c0ddfaf30c842b05502d3cf641c135e0120a3a19047008ba8525b72953ed", size = 2069082, upload-time = "2026-10-09T20:06:27.166Z" },
+]
+
+[[package]]
 name = "filelock"
 version = "4.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -440,6 +452,7 @@ dependencies = [
 
 [package.dev-dependencies]
 bench = [
+    { name = "faker" },
     { name = "pandas" },
 ]
 clock = [
@@ -457,7 +470,10 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-bench = [{ name = "pandas", specifier = ">=3.0.6" }]
+bench = [
+    { name = "faker", specifier = ">=40.43.0" },
+    { name = "pandas", specifier = ">=3.0.6" },
+]
 clock = [{ name = "pyaging", specifier = ">=0.5.7" }]
 dev = [
     { name = "pytest", specifier = ">=9.1.1" },

@@ -35,6 +35,7 @@ testpaths = ["tests"]
 
 [dependency-groups]
 bench = [
+    "faker>=40.43.0",
     "pandas>=3.0.6",
 ]
 clock = [

@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Sara Shah",
+    "patient_id": "MRN-51265286",
+    "specimen_id": "KD2523296",
+    "date_of_birth": "1976-01-04",
+    "collected": "2025-09-17",
+    "reported": "2025-09-18",
+    "physician": "Dr. Ashley Cunningham",
+    "facility": "Pineda Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

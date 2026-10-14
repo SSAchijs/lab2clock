@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Stephen Johnson",
+    "patient_id": "MRN-45236361",
+    "specimen_id": "KJ4525550",
+    "date_of_birth": "1988-10-15",
+    "collected": "2025-04-07",
+    "reported": "2025-04-09",
+    "physician": "Dr. Jacqueline Daniels",
+    "facility": "Vincent Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

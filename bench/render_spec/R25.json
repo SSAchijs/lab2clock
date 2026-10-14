@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Jordan Rangel",
+    "patient_id": "MRN-07569597",
+    "specimen_id": "JT1711639",
+    "date_of_birth": "1994-02-01",
+    "collected": "2026-06-13",
+    "reported": "2026-06-15",
+    "physician": "Dr. Dylan Rivera",
+    "facility": "Thomas Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

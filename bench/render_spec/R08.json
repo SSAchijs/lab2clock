@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Zachary Mitchell",
+    "patient_id": "MRN-90449906",
+    "specimen_id": "FM8601946",
+    "date_of_birth": "1985-12-03",
+    "collected": "2025-02-02",
+    "reported": "2025-02-02",
+    "physician": "Dr. Kevin Moore",
+    "facility": "Greer Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

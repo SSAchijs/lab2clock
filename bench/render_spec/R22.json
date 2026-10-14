@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Stephanie Fernandez",
+    "patient_id": "MRN-29575185",
+    "specimen_id": "TL9629201",
+    "date_of_birth": "1978-01-26",
+    "collected": "2026-02-22",
+    "reported": "2026-02-24",
+    "physician": "Dr. Ryan Williams",
+    "facility": "Morrison Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

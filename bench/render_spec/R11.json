@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Katie Richards",
+    "patient_id": "MRN-41612431",
+    "specimen_id": "JZ8560505",
+    "date_of_birth": "1962-11-26",
+    "collected": "2025-03-14",
+    "reported": "2025-03-16",
+    "physician": "Dr. Christopher Wilcox",
+    "facility": "Anderson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

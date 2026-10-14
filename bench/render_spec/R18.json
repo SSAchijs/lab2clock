@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Michael Peterson",
+    "patient_id": "MRN-87607777",
+    "specimen_id": "CN5583449",
+    "date_of_birth": "2004-02-03",
+    "collected": "2025-10-08",
+    "reported": "2025-10-09",
+    "physician": "Dr. Kelly Thomas",
+    "facility": "Russell Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

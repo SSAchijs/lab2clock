@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Jessica Owens",
+    "patient_id": "MRN-22353841",
+    "specimen_id": "FY4084757",
+    "date_of_birth": "1969-08-20",
+    "collected": "2026-02-15",
+    "reported": "2026-02-15",
+    "physician": "Dr. Elizabeth Myers",
+    "facility": "Rocha Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Nathan Sanchez",
+    "patient_id": "MRN-70309174",
+    "specimen_id": "XZ1328098",
+    "date_of_birth": "1954-07-11",
+    "collected": "2025-08-30",
+    "reported": "2025-08-30",
+    "physician": "Dr. Carrie Howell",
+    "facility": "Richardson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

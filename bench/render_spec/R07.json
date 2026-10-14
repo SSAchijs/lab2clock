@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Stephen Mills",
+    "patient_id": "MRN-11185680",
+    "specimen_id": "LB6563707",
+    "date_of_birth": "1988-12-27",
+    "collected": "2025-06-19",
+    "reported": "2025-06-20",
+    "physician": "Dr. Tracey Figueroa",
+    "facility": "Harper Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Michele Parrish",
+    "patient_id": "MRN-41917686",
+    "specimen_id": "YC7608616",
+    "date_of_birth": "1950-10-14",
+    "collected": "2026-05-05",
+    "reported": "2026-05-05",
+    "physician": "Dr. Sean Mcdonald",
+    "facility": "Jones Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

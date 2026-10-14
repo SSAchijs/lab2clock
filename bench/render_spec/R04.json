@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Samantha Hale",
+    "patient_id": "MRN-28945853",
+    "specimen_id": "EJ7136019",
+    "date_of_birth": "1968-11-23",
+    "collected": "2026-01-29",
+    "reported": "2026-01-31",
+    "physician": "Dr. Larry Marquez",
+    "facility": "Mccoy Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

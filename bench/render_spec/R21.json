@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Amy Marsh",
+    "patient_id": "MRN-98618767",
+    "specimen_id": "PP5201298",
+    "date_of_birth": "1953-06-09",
+    "collected": "2025-03-05",
+    "reported": "2025-03-06",
+    "physician": "Dr. Nathan Barrera",
+    "facility": "Byrd Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

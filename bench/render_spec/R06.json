@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Lisa Ward",
+    "patient_id": "MRN-10541156",
+    "specimen_id": "SE1090567",
+    "date_of_birth": "1953-11-22",
+    "collected": "2025-01-20",
+    "reported": "2025-01-21",
+    "physician": "Dr. Carl Palmer",
+    "facility": "Johnson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

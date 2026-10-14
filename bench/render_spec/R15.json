@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Ryan Byrd",
+    "patient_id": "MRN-50539265",
+    "specimen_id": "BE8137050",
+    "date_of_birth": "1968-09-28",
+    "collected": "2026-01-03",
+    "reported": "2026-01-05",
+    "physician": "Dr. Randall Sexton",
+    "facility": "Mcpherson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

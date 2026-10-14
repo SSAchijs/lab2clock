@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Seth Douglas",
+    "patient_id": "MRN-35706664",
+    "specimen_id": "SH9689667",
+    "date_of_birth": "1972-09-08",
+    "collected": "2025-07-04",
+    "reported": "2025-07-04",
+    "physician": "Dr. Jamie Gonzalez",
+    "facility": "Stewart Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

@@ -5,10 +5,10 @@ unrounded values from bench/patients.csv. The clock effect of an error is
 computed from it.
 
 render_spec/R07.json holds the report: its conditions (layout, language, unit
-system, photo degradation, planted errors) and every row exactly as printed,
-in the stage-1 shape. Stage 1 is scored against these rows, and the generator
-renders them, so the two cannot disagree. The conditions also let errors be
-sliced by condition.
+system, photo degradation, planted errors), the fake identity in its header,
+and every row exactly as printed, in the stage-1 shape. Stage 1 is scored
+against these rows, and the generator renders them, so the two cannot disagree.
+The conditions also let errors be sliced by condition.
 
 A printed value is the truth converted into the display unit with lab2clock's
 own conversion table, then rounded half up to the display decimals, as a lab
@@ -28,6 +28,7 @@ from typing import Literal
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from bench.identity import Identity, identity
 from bench.sample import OUT as PATIENTS
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
@@ -104,6 +105,7 @@ class RenderSpec(BaseModel):
     split: Literal["dev", "test"]
     conditions: Conditions
     degradation: Degradation | None = None
+    identity: Identity
     rows: list[PrintedRow]
 
     def stage1(self) -> RawReport:
@@ -238,13 +240,17 @@ def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
             )
         )
     return RenderSpec(
-        report=patient.name, split=patient["split"], conditions=conditions, rows=rows
+        report=patient.name,
+        split=patient["split"],
+        conditions=conditions,
+        identity=identity(patient.name, int(patient["age"]), conditions.language),
+        rows=rows,
     )
 
 
 def write(model: BaseModel, folder: Path) -> None:
     folder.mkdir(exist_ok=True)
-    text = json.dumps(model.model_dump(), indent=2, ensure_ascii=False)
+    text = json.dumps(model.model_dump(mode="json"), indent=2, ensure_ascii=False)
     (folder / f"{model.report}.json").write_text(text + "\n")
 
 

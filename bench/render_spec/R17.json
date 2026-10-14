@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Sarah Aguirre",
+    "patient_id": "MRN-84652055",
+    "specimen_id": "HV4268257",
+    "date_of_birth": "1995-11-01",
+    "collected": "2025-08-28",
+    "reported": "2025-08-28",
+    "physician": "Dr. Colin Nunez",
+    "facility": "Johnson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Janet Garcia",
+    "patient_id": "MRN-51316613",
+    "specimen_id": "RK1659343",
+    "date_of_birth": "1952-03-25",
+    "collected": "2025-04-04",
+    "reported": "2025-04-04",
+    "physician": "Dr. Roberto Murillo",
+    "facility": "Scott Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

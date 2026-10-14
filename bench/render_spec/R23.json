@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Jennifer Thomas",
+    "patient_id": "MRN-45433267",
+    "specimen_id": "NJ5808129",
+    "date_of_birth": "1968-01-20",
+    "collected": "2025-05-11",
+    "reported": "2025-05-13",
+    "physician": "Dr. Anthony Morales",
+    "facility": "Cruz Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

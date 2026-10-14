@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Laura Hawkins",
+    "patient_id": "MRN-66421952",
+    "specimen_id": "EG0301569",
+    "date_of_birth": "1994-07-12",
+    "collected": "2025-01-11",
+    "reported": "2025-01-11",
+    "physician": "Dr. Brett Jackson",
+    "facility": "Ryan Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

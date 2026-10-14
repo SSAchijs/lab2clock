@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Brian Lutz",
+    "patient_id": "MRN-63552043",
+    "specimen_id": "FC4811511",
+    "date_of_birth": "1958-09-04",
+    "collected": "2025-04-19",
+    "reported": "2025-04-20",
+    "physician": "Dr. James Kim",
+    "facility": "Johnson Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

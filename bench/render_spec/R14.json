@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Joseph Bradley",
+    "patient_id": "MRN-47013100",
+    "specimen_id": "JL9786954",
+    "date_of_birth": "1959-01-14",
+    "collected": "2025-05-23",
+    "reported": "2025-05-25",
+    "physician": "Dr. Megan Burnett",
+    "facility": "Mcmillan Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",

@@ -7,6 +7,16 @@
     "unit_system": "si"
   },
   "degradation": null,
+  "identity": {
+    "name": "Teresa Bishop",
+    "patient_id": "MRN-10520217",
+    "specimen_id": "CK2480345",
+    "date_of_birth": "1959-06-12",
+    "collected": "2026-01-24",
+    "reported": "2026-01-25",
+    "physician": "Dr. Tami Gallagher",
+    "facility": "Duncan Medical Laboratory"
+  },
   "rows": [
     {
       "name": "WBC",
