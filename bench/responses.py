@@ -2,7 +2,9 @@
 
 Each extractor's responses live in results/responses/<extractor>/<run>/, one
 file per report, where the scorer reads them. The oracle reads without a
-prompt, so it records none.
+prompt, so it records none. A model's response also records the form the
+report was sent in, a PDF or photos, and the files sent; the oracle reads the
+render spec, so it records neither.
 
 An answer that breaks the stage-1 schema is kept as a failure, with what the
 model wrote, even when a retry then succeeds. After a second failure there is
@@ -10,6 +12,7 @@ no report, and the scorer counts the response as invalid.
 """
 
 from pathlib import Path
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
@@ -17,6 +20,9 @@ from bench.prompts import Prompt
 from lab2clock.stage1 import RawReport
 
 RESPONSES = Path(__file__).resolve().parent.parent / "results" / "responses"
+
+# A digital report goes as its PDF, a photographed one as its photos.
+Form = Literal["pdf", "photo"]
 
 
 class Failure(BaseModel):
@@ -33,6 +39,8 @@ class Response(BaseModel):
 
     prompt: str | None
     prompt_sha256: str | None
+    form: Form | None = None
+    files: list[str] = []
     report: RawReport | None
     failures: list[Failure] = []
 
@@ -50,10 +58,14 @@ class Response(BaseModel):
         report: RawReport | None,
         prompt: Prompt | None = None,
         failures: list[Failure] | None = None,
+        form: Form | None = None,
+        files: list[str] | None = None,
     ) -> "Response":
         return cls(
             prompt=prompt.version if prompt else None,
             prompt_sha256=prompt.sha256 if prompt else None,
+            form=form,
+            files=files or [],
             report=report,
             failures=failures or [],
         )

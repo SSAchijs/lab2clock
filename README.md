@@ -205,7 +205,7 @@ One command goes from the cached responses to the results:
 uv run python -m bench.score
 ```
 
-It scores every response in `results/responses/<extractor>/<run>/` and writes `results/results.csv`, with one row per marker per report per run. Each row holds the extractor, the prompt, the run, the split, the report's conditions, the value as printed and as read, the expected and delivered clock input, whether it is correct, and the stage that went wrong. It then writes `results/summary.md`, the accuracy and errors-by-stage tables, computed from the CSV alone, so every accuracy figure in this README comes from that file and none is typed by hand. Both files are committed, and the tests fail if either differs from a fresh run. The test and development sets are reported separately, because the development set is used to tune the prompt.
+It scores every response in `results/responses/<extractor>/<run>/` and writes `results/results.csv`, with one row per marker per report per run. Each row holds the extractor, the prompt, the form the report was sent in, the run, the split, the report's conditions, the value as printed and as read, the expected and delivered clock input, whether it is correct, and the stage that went wrong. It then writes `results/summary.md`, the accuracy and errors-by-stage tables, computed from the CSV alone, so every accuracy figure in this README comes from that file and none is typed by hand. Both files are committed, and the tests fail if either differs from a fresh run. The test and development sets are reported separately, because the development set is used to tune the prompt.
 
 ## Models
 
@@ -226,6 +226,8 @@ Results from different prompts are not comparable, so once a response has been r
 ## Reading a report
 
 `bench/extract.py` sends one report per call, with the prompt as the system message. The API's structured-output mode holds the answer to the stage-1 JSON schema from `lab2clock/stage1.py`, the same definition the core validates, so the model and the code cannot drift apart. The API cannot enforce every rule in that schema. It drops the length and range limits, such as a name of at least one character or a page from 1, and an answer that was refused or cut off at the token limit need not fit at all. So every answer is validated again against the full schema.
+
+Each report is sent in its native form, as a real app would receive it. A digital report goes as its PDF, so the model can use the text layer. A photographed one goes as its photos, one JPEG per page, each after a line naming its page, since an app knows the order the photos were taken in. Every response records which form was sent and the files, and `results.csv` has a `form` column. A later experiment sends the digital reports as images too, to measure what the text layer is worth.
 
 An answer that fails is retried once. Each failure is saved in the response, with what the model wrote, even when the retry succeeds. After a second failure the response has no report, and the scorer blames every printed marker in it on the `invalid` stage. A broken output is a failure mode worth counting, and retrying until the model complies would hide it.
 

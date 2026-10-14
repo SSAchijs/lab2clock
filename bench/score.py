@@ -423,6 +423,7 @@ SUMMARY = RESPONSES.parent / "summary.md"
 _CONTEXT = (
     "extractor",
     "prompt",
+    "form",
     "run",
     "split",
     "layout",
@@ -460,6 +461,7 @@ def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
         context = {
             "extractor": extractor,
             "prompt": response.prompt,
+            "form": response.form,
             "run": run,
             "split": spec.split,
             **spec.conditions.model_dump(),
