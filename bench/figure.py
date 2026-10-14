@@ -2,8 +2,9 @@
 
 One bar per set of reports: of the markers labelled with a number, the share
 whose input reached the clock right, the share scored wrong, and the share
-missing or unchecked. A tick marks the share of printed values the model
-copied exactly, so the gap between the tick and the end of the blue is what
+missing, delivered only as a limit, or unchecked. A tick marks the share of
+printed numbers the model copied exactly, text results such as Negative left
+out, so the gap between the tick and the end of the blue is what
 was lost between the page and the clock.
 
 Every number is computed from the results file, as summary.md's are, and a
@@ -20,7 +21,6 @@ from bench.score import (
     RESULTS,
     Outcome,
     _number,
-    metrics,
     read_results,
     real_inputs,
     same_value,
@@ -34,7 +34,6 @@ OPUS = "claude-opus-5-5_extract_v1"
 
 # Per bar: its name, the model, and which results it is drawn from.
 BARS = [
-    ("20 synthetic reports", "Claude Haiku 5.5", HAIKU, "test"),
     ("39 real reports", "Claude Haiku 5.5", HAIKU, "real"),
     ("39 real reports", "Claude Opus 5.5", OPUS, "real"),
     ("142 held-out real reports", "Claude Haiku 5.5", HAIKU, "heldout"),
@@ -84,11 +83,6 @@ def bars(results: list[tuple[dict[str, str], Outcome]]) -> list[Bar]:
             for context, o in results
             if context["extractor"] == extractor and context["split"] == split
         ]
-        if split == "test":
-            rates = metrics(o for _, o in chosen)
-            right, copied = rates["value_accuracy"], rates["stage1_accuracy"]
-            out.append(Bar(name, model, right.value, 0.0, copied.value, 0))
-            continue
         by_run: dict[str, list[Outcome]] = {}
         for context, o in chosen:
             by_run.setdefault(context["run"], []).append(o)
@@ -163,7 +157,7 @@ def svg(data: list[Bar], mode: str) -> str:
         )
     header = (
         f'<text x="{x0 + span + 64}" y="{top - 14}" font-size="11.5" '
-        f'text-anchor="end" fill="{c["quiet"]}">Copied</text>'
+        f'text-anchor="end" fill="{c["quiet"]}">Numbers copied</text>'
     )
     bottom = top + (len(data) - 1) * gap + height
     wrong_total = sum(bar.wrong_count for bar in data)
@@ -176,22 +170,24 @@ def svg(data: list[Bar], mode: str) -> str:
         f'<rect x="222" y="{legend_y - 10}" width="12" height="12" rx="2" '
         f'fill="{c["missing"]}"/>'
         f'<text x="240" y="{legend_y}" font-size="12" fill="{c["ink"]}">'
-        "Missing or unchecked</text>"
-        f'<rect x="390" y="{legend_y - 10}" width="12" height="12" rx="2" '
+        "Missing, a limit or unchecked</text>"
+        f'<rect x="436" y="{legend_y - 10}" width="12" height="12" rx="2" '
         f'fill="{c["wrong"]}"/>'
-        f'<text x="408" y="{legend_y}" font-size="12" fill="{c["ink"]}">'
+        f'<text x="454" y="{legend_y}" font-size="12" fill="{c["ink"]}">'
         "Scored wrong</text>"
-        f'<line x1="518" x2="518" y1="{legend_y - 12}" y2="{legend_y + 3}" '
+        f'<line x1="564" x2="564" y1="{legend_y - 12}" y2="{legend_y + 3}" '
         f'stroke="{c["ink"]}" stroke-width="2"/>'
-        f'<text x="526" y="{legend_y}" font-size="12" fill="{c["ink"]}">'
-        "Values copied exactly</text>"
+        f'<text x="572" y="{legend_y}" font-size="12" fill="{c["ink"]}">'
+        "Numbers copied</text>"
     )
     note_y = bottom + 34
     lines = [
-        f"Red: {wrong_total} inputs scored wrong. Checked against the report images, "
-        "each time the pipeline was right",
-        "and the dataset's label was not. Shares of labelled markers, three runs "
-        "per set; real reports from MedRepBench.",
+        "Bars: shares of the markers labelled with a number, three runs per set; "
+        "real reports from MedRepBench.",
+        "Numbers copied: printed numbers the model copied exactly, leaving out "
+        "text results such as Negative.",
+        f"Red: {wrong_total} inputs scored wrong. Checked against the report "
+        "images, each time the label was wrong.",
     ]
     note = "".join(
         f'<text x="24" y="{note_y + 17 * i}" font-size="11.5" '
@@ -199,10 +195,10 @@ def svg(data: list[Bar], mode: str) -> str:
         for i, line in enumerate(lines)
     )
     total = note_y + 17 * (len(lines) - 1) + 22
-    real = [bar.copied for bar in data if bar.wrong_count or bar.right < 1]
+    copied = [bar.copied for bar in data]
     title = (
-        f"Claude copies {min(real) * 100:.0f}–{max(real) * 100:.0f}% of real "
-        "values exactly. Fewer reach the clock"
+        f"Claude copies {min(copied) * 100:.0f}–{max(copied) * 100:.0f}% of printed "
+        "numbers exactly. Fewer reach the clock"
     )
     subtitle = (
         "What the code cannot verify is withheld, so the gap is missing values, "

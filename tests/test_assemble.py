@@ -68,8 +68,20 @@ def test_flags_and_censoring_are_kept():
     assert output["ok"] is True
     assert output["inputs"]["glucose"]["flags"] == ["H"]
     crp = output["inputs"]["c_reactive_protein"]
-    assert crp["censored"] is True
+    assert (crp["censored"], crp["limit"]) == (True, "<")
     assert crp["value"] == pytest.approx(0.03)
+    # Delivered, but with a warning that the true value is lower.
+    [issue] = [i for i in output["issues"] if i["check"] == "limit"]
+    assert issue["severity"] == "warning"
+
+
+def test_a_value_above_a_limit_is_withheld():
+    # >5.0 mg/L could be 6 or 60: delivering 5.0 would understate it.
+    output = assemble(report(*without("CRP"), ("CRP", ">5.0", "mg/L")), age=52)
+    assert output["ok"] is False
+    assert "c_reactive_protein" not in output["inputs"]
+    [issue] = output["issues"]
+    assert (issue["check"], issue["severity"]) == ("limit", "error")
 
 
 def test_missing_age_is_an_error():

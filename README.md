@@ -4,13 +4,15 @@
 
 **Read a blood-test report with an LLM, and pass a biological age clock only numbers you can trust.**
 
-`lab2clock` turns a lab report, a PDF or a phone photo, into the ten inputs of the PhenoAge clock ([Levine 2018](https://doi.org/10.18632/aging.101414)): age plus nine routine blood markers. Claude copies the page. Tested code matches the names, converts the units and checks the values, and anything it cannot verify is withheld rather than guessed.
+A clock is only as good as the numbers fed into it, and lab reports print the same marker under different names, units and languages. One missed conversion, CRP in mg/L where the clock expects mg/dL, adds 2.4 years to every user's PhenoAge.
 
-It is also an evaluation of that design on 25 synthetic and 181 real lab reports:
+`lab2clock` lets Claude do the one thing only a model can do: copy the page. Matching names, converting units, arithmetic and sanity checks happen in tested code, and anything the code cannot verify is withheld and listed, never guessed. The output is the ten inputs of the PhenoAge clock ([Levine 2018](https://doi.org/10.18632/aging.101414)): age plus nine routine blood markers.
+
+On 142 real lab reports held back while I tuned the code on 39 others, 66% of markers reached the clock correctly. Most of the rest went missing rather than wrong, and the output says which and why.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/results-dark.svg">
-  <img alt="Claude copies 94 to 96% of real values exactly; 68 to 80% of markers reach the clock correctly, and the rest are withheld or missing rather than wrong." src="docs/results-light.svg">
+  <img alt="Claude copies 94 to 96% of printed numbers exactly; 66 to 79% of markers reach the clock correctly, and the rest are withheld or missing rather than wrong." src="docs/results-light.svg">
 </picture>
 
 ## Try it
@@ -26,7 +28,7 @@ Each clock input comes back in the clock's unit, with the row it was read from:
 
 ```json
 "c_reactive_protein": {
-  "value": 0.03, "unit": "mg/dL", "censored": true,
+  "value": 0.03, "unit": "mg/dL", "censored": true, "limit": "<",
   "source": {"name": "hs-CRP", "value": "<0.3", "unit": "mg/L", "page": 2}
 }
 ```
@@ -38,25 +40,29 @@ uv run lab2clock report.pdf --age 52 --age-estimate
 uv run lab2clock page1.jpg page2.jpg --age 52
 ```
 
-Claude Haiku 5.5 reads a report for about $0.001. The output lists every input that is missing and why. `--age-estimate` adds the PhenoAge the inputs give when all ten are present, labelled as a statistical estimate, not a diagnosis.
+Claude Haiku 5.5 reads a report for about $0.001. The output lists every input that is missing and why. `--age-estimate` adds the PhenoAge the inputs give when all ten are present, labelled as a statistical estimate, not a diagnosis. When one was printed below a limit, as the demo's CRP is, it gives the range that limit allows rather than one number.
 
 ## What the evaluation found
 
 **Copying the page is the easy part. Getting the right number to the clock is the hard part.**
 
-Both Claude models copy about 95% of printed values exactly. On the first version of the code, only 73% of labelled markers on the 39 real reports reached the clock correctly. Fixing what the gap showed raised that to 78%. On 142 real reports held out until the fixes were done, 68% got through. Almost all the rest is in the data, not the reading:
+Both Claude models copy 94–96% of printed numbers exactly; text results such as "Negative" are not counted. Yet on the held-out reports only 66% of markers reached the clock correctly. Almost all the rest is in the data, not the reading:
 
-- names blurred by the dataset's anonymisation;
-- reports that print no unit;
-- cropped, crossed-out or skipped rows.
+- the dataset's anonymisation blurs the name of albumin on most reports, so it cannot be matched. Leaving albumin out, 74% reach the clock on the held-out reports, against 81% on the 39 the code was tuned on;
+- many reports print no unit, and the code refuses a value without one;
+- rows are cropped, crossed out or skipped.
 
-Every value the code could not verify went missing rather than wrong, with three exceptions. Each one is a wrong number that reached the clock, and each is now blocked:
+Every value the code could not verify went missing rather than wrong, with three exceptions. Each is a wrong number that reached the clock:
 
 | Report | What reached the clock | What blocks it now |
 | --- | --- | --- |
-| M18 | A white-cell count hidden under a pen line, which both models guessed | The lymphocyte cross-check caught the mismatch but withheld the wrong value. It now withholds both. |
+| M18 | A white-cell count hidden under a pen line, which both models guessed | The lymphocyte cross-check, which compares the printed lymphocyte percent with count ÷ white cells, caught the mismatch but withheld only the percent. It now withholds both. |
 | H074 | A urine test's "-" (negative), copied as "0" and passed as a blood glucose of 0 | A value of exactly 0 is refused for markers no living person has at 0 |
 | H118 | A urine "3+", read as the number 3 by a parsing rule I had just added | "3+" no longer counts as a number |
+
+These three routes are closed; one known route is still open (see [Limits](#limits)).
+
+A value printed as a limit is not a value either. A standard CRP printed "<5.00 mg/L" used to reach the clock as if it were exactly 5.00, adding about 2.5 years to a healthy person, and ">5.0" became the same number. A value above a limit is now withheld; one below a limit reaches the clock marked as a limit, with a warning, and the age estimate becomes a range.
 
 What this shows:
 
@@ -75,20 +81,20 @@ flowchart TD
     D -. "anything that fails a check" .-> F["Withheld and listed, never guessed"]
 ```
 
-The model does the one job only it can do, which is reading the page. Everything that can go wrong silently is deterministic, tested code. That covers names in English and Chinese, units, arithmetic and sanity checks. For example, most labs print CRP in mg/L while the clock takes mg/dL, and a missed conversion adds about 2.4 years to everyone's PhenoAge.
+The model only reads. Everything that can go wrong silently, from names in English and Chinese to units, arithmetic and sanity checks, is deterministic code with tests.
 
 ## If you are building something similar
 
 1. **Score what reaches the output, not what the model copied.** Count wrong and missing separately; only a wrong value hurts the user.
 2. **Keep the LLM out of the arithmetic.** Units, conversions and plausibility checks belong in code you can test. When a check fails, withhold the value.
-3. **Hold out a set before you start fixing.** The held-out reports found urine tests that share names with blood markers, and a bug one of the fixes had introduced.
-4. **Look at the images.** Every "wrong" value the scorer still reports turned out to be the dataset's label, not the pipeline. One real error had been scored "unverified".
+3. **Hold out a set before you start fixing**, and score your fixes only on reports they were not made from. The held-out reports found urine tests that share names with blood markers, and a bug one of the fixes had introduced.
+4. **Look at the images.** Every "wrong" value the scorer still reports turned out to be the dataset's label, not the pipeline. One real error had been filed as "unverified", the class for a value whose label has no unit to check it against.
 5. **Try the cheap model first.** Here it matched the expensive one.
 
 ## How the evaluation stays honest
 
-- **Known truth first.** 25 synthetic reports are built from real [NHANES](https://www.cdc.gov/nchs/nhanes/) adults. They cover US, SI and mixed units, three layouts, Chinese, phone photos and planted errors. A perfect "oracle" reader must score 100% before any model is scored.
-- **Real reports with checked labels.** The 181 real reports are from [MedRepBench](https://huggingface.co/datasets/MedRepBench/MedRepBench). A person, not a model, hand-checked a random sample of the labels, so a misreading shared with Claude could not hide.
+- **Known truth first.** 25 synthetic reports are built from real [NHANES](https://www.cdc.gov/nchs/nhanes/) adults. They cover US, SI and mixed units, three layouts, Chinese, phone photos and planted errors. An "oracle", a reader that returns exactly what was printed, must score 100% before any model is scored, so this set checks the code. Both models also score 100% on it.
+- **Real reports with checked labels.** The 181 real reports are from [MedRepBench](https://huggingface.co/datasets/MedRepBench/MedRepBench). I checked a random sample of 44 labels by hand against the images and found nothing wrong; a second pass by Claude then caught four unit errors I had missed, and I confirmed each against the image. 4 of 44 is 9%, so a disagreement with a label is not blamed on the model by default.
 - **A frozen prompt and repeated reads.** The prompt is frozen and hashed. Each report is read three times, because neither model accepts a temperature setting.
 - **Every change after seeing results is disclosed.** Each is listed with what prompted it in [METHODS.md](METHODS.md#changes-made-after-seeing-results).
 - **Reproducible without a key.** Every raw response is committed, and CI fails if a fresh scoring run, or this README's figure, differs from what is committed:
@@ -103,11 +109,12 @@ uv run python -m bench.figure   # docs/results-*.svg
 - **Small and narrow.** 181 real reports, all Chinese and mostly in SI units. US units are tested only on synthetic reports.
 - **No true values.** The real reports have labels of what was printed, not the patient's true values.
 - **One known gap.** A urine white-cell count printed as a plain number per µL, under the blood marker's name, would pass with only a warning. No report here did this, but ruling it out needs a check of which specimen each row comes from.
-- **PhenoAge stands in for other clocks.** Clinical clocks with more markers need a larger dictionary, but the design carries over.
+- **PhenoAge stands in for other clocks.** Clinical clocks built on more routine markers, such as LinAge2, need a larger dictionary and conversion table, but the design carries over.
 
 ## Next
 
 - **Specimen check:** tell urine rows from blood rows before matching names.
+- **Several reports per person:** merge a blood count from one lab and a metabolic panel from another into one set of inputs, checking that the dates are close enough to belong together.
 - **Retake prompts:** ask for a new photo when a marker is missing or unreadable, instead of only listing it.
 - **Explanation layer:** a coach that explains the result, scored with the same harness on safety cases such as emergencies, supplement claims and requests for a diagnosis.
 

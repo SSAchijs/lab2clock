@@ -5,7 +5,8 @@ order, which Claude reads first; or a stage-1 JSON file (- for standard
 input), which is used as it is. Prints the output JSON.
 
 --age-estimate adds the PhenoAge the clock inputs give, when all ten are
-there. It is a model estimate from one blood test, not a diagnosis.
+there, or the range they allow when one was printed below a limit. It is a
+model estimate from one blood test, not a diagnosis.
 
 Exit status: 0 when the report is ok, 1 when it has errors (the output is still
 printed, listing them), 2 when the input could not be read.
@@ -14,10 +15,12 @@ printed, listing them), 2 when the input could not be read.
 import argparse
 import json
 import sys
+from itertools import product
 from pathlib import Path
 from typing import Any
 
 from lab2clock.assemble import assemble
+from lab2clock.clock_spec import BY_NAME
 from lab2clock.config import load_env
 from lab2clock.phenoage import phenoage
 from lab2clock.stage1 import RawReport
@@ -44,11 +47,36 @@ def _stage1(paths: list[str], model: str | None) -> RawReport:
 
 
 def estimate(output: dict[str, Any]) -> dict[str, Any] | None:
-    """The PhenoAge of a complete output, with what it is; None if incomplete."""
+    """The PhenoAge of a complete output, with what it is; None if incomplete.
+
+    An input printed below a limit, such as CRP <5.00 mg/L, lies anywhere from
+    the clock's lowest possible value up to the limit, so the age is a range:
+    PhenoAge moves one way with each input, so its ends are at the ends of
+    those inputs' ranges.
+    """
     if not output["ok"]:
         return None
     inputs = {name: field["value"] for name, field in output["inputs"].items()}
-    return {"years": round(phenoage(**inputs), 1), "note": ESTIMATE_NOTE}
+    below = [
+        name for name, field in output["inputs"].items() if field.get("limit") == "<"
+    ]
+    if not below:
+        return {"years": round(phenoage(**inputs), 1), "note": ESTIMATE_NOTE}
+    ages = [
+        phenoage(**{**inputs, **dict(zip(below, ends, strict=True))})
+        for ends in product(*[(BY_NAME[name].error[0], inputs[name]) for name in below])
+    ]
+    printed = ", ".join(
+        f"{output['inputs'][name]['source']['name']} "
+        f"{output['inputs'][name]['source']['value']}"
+        for name in below
+    )
+    return {
+        "years": None,
+        "range": [round(min(ages), 1), round(max(ages), 1)],
+        "note": f"{ESTIMATE_NOTE} Printed below a limit ({printed}), so only a "
+        "range can be given.",
+    }
 
 
 def main(argv: list[str] | None = None) -> int:

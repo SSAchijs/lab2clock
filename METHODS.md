@@ -195,7 +195,7 @@ The metrics, each with a Wilson 95% interval:
 | Flag precision | printed markers the pipeline withheld | the marker had to be withheld |
 | Flag recall | printed markers that had to be withheld | the pipeline withheld it |
 
-Report accuracy is the number that matters most to a user, because one wrong input corrupts the clock. Stage-1 accuracy is the one the real-world set can also be scored on. A marker has to be withheld when its printed value is a planted slip, or when a planted slip breaks its cross-check. A missing marker counts toward neither flag metric, since nothing was printed to flag. The intervals are Wilson intervals because, near 100% on a sample this small, the usual normal-approximation interval runs past 100%: at 19 of 20 its upper end is 104.6%, while Wilson's is 99.1%.
+Report accuracy is the number that matters most to a user, because one wrong input corrupts the clock. Stage-1 accuracy is the one that compares directly with the real-world set, which is scored on it and end to end against its labels. A marker has to be withheld when its printed value is a planted slip, or when a planted slip breaks its cross-check. A missing marker counts toward neither flag metric, since nothing was printed to flag. The intervals are Wilson intervals because, near 100% on a sample this small, the usual normal-approximation interval runs past 100%: at 19 of 20 its upper end is 104.6%, while Wilson's is 99.1%.
 
 ### Results
 
@@ -211,7 +211,7 @@ It scores every response in `results/responses/<extractor>/<run>/` and writes `r
 
 ## Models
 
-Two models read the reports at stage 1, giving two points on the cost-versus-accuracy curve: Claude Opus 5.5 (`claude-opus-5-5`, $4 / $20 per million input and output tokens) and Claude Haiku 5.5 (`claude-haiku-5-5`, $0.10 / $0.50), about 40 times cheaper. A failure both make is one that no choice of model fixes.
+Two models read the reports at stage 1, giving two points on the cost-versus-accuracy curve: Claude Opus 5.5 (`claude-opus-5-5`, $4 / $20 per million input and output tokens) and Claude Haiku 5.5 (`claude-haiku-5-5`, $0.10 / $0.50), 40 times cheaper per token. Haiku writes more output tokens for the same report, so per report it is about 30 times cheaper: $0.0011 against $0.034 on the real set. A failure both make is one that no choice of model fixes.
 
 Neither ID names a dated snapshot, so before a run `bench/models.py` asks the Models API for each model's record and writes it, with the date and the SDK version, to `results/models.json`. It fails if either model is not served, or cannot take a PDF or an image or answer in a fixed JSON schema. It needs `ANTHROPIC_API_KEY` in `.env`.
 
@@ -229,7 +229,7 @@ Results from different prompts are not comparable, so once a response has been r
 
 `bench/extract.py` sends one report per call, with the prompt as the system message. The API's structured-output mode holds the answer to the stage-1 JSON schema from `lab2clock/stage1.py`, the same definition the core validates, so the model and the code cannot drift apart. The API cannot enforce every rule in that schema. It drops the length and range limits, such as a name of at least one character or a page from 1, and an answer that was refused or cut off at the token limit need not fit at all. So every answer is validated again against the full schema.
 
-Each report is sent in its native form, as a real app would receive it. A digital report goes as its PDF, so the model can use the text layer. A photographed one goes as its photos, one JPEG per page, each after a line naming its page, since an app knows the order the photos were taken in. Every response records which form was sent and the files, and `results.csv` has a `form` column. A later experiment sends the digital reports as images too, to measure what the text layer is worth.
+Each report is sent in its native form, as a real app would receive it. A digital report goes as its PDF, so the model can use the text layer. A photographed one goes as its photos, one JPEG per page, each after a line naming its page, since an app knows the order the photos were taken in. Every response records which form was sent and the files, and `results.csv` has a `form` column.
 
 An answer that fails is retried once. Each failure is saved in the response, with what the model wrote, even when the retry succeeds. After a second failure the response has no report, and the scorer blames every printed marker in it on the `invalid` stage. A broken output is a failure mode worth counting, and retrying until the model complies would hide it.
 
@@ -251,7 +251,7 @@ The dataset is licensed CC BY-NC 4.0, so none of it is committed: redistributing
 
 At the pinned revision, 819 reports have item labels, but 387 of the images are empty files, 133 of them labelled ones. So 686 labelled reports have an image to read. Fetching an empty image fails rather than score a model on a blank page.
 
-The scored set is every labelled report that prints at least three of the nine clock markers, matched by the core's synonym dictionary, and has an image. With fewer markers, a call yields too little clock-relevant data. Only 39 reports qualify: most labelled reports are other tests, such as urinalysis, coagulation or hormones, and most that print a marker print one or two. So all 39 are scored, not a sample of 40, and no seed is needed: the set follows from the labels, the dictionary and the revision alone. They print 146 marker values, which at 85% accuracy gives a margin of about ±5.8 points. The dictionary is not why there are so few. The names it leaves unmapped that look like markers are lookalikes it excludes on purpose, such as platelet distribution width (血小板分布宽度), RDW-SD, prealbumin (前白蛋白) and urine tests, or a lymphocyte row with no unit, which could be the count or the percent.
+The scored set is every labelled report that prints at least three of the nine clock markers, matched by the core's synonym dictionary, and has an image. With fewer markers, a call yields too little clock-relevant data. Only 39 reports qualify: most labelled reports are other tests, such as urinalysis, coagulation or hormones, and most that print a marker print one or two. So all 39 are scored, and no seed is needed: the set follows from the labels, the dictionary and the revision alone. They print 146 marker values. The dictionary is not why there are so few. The names it leaves unmapped that look like markers are lookalikes it excludes on purpose, such as platelet distribution width (血小板分布宽度), RDW-SD, prealbumin (前白蛋白) and urine tests, or a lymphocyte row with no unit, which could be the count or the percent.
 
 `bench/medrepbench.csv` fixes the set, committed: each report's ID (M01 to M39), image name, the image's SHA-256 and the markers it prints. Its labelled marker rows, 149 of them (some reports print two rows for one marker, such as CRP and hs-CRP), are committed in `bench/medrepbench_labels.csv`, so the real set can be scored, and rescored in CI, without the dataset.
 
@@ -264,7 +264,7 @@ uv run python -m bench.medrepbench          # fetch the labels and the 39 images
 
 MedRepBench's labels were produced by OCR and an LLM; the authors report about 97% agreement in their own audit. Before a model is blamed for disagreeing with a label, the label itself has to be right. So 10 of the 39 reports, drawn with a fixed seed, were checked by hand against their images: every labelled row that maps to a clock marker, 44 in all, its name, value and unit.
 
-The check was done by a person, not a model, because the models scored are Claude models and a misreading shared with the checker would pass unseen. `bench/audit.py` writes a local review page showing each image beside its rows, and the verdicts are committed in `bench/medrepbench_audit.csv`. A second, independent pass by Claude found four rows the first pass had accepted, and the person checking agreed on all four after looking again.
+The check was meant to be done by a person, not a model, because the models scored are Claude models and a misreading shared with the checker would pass unseen. `bench/audit.py` writes a local review page showing each image beside its rows, and the verdicts are committed in `bench/medrepbench_audit.csv`. That hand pass accepted all 44 rows. A second, independent pass by Claude then found four wrong ones, all units, and the person checking confirmed each against the image. So the hand check alone found none of the errors; the four below were found by a model and confirmed by a person.
 
 ```bash
 uv run python -m bench.audit         # write the review page
@@ -301,6 +301,7 @@ The labels say what was printed, not what the patient had, so the real set is sc
 | Right | the input delivered is the labelled value, converted to the clock's unit, within 0.5% |
 | Wrong | it is not; or the label prints text for the marker, such as a urine test's `Negative`, so nothing should have been delivered |
 | Missing | nothing was delivered for a labelled number |
+| Limit | what was delivered was printed as a limit, such as `<0.5`: a bound on the value, not the value |
 | Unverified | something was delivered, but the label has no unit, so it cannot be checked |
 
 A wrong input is the error that matters, because it reaches the clock looking like any other value. A missing one only leaves the clock without it, and the output says so. Markers labelled only with text, and rightly not delivered, are counted apart and left out of the rates.
@@ -314,9 +315,9 @@ Copying is not the hard part. Both models copy about 95% of printed values exact
 | Claude Haiku 5.5, 39 reports, 3 runs | Right | Wrong | Missing |
 | --- | --- | --- | --- |
 | Before the fixes below | 319 / 438 (72.8%) | 2 | 111 |
-| After them | 342 / 438 (78.1%) | 3 | 90 |
+| After them | 339 / 438 (77.4%) | 3 | 90 |
 
-Claude Opus 5.5 is within two percentage points of Haiku in both rows (73.7% before, 79.9% after), at about 30 times the cost per report. `results/summary.md` holds the "after" rows. The "before" row is the same responses scored with the code as it was before the fixes, commit `42e99c2`:
+Claude Opus 5.5 is within two percentage points of Haiku in both rows (73.7% before, 79.2% after), at about 30 times the cost per report. `results/summary.md` holds the "after" rows; there, the 3 inputs delivered as a limit (M05's CRP `<0.5`) are counted apart, while the code before the fixes did not mark them, so the "before" row counts them as right. The "before" row is the same responses scored with the code as it was before the fixes, commit `42e99c2`:
 
 ```bash
 git checkout 42e99c2 -- lab2clock        # the code before the fixes
@@ -343,7 +344,7 @@ uv run python -m bench.medrepbench heldout   # rebuild the held-out set from the
 uv run python -m bench.extract cheap --split heldout --workers 8
 ```
 
-Haiku copied 94% of the printed numbers exactly, as on the 39. Of the labelled markers with a number, 68% reached the clock right (335 of 495 over three runs) and 31% went missing. About 40% of the missing ones are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
+Haiku copied 94% of the printed numbers exactly, as on the 39. Of the labelled markers with a number, 66% reached the clock right (329 of 495 over three runs) and 31% went missing. About 40% of the missing ones are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
 
 Many held-out reports are urine tests, which print results such as `Negative`, `3+` or `-` under the same names as blood markers (白细胞, 葡萄糖). They found two ways a wrong value got through:
 
@@ -366,6 +367,8 @@ Every change made after a set's responses were read, so a reader can judge how m
 | the 39 real reports | compound names; five Chinese names; `+` and `-` flags in values; the unit `*10`9/L` | code |
 | the held-out reports | a label that prints text counts as wrong when anything is delivered for it | scorer |
 | the held-out reports | a 0 is refused for markers that cannot be 0; `+` and `-` are flags only when set apart | code |
+| a review of the published results | a value printed as a limit keeps its direction: above a limit it is withheld, below one it warns and the age estimate is a range | code |
+| a review of the published results | a delivered limit is scored as its own class, not as right | scorer |
 
 The held-out rates above are with all of these in place. With the code as it was frozen before the held-out set was read, the same responses put 67% of labelled numbers on the clock right and 8 wrong over three runs: H056's wrong label in each run, and five real errors, H074's two zeros in one run and H118's `3+` in each. Parsed with that code's own rule, the label `3+` is the number 3 too, so a score with it counts H118 as right; that is why the scorer's text rule and the code's flag rule were changed together.
 
@@ -392,7 +395,7 @@ Claude Haiku 5.5 reads it with the frozen prompt, the same call the benchmark ma
 uv run lab2clock tests/data/stage1_example.json --age 52
 ```
 
-The output gives each clock input in the clock's unit with the row it was read from, plus the missing fields, every issue found, and the rows that matched no marker. Age is not read from the report, so pass it with `--age`. An analyte with an error is withheld rather than guessed. `--age-estimate` adds the PhenoAge the inputs give, when all ten are present, with a note that it is a statistical estimate from one blood test, not a diagnosis. The exit status is 0 when the report is ok, 1 when it has errors, and 2 when the report could not be read.
+The output gives each clock input in the clock's unit with the row it was read from, plus the missing fields, every issue found, and the rows that matched no marker. Age is not read from the report, so pass it with `--age`. An analyte with an error is withheld rather than guessed. `--age-estimate` adds the PhenoAge the inputs give, when all ten are present, with a note that it is a statistical estimate from one blood test, not a diagnosis. When an input was printed below a limit, such as CRP `<5.00 mg/L`, the true value lies anywhere from the clock's lowest possible value up to the limit, so it gives the range of ages those values allow; a value printed above a limit is withheld, since it could be any amount higher. The exit status is 0 when the report is ok, 1 when it has errors, and 2 when the report could not be read.
 
 ## Setup
 

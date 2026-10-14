@@ -17,6 +17,7 @@ from lab2clock.checks import (
     Issue,
     Reading,
     duplicates,
+    limit,
     lymphocyte_consistency,
     missing,
     plausibility,
@@ -102,7 +103,8 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
     - ok: True when no issue is an error, so every clock input is present.
     - inputs: per clock field, in pyaging's order, the value in the clock's
       unit, the printed row it came from (or the rows it was derived from),
-      and whether it was censored or derived.
+      whether it was censored, and which way ("<" or ">" in limit), and
+      whether it was derived. A value printed above a limit is withheld.
     - missing: clock fields with no value in inputs.
     - issues: every problem found, errors and warnings.
     - unmapped: printed rows that are not one of the clock's analytes.
@@ -159,6 +161,12 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
                 issues.append(issue)
                 inconsistent = issue
 
+    for analyte, row in rows.items():
+        if analyte in MARKERS:
+            issue = limit(analyte, row.item.value, row.value, row.parsed.limit)
+            if issue:
+                issues.append(issue)
+
     values = {analyte: row.value for analyte, row in rows.items() if analyte in MARKERS}
     if derived is not None:
         values["lymphocyte_percent"] = derived.value
@@ -189,6 +197,7 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
                 "value": derived.value,
                 "unit": unit,
                 "censored": False,
+                "limit": None,
                 "flags": [],
                 "derived": True,
                 "sources": [
@@ -201,6 +210,7 @@ def assemble(report: RawReport, age: float | None = None) -> dict[str, Any]:
                 "value": row.value,
                 "unit": unit,
                 "censored": row.parsed.censored,
+                "limit": row.parsed.limit,
                 "flags": list(row.parsed.flags),
                 "derived": False,
                 "source": row.item.model_dump(),

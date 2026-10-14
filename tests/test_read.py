@@ -150,3 +150,20 @@ def test_without_an_api_key_the_cli_says_so_and_exits_2(tmp_path, monkeypatch, c
     err = capsys.readouterr().err
     assert err.startswith("lab2clock: no API key")
     assert "Traceback" not in err
+
+
+def test_a_value_below_a_limit_gives_an_age_range(tmp_path, monkeypatch, capsys):
+    rows = [(n, "<5.00" if n == "CRP" else v, u) for n, v, u in ROWS]
+    items = [{"name": n, "value": v, "unit": u, "page": 1} for n, v, u in rows]
+    client = Client(message(json.dumps({"items": items})))
+    real = read.read_report
+    monkeypatch.setattr(
+        read, "read_report", lambda paths, model: real(paths, model, client)
+    )
+    [path] = files(tmp_path, report_png=PNG)
+    assert cli.main([str(path), "--age", "52", "--age-estimate"]) == 0
+    age = json.loads(capsys.readouterr().out)["phenoage"]
+    low, high = age["range"]
+    assert age["years"] is None and low < high
+    # The top is the age at the limit itself: CRP 5.00 mg/L is 0.5 mg/dL.
+    assert "CRP <5.00" in age["note"]

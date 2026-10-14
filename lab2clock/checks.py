@@ -174,3 +174,29 @@ def lymphocyte_consistency(
         f"printed {percent.value:g}%, but count / white cells gives "
         f"{low:.4g} to {high:.4g}%",
     )
+
+
+def limit(analyte: str, printed: str, value: float, sign: str | None) -> Issue | None:
+    """An issue for a clock input printed as a limit, else None.
+
+    Below a limit, the clock gets the limit, which is at or above the true
+    value, so it warns and an age from it is a range. Above a limit, the true
+    value could be any amount higher, so it is an error and is withheld.
+    """
+    if sign is None:
+        return None
+    unit = BY_NAME[analyte].unit
+    if sign == ">":
+        return Issue(
+            "limit",
+            "error",
+            analyte,
+            f"printed {printed}: above a limit, so the true value is unknown",
+        )
+    return Issue(
+        "limit",
+        "warning",
+        analyte,
+        f"printed {printed}: below a limit; the clock gets the limit, "
+        f"{value:g} {unit}, and the true value is lower",
+    )

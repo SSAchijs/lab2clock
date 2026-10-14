@@ -187,6 +187,7 @@ class Outcome:
     error: the first stage that went wrong, or None.
     printed_value, printed_unit: the row as printed, when printed.
     read_value, read_unit: the row as transcribed, when transcribed.
+    got_limit: "<" or ">" when what was delivered was printed as a limit.
     """
 
     report: str
@@ -200,6 +201,7 @@ class Outcome:
     printed_unit: str | None = None
     read_value: str | None = None
     read_unit: str | None = None
+    got_limit: str | None = None
 
 
 def withheld(spec: RenderSpec) -> set[str]:
@@ -341,6 +343,7 @@ def score_report(spec: RenderSpec, response: RawReport, age: float) -> list[Outc
                 printed_unit=row.unit if row else None,
                 read_value=item.value if item else None,
                 read_unit=item.unit if item else None,
+                got_limit=delivered.get("limit") if delivered else None,
             )
         )
     return outcomes
@@ -528,6 +531,7 @@ def score_real(
                 printed_unit=row.unit,
                 read_value=item.value if item else None,
                 read_unit=item.unit if item else None,
+                got_limit=delivered.get("limit") if delivered else None,
             )
         )
     labelled = {row.marker for row in rows}
@@ -545,12 +549,13 @@ def score_real(
                     None,
                     read_value=source.get("value"),
                     read_unit=source.get("unit"),
+                    got_limit=inputs[marker].get("limit"),
                 )
             )
     return outcomes
 
 
-RealInput = Literal["right", "wrong", "missing", "unverified", "text"]
+RealInput = Literal["right", "wrong", "missing", "unverified", "text", "limit"]
 
 
 def _number(printed: str | None) -> bool:
@@ -572,7 +577,9 @@ def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
     "Negative" under the name of a blood marker, so nothing should have been
     delivered. missing: nothing was delivered for a labelled number.
     unverified: something was delivered that no label can check. text: the
-    labels print no number, and rightly nothing was delivered.
+    labels print no number, and rightly nothing was delivered. limit: what
+    was delivered was printed as a limit, such as CRP <5.00, so it is not the
+    value, only a bound on it, whatever the label says.
     """
     by_marker: dict[tuple[str, str], list[Outcome]] = {}
     for o in outcomes:
@@ -587,6 +594,8 @@ def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
             kind: RealInput = "text" if got is None else "wrong"
         elif got is None:
             kind = "missing"
+        elif group[0].got_limit:
+            kind = "limit"
         elif not expected:
             kind = "unverified"
         elif any(same_input(got, e) for e in expected):
@@ -718,6 +727,7 @@ def _outcome(row: dict[str, str]) -> Outcome:
         printed_unit=optional("printed_unit"),
         read_value=optional("read_value"),
         read_unit=optional("read_unit"),
+        got_limit=optional("got_limit"),
     )
 
 
@@ -756,7 +766,23 @@ _REAL_INPUTS: dict[str, str] = {
     "wrong": "Wrong",
     "missing": "Missing",
     "unverified": "Unverified",
+    "limit": "Limit",
 }
+
+
+# The classes the pooled table shows beside right.
+_POOLED = ("wrong", "limit", "missing")
+
+
+def _numbers(runs: list[list[Outcome]], keep) -> list[RealInput]:
+    """Per labelled marker with a number, over every run, what reached the
+    clock, keeping only the outcomes `keep` accepts."""
+    return [
+        kind
+        for outcomes in runs
+        for printed, kind in real_inputs([o for o in outcomes if keep(o)])
+        if printed and kind != "text"
+    ]
 
 
 def _rate(rate: Rate) -> str:
@@ -790,11 +816,15 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
     names = {v: k for k, v in _SPLITS.items()}
     stages = list(get_args(Stage))
     accuracy, real, real_end, errors = [], [], [], []
+    pooled: dict[tuple[str, str, str], list[list[Outcome]]] = {}
     for (extractor, prompt, split, run), outcomes in groups:
         label = [extractor, prompt or "–", names[split], run]
         if names[split] in _REAL_SPLITS:
             rates = real_metrics(outcomes)
             real.append(label + [_rate(rates[n]) for n in _REAL_METRICS])
+            pooled.setdefault((extractor, prompt or "–", names[split]), []).append(
+                outcomes
+            )
             inputs = real_inputs(outcomes)
             labelled = [kind for printed, kind in inputs if printed]
             numbers = [kind for kind in labelled if kind != "text"]
@@ -810,6 +840,18 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
         counts = [str(sum(o.error == stage for o in outcomes)) for stage in stages]
         errors.append(label + counts)
     label = ["Extractor", "Prompt", "Split", "Run"]
+    pooled_lines = []
+    for key, runs in pooled.items():
+        every = _numbers(runs, lambda o: True)
+        no_albumin = _numbers(runs, lambda o: o.marker != "albumin")
+        pooled_lines.append(
+            [
+                *key,
+                _rate(Rate(every.count("right"), len(every))),
+                _rate(Rate(no_albumin.count("right"), len(no_albumin))),
+                *(_rate(Rate(every.count(k), len(every))) for k in _POOLED),
+            ]
+        )
     real_section = []
     if real:
         real_section = [
@@ -825,7 +867,9 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
             "clock's unit; a value delivered for a marker whose label prints text, "
             "such as a urine test's Negative, is wrong. Unverified is a value "
             "delivered for a marker whose label has no unit, or an RDW labelled in "
-            "fL, which no label can check. The rates are over the markers labelled "
+            "fL, which no label can check. Limit is a value delivered as printed "
+            "below a limit, such as CRP <5.00: a bound, not the value. "
+            "The rates are over the markers labelled "
             "with a number, or delivered; the last two columns count markers "
             "labelled only with text and rightly not delivered, and values "
             "delivered for a marker no label names.",
@@ -837,6 +881,22 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
                     "Delivered, not labelled",
                 ],
                 real_end,
+            ),
+            "Pooled over the runs, per labelled marker with a number. Albumin is "
+            "also left out in one column, because the dataset's de-identification "
+            "blurs its name on most reports that print it. The intervals treat "
+            "the three runs as independent, which they are not, so they are too "
+            "narrow.",
+            _table(
+                [
+                    "Extractor",
+                    "Prompt",
+                    "Split",
+                    "Right",
+                    "Right, leaving out albumin",
+                    *(_REAL_INPUTS[k] for k in _POOLED),
+                ],
+                pooled_lines,
             ),
         ]
     return (

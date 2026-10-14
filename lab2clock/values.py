@@ -20,6 +20,7 @@ Separator rules, in order:
 import re
 import unicodedata
 from dataclasses import dataclass
+from typing import Literal
 
 
 class ValueParseError(ValueError):
@@ -31,18 +32,23 @@ class ParsedValue:
     """A number read from a printed value.
 
     value: the number. For a censored value, the detection limit.
-    censored: True when printed as below or above a limit (<0.5, >1000). CRP
-        is often below detection and PhenoAge takes its log, so zero would be
-        unusable; the limit stands in, and this flag keeps that visible.
+    limit: "<" when printed as below a limit (<0.5, ≤0.2), ">" when above one
+        (>1000), else None. The direction matters: CRP below detection still
+        tells the clock roughly where the value is, but a CRP above a limit
+        could be any amount higher.
     flags: the abnormal-result flags printed after the number, in order.
     decimals: digits printed after the decimal mark. The printed value was
         rounded to them, which the cross-field checks need to know.
     """
 
     value: float
-    censored: bool = False
+    limit: Literal["<", ">"] | None = None
     flags: tuple[str, ...] = ()
     decimals: int = 0
+
+    @property
+    def censored(self) -> bool:
+        return self.limit is not None
 
 
 # Trailing flags. Letters may be wrapped in brackets, as in 1.2 (H). Chinese
@@ -102,9 +108,9 @@ def parse_value(printed: str) -> ParsedValue:
         flags.insert(0, (match.group(1) or match.group(2)).strip("()"))
         text = text[: match.start()]
 
-    censored = False
+    limit = None
     if match := _COMPARATOR.match(text):
-        censored = True
+        limit = "<" if match.group(1) in ("<", "<=", "≤") else ">"
         text = text[match.end() :]
 
     if not _NUMBER.match(text):
@@ -113,4 +119,4 @@ def parse_value(printed: str) -> ParsedValue:
         number, decimals = _to_float(text)
     except ValueParseError as error:
         raise ValueParseError(f"{error}: {printed!r}") from None
-    return ParsedValue(number, censored, tuple(flags), decimals)
+    return ParsedValue(number, limit, tuple(flags), decimals)
