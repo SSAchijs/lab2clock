@@ -32,7 +32,8 @@ Severity = Literal["warning", "error"]
 class Issue:
     """One problem found in a report.
 
-    check: which check found it: plausibility, missing, duplicate, consistency.
+    check: which check found it: plausibility, missing, duplicate, consistency,
+        or, from assembly, unit, value, conversion, derivation.
     severity: error means the value must not reach the clock; warning means it
         is unusual but possible, and stays visible in the output.
     analyte: the analyte it concerns.

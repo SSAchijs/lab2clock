@@ -48,6 +48,16 @@ Traps for anyone converting a lab report:
 
 `bench/phenoage.py` computes PhenoAge from the coefficients and constants published in Levine 2018, independently of pyaging. On all 30 example rows it matches pyaging 0.5.7 within 0.03 years. Since the paper states the unit of every coefficient, this agreement confirms the units in the table above. It lives in `bench/`, not in the `lab2clock` package, because the tool stops at clock inputs and does not report an age. The test runs in CI against `tests/data/phenoage_reference.csv`, so pyaging does not need to be installed. To regenerate that file, run `uv run --group clock python -m bench.make_phenoage_reference`.
 
+## Usage
+
+Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
+
+```bash
+uv run python -m lab2clock tests/data/stage1_example.json --age 52
+```
+
+The output gives each clock input in the clock's unit with the row it was read from, plus the missing fields, every issue found, and the rows that matched no marker. Age is not read from the report, so pass it with `--age`. An analyte with an error is withheld rather than guessed. The exit status is 0 when the report is ok, 1 when it has errors, and 2 when the input is not a valid stage-1 file.
+
 ## Setup
 
 Python 3.12 is required ([pyaging](https://pyaging.readthedocs.io/en/latest/installation.html) needs 3.11 or newer). Recreate the locked environment with [uv](https://docs.astral.sh/uv/):

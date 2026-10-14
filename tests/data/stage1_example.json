@@ -1,0 +1,14 @@
+{
+  "items": [
+    {"name": "WBC", "value": "7.00", "unit": "x10^9/L", "page": 1},
+    {"name": "Hemoglobin", "value": "14.2", "unit": "g/dL", "page": 1},
+    {"name": "MCV", "value": "91.3", "unit": "fL", "page": 1},
+    {"name": "RDW-CV", "value": "13.1", "unit": "%", "page": 1},
+    {"name": "Lymphocytes", "value": "2.10", "unit": "x10^9/L", "page": 1},
+    {"name": "Albumin", "value": "4,2", "unit": "g/dL", "page": 2},
+    {"name": "Creatinine", "value": "0.98", "unit": "mg/dL", "page": 2},
+    {"name": "Glucose", "value": "112 H", "unit": "mg/dL", "page": 2},
+    {"name": "Alkaline Phosphatase", "value": "74", "unit": "U/L", "page": 2},
+    {"name": "hs-CRP", "value": "<0.3", "unit": "mg/L", "page": 2}
+  ]
+}
