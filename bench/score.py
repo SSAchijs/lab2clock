@@ -817,7 +817,7 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
             "Stage 1 on the MedRepBench reports, per labelled marker row: real is "
             "the scored set, heldout the reports set aside to test changes made "
             "after it was scored. The hand check found the labels right on every "
-            "value but wrong on some units (see the README), so the unit rate is a "
+            "value but wrong on some units (see METHODS.md), so the unit rate is a "
             "lower bound.",
             _table([*label, *_REAL_METRICS.values()], real),
             "End to end on the same reports, per labelled marker: what reached the "
