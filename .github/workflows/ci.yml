@@ -19,4 +19,7 @@ jobs:
 
       - run: uv run ruff check
 
+      # The PDF tests print reports with Playwright's headless Chromium.
+      - run: uv run playwright install --with-deps chromium
+
       - run: uv run pytest

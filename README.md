@@ -119,7 +119,18 @@ The table and multi-page layouts add a previous-results column when the report h
 uv run python -m bench.render
 ```
 
-This writes `bench/data/reports/R01.html` and so on. Each results row carries `data-row`, its index in the spec, and the tests check that every row prints its own name, value, unit, interval, flag and previous result, not merely somewhere on the page. Chinese reports wait for the Chinese template.
+This writes `bench/data/reports/R01.html` and so on. Each results row carries `data-row`, its index in the spec, and the tests check that every row prints its own name, value, unit, interval, flag and previous result, not merely somewhere on the page.
+
+Chinese reports use the same layouts with Chinese labels, ISO dates and A4 paper. They are printed in Noto Sans SC, which `bench/fonts.py` downloads from a pinned [noto-cjk](https://github.com/notofonts/noto-cjk) release (SIL Open Font License), checks against a SHA-256 and caches in `bench/data/fonts/`. The HTML loads it through `@font-face`, so Chinese never prints as empty boxes or in whatever font the machine happens to have.
+
+`bench/pdf.py` prints every report to PDF with [Playwright](https://playwright.dev/python/)'s headless Chromium, the same browser engine that lays out the HTML:
+
+```bash
+uv run playwright install chromium   # once
+uv run python -m bench.pdf
+```
+
+This renders the HTML and writes `bench/data/reports/R01.pdf` and so on, each at its report's page size (Letter or A4). Before printing, every font a report declares must load, or the run stops rather than printing in a fallback font.
 
 ## Usage
 

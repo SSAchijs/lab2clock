@@ -127,7 +127,8 @@ def render_html(spec: RenderSpec, env: Environment | None = None) -> str:
     )
 
 
-def main() -> None:
+def main() -> list[Path]:
+    """Write every report's HTML and return the paths written."""
     env = environment()
     OUT.mkdir(parents=True, exist_ok=True)
     for weight in fonts.FILES:
@@ -136,9 +137,13 @@ def main() -> None:
         RenderSpec.model_validate_json(path.read_text())
         for path in sorted(RENDER_SPEC.glob("*.json"))
     ]
+    written = []
     for spec in specs:
-        (OUT / f"{spec.report}.html").write_text(render_html(spec, env))
-    print(f"wrote {len(specs)} reports to {OUT}")
+        path = OUT / f"{spec.report}.html"
+        path.write_text(render_html(spec, env))
+        written.append(path)
+    print(f"wrote {len(written)} reports to {OUT}")
+    return written
 
 
 if __name__ == "__main__":
