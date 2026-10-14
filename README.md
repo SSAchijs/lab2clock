@@ -58,6 +58,10 @@ uv run python -m bench.nhanes
 
 The table keeps the units NHANES publishes, as its codebooks state them. The script then converts every value into clock units with lab2clock's own unit normaliser and conversion table, the same path a printed report takes. That makes NHANES the first real test of the conversion table: NHANES also publishes albumin, creatinine and glucose in SI units, and every converted value must agree with them, or the script fails. All 4,894 agree to within 0.01 plus 0.02%. The small gap comes from NHANES's rounded factors (88.4 and 0.0555, against our 88.40 and 0.05551 from molar masses), while a unit slip would be off by a factor of 10 or more. The run writes both tables to `bench/data/`: `nhanes_adults.csv` as published and `nhanes_clock.csv` in clock units.
 
+The same table sets the plausibility tiers in `lab2clock/clock_spec.py`. The warning tier for each marker is the 0.5th to 99.5th percentile of these adults, rounded outwards; a value outside it is unusual but real, such as a diabetic's glucose of 20 mmol/L, so it warns without failing. The error tier was set by hand from published extremes, and since every NHANES value was measured in a real person, none may break it. The script fails if `clock_spec.py` disagrees with either. That check has already caught one limit: an MCV of 35.4 fL in NHANES, below the 44.5 fL found in the literature, so the error floor is now 30 fL.
+
+The warning tier does not catch every unit slip. Glucose left in mg/dL (95 read as 95 mmol/L) warns. CRP left in mg/L usually does not: 2 mg/L read as 2 mg/dL is inside both tiers, so only the unit handling stops it.
+
 Two codebook facts to know:
 
 - **hs-CRP is in mg/L** (LBXHSCRP), not the mg/dL the clock takes. Results below the 0.15 mg/L detection limit are filled with 0.15/√2 and kept with `crp_below_lod`.

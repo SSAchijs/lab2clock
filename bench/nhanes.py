@@ -6,6 +6,10 @@ the units NHANES publishes. to_clock_units then converts them with lab2clock's
 own unit normaliser and conversion table, and check_si compares the result with
 the SI columns NHANES computed itself: the first real test of that table.
 
+The table in clock units also sets the plausibility tiers in clock_spec: the
+warning tier is its 0.5th and 99.5th percentiles, and no value in it may break
+the error tier, since every one was measured in a real person.
+
 Every variable name and unit below was checked against its codebook, the .htm
 page beside each .xpt file. Two codebook facts shape the table:
 
@@ -21,17 +25,19 @@ to wwwn.cdc.gov on the first run:
     uv run python -m bench.nhanes
 
 This writes the table as published (nhanes_adults.csv) and in clock units
-(nhanes_clock.csv), after the SI check passes.
+(nhanes_clock.csv), after the SI check passes, then fails if clock_spec's tiers
+disagree with the data, printing the warning limits to put there.
 """
 
 import hashlib
+import math
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
 import pandas as pd
 
-from lab2clock.clock_spec import BY_NAME, FIELD_NAMES, MARKERS
+from lab2clock.clock_spec import BY_NAME, FIELD_NAMES, MARKERS, Range
 from lab2clock.conversions import convert
 from lab2clock.units import normalise_unit
 
@@ -113,6 +119,24 @@ SI_COLUMNS: dict[str, str] = {
 # reproduce its glucose column only to 0.0085. A unit slip is off by 10x or more.
 SI_RTOL = 2e-4
 SI_ATOL = 0.01
+
+# The warning tier: these percentiles of the adults in clock units, unweighted,
+# so they describe the respondents the reports are sampled from.
+WARN_QUANTILES: Range = (0.005, 0.995)
+
+# Decimals each warning limit is rounded to, outwards, so rounding never makes
+# a value inside the percentiles warn. As many as labs commonly print.
+WARN_DECIMALS: dict[str, int] = {
+    "albumin": 0,
+    "creatinine": 0,
+    "glucose": 1,
+    "c_reactive_protein": 2,
+    "lymphocyte_percent": 1,
+    "mean_cell_volume": 1,
+    "red_cell_distribution_width": 1,
+    "alkaline_phosphatase": 0,
+    "white_blood_cell_count": 1,
+}
 
 # SAS transport files store 0 as a tiny float that pandas reads as about 5e-79.
 _SAS_ZERO = 1e-70
@@ -199,6 +223,50 @@ def check_si(table: pd.DataFrame, clock: pd.DataFrame) -> None:
             )
 
 
+def _round(value: float, decimals: int, rounder) -> float:
+    scale = 10**decimals
+    # The tolerance stops 12.0 * 10 = 119.99999 from flooring to 11.9.
+    nudge = -1e-9 if rounder is math.ceil else 1e-9
+    return round(rounder(value * scale + nudge) / scale, decimals)
+
+
+def warning_limits(clock: pd.DataFrame) -> dict[str, Range]:
+    """Per marker, the warning tier: the percentiles, rounded outwards."""
+    limits = {}
+    for marker in MARKERS:
+        low, high = clock[marker].quantile(WARN_QUANTILES)
+        decimals = WARN_DECIMALS[marker]
+        limits[marker] = (
+            _round(low, decimals, math.floor),
+            _round(high, decimals, math.ceil),
+        )
+    return limits
+
+
+def check_error_tier(clock: pd.DataFrame) -> None:
+    """Raise if a measured value breaks clock_spec's error tier.
+
+    The error tier means never measured in any patient, so a real respondent
+    outside it proves the limit wrong.
+    """
+    for marker in MARKERS:
+        low, high = BY_NAME[marker].error
+        outside = clock[marker][(clock[marker] < low) | (clock[marker] > high)]
+        if not outside.empty:
+            raise ValueError(
+                f"{marker}: SEQN {outside.index[0]} measured {outside.iloc[0]:g} "
+                f"{BY_NAME[marker].unit}, outside the error tier {low:g} to {high:g}"
+            )
+
+
+def check_warning_tier(clock: pd.DataFrame) -> None:
+    """Raise unless clock_spec holds the warning limits computed from `clock`."""
+    computed = warning_limits(clock)
+    stale = {m: lim for m, lim in computed.items() if BY_NAME[m].warn != lim}
+    if stale:
+        raise ValueError(f"clock_spec's warning tier is out of date; use {stale}")
+
+
 def main() -> None:
     table = load()
     clock = to_clock_units(table)
@@ -212,6 +280,9 @@ def main() -> None:
         f.write(f"# The same adults in clock units: {units}\n")
         clock.to_csv(f)
     print(f"wrote {len(table)} adults to {OUT} and {CLOCK_OUT}")
+    check_error_tier(clock)
+    check_warning_tier(clock)
+    print("clock_spec's plausibility tiers agree with NHANES")
 
 
 if __name__ == "__main__":

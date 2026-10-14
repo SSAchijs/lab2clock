@@ -40,8 +40,9 @@ def test_units_are_ascii():
 
 
 @pytest.mark.parametrize("name", MARKERS)
-def test_every_marker_has_an_error_tier(name):
+def test_every_marker_has_both_tiers(name):
     assert BY_NAME[name].error is not None
+    assert BY_NAME[name].warn is not None
 
 
 @pytest.mark.parametrize("field", FIELDS, ids=FIELD_NAMES)

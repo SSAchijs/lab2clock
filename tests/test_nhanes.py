@@ -10,11 +10,14 @@ from bench.nhanes import (
     UNITS,
     VARIABLES,
     build,
+    check_error_tier,
     check_si,
+    check_warning_tier,
     download,
     to_clock_units,
+    warning_limits,
 )
-from lab2clock.clock_spec import FIELD_NAMES
+from lab2clock.clock_spec import BY_NAME, FIELD_NAMES, MARKERS
 
 # A complete adult, in NHANES units.
 ADULT = {
@@ -165,3 +168,43 @@ def test_si_check_catches_a_wrong_conversion(marker, factor):
     clock[marker] *= factor
     with pytest.raises(ValueError, match=marker):
         check_si(table, clock)
+
+
+def spread(n: int = 1001) -> pd.DataFrame:
+    """A clock-unit table where each marker runs evenly between its warn limits."""
+    columns = {}
+    for marker in MARKERS:
+        low, high = BY_NAME[marker].warn
+        step = (high - low) / (n - 1)
+        columns[marker] = [low + i * step for i in range(n)]
+    return pd.DataFrame(columns)
+
+
+def test_warning_limits_round_outwards():
+    clock = pd.DataFrame({m: [0.0] * 1000 for m in MARKERS})
+    # Percentiles of 3.5782 and 17.9479, as for NHANES glucose.
+    clock["glucose"] = [3.5782] * 10 + [10.0] * 980 + [17.9479] * 10
+    assert warning_limits(clock)["glucose"] == (3.5, 18.0)
+
+
+def test_warning_limits_keep_a_limit_already_round():
+    clock = pd.DataFrame({m: [12.0] * 10 for m in MARKERS})
+    assert warning_limits(clock)["red_cell_distribution_width"] == (12.0, 12.0)
+
+
+def test_warning_tier_check_fails_when_clock_spec_is_stale():
+    clock = spread()
+    clock["glucose"] *= 2
+    with pytest.raises(ValueError, match="glucose"):
+        check_warning_tier(clock)
+
+
+def test_error_tier_check_passes_for_measured_values():
+    check_error_tier(spread())
+
+
+def test_error_tier_check_fails_for_a_value_beyond_it():
+    clock = spread()
+    clock.loc[0, "mean_cell_volume"] = 25.0
+    with pytest.raises(ValueError, match="mean_cell_volume"):
+        check_error_tier(clock)

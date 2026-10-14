@@ -24,13 +24,6 @@ def reading(analyte, printed, unit):
     )
 
 
-@pytest.fixture
-def glucose_warn(monkeypatch):
-    # The warning tier is None until Phase 3 computes it from NHANES.
-    field = replace(BY_NAME["glucose"], warn=(3.5, 15.0))
-    monkeypatch.setitem(BY_NAME, "glucose", field)
-
-
 # Plausibility.
 
 
@@ -38,15 +31,26 @@ def glucose_warn(monkeypatch):
     ("analyte", "value"),
     [
         ("glucose", 5.5),
+        ("c_reactive_protein", 0.2),
+        ("white_blood_cell_count", 6.5),
+        ("age", 120),
+    ],
+)
+def test_typical_values_pass(analyte, value):
+    assert plausibility(analyte, value) is None
+
+
+@pytest.mark.parametrize(
+    ("analyte", "value"),
+    [
         ("glucose", 0),
         ("albumin", 0.5),
         ("lymphocyte_percent", 100),
         ("white_blood_cell_count", 1360),
-        ("age", 120),
     ],
 )
-def test_plausible_values_pass(analyte, value):
-    assert plausibility(analyte, value) is None
+def test_extreme_but_possible_values_warn_and_do_not_fail(analyte, value):
+    assert plausibility(analyte, value).severity == "warning"
 
 
 @pytest.mark.parametrize(
@@ -69,27 +73,39 @@ def test_impossible_values_fail(analyte, value):
     assert issue.analyte == analyte
 
 
-@pytest.mark.usefixtures("glucose_warn")
-def test_unusual_values_warn():
-    # A diabetic's glucose: real, so it warns and does not fail.
-    issue = plausibility("glucose", 16.0)
-    assert issue.severity == "warning"
-    assert plausibility("glucose", 2.0).severity == "warning"
+@pytest.mark.parametrize(
+    ("analyte", "value"),
+    [
+        # A diabetic's glucose: real, so it warns and does not fail.
+        ("glucose", 20.0),
+        ("glucose", 3.0),
+        # Glucose left in mg/dL: possible in mmol/L, but unusual.
+        ("glucose", 95),
+        ("c_reactive_protein", 8.0),
+        ("mean_cell_volume", 35.4),
+    ],
+)
+def test_unusual_values_warn(analyte, value):
+    assert plausibility(analyte, value).severity == "warning"
 
 
-@pytest.mark.usefixtures("glucose_warn")
+def test_crp_left_in_mg_per_litre_usually_passes():
+    # 2 mg/L read as 2 mg/dL: inside both tiers. Only the unit catches it.
+    assert plausibility("c_reactive_protein", 2.0) is None
+
+
 def test_error_tier_wins_over_warning_tier():
     assert plausibility("glucose", 200).severity == "error"
 
 
-@pytest.mark.usefixtures("glucose_warn")
 def test_warning_tier_limits_are_inclusive():
-    assert plausibility("glucose", 15.0) is None
-    assert plausibility("glucose", 3.5) is None
+    low, high = BY_NAME["glucose"].warn
+    assert plausibility("glucose", high) is None
+    assert plausibility("glucose", low) is None
 
 
-def test_warning_tier_is_skipped_until_computed():
-    assert BY_NAME["glucose"].warn is None
+def test_no_warning_tier_skips_the_warning(monkeypatch):
+    monkeypatch.setitem(BY_NAME, "glucose", replace(BY_NAME["glucose"], warn=None))
     assert plausibility("glucose", 30) is None
 
 
