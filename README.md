@@ -286,9 +286,23 @@ uv run python -m bench.extract cheap --split real
 uv run python -m bench.extract frontier --split real
 ```
 
-Only stage 1 is scored. The labels record what was printed, which is exactly stage 1's contract, but there is no patient-level truth behind them to score a conversion against. Each labelled marker row is lined up with the item read from it as on the synthetic reports, by name first and then by value and unit, and scored on its value as printed and its unit as labelled. The four labels the hand check found wrong are scored as what is printed. Since the labels were right on every value checked but wrong on 9% of units, the value rate is the one to trust, and the unit rate is a lower bound. The rows go into `results.csv` with the split `real`, and `summary.md` reports them in their own table.
+Only stage 1 is scored. The labels record what was printed, which is exactly stage 1's contract, but there is no patient-level truth behind them to score a conversion against. Each labelled marker row is lined up with the item read from it as on the synthetic reports, by name first and then by value and unit. Because the labels' units are noisy, a last pass also matches by value alone, so a row read under another name, such as `ALB` for a label's `白蛋白` with `g/l` for `g/1`, is not counted as omitted. Each row is scored on its value as printed and its unit as labelled. A trailing `+` or `-`, which Chinese reports print as a flag, is not part of the value, just as `H`, `L`, `↑` and `↓` are not. The four labels the hand check found wrong are scored as what is printed. Since the labels were right on every value checked but wrong on 9% of units, the value rate is the one to trust, and the unit rate is a lower bound. The rows go into `results.csv` with the split `real`, and `summary.md` reports them in their own table.
 
 The reports are all Chinese and mostly in SI units, so this set does not test US units; the synthetic set covers that.
+
+### What the real set shows
+
+The rates are in the real-world table of `results/summary.md`. What the errors behind them show:
+
+- **The real reports are harder than the synthetic ones.** Both models read every synthetic report perfectly but not every real one. The synthetic reports are too clean to separate the two models.
+- **The cheaper model is as accurate.** Claude Haiku 5.5 scores as well as Claude Opus 5.5 on the real set, within overlapping intervals, at a list price about 40 times lower.
+- **Opus leaves rows out rather than misreading them.** It never misread a value it transcribed; every value it got wrong is a row it left out, most often albumin: on M27 in every run, and on M06, M24 and M25 in one run each.
+- **Haiku says when it cannot read a value.** Its only misread value is M05's mean cell volume, which it gave as "illegible" or "unreadable" in every run instead of guessing. Opus left the same row out.
+- **Most of the remaining errors are not the models'.** Both models miss the same rows and disagree with the same labels in every run, which points to the image or the label rather than the reader. On M39 the labelled white cell count is not in the image, which is cropped above it; on M18 it is covered by a hand-drawn ink line. Other disagreements look like OCR noise in the labels, such as `g/1` for `g/l` on M10 and `fl.` for `fL` on M32, or a unit printed only in the reference range, which the label leaves out on M02.
+
+None of these is removed from the score. Only the four labels the random hand check found wrong are corrected. Correcting the labels wherever a model disagrees would check only the disagreements, never a wrong label a model happened to agree with, and so flatter the models. The rates are therefore lower bounds on what the models read correctly.
+
+Two changes to the scorer were made after the first responses were seen, both to how a reading is compared, neither to the prompt: `+` and `-` count as flags, and a real row can be matched by its value alone. Without them, a correct `50.68 +` would have counted as a misread value and a correct `ALB 38.6 g/l` as an omitted row.
 
 ### License of the derived files
 
