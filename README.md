@@ -69,6 +69,16 @@ Two codebook facts to know:
 
 `bench/data/` is ignored by git. NHANES data is public domain, but the script regenerates the downloads and both tables exactly.
 
+### The 25 patients
+
+`bench/sample.py` draws the 25 patients behind the fake reports from that table with a fixed seed, so rerunning it gives the same file, `bench/patients.csv`, which is committed. Five are for developing the prompt and twenty for the scored test set, so the prompt is never tuned on a report it is scored on.
+
+```bash
+uv run python -m bench.sample
+```
+
+A purely random draw rarely contains large values: twenty random adults have fewer than three CRPs above 10 mg/L about 65% of the time, and fewer than three glucoses of 11.1 mmol/L (200 mg/dL) or more 96% of the time. So the test set is forced to hold at least three of each, and the development set one of each; the rest are random. Each row records why it was drawn. Ages run from 20 to 79, because NHANES records everyone 80 or older as 80 and their true age is unknown.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
