@@ -142,7 +142,11 @@ class PrintedRow(RawItem):
 
 
 class Degradation(BaseModel):
-    """A photo-like degradation of the rendered page; Phase 4 sets the steps."""
+    """A photo-like degradation of the rendered page.
+
+    bench.degrade draws every step from the seed, so the photo regenerates
+    identically.
+    """
 
     model_config = ConfigDict(extra="forbid")
 

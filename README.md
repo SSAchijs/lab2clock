@@ -140,6 +140,14 @@ uv run python -m bench.raster
 
 This writes `bench/data/images/R01-1.png`, `R03-1.png`, `R03-2.png` and so on: 32 pages from 25 reports. Pages are rendered at 200 DPI, where the smallest printed text (7.5pt) is about 21 pixels tall, on white without transparency, and the same PDF always gives the same bytes.
 
+`bench/degrade.py` turns the page images of the six photo reports (one development, five test) into phone photos with [OpenCV](https://opencv.org/), in the order a real photo happens: the page lies on a desk, the camera sees it turned up to 3° and slanted, the room lights it unevenly and warmly, the lens blurs it, the sensor adds noise, and the phone saves a JPEG at quality 55 to 80:
+
+```bash
+uv run python -m bench.degrade
+```
+
+This writes `bench/data/photos/R05-1.jpg` and so on, and `steps.json` with the steps drawn for each page. Every step comes from the degradation seed in the report's render spec and the page number, so a photo regenerates byte for byte, and each page of a multi-page report is photographed differently. The ranges keep every value legible; the tests check that ink still stands well clear of paper at the harshest end of every range at once. Augraphy was not used: it draws from global random state, which makes exact regeneration harder to guarantee.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
