@@ -51,13 +51,23 @@ def age_on(birth: date, day: date) -> int:
     return day.year - birth.year - ((day.month, day.day) < (birth.month, birth.day))
 
 
+def day_between(fake: Faker, first: date, last: date) -> date:
+    """A day from `first` to `last`, inclusive.
+
+    Not Faker's date_between_dates, which goes through local-time timestamps,
+    so the same seed gives a different day in another time zone.
+    """
+    return first + timedelta(days=fake.random_int(0, (last - first).days))
+
+
 def identity(report: str, age: int, language: str) -> Identity:
     """The identity printed on `report`, in its language, for a patient of `age`."""
     fake = Faker(LOCALES[language])
     fake.seed_instance(f"{SEED}-{report}")
-    collected = fake.date_between_dates(*COLLECTED)
+    collected = day_between(fake, *COLLECTED)
     # Born at most `age` years and at least `age` + 1 years minus a day before.
-    born = fake.date_between_dates(
+    born = day_between(
+        fake,
         years_before(collected, age + 1) + timedelta(days=1),
         years_before(collected, age),
     )

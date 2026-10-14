@@ -12,12 +12,12 @@
   },
   "degradation": null,
   "identity": {
-    "name": "杜淑华",
+    "name": "孙淑华",
     "patient_id": "1118568065",
     "specimen_id": "637075097981",
-    "date_of_birth": "1988-12-27",
-    "collected": "2025-06-19",
-    "reported": "2025-06-20",
+    "date_of_birth": "1989-08-11",
+    "collected": "2025-11-15",
+    "reported": "2025-11-17",
     "physician": "赵鑫",
     "facility": "六安市人民医院"
   },

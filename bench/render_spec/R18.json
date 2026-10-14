@@ -14,14 +14,14 @@
     "seed": 1856395514
   },
   "identity": {
-    "name": "官凤兰",
-    "patient_id": "7607777558",
-    "specimen_id": "344916402621",
-    "date_of_birth": "2004-02-03",
-    "collected": "2025-10-08",
-    "reported": "2025-10-09",
-    "physician": "刘龙",
-    "facility": "巢湖市人民医院"
+    "name": "黄慧",
+    "patient_id": "9876077775",
+    "specimen_id": "583449164026",
+    "date_of_birth": "2005-02-24",
+    "collected": "2026-06-11",
+    "reported": "2026-06-12",
+    "physician": "欧林",
+    "facility": "汕尾市人民医院"
   },
   "previous_collected": null,
   "rows": [

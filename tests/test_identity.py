@@ -1,3 +1,4 @@
+import time
 from datetime import date, timedelta
 
 import pytest
@@ -85,3 +86,15 @@ def test_years_before(day, years, expected):
 )
 def test_age_on(birth, day, expected):
     assert age_on(birth, day) == expected
+
+
+@pytest.mark.parametrize("zone", ["UTC", "Europe/Amsterdam", "America/Los_Angeles"])
+def test_identity_does_not_depend_on_the_time_zone(monkeypatch, zone):
+    expected = identity("R03", 73, "en")
+    monkeypatch.setenv("TZ", zone)
+    time.tzset()
+    try:
+        assert identity("R03", 73, "en") == expected
+    finally:
+        monkeypatch.undo()
+        time.tzset()

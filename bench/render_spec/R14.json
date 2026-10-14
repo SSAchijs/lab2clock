@@ -12,16 +12,16 @@
   },
   "degradation": null,
   "identity": {
-    "name": "张玉兰",
-    "patient_id": "7013100978",
-    "specimen_id": "695445286091",
-    "date_of_birth": "1959-01-14",
-    "collected": "2025-05-23",
-    "reported": "2025-05-25",
-    "physician": "陈艳",
-    "facility": "荆门市人民医院"
+    "name": "曾东",
+    "patient_id": "9470131009",
+    "specimen_id": "786954452860",
+    "date_of_birth": "1959-08-31",
+    "collected": "2025-09-25",
+    "reported": "2025-09-27",
+    "physician": "封颖",
+    "facility": "辛集市人民医院"
   },
-  "previous_collected": "2025-02-15",
+  "previous_collected": "2025-06-20",
   "rows": [
     {
       "name": "白细胞计数",
