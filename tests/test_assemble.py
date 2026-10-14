@@ -229,3 +229,10 @@ def test_cli_exits_2_on_invalid_input(tmp_path, capsys):
     path.write_text('{"items": [{"name": "Albumin", "value": 42}]}')
     assert main([str(path)]) == 2
     assert capsys.readouterr().err.startswith("lab2clock:")
+
+
+def test_the_lab2clock_command_runs_main():
+    from importlib.metadata import entry_points
+
+    [script] = entry_points(group="console_scripts", name="lab2clock")
+    assert script.load() is main

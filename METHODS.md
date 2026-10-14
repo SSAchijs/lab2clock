@@ -382,14 +382,14 @@ MedRepBench is licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-n
 Read a report of your own, a PDF or one photo per page in page order, with `ANTHROPIC_API_KEY` in `.env`:
 
 ```bash
-uv run python -m lab2clock report.pdf --age 52
-uv run python -m lab2clock page1.jpg page2.jpg --age 52 --age-estimate
+uv run lab2clock report.pdf --age 52
+uv run lab2clock page1.jpg page2.jpg --age 52 --age-estimate
 ```
 
 Claude Haiku 5.5 reads it with the frozen prompt, the same call the benchmark makes (`lab2clock/read.py`; `--model` picks another model), and the code stages turn what it read into clock inputs. Or skip the model and run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
 
 ```bash
-uv run python -m lab2clock tests/data/stage1_example.json --age 52
+uv run lab2clock tests/data/stage1_example.json --age 52
 ```
 
 The output gives each clock input in the clock's unit with the row it was read from, plus the missing fields, every issue found, and the rows that matched no marker. Age is not read from the report, so pass it with `--age`. An analyte with an error is withheld rather than guessed. `--age-estimate` adds the PhenoAge the inputs give, when all ten are present, with a note that it is a statistical estimate from one blood test, not a diagnosis. The exit status is 0 when the report is ok, 1 when it has errors, and 2 when the report could not be read.

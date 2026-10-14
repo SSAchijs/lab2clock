@@ -1,4 +1,4 @@
-"""Command line: python -m lab2clock REPORT... --age YEARS [--age-estimate]
+"""Command line: lab2clock REPORT... --age YEARS [--age-estimate]
 
 REPORT is a lab report as a PDF, or one photo per page (PNG or JPEG) in page
 order, which Claude reads first; or a stage-1 JSON file (- for standard
@@ -53,7 +53,7 @@ def estimate(output: dict[str, Any]) -> dict[str, Any] | None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="python -m lab2clock",
+        prog="lab2clock",
         description="Turn a lab report into PhenoAge clock inputs.",
     )
     parser.add_argument(

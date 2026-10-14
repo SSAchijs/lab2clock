@@ -19,7 +19,7 @@ No API key is needed to see the output. This runs the code stages on a report th
 
 ```bash
 uv sync
-uv run python -m lab2clock tests/data/stage1_example.json --age 52 --age-estimate
+uv run lab2clock tests/data/stage1_example.json --age 52 --age-estimate
 ```
 
 Each clock input comes back in the clock's unit, with the row it was read from:
@@ -34,8 +34,8 @@ Each clock input comes back in the clock's unit, with the row it was read from:
 To read your own report, add `ANTHROPIC_API_KEY` to `.env` and pass a PDF, or one photo per page:
 
 ```bash
-uv run python -m lab2clock report.pdf --age 52 --age-estimate
-uv run python -m lab2clock page1.jpg page2.jpg --age 52
+uv run lab2clock report.pdf --age 52 --age-estimate
+uv run lab2clock page1.jpg page2.jpg --age 52
 ```
 
 Claude Haiku 5.5 reads a report for about $0.001. The output lists every input that is missing and why. `--age-estimate` adds the PhenoAge the inputs give when all ten are present, labelled as a statistical estimate, not a diagnosis.
