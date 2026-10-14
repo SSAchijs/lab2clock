@@ -379,9 +379,13 @@ def test_flags_count_false_alarms_and_misses():
 
 def test_one_row_per_marker_per_report_per_run():
     rows = score_responses()
-    assert len(rows) == 25 * 9
     assert all(list(row) == list(COLUMNS) for row in rows)
-    assert {(row["extractor"], row["run"]) for row in rows} == {("oracle", "1")}
+    keys = [(row["extractor"], row["run"], row["report"]) for row in rows]
+    reports = set(keys)
+    assert len(rows) == 9 * len(reports)
+    assert all(keys.count(key) == 9 for key in reports)
+    oracle_reports = {k for k in reports if k[:2] == ("oracle", "1")}
+    assert len(oracle_reports) == 25
 
 
 def test_results_read_back_as_written(tmp_path):

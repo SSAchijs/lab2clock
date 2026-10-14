@@ -1,4 +1,274 @@
 extractor,prompt,form,run,split,layout,language,unit_system,photo,previous,missing,planted,report,marker,printed,expected,got,correct,error,printed_value,printed_unit,read_value,read_unit
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-haiku-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-haiku-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,1,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-opus-5-5_extract_v1,extract_v1,photo,1,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,2,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-opus-5-5_extract_v1,extract_v1,photo,2,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,c_reactive_protein,True,0.22999999999999998,0.22999999999999998,True,,2.3,mg/L,2.3,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,lymphocyte_percent,True,30.7,30.7,True,,30.7,%,30.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,mean_cell_volume,True,92.9,92.9,True,,92.9,fL,92.9,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,red_cell_distribution_width,True,14.1,14.1,True,,14.1,%,14.1,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,alkaline_phosphatase,True,117.0,117.0,True,,117,U/L,117,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,en,si,False,True,,,R01,white_blood_cell_count,True,9.8,9.8,True,,9.8,10^9/L,9.8,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,albumin,True,40.0,40.0,True,,4.0,g/dL,4.0,g/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,creatinine,True,42.43281471004243,42.43281471004243,True,,0.48,mg/dL,0.48 L,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,glucose,True,4.440497335701599,4.440497335701599,True,,80,mg/dL,80,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,c_reactive_protein,True,0.46,0.46,True,,0.46,mg/dL,0.46 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,lymphocyte_percent,True,24.3,24.3,True,,24.3,%,24.3,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,mean_cell_volume,True,77.9,77.9,True,,77.9,fL,77.9 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,red_cell_distribution_width,False,,,True,,,,,
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,alkaline_phosphatase,True,97.0,97.0,True,,97,IU/L,97,IU/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,two_column,en,us,False,False,red_cell_distribution_width,,R02,white_blood_cell_count,True,10.5,10.5,True,,10.5,x10^3/uL,10.5,x10^3/uL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,albumin,True,43.0,43.0,True,,43,g/L,43,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,creatinine,True,104.3140028288543,104.3140028288543,True,,1.18,mg/dL,1.18,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,glucose,True,8.103907637655418,8.103907637655418,True,,146,mg/dL,146 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,c_reactive_protein,True,5.0,5.0,True,,5.00,mg/dL,5.00 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,lymphocyte_percent,True,19.7,19.7,True,,19.7,%,19.7 L,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,mean_cell_volume,True,,,True,,8.87,fL,8.87 L,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,red_cell_distribution_width,True,13.4,13.4,True,,13.4,%,13.4,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,alkaline_phosphatase,True,87.0,87.0,True,,87,U/L,87,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,multi_page,en,mixed,False,False,,mcv_decimal,R03,white_blood_cell_count,True,4.7,4.7,True,,4.7,10^9/L,4.7,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,albumin,True,40.0,40.0,True,,40,g/L,40,g/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,creatinine,True,58.0,58.0,True,,58,µmol/L,58,µmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,glucose,True,19.3,19.3,True,,19.3,mmol/L,19.3 H,mmol/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,c_reactive_protein,True,0.47000000000000003,0.47000000000000003,True,,4.7,mg/L,4.7 H,mg/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,lymphocyte_percent,True,34.7,34.7,True,,34.7,%,34.7,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,mean_cell_volume,True,96.1,96.1,True,,96.1,fL,96.1,fL
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,red_cell_distribution_width,True,16.8,16.8,True,,16.8,%,16.8 H,%
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,alkaline_phosphatase,True,152.0,152.0,True,,152,U/L,152 H,U/L
+claude-opus-5-5_extract_v1,extract_v1,pdf,3,dev,table,zh,si,False,False,,,R04,white_blood_cell_count,True,6.6,6.6,True,,6.6,10^9/L,6.6,10^9/L
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,albumin,True,41.0,41.0,True,,4.1,g/dL,4.1,g/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,creatinine,True,69.83734087694484,69.83734087694484,True,,0.79,mg/dL,0.79,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,glucose,True,5.051065719360569,5.051065719360569,True,,91,mg/dL,91,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,c_reactive_protein,True,0.53,0.53,True,,0.53,mg/dL,0.53 H,mg/dL
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,lymphocyte_percent,True,28.1,28.1,True,,28.1,%,28.1,%
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,mean_cell_volume,True,87.2,87.2,True,,87.2,fL,87.2,fL
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,red_cell_distribution_width,True,13.6,13.6,True,,13.6,%,13.6,%
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,alkaline_phosphatase,True,67.0,67.0,True,,67,IU/L,67,IU/L
+claude-opus-5-5_extract_v1,extract_v1,photo,3,dev,two_column,en,us,True,False,,,R05,white_blood_cell_count,True,7.9,7.9,True,,7.9,x10^3/uL,7.9,x10^3/uL
 oracle,,,1,dev,table,en,si,False,True,,,R01,albumin,True,37.0,37.0,True,,37,g/L,37,g/L
 oracle,,,1,dev,table,en,si,False,True,,,R01,creatinine,True,96.0,96.0,True,,96,µmol/L,96,µmol/L
 oracle,,,1,dev,table,en,si,False,True,,,R01,glucose,True,5.3,5.3,True,,5.3,mmol/L,5.3,mmol/L
