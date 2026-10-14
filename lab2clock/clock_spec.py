@@ -4,7 +4,7 @@ This is the single source of truth for field names, target units and transforms.
 Every other module takes them from here, so a wrong unit is fixed in one place.
 
 Units were derived from running pyaging 0.5.7 and confirmed against the paper's
-coefficients (see bench/phenoage.py). Unit strings are ASCII ("u", not the micro
+coefficients (see lab2clock/phenoage.py). Unit strings are ASCII ("u", not the micro
 sign or Greek mu), so the unit normaliser has one canonical spelling to map to.
 """
 

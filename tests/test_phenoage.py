@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from bench.phenoage import phenoage
 from lab2clock.clock_spec import FIELD_NAMES
+from lab2clock.phenoage import phenoage
 
 REFERENCE = Path(__file__).parent / "data" / "phenoage_reference.csv"
 
@@ -48,7 +48,9 @@ def test_crp_left_in_mg_per_l_adds_about_2_4_years():
     assert shift == pytest.approx(2.44, abs=0.01)
 
 
-def test_non_positive_crp_is_rejected():
+@pytest.mark.parametrize("crp", [0.0, 0.001])
+def test_crp_below_the_floor_counts_as_the_floor(crp):
+    # As pyaging floors it at 0.01 mg/dL before the log.
     _, inputs, _ = REFERENCE_ROWS[0]
-    with pytest.raises(ValueError, match="CRP"):
-        phenoage(**{**inputs, "c_reactive_protein": 0.0})
+    floored = phenoage(**{**inputs, "c_reactive_protein": 0.01})
+    assert phenoage(**{**inputs, "c_reactive_protein": crp}) == floored

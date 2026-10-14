@@ -674,13 +674,13 @@ version = "0.1.0"
 source = { editable = "." }
 default-groups = ["bench", "dev"]
 dependencies = [
+    { name = "anthropic" },
     { name = "pydantic" },
     { name = "python-dotenv" },
 ]
 
 [package.dev-dependencies]
 bench = [
-    { name = "anthropic" },
     { name = "faker" },
     { name = "jinja2" },
     { name = "opencv-python-headless" },
@@ -698,13 +698,13 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "anthropic", specifier = ">=1.13.0" },
     { name = "pydantic", specifier = ">=2.14.1" },
     { name = "python-dotenv", specifier = ">=1.2.4" },
 ]
 
 [package.metadata.requires-dev]
 bench = [
-    { name = "anthropic", specifier = ">=1.13.0" },
     { name = "faker", specifier = ">=40.43.0" },
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "opencv-python-headless", specifier = ">=5.0.0.93" },

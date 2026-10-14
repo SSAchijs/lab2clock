@@ -46,6 +46,7 @@ import base64
 import hashlib
 import json
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -61,17 +62,17 @@ from bench.prompts import Prompt
 from bench.responses import RESPONSES, Failure, Form, Response, Usage
 from bench.spec import RENDER_SPEC, RenderSpec
 from lab2clock.config import load_env
-from lab2clock.stage1 import RawReport, json_schema
-
-# The stage-1 schema as the API accepts it: the limits it cannot enforce move
-# into the field descriptions, and the full model still checks them.
-SCHEMA = anthropic.transform_schema(json_schema())
-
-# A report is a few dozen rows, far below this, but thinking counts toward it.
-MAX_TOKENS = 16_000
-
-# The first answer and one retry.
-ATTEMPTS = 2
+from lab2clock.read import (
+    ATTEMPTS,
+    EFFORT,
+    MAX_IMAGE,
+    MAX_TOKENS,
+    SCHEMA,
+    THINKING,
+    answer,
+    request,
+    text,
+)
 
 
 def _sha256(data: bytes) -> str:
@@ -81,11 +82,6 @@ def _sha256(data: bytes) -> str:
 # Everything besides the model, prompt and files that can change an answer.
 # Each report is read this many times.
 RUNS = 3
-
-# Pinned, so a changed default cannot change an answer. Effort is not a
-# randomness setting; medium is both models' default, kept rather than tuned.
-EFFORT = "medium"
-THINKING = {"type": "adaptive"}
 
 SETTINGS = {
     "max_tokens": MAX_TOKENS,
@@ -127,9 +123,6 @@ def report_input(spec: RenderSpec) -> Input:
         ]
     return Input("photo", files, content)
 
-
-# The API refuses an image over 10 MB once base64-encoded.
-MAX_IMAGE = 10 * 1024 * 1024
 
 # An image's type by its first bytes, not its name: some of the dataset's
 # .jpg files are PNGs, and the API checks.
@@ -195,17 +188,6 @@ def real_jobs() -> list[Job]:
     ]
 
 
-def _report(message: Any) -> RawReport:
-    """The stage-1 report in a model's answer; ValueError if there is none."""
-    if message.stop_reason != "end_turn":
-        raise ValueError(f"the answer stopped with {message.stop_reason}")
-    return RawReport.model_validate_json(_text(message))
-
-
-def _text(message: Any) -> str:
-    return "".join(block.text for block in message.content if block.type == "text")
-
-
 def key(model: str, prompt: Prompt, sent: Input, run: int) -> str:
     """The SHA-256 of everything a response was read from."""
     identity = {
@@ -236,24 +218,14 @@ def read(
     failures, report = [], None
     input_tokens = output_tokens = 0
     for _ in range(ATTEMPTS):
-        message = client.messages.create(
-            model=model,
-            max_tokens=MAX_TOKENS,
-            system=prompt.text,
-            messages=[{"role": "user", "content": sent.content}],
-            thinking=THINKING,
-            output_config={
-                "effort": EFFORT,
-                "format": {"type": "json_schema", "schema": SCHEMA},
-            },
-        )
+        message = client.messages.create(**request(model, prompt.text, sent.content))
         input_tokens += message.usage.input_tokens
         output_tokens += message.usage.output_tokens
         try:
-            report = _report(message)
+            report = answer(message)
             break
         except (ValueError, ValidationError) as error:
-            failures.append(Failure(reason=str(error), output=_text(message)))
+            failures.append(Failure(reason=str(error), output=text(message)))
     return Response(
         key=key(model, prompt, sent, run),
         model=model,
@@ -280,11 +252,13 @@ def run(
     jobs: list[Job],
     number: int,
     root: Path = RESPONSES,
+    workers: int = 1,
 ) -> tuple[int, int]:
     """Read every report not already saved; how many were read and cached.
 
     A test or real report is read only with the frozen prompt, so neither set
-    is seen while the prompt can still change.
+    is seen while the prompt can still change. With more than one worker,
+    reports are read side by side; each is still one call, saved on its own.
     """
     scored = any(job.split in {"test", "real"} for job in jobs)
     if scored and not prompts.is_frozen(prompt):
@@ -293,21 +267,25 @@ def run(
             "then freeze it with python -m bench.prompts freeze"
         )
     out = root / extractor(model, prompt) / str(number)
-    read_count = cached = 0
+    pending = []
     for job in jobs:
         sent = job.sent()
         path = out / f"{job.report}.json"
-        if path.exists():
-            if responses.read(path).key != key(model, prompt, sent, number):
-                raise SystemExit(
-                    f"{path} was read from different inputs; delete it to read "
-                    "the report again"
-                )
-            cached += 1
-            continue
+        if not path.exists():
+            pending.append((job, sent))
+        elif responses.read(path).key != key(model, prompt, sent, number):
+            raise SystemExit(
+                f"{path} was read from different inputs; delete it to read "
+                "the report again"
+            )
+
+    def one(item: tuple[Job, Input]) -> None:
+        job, sent = item
         responses.write(job.report, read(client, model, prompt, sent, number), out)
-        read_count += 1
-    return read_count, cached
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        list(pool.map(one, pending))
+    return len(pending), len(jobs) - len(pending)
 
 
 def main() -> None:
@@ -315,6 +293,9 @@ def main() -> None:
     parser.add_argument("model", choices=sorted(MODELS))
     parser.add_argument("--split", choices=["dev", "test", "real"], required=True)
     parser.add_argument("--runs", type=int, default=RUNS)
+    parser.add_argument(
+        "--workers", type=int, default=1, help="reports read side by side"
+    )
     args = parser.parse_args()
     load_env()
     model, prompt = MODELS[args.model].id, prompts.load()
@@ -328,7 +309,9 @@ def main() -> None:
         jobs = synthetic_jobs([s for s in specs if s.split == args.split])
     client = anthropic.Anthropic()
     for number in range(1, args.runs + 1):
-        read_count, cached = run(client, model, prompt, jobs, number)
+        read_count, cached = run(
+            client, model, prompt, jobs, number, workers=args.workers
+        )
         print(
             f"{extractor(model, prompt)} run {number}: read {read_count} reports, "
             f"{cached} from the cache"

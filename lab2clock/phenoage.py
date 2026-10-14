@@ -5,6 +5,9 @@ healthspan. Aging 2018;10(4):573-591, Table 1 and supplementary methods.
 
 This is written from the paper, not from pyaging, so that agreement between the
 two is evidence that the units below are the ones the coefficients expect.
+
+lab2clock's output stops at the clock inputs. The command line computes an age
+from them only when asked, with --age-estimate, and says what it is not.
 """
 
 import math
@@ -25,6 +28,9 @@ COEFFICIENTS = {
     "age": 0.0804,  # years
 }
 
+# pyaging floors CRP here, in mg/dL, before taking its log.
+CRP_FLOOR = 0.01
+
 # Gompertz shape parameter (supplementary methods, p. 2).
 GAMMA = 0.0076927
 # Mortality horizon of the score, in months.
@@ -44,14 +50,14 @@ def linear_predictor(
     white_blood_cell_count: float,
     age: float,
 ) -> float:
-    """Return xb, the log hazard. CRP is raw, in mg/dL, and is logged here."""
-    if c_reactive_protein <= 0:
-        raise ValueError(f"CRP must be positive to take its log: {c_reactive_protein}")
+    """Return xb, the log hazard. CRP is raw, in mg/dL, and is logged here,
+    floored at 0.01 first as pyaging does, so a CRP below detection, or read
+    as 0, still has a log."""
     inputs = {
         "albumin": albumin,
         "creatinine": creatinine,
         "glucose": glucose,
-        "log_crp": math.log(c_reactive_protein),
+        "log_crp": math.log(max(c_reactive_protein, CRP_FLOOR)),
         "lymphocyte_percent": lymphocyte_percent,
         "mean_cell_volume": mean_cell_volume,
         "red_cell_distribution_width": red_cell_distribution_width,

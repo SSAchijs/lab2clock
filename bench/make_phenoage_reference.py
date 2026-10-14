@@ -2,7 +2,7 @@
 
 Runs pyaging's PhenoAge on its blood_chemistry_example data (30 NHANES 2007
 adults) and saves the 10 inputs with pyaging's output, so CI can check
-bench.phenoage against pyaging without installing it.
+lab2clock.phenoage against pyaging without installing it.
 
 Needs the clock group and network access to Hugging Face:
 
