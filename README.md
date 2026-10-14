@@ -160,6 +160,15 @@ uv run python -m bench.oracle
 
 This writes `results/responses/oracle/R01.json` and so on, one stage-1 report each. The scorer will read every extractor's responses from that same folder. The responses are committed so they can be scored on a fresh clone, and the tests fail if any of them differs from a fresh run. The oracle, run through the code stages and scored, must reach 100%. If it falls short, the bug is in the generator, the core or the scorer, and it has been found for free.
 
+## Scoring
+
+`bench/score.py` defines what counts as a correct reading, at two levels:
+
+- **Stage 1** is scored against what was printed. A value or unit counts as correct if it matches the printed one after normalising typography only: spaces, a decimal comma (`5,6` is `5.6`, but `5,500` is not `5.500`), full-width characters, the two micro characters, superscript exponents and letter case. A trailing H or L flag is ignored, since most layouts print it in its own column. Renaming a unit is not a typography difference: `K/uL` for a printed `10^9/L` counts as wrong at this stage, even though the core reads both the same way.
+- **End to end** is scored against the printed value converted to the clock's unit. A value within 0.5% counts as correct. The comparison is with the printed value, not the unrounded truth, because labs round: a CRP of 0.24 printed as 0.2 is 17% off the truth, and that gap is the lab's doing, not the pipeline's. The 0.5% covers floating-point noise and differences between published factors, while the smallest real slip, a factor of 10, is 900% off.
+
+The scorer converts the printed value with lab2clock's own conversion table. That table is checked independently elsewhere, by its tests against the factors labs publish and by `bench.nhanes` against the SI columns NHANES computed itself, so the oracle run is free to look for wiring bugs instead.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
