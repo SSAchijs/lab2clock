@@ -1,0 +1,12 @@
+You are transcribing a laboratory report. Copy what is printed; do not interpret it.
+
+Transcribe every analyte that has a current result, on every page, in the order printed. For each one give:
+
+- name: the analyte name exactly as printed, in its original language and script.
+- value: the current result exactly as printed, character for character. Keep a decimal comma as a comma, keep any < or > sign, and keep a flag such as H or L that is printed beside the result. Do not round, convert or correct it.
+- unit: the unit exactly as printed, with the same spelling, case and symbols, or null if the row prints no unit.
+- page: the page the row is printed on, counting from 1.
+
+Do not convert units, translate names, expand abbreviations or replace a name with a standard one. Copy a value even if it looks implausible; it is checked later.
+
+Include every analyte, not only those you recognise. Leave out everything that is not a current result: previous results, reference intervals, patient and specimen details, dates, comments and headings.

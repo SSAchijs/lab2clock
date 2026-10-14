@@ -1,7 +1,9 @@
 import pytest
 
 import lab2clock.assemble as assemble_module
-from bench import oracle
+from bench import oracle, prompts, responses
+from bench.prompts import Prompt
+from bench.responses import Response
 from bench.score import (
     COLUMNS,
     RESULTS,
@@ -405,10 +407,39 @@ def test_the_summary_counts_every_extractor_run_and_error(tmp_path):
             oracle.write(report, r, tmp_path / extractor / run)
     write_results(score_responses(tmp_path), tmp_path / "results.csv")
     text = summary(read_results(tmp_path / "results.csv"))
-    assert "| sloppy | test | 2 | 99.4% (96.9%–99.9%), 179/180 |" in text
-    assert "| sloppy | test | 1 | 0 | 0 | 1 | 0 | 0 | 0 |" in text
-    assert "| oracle | test | 1 | 100.0% (97.9%–100.0%), 180/180 |" in text
-    assert "| sloppy | dev | 1 | 100.0%" in text
+    assert "| sloppy | – | test | 2 | 99.4% (96.9%–99.9%), 179/180 |" in text
+    assert "| sloppy | – | test | 1 | 0 | 0 | 1 | 0 | 0 | 0 |" in text
+    assert "| oracle | – | test | 1 | 100.0% (97.9%–100.0%), 180/180 |" in text
+    assert "| sloppy | – | dev | 1 | 100.0%" in text
+
+
+def test_each_row_names_its_prompt(tmp_path):
+    prompt = prompts.load()
+    for report in REPORTS:
+        responses.write(
+            report, Response.of(response(report), prompt), tmp_path / "model" / "1"
+        )
+    rows = score_responses(tmp_path)
+    assert {row["prompt"] for row in rows} == {"extract_v1"}
+    text = summary(read_results_of(rows, tmp_path))
+    assert "| model | extract_v1 | test | 1 | 100.0%" in text
+
+
+def test_an_extractor_that_mixes_prompts_is_refused(tmp_path):
+    # The same version name, but its text edited in place between two runs.
+    v1 = prompts.load()
+    edited = Prompt(v1.version, v1.text + "Also read the comments.\n")
+    for run, prompt in [("1", v1), ("2", edited)]:
+        responses.write(
+            "R01", Response.of(response("R01"), prompt), tmp_path / "model" / run
+        )
+    with pytest.raises(ValueError, match="model mixes prompts"):
+        score_responses(tmp_path)
+
+
+def read_results_of(rows, tmp_path):
+    write_results(rows, tmp_path / "results.csv")
+    return read_results(tmp_path / "results.csv")
 
 
 def test_committed_results_match_a_fresh_run(tmp_path):

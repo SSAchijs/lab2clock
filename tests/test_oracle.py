@@ -1,8 +1,8 @@
 import pytest
 
-from bench import oracle
+from bench import oracle, responses
+from bench.responses import Response
 from bench.spec import RENDER_SPEC, RenderSpec
-from lab2clock.stage1 import RawReport
 
 REPORTS = [f"R{i:02d}" for i in range(1, 26)]
 
@@ -45,7 +45,9 @@ def test_a_written_response_reads_back_as_the_same_report(tmp_path):
     response = oracle.extract(spec("R07"))
     path = oracle.write("R07", response, tmp_path)
     assert path == tmp_path / "R07.json"
-    assert RawReport.model_validate_json(path.read_text()) == response
+    saved = responses.read(path)
+    assert saved.report == response
+    assert (saved.prompt, saved.prompt_sha256) == (None, None)
     # Chinese is written as printed, not escaped.
     assert "白细胞计数" in path.read_text()
 
@@ -58,4 +60,6 @@ def test_one_response_per_report():
 def test_committed_responses_match_a_fresh_run(report):
     # Catches a render spec regenerated without rerunning the oracle.
     committed = (oracle.OUT / f"{report}.json").read_text()
-    assert RawReport.model_validate_json(committed) == oracle.extract(spec(report))
+    assert Response.model_validate_json(committed).report == oracle.extract(
+        spec(report)
+    )

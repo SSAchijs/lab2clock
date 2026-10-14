@@ -11,18 +11,18 @@ paid model is called.
     uv run python -m bench.oracle
 
 writes results/responses/oracle/1/R01.json and so on, one stage-1 report
-each. The scorer reads every extractor's responses from
+each, with no prompt. The scorer reads every extractor's responses from
 results/responses/<extractor>/<run>/; the oracle never varies, so it has one
 run.
 """
 
-import json
 from pathlib import Path
 
+from bench import responses
+from bench.responses import RESPONSES, Response
 from bench.spec import RENDER_SPEC, RenderSpec
 from lab2clock.stage1 import RawItem, RawReport
 
-RESPONSES = Path(__file__).resolve().parent.parent / "results" / "responses"
 OUT = RESPONSES / "oracle" / "1"
 
 
@@ -44,11 +44,8 @@ def extract(spec: RenderSpec) -> RawReport:
 
 
 def write(report: str, response: RawReport, out: Path = OUT) -> Path:
-    out.mkdir(parents=True, exist_ok=True)
-    path = out / f"{report}.json"
-    text = json.dumps(response.model_dump(mode="json"), indent=2, ensure_ascii=False)
-    path.write_text(text + "\n")
-    return path
+    """Save a response; the oracle reads without a prompt, so it records none."""
+    return responses.write(report, Response.of(response), out)
 
 
 def main() -> None:

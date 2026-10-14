@@ -1,130 +1,134 @@
 {
-  "items": [
-    {
-      "name": "WBC",
-      "value": "10000",
-      "unit": "10^9/L",
-      "page": 1
-    },
-    {
-      "name": "RBC",
-      "value": "4.84",
-      "unit": "10^12/L",
-      "page": 1
-    },
-    {
-      "name": "Hemoglobin",
-      "value": "134",
-      "unit": "g/L",
-      "page": 1
-    },
-    {
-      "name": "Hematocrit",
-      "value": "40.3",
-      "unit": "%",
-      "page": 1
-    },
-    {
-      "name": "MCV",
-      "value": "83.3",
-      "unit": "fL",
-      "page": 1
-    },
-    {
-      "name": "RDW-CV",
-      "value": "12.9",
-      "unit": "%",
-      "page": 1
-    },
-    {
-      "name": "Platelets",
-      "value": "304",
-      "unit": "10^9/L",
-      "page": 1
-    },
-    {
-      "name": "Neutrophils %",
-      "value": "61.9",
-      "unit": "%",
-      "page": 1
-    },
-    {
-      "name": "Lymphocytes %",
-      "value": "27.9",
-      "unit": "%",
-      "page": 1
-    },
-    {
-      "name": "Lymphocytes (Absolute)",
-      "value": "2.8",
-      "unit": "10^9/L",
-      "page": 1
-    },
-    {
-      "name": "Sodium",
-      "value": "141",
-      "unit": "mmol/L",
-      "page": 2
-    },
-    {
-      "name": "Potassium",
-      "value": "3.8",
-      "unit": "mmol/L",
-      "page": 2
-    },
-    {
-      "name": "Urea",
-      "value": "5.7",
-      "unit": "mmol/L",
-      "page": 2
-    },
-    {
-      "name": "Creatinine",
-      "value": "0.74",
-      "unit": "mg/dL",
-      "page": 2
-    },
-    {
-      "name": "Glucose",
-      "value": "89",
-      "unit": "mg/dL",
-      "page": 2
-    },
-    {
-      "name": "Total Protein",
-      "value": "68",
-      "unit": "g/L",
-      "page": 2
-    },
-    {
-      "name": "Albumin",
-      "value": "40",
-      "unit": "g/L",
-      "page": 2
-    },
-    {
-      "name": "Total Bilirubin",
-      "value": "3.4",
-      "unit": "µmol/L",
-      "page": 2
-    },
-    {
-      "name": "Alkaline Phosphatase",
-      "value": "90",
-      "unit": "U/L",
-      "page": 2
-    },
-    {
-      "name": "ALT",
-      "value": "17",
-      "unit": "U/L",
-      "page": 2
-    },
-    {
-      "name": "hs-CRP",
-      "value": "0.72",
-      "unit": "mg/dL",
-      "page": 2
-    }
-  ]
+  "prompt": null,
+  "prompt_sha256": null,
+  "report": {
+    "items": [
+      {
+        "name": "WBC",
+        "value": "10000",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "RBC",
+        "value": "4.84",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "Hemoglobin",
+        "value": "134",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "Hematocrit",
+        "value": "40.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MCV",
+        "value": "83.3",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "RDW-CV",
+        "value": "12.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Platelets",
+        "value": "304",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Neutrophils %",
+        "value": "61.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Lymphocytes %",
+        "value": "27.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Lymphocytes (Absolute)",
+        "value": "2.8",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Sodium",
+        "value": "141",
+        "unit": "mmol/L",
+        "page": 2
+      },
+      {
+        "name": "Potassium",
+        "value": "3.8",
+        "unit": "mmol/L",
+        "page": 2
+      },
+      {
+        "name": "Urea",
+        "value": "5.7",
+        "unit": "mmol/L",
+        "page": 2
+      },
+      {
+        "name": "Creatinine",
+        "value": "0.74",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Glucose",
+        "value": "89",
+        "unit": "mg/dL",
+        "page": 2
+      },
+      {
+        "name": "Total Protein",
+        "value": "68",
+        "unit": "g/L",
+        "page": 2
+      },
+      {
+        "name": "Albumin",
+        "value": "40",
+        "unit": "g/L",
+        "page": 2
+      },
+      {
+        "name": "Total Bilirubin",
+        "value": "3.4",
+        "unit": "µmol/L",
+        "page": 2
+      },
+      {
+        "name": "Alkaline Phosphatase",
+        "value": "90",
+        "unit": "U/L",
+        "page": 2
+      },
+      {
+        "name": "ALT",
+        "value": "17",
+        "unit": "U/L",
+        "page": 2
+      },
+      {
+        "name": "hs-CRP",
+        "value": "0.72",
+        "unit": "mg/dL",
+        "page": 2
+      }
+    ]
+  }
 }

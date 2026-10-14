@@ -70,7 +70,8 @@ from pathlib import Path
 from statistics import NormalDist
 from typing import Literal, get_args
 
-from bench.oracle import RESPONSES
+from bench import responses
+from bench.responses import RESPONSES
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
 from lab2clock.clock_spec import MARKERS
@@ -411,6 +412,7 @@ SUMMARY = RESPONSES.parent / "summary.md"
 # Per row, what produced it and the report's conditions, to slice errors by.
 _CONTEXT = (
     "extractor",
+    "prompt",
     "run",
     "split",
     "layout",
@@ -425,21 +427,34 @@ _OUTCOME = tuple(field.name for field in fields(Outcome))
 COLUMNS = _CONTEXT + _OUTCOME
 
 
-def score_responses(responses: Path = RESPONSES) -> list[dict[str, object]]:
-    """One row per marker of every report of every run of every extractor."""
+def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
+    """One row per marker of every report of every run of every extractor.
+
+    Every response of one extractor must come from the same prompt, its
+    version and its text, or the extractor's results would mix two prompts.
+    """
     rows = []
-    for path in sorted(responses.glob("*/*/R*.json")):
+    prompts: dict[str, tuple[str | None, str | None]] = {}
+    for path in sorted(directory.glob("*/*/R*.json")):
         extractor, run = path.parent.parent.name, path.parent.name
         spec = RenderSpec.model_validate_json((RENDER_SPEC / path.name).read_text())
         truth = Truth.model_validate_json((TRUTH / path.name).read_text())
-        response = RawReport.model_validate_json(path.read_text())
+        response = responses.read(path)
+        prompt = response.prompt, response.prompt_sha256
+        if prompts.setdefault(extractor, prompt) != prompt:
+            raise ValueError(
+                f"{extractor} mixes prompts: {path} was read with {prompt[0]} "
+                f"({prompt[1]}), others with {prompts[extractor][0]} "
+                f"({prompts[extractor][1]})"
+            )
         context = {
             "extractor": extractor,
+            "prompt": response.prompt,
             "run": run,
             "split": spec.split,
             **spec.conditions.model_dump(),
         }
-        for outcome in score_report(spec, response, truth.age):
+        for outcome in score_report(spec, response.report, truth.age):
             rows.append({**context, **asdict(outcome)})
     return rows
 
@@ -516,7 +531,12 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
 
     def key(result):
         context = result[0]
-        return context["extractor"], _SPLITS[context["split"]], context["run"]
+        return (
+            context["extractor"],
+            context["prompt"],
+            _SPLITS[context["split"]],
+            context["run"],
+        )
 
     groups = [
         (k, [outcome for _, outcome in group])
@@ -525,13 +545,13 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
     names = {v: k for k, v in _SPLITS.items()}
     stages = list(get_args(Stage))
     accuracy, errors = [], []
-    for (extractor, split, run), outcomes in groups:
-        label = [extractor, names[split], run]
+    for (extractor, prompt, split, run), outcomes in groups:
+        label = [extractor, prompt or "–", names[split], run]
         rates = metrics(outcomes)
         accuracy.append(label + [_rate(rates[name]) for name in _METRICS])
         counts = [str(sum(o.error == stage for o in outcomes)) for stage in stages]
         errors.append(label + counts)
-    label = ["Extractor", "Split", "Run"]
+    label = ["Extractor", "Prompt", "Split", "Run"]
     return (
         "\n\n".join(
             [
