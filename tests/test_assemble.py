@@ -248,3 +248,11 @@ def test_the_lab2clock_command_runs_main():
 
     [script] = entry_points(group="console_scripts", name="lab2clock")
     assert script.load() is main
+
+
+@pytest.mark.parametrize("age", ["-3", "0", "200", "fifty"])
+def test_the_cli_refuses_an_age_that_is_not_one(age, capsys):
+    with pytest.raises(SystemExit) as exit:
+        main([str(EXAMPLE), "--age", age])
+    assert exit.value.code == 2
+    assert "--age" in capsys.readouterr().err

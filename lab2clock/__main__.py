@@ -46,6 +46,23 @@ def _stage1(paths: list[str], model: str | None) -> RawReport:
     return read_report([Path(p) for p in paths], model or MODEL)
 
 
+# The oldest verified human lived to 122.
+MAX_AGE = 125
+
+
+def _age(text: str) -> float:
+    """An age in years, refused unless above 0 and at most MAX_AGE."""
+    try:
+        age = float(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"not a number: {text!r}") from None
+    if not 0 < age <= MAX_AGE:
+        raise argparse.ArgumentTypeError(
+            f"{text} is not an age in years (above 0, at most {MAX_AGE})"
+        )
+    return age
+
+
 def estimate(output: dict[str, Any]) -> dict[str, Any] | None:
     """The PhenoAge of a complete output, with what it is; None if incomplete.
 
@@ -89,7 +106,7 @@ def main(argv: list[str] | None = None) -> int:
         nargs="+",
         help="a PDF, one image per page, or a stage-1 JSON file (- for stdin)",
     )
-    parser.add_argument("--age", type=float, help="the patient's age in years")
+    parser.add_argument("--age", type=_age, help="the patient's age in years")
     parser.add_argument("--model", help="the Claude model that reads the report")
     parser.add_argument(
         "--age-estimate",

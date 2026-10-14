@@ -262,3 +262,10 @@ def test_zero_white_cells_is_left_to_plausibility():
         lymphocyte_consistency(Reading(30, 0.1), Reading(2.1, 0.1), Reading(0, 0))
         is None
     )
+
+
+@pytest.mark.parametrize("value", [0.001, 0.008, 0.04])
+def test_a_urine_white_cell_count_per_microlitre_fails(value):
+    # 1 to 40 cells/uL under the blood name 白细胞 converts to these.
+    issue = plausibility("white_blood_cell_count", value)
+    assert (issue.check, issue.severity) == ("plausibility", "error")

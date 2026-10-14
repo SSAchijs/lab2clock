@@ -27,9 +27,11 @@ class Field:
         ten inputs, rounded outwards. bench/nhanes.py computes them and fails
         if these differ. None (age only) means no check.
     error: (low, high) outside which a value has never been measured in any
-        patient. Each high limit sits just above the most extreme published value
-        found, rounded up; the source is cited beside it. A low of 0 means the
-        marker can be near zero in real patients, so only a negative value fails.
+        patient, except the white-cell count's low, which guards against urine
+        counts (see its comment). Each high limit sits just above the most
+        extreme published value found, rounded up; the source is cited beside
+        it. A low of 0 means the marker can be near zero in real patients, so
+        only a negative value fails.
         inf means no published extreme was found, so there is no high limit.
         None (age only) means no check.
     zero: whether a printed 0 can be a real result. It cannot for a
@@ -89,7 +91,12 @@ FIELDS: tuple[Field, ...] = (
     # 10^3 cells/uL equals the 10^9/L labs print, so no rescaling.
     # 1360 x 10^9/L in CLL with leukostasis (Atwal 2017,
     # doi:10.4103/ajm.AJM_171_16).
-    Field("white_blood_cell_count", "10^3/uL", warn=(3.1, 14.7), error=(0, 1500)),
+    # Low: a guard, not a published extreme. Below 0.05 (50 cells per uL), a
+    # count is far likelier a urine result per uL read under the blood name,
+    # as 白细胞 is printed on both, than an outpatient's blood count; the lowest
+    # of the 4,894 NHANES adults is 1.9. A real count this low is withheld,
+    # not guessed.
+    Field("white_blood_cell_count", "10^3/uL", warn=(3.1, 14.7), error=(0.05, 1500)),
     Field("age", "years"),
 )
 

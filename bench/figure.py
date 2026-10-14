@@ -36,7 +36,12 @@ OPUS = "claude-opus-5-5_extract_v1"
 BARS = [
     ("39 real reports", "Claude Haiku 5.5", HAIKU, "real"),
     ("39 real reports", "Claude Opus 5.5", OPUS, "real"),
-    ("142 held-out real reports", "Claude Haiku 5.5", HAIKU, "heldout"),
+    (
+        "142 held-out reports",
+        "Haiku 5.5, after 4 fixes from them",
+        HAIKU,
+        "heldout",
+    ),
 ]
 
 # Validated with the dataviz skill's palette checks: blue and the status red
@@ -90,7 +95,7 @@ def bars(results: list[tuple[dict[str, str], Outcome]]) -> list[Bar]:
             kind
             for outcomes in by_run.values()
             for printed, kind in real_inputs(outcomes)
-            if printed and kind != "text"
+            if printed and kind != "not_blood"
         ]
         numbers = [o for _, o in chosen if o.printed and _number(o.printed_value)]
         copied = sum(
@@ -182,7 +187,7 @@ def svg(data: list[Bar], mode: str) -> str:
     )
     note_y = bottom + 34
     lines = [
-        "Bars: shares of the markers labelled with a number, three runs per set; "
+        "Bars: shares of the markers labelled with a blood value, three runs per set; "
         "real reports from MedRepBench.",
         "Numbers copied: printed numbers the model copied exactly, leaving out "
         "text results such as Negative.",
@@ -201,8 +206,8 @@ def svg(data: list[Bar], mode: str) -> str:
         "numbers exactly. Fewer reach the clock"
     )
     subtitle = (
-        "What the code cannot verify is withheld, so the gap is missing values, "
-        "not wrong ones"
+        "With the current code, what cannot be verified is withheld, so the gap is "
+        "missing values, not wrong ones"
     )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {total}" '

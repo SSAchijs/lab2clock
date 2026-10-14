@@ -207,7 +207,7 @@ uv run python -m bench.score
 
 It scores every response in `results/responses/<extractor>/<run>/` and writes `results/results.csv`, with one row per marker per report per run. Each row holds the extractor, the prompt, the form the report was sent in, the run, the split, the report's conditions, the value as printed and as read, the expected and delivered clock input, whether it is correct, and the stage that went wrong. It then writes `results/summary.md`, the accuracy and errors-by-stage tables, computed from the CSV alone, so every accuracy figure in this README comes from that file and none is typed by hand. Both files are committed, and the tests fail if either differs from a fresh run. The test and development sets are reported separately, because the development set is used to tune the prompt.
 
-`uv run python -m bench.figure` draws the README's figure from `results.csv` the same way, as `docs/results-light.svg` and `docs/results-dark.svg`, and the tests fail if either differs from a fresh run.
+`uv run python -m bench.figure` draws the README's figure from `results.csv` the same way, as `docs/results-light.svg` and `docs/results-dark.svg`, and the tests fail if either differs from a fresh run. `uv run python -m bench.frozen` writes `results/frozen.md`, the held-out set scored with the code as it was before that set was read (see [Held-out set](#held-out-set)), under the same test.
 
 ## Models
 
@@ -344,16 +344,21 @@ uv run python -m bench.medrepbench heldout   # rebuild the held-out set from the
 uv run python -m bench.extract cheap --split heldout --workers 8
 ```
 
-Haiku copied 94% of the printed numbers exactly, as on the 39. Of the labelled markers with a number, 66% reached the clock right (329 of 495 over three runs) and 31% went missing. About 40% of the missing ones are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
+Haiku copied 94% of the printed numbers exactly, as on the 39. Scored with the code as it was before the held-out set was read, 66% of the labelled markers with a blood value reached the clock right (319 of 483 over three runs), 28% went missing and 4% were wrong (21). That score is in [`results/frozen.md`](results/frozen.md), made by `bench/frozen.py`, which undoes the four code changes listed below and scores the same responses with the current scorer. About 40% of the missing markers are albumin with its name blurred, a quarter are rows with no unit printed or read, and most of the rest are values written in a form the code refuses or rows the model left out.
 
-Many held-out reports are urine tests, which print results such as `Negative`, `3+` or `-` under the same names as blood markers (白细胞, 葡萄糖). They found two ways a wrong value got through:
+Many held-out reports are urine tests, which print results such as `Negative`, `3+`, `-` or a count per µL under the same names as blood markers (白细胞, 葡萄糖). Eighteen of the 21 wrong inputs came from seven of them:
 
-- **H074**, in one run: a urine test's `-` copied as `0`, delivered as a blood glucose and white cell count of 0.
-- **H118**, in every run: a urine `3+` read as the number 3 with a `+` flag, by the flag rule added after the 39 were scored, and delivered as 3 white cells per µL.
+- **H015, H045, H078, H104, H129**: urine white-cell counts of 0 to 17 per µL, delivered as blood counts of 0 to 0.017 × 10⁹/L, in most runs.
+- **H074**, in one run: a `-` copied as `0`, delivered as a blood glucose and white-cell count of 0.
+- **H118**, in every run: a `3+` read as the number 3 with a `+` flag, by the flag rule added after the 39 were scored.
 
-Both are fixed. A value of exactly 0 is now refused for markers a living person cannot have at 0, since a lab prints a detection limit such as `<0.1` instead; and `+` or `-` is a flag only when set apart from the number, so `3+` is not a number. The one input still scored wrong, H056's alkaline phosphatase, is a wrong label: the report prints 87.0, which is what was delivered, and the label took 14.3 from another column.
+The other three are H056's alkaline phosphatase in each run, a wrong label: the report prints 87.0, which is what was delivered, and the label took 14.3 from another column.
 
-One gap remains: a urine white cell count printed as a plain number per µL, under the blood marker's name, would pass with only a warning. None of the held-out reports did that, but a specimen check would be needed to rule it out.
+The scorer first counted the urine counts as right. It converts each label with the code's own parser and conversion table, so a urine count read as a blood count matched its label exactly. A label is now a blood value only if it is a number that blood could have, inside the clock's error tier; a label that prints text or an impossible number gives no blood value, and anything delivered for it is wrong.
+
+Four code changes followed: a value of exactly 0 is refused for markers a living person cannot have at 0, since a lab prints a detection limit such as `<0.1` instead; `+` or `-` is a flag only when set apart from the number, so `3+` is not a number; a white-cell count below 0.05 × 10⁹/L is refused, a guard against urine counts rather than a published extreme; and a value printed above a limit is withheld (see the review below). With them, the held-out reports put 69% on the clock right (`results/summary.md`) and no real wrong value. That number flatters the code, because the fixes were made from these reports, so the held-out set is now used up: any further change needs new reports to be tested on.
+
+One gap remains: a heavy urine infection, over 50 white cells per µL, printed under the blood marker's name would pass the floor with a warning. Ruling it out needs to know which panel each row is printed in.
 
 ### Changes made after seeing results
 
@@ -365,12 +370,12 @@ Every change made after a set's responses were read, so a reader can judge how m
 | the 39 real reports | end-to-end scoring of the real set | scorer |
 | the 39 real reports | the cross-check withholds the white cell count too | code |
 | the 39 real reports | compound names; five Chinese names; `+` and `-` flags in values; the unit `*10`9/L` | code |
-| the held-out reports | a label that prints text counts as wrong when anything is delivered for it | scorer |
-| the held-out reports | a 0 is refused for markers that cannot be 0; `+` and `-` are flags only when set apart | code |
+| the held-out reports | a label that prints text, or a number no blood could have, gives no blood value; anything delivered for it is wrong | scorer |
+| the held-out reports | a 0 is refused for markers that cannot be 0; `+` and `-` are flags only when set apart; a white-cell count below 0.05 × 10⁹/L is refused | code |
 | a review of the published results | a value printed as a limit keeps its direction: above a limit it is withheld, below one it warns and the age estimate is a range | code |
 | a review of the published results | a delivered limit is scored as its own class, not as right | scorer |
 
-The held-out rates above are with all of these in place. With the code as it was frozen before the held-out set was read, the same responses put 67% of labelled numbers on the clock right and 8 wrong over three runs: H056's wrong label in each run, and five real errors, H074's two zeros in one run and H118's `3+` in each. Parsed with that code's own rule, the label `3+` is the number 3 too, so a score with it counts H118 as right; that is why the scorer's text rule and the code's flag rule were changed together.
+The held-out rates with the code frozen before that set was read are in [`results/frozen.md`](results/frozen.md); `bench/frozen.py` undoes the four code changes made from it, the two held-out rows and the limit rule in the table above, and scores the same responses with the current scorer.
 
 ### License of the derived files
 

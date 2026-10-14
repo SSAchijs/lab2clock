@@ -37,26 +37,26 @@ Stage 1 on the MedRepBench reports, per labelled marker row: real is the scored 
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 2 | 95.3% (90.6%–97.7%), 142/149 | 91.3% (85.6%–94.8%), 136/149 | 91.3% (85.6%–94.8%), 136/149 |
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 3 | 94.6% (89.8%–97.3%), 141/149 | 90.6% (84.8%–94.3%), 135/149 | 90.6% (84.8%–94.3%), 135/149 |
 
-End to end on the same reports, per labelled marker: what reached the clock. Right and wrong are judged against the labelled value in the clock's unit; a value delivered for a marker whose label prints text, such as a urine test's Negative, is wrong. Unverified is a value delivered for a marker whose label has no unit, or an RDW labelled in fL, which no label can check. Limit is a value delivered as printed below a limit, such as CRP <5.00: a bound, not the value. The rates are over the markers labelled with a number, or delivered; the last two columns count markers labelled only with text and rightly not delivered, and values delivered for a marker no label names.
+End to end on the same reports, per labelled marker: what reached the clock. Right and wrong are judged against the labelled value in the clock's unit. A label gives no blood value when it prints text, such as a urine test's Negative, or a number no blood could have, such as a urine white-cell count of 17 per uL; a value delivered for it is wrong. Unverified is a value delivered for a marker whose label has no unit, or an RDW labelled in fL, which no label can check. Limit is a value delivered as printed below a limit, such as CRP <5.00: a bound, not the value. The rates are over the markers labelled with a blood value, or delivered; the last two columns count markers labelled with no blood value and rightly not delivered, and values delivered for a marker no label names.
 
-| Extractor | Prompt | Split | Run | Right | Wrong | Missing | Unverified | Limit | Text, rightly not delivered | Delivered, not labelled |
+| Extractor | Prompt | Split | Run | Right | Wrong | Missing | Unverified | Limit | No blood value, rightly not delivered | Delivered, not labelled |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | claude-haiku-5-5_extract_v1 | extract_v1 | real | 1 | 76.0% (68.5%–82.2%), 111/146 | 0.0% (0.0%–2.6%), 0/146 | 22.6% (16.6%–30.0%), 33/146 | 0.7% (0.1%–3.8%), 1/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
 | claude-haiku-5-5_extract_v1 | extract_v1 | real | 2 | 78.1% (70.7%–84.0%), 114/146 | 0.7% (0.1%–3.8%), 1/146 | 19.9% (14.2%–27.1%), 29/146 | 0.7% (0.1%–3.8%), 1/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
 | claude-haiku-5-5_extract_v1 | extract_v1 | real | 3 | 78.1% (70.7%–84.0%), 114/146 | 1.4% (0.4%–4.9%), 2/146 | 19.2% (13.6%–26.3%), 28/146 | 0.7% (0.1%–3.8%), 1/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
-| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 1 | 66.7% (59.2%–73.4%), 110/165 | 0.6% (0.1%–3.4%), 1/165 | 30.9% (24.4%–38.3%), 51/165 | 0.6% (0.1%–3.4%), 1/165 | 1.2% (0.3%–4.3%), 2/165 | 36 | 3 |
-| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 2 | 66.7% (59.2%–73.4%), 110/165 | 0.6% (0.1%–3.4%), 1/165 | 30.9% (24.4%–38.3%), 51/165 | 0.6% (0.1%–3.4%), 1/165 | 1.2% (0.3%–4.3%), 2/165 | 36 | 2 |
-| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 3 | 66.1% (58.5%–72.8%), 109/165 | 0.6% (0.1%–3.4%), 1/165 | 31.5% (24.9%–39.0%), 52/165 | 0.6% (0.1%–3.4%), 1/165 | 1.2% (0.3%–4.3%), 2/165 | 36 | 2 |
+| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 1 | 69.0% (61.4%–75.8%), 107/155 | 0.6% (0.1%–3.6%), 1/155 | 28.4% (21.9%–35.9%), 44/155 | 0.6% (0.1%–3.6%), 1/155 | 1.3% (0.4%–4.6%), 2/155 | 46 | 3 |
+| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 2 | 68.4% (60.7%–75.2%), 106/155 | 0.6% (0.1%–3.6%), 1/155 | 29.0% (22.5%–36.6%), 45/155 | 0.6% (0.1%–3.6%), 1/155 | 1.3% (0.4%–4.6%), 2/155 | 46 | 2 |
+| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 3 | 68.4% (60.7%–75.2%), 106/155 | 0.6% (0.1%–3.6%), 1/155 | 29.0% (22.5%–36.6%), 45/155 | 0.6% (0.1%–3.6%), 1/155 | 1.3% (0.4%–4.6%), 2/155 | 46 | 2 |
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 1 | 77.4% (70.0%–83.4%), 113/146 | 0.7% (0.1%–3.8%), 1/146 | 20.5% (14.8%–27.8%), 30/146 | 0.7% (0.1%–3.8%), 1/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 2 | 79.5% (72.2%–85.2%), 116/146 | 0.7% (0.1%–3.8%), 1/146 | 18.5% (13.0%–25.6%), 27/146 | 0.7% (0.1%–3.8%), 1/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 3 | 80.8% (73.7%–86.4%), 118/146 | 0.7% (0.1%–3.8%), 1/146 | 16.4% (11.3%–23.3%), 24/146 | 1.4% (0.4%–4.9%), 2/146 | 0.7% (0.1%–3.8%), 1/146 | 0 | 3 |
 
-Pooled over the runs, per labelled marker with a number. Albumin is also left out in one column, because the dataset's de-identification blurs its name on most reports that print it. The intervals treat the three runs as independent, which they are not, so they are too narrow.
+Pooled over the runs, per labelled marker with a blood value. Albumin is also left out in one column, because the dataset's de-identification blurs its name on most reports that print it. The intervals treat the three runs as independent, which they are not, so they are too narrow.
 
 | Extractor | Prompt | Split | Right | Right, leaving out albumin | Wrong | Limit | Missing |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | claude-haiku-5-5_extract_v1 | extract_v1 | real | 77.4% (73.3%–81.1%), 339/438 | 81.0% (76.8%–84.5%), 323/399 | 0.7% (0.2%–2.0%), 3/438 | 0.7% (0.2%–2.0%), 3/438 | 20.5% (17.0%–24.6%), 90/438 |
-| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 66.5% (62.2%–70.5%), 329/495 | 74.3% (69.8%–78.3%), 303/408 | 0.6% (0.2%–1.8%), 3/495 | 1.2% (0.6%–2.6%), 6/495 | 31.1% (27.2%–35.3%), 154/495 |
+| claude-haiku-5-5_extract_v1 | extract_v1 | heldout | 68.6% (64.2%–72.7%), 319/465 | 77.5% (73.0%–81.4%), 293/378 | 0.6% (0.2%–1.9%), 3/465 | 1.3% (0.6%–2.8%), 6/465 | 28.8% (24.9%–33.1%), 134/465 |
 | claude-opus-5-5_extract_v1 | extract_v1 | real | 79.2% (75.2%–82.8%), 347/438 | 81.5% (77.3%–85.0%), 325/399 | 0.7% (0.2%–2.0%), 3/438 | 0.7% (0.2%–2.0%), 3/438 | 18.5% (15.1%–22.4%), 81/438 |
 
 ## Errors by stage

@@ -83,6 +83,7 @@ from bench import medrepbench, responses
 from bench.responses import RESPONSES
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
+from lab2clock.checks import plausibility
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import ConversionError, convert
 from lab2clock.stage1 import RawItem, RawReport
@@ -555,7 +556,7 @@ def score_real(
     return outcomes
 
 
-RealInput = Literal["right", "wrong", "missing", "unverified", "text", "limit"]
+RealInput = Literal["right", "wrong", "missing", "unverified", "not_blood", "limit"]
 
 
 def _number(printed: str | None) -> bool:
@@ -566,6 +567,18 @@ def _number(printed: str | None) -> bool:
     return True
 
 
+def _blood(o: Outcome) -> bool:
+    """Whether a labelled row prints a number blood could have: not text such
+    as Negative, and not a value outside the clock's error tier, such as a
+    urine white-cell count of 17 per uL read as 0.017 x 10^9/L."""
+    if not _number(o.printed_value):
+        return False
+    if o.expected is None:
+        return True
+    issue = plausibility(o.marker, o.expected)
+    return issue is None or issue.severity != "error"
+
+
 def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
     """Per marker of each real report, whether a label row names it, and
     what reached the clock.
@@ -573,11 +586,12 @@ def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
     right: the delivered input is a labelled value of the marker, within the
     tolerance; a report may label two rows for one marker, such as CRP and
     hs-CRP. wrong: it is none of them, though the labels give at least one,
-    or the labels print no number for it at all, as a urine test prints
-    "Negative" under the name of a blood marker, so nothing should have been
-    delivered. missing: nothing was delivered for a labelled number.
-    unverified: something was delivered that no label can check. text: the
-    labels print no number, and rightly nothing was delivered. limit: what
+    or the labels give no blood value for it at all, as a urine test prints
+    "Negative" or 17 per uL under the name of a blood marker, so nothing
+    should have been delivered. missing: nothing was delivered for a labelled
+    blood value. unverified: something was delivered that no label can check.
+    not_blood: the labels give no blood value, and rightly nothing was
+    delivered. limit: what
     was delivered was printed as a limit, such as CRP <5.00, so it is not the
     value, only a bound on it, whatever the label says.
     """
@@ -587,11 +601,11 @@ def real_inputs(outcomes: Iterable[Outcome]) -> list[tuple[bool, RealInput]]:
     out: list[tuple[bool, RealInput]] = []
     for group in by_marker.values():
         got = group[0].got
-        expected = [o.expected for o in group if o.expected is not None]
+        blood = [o for o in group if _blood(o)]
+        expected = [o.expected for o in blood if o.expected is not None]
         printed = group[0].printed
-        text = printed and not any(_number(o.printed_value) for o in group)
-        if text:
-            kind: RealInput = "text" if got is None else "wrong"
+        if printed and not blood:
+            kind: RealInput = "not_blood" if got is None else "wrong"
         elif got is None:
             kind = "missing"
         elif group[0].got_limit:
@@ -775,13 +789,13 @@ _POOLED = ("wrong", "limit", "missing")
 
 
 def _numbers(runs: list[list[Outcome]], keep) -> list[RealInput]:
-    """Per labelled marker with a number, over every run, what reached the
+    """Per labelled marker with a blood value, over every run, what reached the
     clock, keeping only the outcomes `keep` accepts."""
     return [
         kind
         for outcomes in runs
         for printed, kind in real_inputs([o for o in outcomes if keep(o)])
-        if printed and kind != "text"
+        if printed and kind != "not_blood"
     ]
 
 
@@ -827,12 +841,12 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
             )
             inputs = real_inputs(outcomes)
             labelled = [kind for printed, kind in inputs if printed]
-            numbers = [kind for kind in labelled if kind != "text"]
+            numbers = [kind for kind in labelled if kind != "not_blood"]
             unlabelled = [kind for printed, kind in inputs if not printed]
             real_end.append(
                 label
                 + [_rate(Rate(numbers.count(k), len(numbers))) for k in _REAL_INPUTS]
-                + [str(labelled.count("text")), str(len(unlabelled))]
+                + [str(labelled.count("not_blood")), str(len(unlabelled))]
             )
         else:
             rates = metrics(outcomes)
@@ -864,25 +878,27 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
             _table([*label, *_REAL_METRICS.values()], real),
             "End to end on the same reports, per labelled marker: what reached the "
             "clock. Right and wrong are judged against the labelled value in the "
-            "clock's unit; a value delivered for a marker whose label prints text, "
-            "such as a urine test's Negative, is wrong. Unverified is a value "
-            "delivered for a marker whose label has no unit, or an RDW labelled in "
-            "fL, which no label can check. Limit is a value delivered as printed "
-            "below a limit, such as CRP <5.00: a bound, not the value. "
-            "The rates are over the markers labelled "
-            "with a number, or delivered; the last two columns count markers "
-            "labelled only with text and rightly not delivered, and values "
+            "clock's unit. A label gives no blood value when it prints text, such "
+            "as a urine test's Negative, or a number no blood could have, such as "
+            "a urine white-cell count of 17 per uL; a value delivered for it is "
+            "wrong. Unverified is a value delivered for a marker whose label has "
+            "no unit, or an RDW labelled in fL, which no label can check. Limit is "
+            "a value delivered as printed below a limit, such as CRP <5.00: a "
+            "bound, not the value. The rates are over the markers labelled with a "
+            "blood value, or delivered; the last two columns count markers "
+            "labelled with no blood value and rightly not delivered, and values "
             "delivered for a marker no label names.",
             _table(
                 [
                     *label,
                     *_REAL_INPUTS.values(),
-                    "Text, rightly not delivered",
+                    "No blood value, rightly not delivered",
                     "Delivered, not labelled",
                 ],
                 real_end,
             ),
-            "Pooled over the runs, per labelled marker with a number. Albumin is "
+            "Pooled over the runs, per labelled marker with a blood value. Albumin "
+            "is "
             "also left out in one column, because the dataset's de-identification "
             "blurs its name on most reports that print it. The intervals treat "
             "the three runs as independent, which they are not, so they are too "

@@ -2,6 +2,7 @@ import pytest
 
 import lab2clock.assemble as assemble_module
 from bench import medrepbench, oracle, prompts, responses
+from bench.frozen import frozen_code
 from bench.prompts import Prompt
 from bench.responses import Failure, Response
 from bench.score import (
@@ -635,3 +636,13 @@ def test_one_of_two_labelled_rows_for_a_marker_makes_its_input_right():
 def test_nothing_reaches_the_clock_from_an_invalid_real_response():
     rows = labelled(("glucose", "葡萄糖", "5.2", "mmol/L"))
     assert real_inputs(score_real("M01", rows, None)) == [(True, "missing")]
+
+
+def test_a_label_no_blood_could_have_is_not_a_blood_value():
+    # A urine white-cell count of 17 per uL, under the blood marker's name.
+    rows = labelled(("white_blood_cell_count", "白细胞", "17", "/ul"))
+    delivered = score_real("M01", rows, read(("白细胞", "17", "/ul")))
+    with frozen_code():
+        let_through = score_real("M01", rows, read(("白细胞", "17", "/ul")))
+    assert real_inputs(delivered) == [(True, "not_blood")]
+    assert real_inputs(let_through) == [(True, "wrong")]
