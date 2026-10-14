@@ -433,6 +433,7 @@ name = "lab2clock"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "pydantic" },
     { name = "python-dotenv" },
 ]
 
@@ -446,7 +447,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "python-dotenv", specifier = ">=1.2.4" }]
+requires-dist = [
+    { name = "pydantic", specifier = ">=2.14.1" },
+    { name = "python-dotenv", specifier = ">=1.2.4" },
+]
 
 [package.metadata.requires-dev]
 clock = [{ name = "pyaging", specifier = ">=0.5.7" }]
