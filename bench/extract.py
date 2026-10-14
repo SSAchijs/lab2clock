@@ -25,10 +25,18 @@ whose saved key matches, so it makes no API call. A saved response with a
 different key was read from something else, such as a regenerated PDF or a
 changed setting, and the run stops rather than mix it with new ones.
 
-    uv run python -m bench.extract cheap --split dev --run 1
+Neither model offers a setting that lowers randomness: both reject
+temperature and top_k, and Opus 5.5 cannot turn thinking off. So every setting
+the API does take is pinned, the same for both models, so a changed default
+cannot change an answer between runs: medium effort, both models' default,
+and adaptive thinking, the only mode Opus 5.5 allows. Each report is then read
+three times. Repeats are the only way left to tell an error the model makes
+every time from one it makes by chance.
 
-reads every development report with Claude Haiku 5.5 into
-results/responses/claude-haiku-5-5_extract_v1/1/.
+    uv run python -m bench.extract cheap --split dev
+
+reads every development report three times with Claude Haiku 5.5, into
+results/responses/claude-haiku-5-5_extract_v1/1/ to 3/.
 """
 
 import argparse
@@ -66,8 +74,18 @@ def _sha256(data: bytes) -> str:
 
 
 # Everything besides the model, prompt and files that can change an answer.
+# Each report is read this many times.
+RUNS = 3
+
+# Pinned, so a changed default cannot change an answer. Effort is not a
+# randomness setting; medium is both models' default, kept rather than tuned.
+EFFORT = "medium"
+THINKING = {"type": "adaptive"}
+
 SETTINGS = {
     "max_tokens": MAX_TOKENS,
+    "effort": EFFORT,
+    "thinking": THINKING,
     "attempts": ATTEMPTS,
     "schema_sha256": _sha256(json.dumps(SCHEMA, sort_keys=True).encode()),
 }
@@ -151,7 +169,11 @@ def read(
             max_tokens=MAX_TOKENS,
             system=prompt.text,
             messages=[{"role": "user", "content": sent.content}],
-            output_config={"format": {"type": "json_schema", "schema": SCHEMA}},
+            thinking=THINKING,
+            output_config={
+                "effort": EFFORT,
+                "format": {"type": "json_schema", "schema": SCHEMA},
+            },
         )
         input_tokens += message.usage.input_tokens
         output_tokens += message.usage.output_tokens
@@ -210,7 +232,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Read the reports with a model.")
     parser.add_argument("model", choices=sorted(MODELS))
     parser.add_argument("--split", choices=["dev", "test"], required=True)
-    parser.add_argument("--run", type=int, default=1)
+    parser.add_argument("--runs", type=int, default=RUNS)
     args = parser.parse_args()
     load_env()
     model, prompt = MODELS[args.model].id, prompts.load()
@@ -220,11 +242,13 @@ def main() -> None:
         if (spec := RenderSpec.model_validate_json(path.read_text())).split
         == args.split
     ]
-    read_count, cached = run(anthropic.Anthropic(), model, prompt, specs, args.run)
-    print(
-        f"{extractor(model, prompt)} run {args.run}: read {read_count} reports, "
-        f"{cached} from the cache"
-    )
+    client = anthropic.Anthropic()
+    for number in range(1, args.runs + 1):
+        read_count, cached = run(client, model, prompt, specs, number)
+        print(
+            f"{extractor(model, prompt)} run {number}: read {read_count} reports, "
+            f"{cached} from the cache"
+        )
 
 
 if __name__ == "__main__":

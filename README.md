@@ -233,9 +233,13 @@ An answer that fails is retried once. Each failure is saved in the response, wit
 
 Every response is saved where the scorer reads it, in `results/responses/<model>_<prompt>/<run>/`, and the saved responses are the cache. Each one holds a key, the SHA-256 of everything it was read from: every file sent, the model, the prompt version and text, the settings and the run number. A rerun skips every report whose saved key matches, so rescoring makes no API call, and spending is bounded to one call per report per run. The run number is part of the key, so repeated runs of one report are read separately rather than copied from the first. If a saved response was read from something else, such as a regenerated PDF or a changed setting, the run stops rather than mix old and new answers. Each response also records the tokens billed, over every attempt, for the cost comparison. Because the raw responses are committed, anyone can rescore them without an API key.
 
+Neither model offers a setting that lowers randomness. Both reject `temperature` and `top_k` with a 400, and Opus 5.5 cannot turn thinking off. So every setting the API does take is pinned, the same for both models, so a changed default cannot change an answer between runs: medium effort, both models' default, and adaptive thinking, the only mode Opus 5.5 allows. Effort trades accuracy for cost rather than setting randomness, so it is kept at the default rather than tuned. Each report is then read three times, because repeats are the only way left to tell an error a model makes every time from one it makes by chance.
+
 ```bash
-uv run python -m bench.extract cheap --split dev --run 1
+uv run python -m bench.extract cheap --split dev
 ```
+
+This reads every development report three times with Claude Haiku 5.5, into `results/responses/claude-haiku-5-5_extract_v1/1/` to `3/`; `frontier` reads with Claude Opus 5.5. On a one-page PDF, Opus 5.5 used about 3,300 input and 650 output tokens ($0.026) and Haiku 5.5 about 3,300 and 960 ($0.0008), so three runs of the 20 test reports cost roughly $1.60 and $0.05.
 
 ## Usage
 

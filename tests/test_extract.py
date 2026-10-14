@@ -59,8 +59,23 @@ def test_the_request_holds_the_answer_to_the_stage1_schema():
     assert request["system"] == prompts.load().text
     assert request["messages"] == [{"role": "user", "content": PAGES.content}]
     assert request["output_config"] == {
-        "format": {"type": "json_schema", "schema": extract.SCHEMA}
+        "effort": "medium",
+        "format": {"type": "json_schema", "schema": extract.SCHEMA},
     }
+    assert request["thinking"] == {"type": "adaptive"}
+
+
+def test_every_setting_sent_is_pinned_in_the_key():
+    _, [request] = read(("end_turn", VALID))
+    assert extract.SETTINGS["max_tokens"] == request["max_tokens"]
+    assert extract.SETTINGS["effort"] == request["output_config"]["effort"]
+    assert extract.SETTINGS["thinking"] == request["thinking"]
+    # Neither model accepts a sampling setting, so none is sent.
+    assert not {"temperature", "top_p", "top_k"} & set(request)
+
+
+def test_each_report_is_read_three_times():
+    assert extract.RUNS == 3
 
 
 def test_the_schema_sent_leaves_out_only_what_the_api_cannot_enforce():
