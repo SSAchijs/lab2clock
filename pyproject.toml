@@ -17,6 +17,10 @@ dependencies = [
 requires = ["uv_build>=0.13.0,<0.14"]
 build-backend = "uv_build"
 
+[tool.uv]
+# bench holds the NHANES ground truth, which CI tests, so it installs by default.
+default-groups = ["dev", "bench"]
+
 [tool.uv.build-backend]
 module-root = ""
 
@@ -30,6 +34,9 @@ select = ["E", "F", "I", "B", "UP"]
 testpaths = ["tests"]
 
 [dependency-groups]
+bench = [
+    "pandas>=3.0.6",
+]
 clock = [
     "pyaging>=0.5.7",
 ]

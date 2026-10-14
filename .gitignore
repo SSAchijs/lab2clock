@@ -9,3 +9,6 @@ __pycache__/
 .claude/
 Lab Report Extraction Build Plan.md
 .env
+
+# NHANES downloads and the table built from them; bench.nhanes regenerates both.
+bench/data/

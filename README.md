@@ -48,6 +48,21 @@ Traps for anyone converting a lab report:
 
 `bench/phenoage.py` computes PhenoAge from the coefficients and constants published in Levine 2018, independently of pyaging. On all 30 example rows it matches pyaging 0.5.7 within 0.03 years. Since the paper states the unit of every coefficient, this agreement confirms the units in the table above. It lives in `bench/`, not in the `lab2clock` package, because the tool stops at clock inputs and does not report an age. The test runs in CI against `tests/data/phenoage_reference.csv`, so pyaging does not need to be installed. To regenerate that file, run `uv run --group clock python -m bench.make_phenoage_reference`.
 
+## Ground truth from NHANES
+
+The fake reports are built from real biomarker combinations, so every patient is physiologically coherent. `bench/nhanes.py` downloads four NHANES 2017–2018 files (demographics, complete blood count, standard biochemistry and hs-CRP), checks each against a SHA-256, and joins them into one table: age plus the nine markers for every adult (20 or older) with all ten present. That is 4,894 adults.
+
+```bash
+uv run python -m bench.nhanes
+```
+
+Values stay in the units NHANES publishes, as its codebooks state them, so converting them tests lab2clock's own conversion table. Two codebook facts to know:
+
+- **hs-CRP is in mg/L** (LBXHSCRP), not the mg/dL the clock takes. Results below the 0.15 mg/L detection limit are filled with 0.15/√2 and kept with `crp_below_lod`.
+- **Age is top-coded**: everyone 80 or older is recorded as 80.
+
+The downloads and the table go to `bench/data/`, which git ignores. NHANES data is public domain, but the script regenerates both exactly.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):

@@ -432,12 +432,16 @@ wheels = [
 name = "lab2clock"
 version = "0.1.0"
 source = { editable = "." }
+default-groups = ["bench", "dev"]
 dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
 ]
 
 [package.dev-dependencies]
+bench = [
+    { name = "pandas" },
+]
 clock = [
     { name = "pyaging" },
 ]
@@ -453,6 +457,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
+bench = [{ name = "pandas", specifier = ">=3.0.6" }]
 clock = [{ name = "pyaging", specifier = ">=0.5.7" }]
 dev = [
     { name = "pytest", specifier = ">=9.1.1" },
