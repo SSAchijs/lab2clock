@@ -206,6 +206,16 @@ uv run python -m bench.score
 
 It scores every response in `results/responses/<extractor>/<run>/` and writes `results/results.csv`, with one row per marker per report per run. Each row holds the extractor, the run, the split, the report's conditions, the value as printed and as read, the expected and delivered clock input, whether it is correct, and the stage that went wrong. It then writes `results/summary.md`, the accuracy and errors-by-stage tables, computed from the CSV alone, so every accuracy figure in this README comes from that file and none is typed by hand. Both files are committed, and the tests fail if either differs from a fresh run. The test and development sets are reported separately, because the development set is used to tune the prompt.
 
+## Models
+
+Two models read the reports at stage 1, giving two points on the cost-versus-accuracy curve: Claude Opus 5.5 (`claude-opus-5-5`, $4 / $20 per million input and output tokens) and Claude Haiku 5.5 (`claude-haiku-5-5`, $0.10 / $0.50), about 40 times cheaper. A failure both make is one that no choice of model fixes.
+
+Neither ID names a dated snapshot, so before a run `bench/models.py` asks the Models API for each model's record and writes it, with the date and the SDK version, to `results/models.json`. It fails if either model is not served, or cannot take a PDF or an image or answer in a fixed JSON schema. It needs `ANTHROPIC_API_KEY` in `.env`.
+
+```bash
+uv run python -m bench.models
+```
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
