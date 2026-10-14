@@ -11,11 +11,39 @@ from lab2clock.stage1 import RawItem, RawReport
 
 REPORT = RawReport(items=[RawItem(name="CRP", value="2,4", unit="mg/L", page=1)])
 VALID = REPORT.model_dump_json()
-PAGES = extract.Input(
-    "pdf",
-    [render.OUT / "R01.pdf"],
-    [{"type": "text", "text": "a stand-in for the report's pages"}],
-)
+
+
+def spec(report):
+    return RenderSpec.model_validate_json((RENDER_SPEC / f"{report}.json").read_text())
+
+
+def specs():
+    return [spec(path.stem) for path in sorted(RENDER_SPEC.glob("*.json"))]
+
+
+@pytest.fixture(autouse=True)
+def data(tmp_path, monkeypatch):
+    """Stand-ins for the printed PDFs and photos, which bench/data holds only
+    once generated; every file gets its own bytes, as a real one would."""
+    reports, photos = tmp_path / "data" / "reports", tmp_path / "data" / "photos"
+    reports.mkdir(parents=True)
+    photos.mkdir()
+    for s in specs():
+        (reports / f"{s.report}.pdf").write_bytes(f"%PDF {s.report}".encode())
+        if s.conditions.photo:
+            for page in {row.page for row in s.rows}:
+                photo = f"{s.report}-{page}.jpg"
+                (photos / photo).write_bytes(b"\xff\xd8" + photo.encode())
+    monkeypatch.setattr(render, "OUT", reports)
+    monkeypatch.setattr(degrade, "OUT", photos)
+
+
+def pages():
+    return extract.Input(
+        "pdf",
+        [render.OUT / "R01.pdf"],
+        [{"type": "text", "text": "a stand-in for the report's pages"}],
+    )
 
 
 class FakeMessages:
@@ -42,7 +70,7 @@ class FakeMessages:
 def read(*script):
     messages = FakeMessages(script)
     client = SimpleNamespace(messages=messages)
-    response = extract.read(client, "claude-haiku-5-5", prompts.load(), PAGES, 1)
+    response = extract.read(client, "claude-haiku-5-5", prompts.load(), pages(), 1)
     return response, messages.calls
 
 
@@ -57,7 +85,7 @@ def test_the_request_holds_the_answer_to_the_stage1_schema():
     _, [request] = read(("end_turn", VALID))
     assert request["model"] == "claude-haiku-5-5"
     assert request["system"] == prompts.load().text
-    assert request["messages"] == [{"role": "user", "content": PAGES.content}]
+    assert request["messages"] == [{"role": "user", "content": pages().content}]
     assert request["output_config"] == {
         "effort": "medium",
         "format": {"type": "json_schema", "schema": extract.SCHEMA},
@@ -138,14 +166,6 @@ def test_a_refused_or_cut_off_answer_fails_even_if_it_parses():
 # The report in its native form.
 
 
-def spec(report):
-    return RenderSpec.model_validate_json((RENDER_SPEC / f"{report}.json").read_text())
-
-
-def specs():
-    return [spec(path.stem) for path in sorted(RENDER_SPEC.glob("*.json"))]
-
-
 def test_a_digital_report_goes_as_its_pdf():
     s = next(s for s in specs() if not s.conditions.photo)
     sent = extract.report_input(s)
@@ -173,10 +193,15 @@ def test_a_photographed_report_goes_as_one_labelled_photo_per_page():
 @pytest.mark.parametrize(
     "report", [path.stem for path in sorted(RENDER_SPEC.glob("*.json"))]
 )
-def test_every_report_has_the_files_it_is_sent_as(report):
-    sent = extract.report_input(spec(report))
-    assert sent.form == ("photo" if spec(report).conditions.photo else "pdf")
-    assert all(path.exists() for path in sent.files)
+def test_every_report_is_sent_as_its_pdf_or_its_photos(report):
+    s = spec(report)
+    sent = extract.report_input(s)
+    if s.conditions.photo:
+        pages = sorted({row.page for row in s.rows})
+        assert sent.form == "photo"
+        assert [p.name for p in sent.files] == [f"{report}-{p}.jpg" for p in pages]
+    else:
+        assert (sent.form, [p.name for p in sent.files]) == ("pdf", [f"{report}.pdf"])
 
 
 # The cache.
@@ -195,7 +220,7 @@ def test_a_response_records_what_it_was_read_from_and_its_cost():
     assert response.files == {
         "R01.pdf": hashlib.sha256((render.OUT / "R01.pdf").read_bytes()).hexdigest()
     }
-    assert response.key == extract.key(MODEL, prompts.load(), PAGES, 1)
+    assert response.key == extract.key(MODEL, prompts.load(), pages(), 1)
     # Both attempts were billed.
     assert (response.usage.input_tokens, response.usage.output_tokens) == (2000, 400)
 
@@ -224,19 +249,19 @@ def test_each_run_is_read_separately(tmp_path):
 
 def test_the_key_changes_with_anything_that_can_change_the_answer(tmp_path):
     prompt = prompts.load()
-    base = extract.key(MODEL, prompt, PAGES, 1)
+    base = extract.key(MODEL, prompt, pages(), 1)
     edited = prompts.Prompt(prompt.version, prompt.text + " ")
     copy = tmp_path / "R01.pdf"
-    copy.write_bytes(PAGES.files[0].read_bytes() + b"%")
-    other_file = extract.Input("pdf", [copy], PAGES.content)
+    copy.write_bytes(pages().files[0].read_bytes() + b"%")
+    other_file = extract.Input("pdf", [copy], pages().content)
     assert (
         len(
             {
                 base,
-                extract.key("claude-opus-5-5", prompt, PAGES, 1),
-                extract.key(MODEL, edited, PAGES, 1),
+                extract.key("claude-opus-5-5", prompt, pages(), 1),
+                extract.key(MODEL, edited, pages(), 1),
                 extract.key(MODEL, prompt, other_file, 1),
-                extract.key(MODEL, prompt, PAGES, 2),
+                extract.key(MODEL, prompt, pages(), 2),
             }
         )
         == 5
