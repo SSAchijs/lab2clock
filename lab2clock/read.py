@@ -11,6 +11,7 @@ as Claude Opus 5.5 at about a thirtieth of the price.
 """
 
 import base64
+import os
 from pathlib import Path
 from typing import Any
 
@@ -40,6 +41,10 @@ THINKING = {"type": "adaptive"}
 
 # The API refuses an image over 10 MB once base64-encoded.
 MAX_IMAGE = 10 * 1024 * 1024
+
+# Either lets the API client authenticate; the SDK raises a bare TypeError,
+# not an API error, when neither is set, so it is checked before.
+KEYS = ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN")
 
 # A file's type by its first bytes, not its name.
 SIGNATURES = {
@@ -118,6 +123,11 @@ def text(message: Any) -> str:
 def read_report(paths: list[Path], model: str = MODEL, client: Any = None) -> RawReport:
     """Read a report with Claude into a stage-1 report."""
     call = request(model, PROMPT.read_text(encoding="utf-8"), content(paths))
+    if client is None and not any(os.environ.get(name) for name in KEYS):
+        raise ReadError(
+            "no API key: put ANTHROPIC_API_KEY in .env or the environment to read "
+            "a PDF or photo, or pass a stage-1 JSON file, which needs none"
+        )
     reasons = []
     try:
         client = client or anthropic.Anthropic()
@@ -128,6 +138,6 @@ def read_report(paths: list[Path], model: str = MODEL, client: Any = None) -> Ra
             except (ValueError, ValidationError) as error:
                 reasons.append(str(error))
     except anthropic.AnthropicError as error:
-        # Such as no API key, or the API refusing the call.
+        # Such as a rejected key, or the API refusing the call.
         raise ReadError(f"{type(error).__name__}: {error}") from error
     raise ReadError(f"no valid answer in {ATTEMPTS} attempts: {reasons[-1]}")

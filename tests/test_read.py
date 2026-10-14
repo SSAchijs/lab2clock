@@ -130,7 +130,23 @@ def _missing_one():
     return RawReport.model_validate({"items": items})
 
 
-def test_the_cli_exits_2_when_the_report_cannot_be_read(tmp_path, capsys):
+def test_the_cli_exits_2_when_the_report_cannot_be_read(tmp_path, monkeypatch, capsys):
+    # The file is refused before the key is looked for, with or without one.
+    for name in read.KEYS:
+        monkeypatch.delenv(name, raising=False)
+    monkeypatch.setattr(cli, "load_env", lambda: False)
     [path] = files(tmp_path, notes_txt=b"hello")
     assert cli.main([str(path), "--age", "52"]) == 2
     assert capsys.readouterr().err.startswith("lab2clock: not a PDF")
+
+
+def test_without_an_api_key_the_cli_says_so_and_exits_2(tmp_path, monkeypatch, capsys):
+    for name in read.KEYS:
+        monkeypatch.delenv(name, raising=False)
+    # No .env either: the repository's own may hold a key.
+    monkeypatch.setattr(cli, "load_env", lambda: False)
+    [path] = files(tmp_path, report_pdf=PDF)
+    assert cli.main([str(path), "--age", "52"]) == 2
+    err = capsys.readouterr().err
+    assert err.startswith("lab2clock: no API key")
+    assert "Traceback" not in err
