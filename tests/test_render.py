@@ -1,16 +1,17 @@
+import hashlib
 from html.parser import HTMLParser
+from pathlib import Path
 
 import pytest
 
-from bench.render import LABELS, day, render_html
+from bench import fonts
+from bench.render import LABELS, OUT, day, font_faces, render_html
 from bench.spec import RENDER_SPEC, RenderSpec
 
-SPECS = [
+RENDERED = [
     RenderSpec.model_validate_json(path.read_text())
     for path in sorted(RENDER_SPEC.glob("*.json"))
 ]
-# Chinese reports wait for the Chinese template.
-RENDERED = [spec for spec in SPECS if spec.conditions.language in LABELS]
 
 
 class Rows(HTMLParser):
@@ -97,3 +98,46 @@ def test_every_layout_is_rendered():
         "two_column",
         "multi_page",
     }
+
+
+def test_every_language_is_rendered():
+    assert {s.conditions.language for s in RENDERED} == set(LABELS)
+
+
+def test_every_language_has_every_label():
+    assert LABELS["zh"].keys() == LABELS["en"].keys()
+
+
+def test_chinese_reports_load_the_embedded_font_from_the_cache():
+    spec = next(s for s in RENDERED if s.conditions.language == "zh")
+    html = render_html(spec)
+    faces = font_faces("zh")
+    assert [weight for weight, _ in faces] == list(fonts.FILES)
+    for weight, url in faces:
+        # Resolved from the reports directory, the URL is the cached file.
+        name, _ = fonts.FILES[weight]
+        assert (OUT / url).resolve() == (fonts.CACHE / name).resolve()
+        assert f'src: url("{url}")' in html
+    assert f'font-family: "{fonts.FAMILY}", sans-serif;' in html
+    assert "size: A4;" in html
+
+
+def test_english_reports_use_no_embedded_font():
+    spec = next(s for s in RENDERED if s.conditions.language == "en")
+    assert font_faces("en") == []
+    assert "@font-face" not in render_html(spec)
+
+
+def test_font_download_rejects_a_changed_file(tmp_path):
+    name, _ = fonts.FILES[400]
+    (tmp_path / name).write_bytes(b"revised")
+    with pytest.raises(ValueError, match="SHA-256"):
+        fonts.download(400, tmp_path)
+
+
+def test_font_download_reuses_a_cached_file(tmp_path, monkeypatch):
+    content = b"cached"
+    name, _ = fonts.FILES[700]
+    (tmp_path / name).write_bytes(content)
+    monkeypatch.setitem(fonts.FILES, 700, (name, hashlib.sha256(content).hexdigest()))
+    assert fonts.download(700, tmp_path) == Path(tmp_path / name)

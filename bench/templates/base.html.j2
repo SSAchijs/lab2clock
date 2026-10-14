@@ -4,12 +4,20 @@
 <meta charset="utf-8">
 <title>{{ t.title }} {{ spec.identity.specimen_id }}</title>
 <style>
+  {% for weight, url in font_faces %}
+  @font-face { font-family: "{{ font_family }}"; font-weight: {{ weight }};
+               src: url("{{ url }}") format("opentype"); }
+  {% endfor %}
   @page { size: {{ page_size }}; margin: 0; }
   * { box-sizing: border-box; }
   html { background: #e8e8e8; }
   body {
     margin: 0;
+    {% if font_faces %}
+    font-family: "{{ font_family }}", sans-serif;
+    {% else %}
     font-family: "Helvetica Neue", Arial, sans-serif;
+    {% endif %}
     font-size: 9.5pt;
     color: #111;
   }
