@@ -14,14 +14,15 @@ Needs Chromium once: uv run playwright install chromium. Then
 
     uv run python -m bench.pdf
 
-renders every report to HTML and prints bench/data/reports/R01.pdf and so on.
+renders every report to HTML, prints bench/data/reports/R01.pdf and so on, and
+runs bench.selfcheck on the result.
 """
 
 from pathlib import Path
 
 from playwright.sync_api import Page, sync_playwright
 
-from bench import render
+from bench import render, selfcheck
 
 # Loads every declared font face and resolves to the families that failed.
 LOAD_FONTS = """
@@ -54,6 +55,7 @@ def main() -> None:
             print_pdf(page, html, html.with_suffix(".pdf"))
         browser.close()
     print(f"printed {len(htmls)} PDFs to {render.OUT}")
+    selfcheck.main()
 
 
 if __name__ == "__main__":

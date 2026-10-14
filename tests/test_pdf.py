@@ -1,20 +1,14 @@
 import re
 
 import pytest
-from playwright.sync_api import sync_playwright
+from conftest import load_spec, reports_dir
 
-from bench import fonts
 from bench.pdf import print_pdf
 from bench.render import render_html
-from bench.spec import RENDER_SPEC, RenderSpec
 
 # Points per page side: US letter and A4.
 LETTER = (612.0, 792.0)
 A4 = (595.0, 842.0)
-
-
-def spec(report: str) -> RenderSpec:
-    return RenderSpec.model_validate_json((RENDER_SPEC / f"{report}.json").read_text())
 
 
 def media_boxes(pdf: bytes) -> list[tuple[float, float]]:
@@ -23,24 +17,9 @@ def media_boxes(pdf: bytes) -> list[tuple[float, float]]:
     return [(round(float(w)), round(float(h))) for w, h in boxes]
 
 
-@pytest.fixture(scope="module")
-def page():
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        yield browser.new_page()
-        browser.close()
-
-
 @pytest.fixture
 def reports(tmp_path):
-    """A reports directory beside a fonts directory, as in bench/data."""
-    out = tmp_path / "reports"
-    out.mkdir()
-    (tmp_path / "fonts").mkdir()
-    for weight in fonts.FILES:
-        cached = fonts.download(weight)
-        (tmp_path / "fonts" / cached.name).symlink_to(cached)
-    return out
+    return reports_dir(tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -48,7 +27,7 @@ def reports(tmp_path):
     [("R01", LETTER), ("R03", LETTER), ("R04", A4), ("R14", A4)],
 )
 def test_prints_each_page_at_the_report_size(page, reports, report, size):
-    s = spec(report)
+    s = load_spec(report)
     html = reports / f"{report}.html"
     html.write_text(render_html(s))
     pdf = print_pdf(page, html, reports / f"{report}.pdf")
@@ -59,7 +38,7 @@ def test_prints_each_page_at_the_report_size(page, reports, report, size):
 def test_a_font_that_fails_to_load_stops_the_print(page, tmp_path):
     # No fonts directory beside the report, so the Chinese font cannot load.
     html = tmp_path / "R04.html"
-    html.write_text(render_html(spec("R04")))
+    html.write_text(render_html(load_spec("R04")))
     with pytest.raises(RuntimeError, match="Noto Sans SC"):
         print_pdf(page, html, tmp_path / "R04.pdf")
     assert not (tmp_path / "R04.pdf").exists()

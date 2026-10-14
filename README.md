@@ -132,6 +132,8 @@ uv run python -m bench.pdf
 
 This renders the HTML and writes `bench/data/reports/R01.pdf` and so on, each at its report's page size (Letter or A4). Before printing, every font a report declares must load, or the run stops rather than printing in a fallback font.
 
+The run ends with `bench/selfcheck.py`, which reads each PDF's text layer back with PyMuPDF and fails unless every row of the render spec is printed as its own line on its own page: name, value, flag, previous result, unit and reference interval, in column order, with the interval on the next line in the two-column layout. Finding each value somewhere on the page would not be enough, since a value like 4.2 appears in many places; a value printed in the wrong row must fail, and the tests prove it does by swapping values, flags, intervals and pages in a spec. It also runs on its own: `uv run python -m bench.selfcheck`.
+
 `bench/raster.py` turns each PDF into one PNG per page with [PyMuPDF](https://pymupdf.readthedocs.io/), the starting point for the photo-degraded reports:
 
 ```bash
