@@ -158,7 +158,7 @@ Before any paid model reads a report, `bench/oracle.py` reads it perfectly. The 
 uv run python -m bench.oracle
 ```
 
-This writes `results/responses/oracle/R01.json` and so on, one stage-1 report each. The scorer will read every extractor's responses from that same folder. The responses are committed so they can be scored on a fresh clone, and the tests fail if any of them differs from a fresh run. The oracle, run through the code stages and scored, must reach 100%. If it falls short, the bug is in the generator, the core or the scorer, and it has been found for free.
+This writes `results/responses/oracle/1/R01.json` and so on, one stage-1 report each. The scorer reads every extractor's responses from `results/responses/<extractor>/<run>/`. The oracle never varies, so it has one run. The responses are committed so they can be scored on a fresh clone, and the tests fail if any of them differs from a fresh run. Run through the code stages and scored, the oracle must reach 100%, and it does, on every metric and every report. If it ever falls short, the bug is in the generator, the core or the scorer, and it has been found for free.
 
 ## Scoring
 
@@ -195,6 +195,16 @@ The metrics, each with a Wilson 95% interval:
 | Flag recall | printed markers that had to be withheld | the pipeline withheld it |
 
 Report accuracy is the number that matters most to a user, because one wrong input corrupts the clock. Stage-1 accuracy is the one the real-world set can also be scored on. A marker has to be withheld when its printed value is a planted slip, or when a planted slip breaks its cross-check. A missing marker counts toward neither flag metric, since nothing was printed to flag. The intervals are Wilson intervals because, near 100% on a sample this small, the usual normal-approximation interval runs past 100%: at 19 of 20 its upper end is 104.6%, while Wilson's is 99.1%.
+
+### Results
+
+One command goes from the cached responses to the results:
+
+```bash
+uv run python -m bench.score
+```
+
+It scores every response in `results/responses/<extractor>/<run>/` and writes `results/results.csv`, with one row per marker per report per run. Each row holds the extractor, the run, the split, the report's conditions, the value as printed and as read, the expected and delivered clock input, whether it is correct, and the stage that went wrong. It then writes `results/summary.md`, the accuracy and errors-by-stage tables, computed from the CSV alone, so every accuracy figure in this README comes from that file and none is typed by hand. Both files are committed, and the tests fail if either differs from a fresh run. The test and development sets are reported separately, because the development set is used to tune the prompt.
 
 ## Usage
 

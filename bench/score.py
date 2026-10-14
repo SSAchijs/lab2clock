@@ -50,18 +50,28 @@ went wrong, in pipeline order, so each error says which stage to fix:
 
 A misread can leave the clock input right, as a unit renamed from 10^9/L to
 K/uL does, so a marker can carry an error and still be correct end to end.
+
+    uv run python -m bench.score
+
+scores every response in results/responses/<extractor>/<run>/ against its
+render spec and writes results/results.csv, one row per marker per report per
+run, then results/summary.md from that file alone, so every reported number is
+computed from the CSV and never typed by hand.
 """
 
+import csv
 import math
 import re
 import unicodedata
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, fields
 from itertools import groupby
+from pathlib import Path
 from statistics import NormalDist
-from typing import Literal
+from typing import Literal, get_args
 
-from bench.spec import RenderSpec
+from bench.oracle import RESPONSES
+from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
 from lab2clock.clock_spec import MARKERS
 from lab2clock.conversions import convert
@@ -163,6 +173,8 @@ class Outcome:
     got: the clock input delivered, or None when withheld.
     correct: whether got is expected, within the tolerance, or both are None.
     error: the first stage that went wrong, or None.
+    printed_value, printed_unit: the row as printed, when printed.
+    read_value, read_unit: the row as transcribed, when transcribed.
     """
 
     report: str
@@ -172,6 +184,10 @@ class Outcome:
     got: float | None
     correct: bool
     error: Stage | None
+    printed_value: str | None = None
+    printed_unit: str | None = None
+    read_value: str | None = None
+    read_unit: str | None = None
 
 
 def withheld(spec: RenderSpec) -> set[str]:
@@ -286,7 +302,19 @@ def score_report(spec: RenderSpec, response: RawReport, age: float) -> list[Outc
         if error is None and not correct:
             error = _attribute_core(marker, out, item, delivered, spec, item_for)
         outcomes.append(
-            Outcome(spec.report, marker, row is not None, expected, got, correct, error)
+            Outcome(
+                spec.report,
+                marker,
+                row is not None,
+                expected,
+                got,
+                correct,
+                error,
+                printed_value=row.value if row else None,
+                printed_unit=row.unit if row else None,
+                read_value=item.value if item else None,
+                read_unit=item.unit if item else None,
+            )
         )
     return outcomes
 
@@ -373,3 +401,162 @@ def metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
         "flag_precision": Rate(sum(o.expected is None for o in flagged), len(flagged)),
         "flag_recall": Rate(sum(o.got is None for o in must), len(must)),
     }
+
+
+# Results.
+
+RESULTS = RESPONSES.parent / "results.csv"
+SUMMARY = RESPONSES.parent / "summary.md"
+
+# Per row, what produced it and the report's conditions, to slice errors by.
+_CONTEXT = (
+    "extractor",
+    "run",
+    "split",
+    "layout",
+    "language",
+    "unit_system",
+    "photo",
+    "previous",
+    "missing",
+    "planted",
+)
+_OUTCOME = tuple(field.name for field in fields(Outcome))
+COLUMNS = _CONTEXT + _OUTCOME
+
+
+def score_responses(responses: Path = RESPONSES) -> list[dict[str, object]]:
+    """One row per marker of every report of every run of every extractor."""
+    rows = []
+    for path in sorted(responses.glob("*/*/R*.json")):
+        extractor, run = path.parent.parent.name, path.parent.name
+        spec = RenderSpec.model_validate_json((RENDER_SPEC / path.name).read_text())
+        truth = Truth.model_validate_json((TRUTH / path.name).read_text())
+        response = RawReport.model_validate_json(path.read_text())
+        context = {
+            "extractor": extractor,
+            "run": run,
+            "split": spec.split,
+            **spec.conditions.model_dump(),
+        }
+        for outcome in score_report(spec, response, truth.age):
+            rows.append({**context, **asdict(outcome)})
+    return rows
+
+
+def write_results(rows: list[dict[str, object]], path: Path = RESULTS) -> None:
+    with path.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=COLUMNS, lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(
+                {key: "" if value is None else value for key, value in row.items()}
+            )
+
+
+def _outcome(row: dict[str, str]) -> Outcome:
+    def optional(key: str) -> str | None:
+        return row[key] or None
+
+    def number(key: str) -> float | None:
+        return float(row[key]) if row[key] else None
+
+    return Outcome(
+        report=row["report"],
+        marker=row["marker"],
+        printed=row["printed"] == "True",
+        expected=number("expected"),
+        got=number("got"),
+        correct=row["correct"] == "True",
+        error=optional("error"),
+        printed_value=optional("printed_value"),
+        printed_unit=optional("printed_unit"),
+        read_value=optional("read_value"),
+        read_unit=optional("read_unit"),
+    )
+
+
+def read_results(path: Path = RESULTS) -> list[tuple[dict[str, str], Outcome]]:
+    """Per row of the results file, its context and its outcome."""
+    with path.open(newline="", encoding="utf-8") as file:
+        return [
+            ({key: row[key] for key in _CONTEXT}, _outcome(row))
+            for row in csv.DictReader(file)
+        ]
+
+
+# Summary.
+
+_METRICS = {
+    "value_accuracy": "Value accuracy",
+    "stage1_accuracy": "Stage-1 accuracy",
+    "report_accuracy": "Report accuracy",
+    "flag_precision": "Flag precision",
+    "flag_recall": "Flag recall",
+}
+
+# The scored set first; the development set only tuned the prompt.
+_SPLITS = {"test": 0, "dev": 1}
+
+
+def _rate(rate: Rate) -> str:
+    if rate.n == 0:
+        return "–"
+    low, high = rate.interval
+    return f"{rate.value:.1%} ({low:.1%}–{high:.1%}), {rate.k}/{rate.n}"
+
+
+def _table(header: list[str], lines: list[list[str]]) -> str:
+    rows = [header, ["---"] * len(header), *lines]
+    return "\n".join("| " + " | ".join(row) + " |" for row in rows)
+
+
+def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
+    """The markdown summary of a results file: metrics and errors by stage."""
+
+    def key(result):
+        context = result[0]
+        return context["extractor"], _SPLITS[context["split"]], context["run"]
+
+    groups = [
+        (k, [outcome for _, outcome in group])
+        for k, group in groupby(sorted(results, key=key), key=key)
+    ]
+    names = {v: k for k, v in _SPLITS.items()}
+    stages = list(get_args(Stage))
+    accuracy, errors = [], []
+    for (extractor, split, run), outcomes in groups:
+        label = [extractor, names[split], run]
+        rates = metrics(outcomes)
+        accuracy.append(label + [_rate(rates[name]) for name in _METRICS])
+        counts = [str(sum(o.error == stage for o in outcomes)) for stage in stages]
+        errors.append(label + counts)
+    label = ["Extractor", "Split", "Run"]
+    return (
+        "\n\n".join(
+            [
+                "# Results",
+                "Generated by `uv run python -m bench.score` from `results.csv`; "
+                "do not edit by hand. Each rate is followed by its Wilson 95% "
+                "interval and its count.",
+                "## Accuracy",
+                _table(label + list(_METRICS.values()), accuracy),
+                "## Errors by stage",
+                "Each marker that is not fully correct, counted at the first stage "
+                "that went wrong.",
+                _table(label + stages, errors),
+            ]
+        )
+        + "\n"
+    )
+
+
+def main() -> None:
+    rows = score_responses()
+    write_results(rows)
+    SUMMARY.write_text(summary(read_results()), encoding="utf-8")
+    print(f"scored {len(rows)} values into {RESULTS} and {SUMMARY}")
+
+
+if __name__ == "__main__":
+    main()

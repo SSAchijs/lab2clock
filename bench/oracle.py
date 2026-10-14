@@ -10,8 +10,10 @@ paid model is called.
 
     uv run python -m bench.oracle
 
-writes results/responses/oracle/R01.json and so on, one stage-1 report each,
-where the scorer reads every extractor's responses.
+writes results/responses/oracle/1/R01.json and so on, one stage-1 report
+each. The scorer reads every extractor's responses from
+results/responses/<extractor>/<run>/; the oracle never varies, so it has one
+run.
 """
 
 import json
@@ -21,7 +23,7 @@ from bench.spec import RENDER_SPEC, RenderSpec
 from lab2clock.stage1 import RawItem, RawReport
 
 RESPONSES = Path(__file__).resolve().parent.parent / "results" / "responses"
-OUT = RESPONSES / "oracle"
+OUT = RESPONSES / "oracle" / "1"
 
 
 def extract(spec: RenderSpec) -> RawReport:

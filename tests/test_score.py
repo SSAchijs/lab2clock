@@ -3,17 +3,24 @@ import pytest
 import lab2clock.assemble as assemble_module
 from bench import oracle
 from bench.score import (
+    COLUMNS,
+    RESULTS,
+    SUMMARY,
     TOLERANCE,
     Outcome,
     Rate,
     expected_input,
     metrics,
+    read_results,
     same_input,
     same_unit,
     same_value,
     score_report,
+    score_responses,
+    summary,
     wilson,
     withheld,
+    write_results,
 )
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.checks import Issue
@@ -363,3 +370,49 @@ def test_flags_count_false_alarms_and_misses():
     )
     assert (result["flag_precision"].k, result["flag_precision"].n) == (1, 2)
     assert (result["flag_recall"].k, result["flag_recall"].n) == (1, 2)
+
+
+# Results and summary.
+
+
+def test_one_row_per_marker_per_report_per_run():
+    rows = score_responses()
+    assert len(rows) == 25 * 9
+    assert all(list(row) == list(COLUMNS) for row in rows)
+    assert {(row["extractor"], row["run"]) for row in rows} == {("oracle", "1")}
+
+
+def test_results_read_back_as_written(tmp_path):
+    rows = score_responses()
+    write_results(rows, tmp_path / "results.csv")
+    read = read_results(tmp_path / "results.csv")
+    assert [outcome for _, outcome in read] == [
+        Outcome(**{f: row[f] for f in Outcome.__dataclass_fields__}) for row in rows
+    ]
+    # The context reads back as text, an empty cell for no condition.
+    assert read[0][0] == {
+        key: "" if rows[0][key] is None else str(rows[0][key]) for key in read[0][0]
+    }
+
+
+def test_the_summary_counts_every_extractor_run_and_error(tmp_path):
+    # Two runs of a reader that misreads R07's CRP unit, beside the oracle.
+    for extractor, run in [("oracle", "1"), ("sloppy", "1"), ("sloppy", "2")]:
+        for report in REPORTS:
+            r = response(report)
+            if extractor == "sloppy" and report == "R07":
+                r = RawReport(items=edit("R07", "超敏C反应蛋白", unit="mg/dL"))
+            oracle.write(report, r, tmp_path / extractor / run)
+    write_results(score_responses(tmp_path), tmp_path / "results.csv")
+    text = summary(read_results(tmp_path / "results.csv"))
+    assert "| sloppy | test | 2 | 99.4% (96.9%–99.9%), 179/180 |" in text
+    assert "| sloppy | test | 1 | 0 | 0 | 1 | 0 | 0 | 0 |" in text
+    assert "| oracle | test | 1 | 100.0% (97.9%–100.0%), 180/180 |" in text
+    assert "| sloppy | dev | 1 | 100.0%" in text
+
+
+def test_committed_results_match_a_fresh_run(tmp_path):
+    # Catches a response, spec or scorer changed without rerunning bench.score.
+    write_results(score_responses(), tmp_path / "results.csv")
+    assert (tmp_path / "results.csv").read_text() == RESULTS.read_text()
+    assert summary(read_results(RESULTS)) == SUMMARY.read_text()
