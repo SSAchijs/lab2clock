@@ -69,9 +69,9 @@ from dataclasses import asdict, dataclass, fields, replace
 from itertools import groupby
 from pathlib import Path
 from statistics import NormalDist
-from typing import Literal, get_args
+from typing import Any, Literal, NamedTuple, get_args
 
-from bench import responses
+from bench import medrepbench, responses
 from bench.responses import RESPONSES
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.assemble import assemble
@@ -87,8 +87,8 @@ TOLERANCE = 0.005
 # A trailing abnormal-result flag. The stage-1 contract asks for the flag in
 # the value, but most layouts print it in its own column, so a reader that
 # copies it from there has not misread the value; the core discards it either
-# way.
-_FLAG = re.compile(r"(\((?:HH|LL|H|L)\)|HH|LL|H|L|[*!↑↓])$")
+# way. Chinese reports also flag with + and -.
+_FLAG = re.compile(r"(\((?:HH|LL|H|L)\)|HH|LL|H|L|[*!↑↓+-])$")
 
 # One comma that is unambiguously a decimal mark: not before exactly three
 # digits, where it may separate thousands (5,500 is not 5.500).
@@ -211,16 +211,29 @@ def _name(printed: str) -> str:
 
 
 def align(spec: RenderSpec, response: RawReport) -> dict[int, int]:
-    """Per printed row of an analyte, the index of the item read from it.
+    """Per printed row of an analyte, the index of the item read from it."""
+    rows = {r: row for r, row in enumerate(spec.rows) if row.analyte is not None}
+    return _align(rows, response.items)
+
+
+def _align(
+    rows: dict[int, Any], items: list[RawItem], loose: bool = False
+) -> dict[int, int]:
+    """Per printed row, by its index, the index of the item read from it.
 
     Matched without the core's synonyms, so a name the core maps wrongly is
     still found: first by name, value, unit and page together, so a second row
     under the same name cannot take a correct row's place; then by name on the
     same page; then by name anywhere; then by value and unit on the same page,
-    for a misread name. Each item is used once; a row with no item was
+    for a misread name. A row whose page is None, as on a one-image report,
+    matches any page. Loose alignment, for labels whose units are noisy, adds
+    a last pass by value alone. Each item is used once; a row with no item was
     omitted.
     """
-    items = response.items
+
+    def page(row, item):
+        return row.page is None or item.page == row.page
+
     used: set[int] = set()
     aligned: dict[int, int] = {}
     passes = [
@@ -228,19 +241,21 @@ def align(spec: RenderSpec, response: RawReport) -> dict[int, int]:
             _name(item.name) == _name(row.name)
             and same_value(item.value, row.value)
             and same_unit(item.unit, row.unit)
-            and item.page == row.page
+            and page(row, item)
         ),
-        lambda row, item: _name(item.name) == _name(row.name) and item.page == row.page,
+        lambda row, item: _name(item.name) == _name(row.name) and page(row, item),
         lambda row, item: _name(item.name) == _name(row.name),
         lambda row, item: (
             same_value(item.value, row.value)
             and same_unit(item.unit, row.unit)
-            and item.page == row.page
+            and page(row, item)
         ),
     ]
+    if loose:
+        passes.append(lambda row, item: same_value(item.value, row.value))
     for same in passes:
-        for r, row in enumerate(spec.rows):
-            if row.analyte is None or r in aligned:
+        for r, row in rows.items():
+            if r in aligned:
                 continue
             for i, item in enumerate(items):
                 if i not in used and same(row, item):
@@ -414,6 +429,102 @@ def metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
     }
 
 
+# The real set.
+
+
+class Labelled(NamedTuple):
+    """A labelled marker row of a real report; it carries no page."""
+
+    marker: str
+    name: str
+    value: str
+    unit: str | None
+    page: None = None
+
+
+def real_labels() -> dict[str, list[Labelled]]:
+    """Per real report, its labelled marker rows, with the hand-checked
+    corrections applied: a label found wrong is scored as what is printed."""
+    fixes = {}
+    for row in medrepbench.read_audit():
+        if row["verdict"] == "wrong":
+            label = (
+                row["image"],
+                row["label_name"],
+                row["label_value"],
+                row["label_unit"],
+            )
+            fixes[label] = (row["printed_value"], row["printed_unit"])
+    out = {}
+    for report, rows in medrepbench.read_labelled().items():
+        out[report] = []
+        for row in rows:
+            value, unit = fixes.get(
+                (row["image"], row["name"], row["value"], row["unit"]),
+                (row["value"], row["unit"]),
+            )
+            out[report].append(
+                Labelled(row["marker"], row["name"], value, unit or None)
+            )
+    return out
+
+
+def score_real(
+    report: str, rows: list[Labelled], response: RawReport | None
+) -> list[Outcome]:
+    """Score stage 1 on a real report: each labelled marker row against the
+    item read from it. There is no truth behind the labels, so nothing is
+    scored end to end, and expected and got stay empty."""
+    items = response.items if response else []
+    # The labels' units are noisy (g/1 for g/l, fl. for fL), so a row read
+    # under another name is also found by its value alone.
+    aligned = _align(dict(enumerate(rows)), items, loose=True)
+    outcomes = []
+    for r, row in enumerate(rows):
+        item = items[aligned[r]] if r in aligned else None
+        error = "invalid" if response is None else _misread(row, item)
+        outcomes.append(
+            Outcome(
+                report,
+                row.marker,
+                True,
+                None,
+                None,
+                error is None,
+                error,
+                printed_value=row.value,
+                printed_unit=row.unit,
+                read_value=item.value if item else None,
+                read_unit=item.unit if item else None,
+            )
+        )
+    return outcomes
+
+
+def real_metrics(outcomes: Iterable[Outcome]) -> dict[str, Rate]:
+    """Per labelled marker row: value as printed, unit as labelled, both.
+
+    The hand check found the labels right on every value it checked but wrong
+    on 9% of units, so the value rate is the one to trust, and the unit rate
+    is a lower bound on how often the unit was read correctly.
+    """
+    outcomes = list(outcomes)
+    value = [
+        o.read_value is not None and same_value(o.read_value, o.printed_value)
+        for o in outcomes
+    ]
+    unit = [
+        o.read_value is not None and same_unit(o.read_unit, o.printed_unit)
+        for o in outcomes
+    ]
+    n = len(outcomes)
+    return {
+        "value": Rate(sum(value), n),
+        "unit": Rate(sum(unit), n),
+        "both": Rate(sum(v and u for v, u in zip(value, unit, strict=True)), n),
+    }
+
+
 # Results.
 
 RESULTS = RESPONSES.parent / "results.csv"
@@ -439,17 +550,17 @@ COLUMNS = _CONTEXT + _OUTCOME
 
 
 def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
-    """One row per marker of every report of every run of every extractor.
+    """One row per marker of every report of every run of every extractor;
+    on a real report, one per labelled marker row.
 
     Every response of one extractor must come from the same prompt, its
     version and its text, or the extractor's results would mix two prompts.
     """
     rows = []
     prompts: dict[str, tuple[str | None, str | None]] = {}
-    for path in sorted(directory.glob("*/*/R*.json")):
+    real = None
+    for path in sorted(directory.glob("*/*/*.json")):
         extractor, run = path.parent.parent.name, path.parent.name
-        spec = RenderSpec.model_validate_json((RENDER_SPEC / path.name).read_text())
-        truth = Truth.model_validate_json((TRUTH / path.name).read_text())
         response = responses.read(path)
         prompt = response.prompt, response.prompt_sha256
         if prompts.setdefault(extractor, prompt) != prompt:
@@ -458,18 +569,24 @@ def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
                 f"({prompt[1]}), others with {prompts[extractor][0]} "
                 f"({prompts[extractor][1]})"
             )
-        context = {
+        context = dict.fromkeys(_CONTEXT) | {
             "extractor": extractor,
             "prompt": response.prompt,
             "form": response.form,
             "run": run,
-            "split": spec.split,
-            **spec.conditions.model_dump(),
         }
-        if response.report is None:
-            outcomes = score_invalid(spec, truth.age)
+        if path.stem.startswith("M"):
+            real = real if real is not None else real_labels()
+            context["split"] = "real"
+            outcomes = score_real(path.stem, real[path.stem], response.report)
         else:
-            outcomes = score_report(spec, response.report, truth.age)
+            spec = RenderSpec.model_validate_json((RENDER_SPEC / path.name).read_text())
+            truth = Truth.model_validate_json((TRUTH / path.name).read_text())
+            context |= {"split": spec.split, **spec.conditions.model_dump()}
+            if response.report is None:
+                outcomes = score_invalid(spec, truth.age)
+            else:
+                outcomes = score_report(spec, response.report, truth.age)
         for outcome in outcomes:
             rows.append({**context, **asdict(outcome)})
     return rows
@@ -526,8 +643,15 @@ _METRICS = {
     "flag_recall": "Flag recall",
 }
 
-# The scored set first; the development set only tuned the prompt.
-_SPLITS = {"test": 0, "dev": 1}
+# The scored set first; the development set only tuned the prompt; the real
+# set is scored at stage 1 only.
+_SPLITS = {"test": 0, "dev": 1, "real": 2}
+
+_REAL_METRICS = {
+    "value": "Value as printed",
+    "unit": "Unit as labelled",
+    "both": "Value and unit",
+}
 
 
 def _rate(rate: Rate) -> str:
@@ -560,14 +684,27 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
     ]
     names = {v: k for k, v in _SPLITS.items()}
     stages = list(get_args(Stage))
-    accuracy, errors = [], []
+    accuracy, real, errors = [], [], []
     for (extractor, prompt, split, run), outcomes in groups:
         label = [extractor, prompt or "–", names[split], run]
-        rates = metrics(outcomes)
-        accuracy.append(label + [_rate(rates[name]) for name in _METRICS])
+        if names[split] == "real":
+            rates = real_metrics(outcomes)
+            real.append(label[:2] + [run] + [_rate(rates[n]) for n in _REAL_METRICS])
+        else:
+            rates = metrics(outcomes)
+            accuracy.append(label + [_rate(rates[name]) for name in _METRICS])
         counts = [str(sum(o.error == stage for o in outcomes)) for stage in stages]
         errors.append(label + counts)
     label = ["Extractor", "Prompt", "Split", "Run"]
+    real_section = []
+    if real:
+        real_section = [
+            "## Real-world set",
+            "Stage 1 on the MedRepBench reports, per labelled marker row. The "
+            "hand check found the labels right on every value but wrong on some "
+            "units (see the README), so the unit rate is a lower bound.",
+            _table(["Extractor", "Prompt", "Run", *_REAL_METRICS.values()], real),
+        ]
     return (
         "\n\n".join(
             [
@@ -577,6 +714,7 @@ def summary(results: list[tuple[dict[str, str], Outcome]]) -> str:
                 "interval and its count.",
                 "## Accuracy",
                 _table(label + list(_METRICS.values()), accuracy),
+                *real_section,
                 "## Errors by stage",
                 "Each marker that is not fully correct, counted at the first stage "
                 "that went wrong.",

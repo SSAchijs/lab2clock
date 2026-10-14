@@ -22,7 +22,6 @@ and downloads them as a CSV, saved as bench/medrepbench_audit.csv. Then
 reads that file and prints the label error rate with its Wilson 95% interval.
 """
 
-import csv
 import html
 import json
 import sys
@@ -33,14 +32,12 @@ import pandas as pd
 
 from bench import medrepbench
 from bench.score import wilson
-from lab2clock.clock_spec import MARKERS
-from lab2clock.synonyms import match
 
 SEED = 2017
 SIZE = 10
 
 PAGE = medrepbench.CACHE / "audit.html"
-RESULTS = Path(__file__).resolve().parent / "medrepbench_audit.csv"
+RESULTS = medrepbench.AUDIT
 
 COLUMNS = (
     "image",
@@ -65,20 +62,15 @@ def chosen(seed: int = SEED) -> list[str]:
 
 def marker_rows(items: str) -> list[dict[str, str]]:
     """Every labelled row that maps to a clock marker, in printed order."""
-    rows = []
-    for item in json.loads(items):
-        unit = item["item_unit"] or None
-        marker = match(item["item_name"], unit)
-        if marker in MARKERS:
-            rows.append(
-                {
-                    "marker": marker,
-                    "label_name": item["item_name"],
-                    "label_value": item["item_value"],
-                    "label_unit": item["item_unit"] or "",
-                }
-            )
-    return rows
+    return [
+        {
+            "marker": row["marker"],
+            "label_name": row["name"],
+            "label_value": row["value"],
+            "label_unit": row["unit"],
+        }
+        for row in medrepbench.marker_rows(items)
+    ]
 
 
 def reports(cache: Path = medrepbench.CACHE) -> list[tuple[str, list[dict]]]:
@@ -247,8 +239,7 @@ def score(path: Path = RESULTS) -> dict[str, object]:
     """The label error rate: wrong rows over judged rows, which fields were
     wrong in them, and printed markers missing from the labels. A wrong row
     gives every field as printed, an empty unit where none is printed."""
-    with path.open(newline="", encoding="utf-8") as file:
-        rows = list(csv.DictReader(file))
+    rows = medrepbench.read_audit(path)
     judged = [row for row in rows if row["verdict"] in {"correct", "wrong"}]
     wrong = [row for row in judged if row["verdict"] == "wrong"]
     missing = [row for row in rows if row["verdict"] == "missing"]

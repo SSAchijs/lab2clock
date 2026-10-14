@@ -24,8 +24,9 @@ from lab2clock.stage1 import RawReport
 
 RESPONSES = Path(__file__).resolve().parent.parent / "results" / "responses"
 
-# A digital report goes as its PDF, a photographed one as its photos.
-Form = Literal["pdf", "photo"]
+# A digital report goes as its PDF, a photographed one as its photos, and a
+# real one as the image it came as, a photo or a screenshot.
+Form = Literal["pdf", "photo", "image"]
 
 
 class Failure(BaseModel):

@@ -9,14 +9,18 @@ from bench.score import (
     RESULTS,
     SUMMARY,
     TOLERANCE,
+    Labelled,
     Outcome,
     Rate,
     expected_input,
     metrics,
     read_results,
+    real_labels,
+    real_metrics,
     same_input,
     same_unit,
     same_value,
+    score_real,
     score_report,
     score_responses,
     summary,
@@ -26,7 +30,7 @@ from bench.score import (
 )
 from bench.spec import RENDER_SPEC, TRUTH, RenderSpec, Truth
 from lab2clock.checks import Issue
-from lab2clock.stage1 import RawReport
+from lab2clock.stage1 import RawItem, RawReport
 from lab2clock.units import UnitError
 
 REPORTS = [f"R{i:02d}" for i in range(1, 26)]
@@ -381,10 +385,11 @@ def test_one_row_per_marker_per_report_per_run():
     rows = score_responses()
     assert all(list(row) == list(COLUMNS) for row in rows)
     keys = [(row["extractor"], row["run"], row["report"]) for row in rows]
-    reports = set(keys)
-    assert len(rows) == 9 * len(reports)
-    assert all(keys.count(key) == 9 for key in reports)
-    oracle_reports = {k for k in reports if k[:2] == ("oracle", "1")}
+    labelled = {r: len(rows) for r, rows in real_labels().items()}
+    for key in set(keys):
+        report = key[2]
+        assert keys.count(key) == labelled.get(report, 9)
+    oracle_reports = {k for k in set(keys) if k[:2] == ("oracle", "1")}
     assert len(oracle_reports) == 25
 
 
@@ -465,3 +470,87 @@ def test_committed_results_match_a_fresh_run(tmp_path):
     write_results(score_responses(), tmp_path / "results.csv")
     assert (tmp_path / "results.csv").read_text() == RESULTS.read_text()
     assert summary(read_results(RESULTS)) == SUMMARY.read_text()
+
+
+# The real set.
+
+
+def labelled(*rows):
+    return [Labelled(m, n, v, u) for m, n, v, u in rows]
+
+
+def read(*items):
+    return RawReport(
+        items=[RawItem(name=n, value=v, unit=u, page=1) for n, v, u in items]
+    )
+
+
+def test_a_real_row_read_as_printed_is_correct_and_has_no_end_to_end_score():
+    rows = labelled(("white_blood_cell_count", "白细胞", "6.72", "10^9/L"))
+    [o] = score_real("M01", rows, read(("白细胞", "6.72", "10^9/L")))
+    assert (o.correct, o.error, o.expected, o.got) == (True, None, None, None)
+
+
+def test_a_real_row_under_another_name_is_found_by_value_and_unit():
+    rows = labelled(("white_blood_cell_count", "白细胞(WBC)", "5.70", None))
+    [o] = score_real("M01", rows, read(("★白细胞(WBC)", "5.70", None)))
+    assert o.correct and o.read_value == "5.70"
+
+
+def test_real_rows_misread_omitted_or_unreadable():
+    rows = labelled(
+        ("albumin", "白蛋白", "40.1", "g/L"),
+        ("glucose", "葡萄糖", "5.2", "mmol/L"),
+        ("creatinine", "肌酐", "71", "umol/L"),
+    )
+    response = read(("白蛋白", "40.7", "g/L"), ("葡萄糖", "5.2", "mmol/l"))
+    errors = [o.error for o in score_real("M01", rows, response)]
+    # mmol/l is mmol/L up to letter case, so glucose is correct.
+    assert errors == ["value", None, "omitted"]
+    assert {o.error for o in score_real("M01", rows, None)} == {"invalid"}
+
+
+def test_two_rows_for_one_marker_are_each_scored():
+    rows = labelled(
+        ("c_reactive_protein", "超敏C反应蛋白", ">5.0", "mg/l"),
+        ("c_reactive_protein", "C反应蛋白", "5.5", "mg/l"),
+    )
+    response = read(("C反应蛋白", "5.5", "mg/l"), ("超敏C反应蛋白", ">5.0", "mg/l"))
+    assert [o.read_value for o in score_real("M01", rows, response)] == [">5.0", "5.5"]
+
+
+def test_the_hand_checked_corrections_replace_the_labels():
+    labels = real_labels()
+    m02 = {row.name: row for row in labels["M02"]}
+    # The label gave 10^9/L, which the row does not print.
+    assert m02["白细胞计数"].unit is None
+    rows = [row for rows in labels.values() for row in rows]
+    assert not any(row.unit == "mg/1" for row in rows)
+    assert sum(len(rows) for rows in labels.values()) == 149
+
+
+def test_real_rates_count_value_and_unit_separately():
+    rows = labelled(
+        ("albumin", "白蛋白", "40.1", "g/L"),
+        ("glucose", "葡萄糖", "5.2", None),
+        ("creatinine", "肌酐", "71", "umol/L"),
+    )
+    response = read(("白蛋白", "40.1", "g/L"), ("葡萄糖", "5.2", "mmol/L"))
+    rates = real_metrics(score_real("M01", rows, response))
+    assert [(rates[k].k, rates[k].n) for k in ("value", "unit", "both")] == [
+        (2, 3),
+        (1, 3),
+        (1, 3),
+    ]
+
+
+def test_a_real_row_under_another_name_and_a_noisy_label_unit_is_found_by_value():
+    rows = labelled(("albumin", "白蛋白", "38.6", "g/1"))
+    [o] = score_real("M01", rows, read(("ALB", "38.6", "g/l")))
+    # Found, so not omitted; the unit disagrees with the noisy label.
+    assert (o.read_value, o.error) == ("38.6", "unit")
+
+
+@pytest.mark.parametrize("got", ["50.68 +", "32.38 -", "50.68+"])
+def test_a_plus_or_minus_flag_is_not_part_of_the_value(got):
+    assert same_value(got, got.rstrip("+- "))

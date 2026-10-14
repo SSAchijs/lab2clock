@@ -1,0 +1,142 @@
+{
+  "key": "aa902e9951a17e0a9ddec6e1dd1de3204f4b7ce92c2319dee3ffeb86ee6bb9e7",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1701948338673762304.jpg": "bfc05ec78ed5ab981b2eb586d78f59b6b1bd668f4dc60f884781e8b6b0bf7f1e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "中性粒细胞绝对值",
+        "value": "1.64",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "32.0↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞比积",
+        "value": "37.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞绝对值",
+        "value": "2.72",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "53.2↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白量",
+        "value": "26.6",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "332",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "80.0",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "8.4",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "网织红细胞计数百分数",
+        "value": "1.33",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.32",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "15.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板计数",
+        "value": "385",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞计数",
+        "value": "4.74",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度",
+        "value": "13.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "白细胞计数",
+        "value": "5.11",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百分比",
+        "value": "0.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞绝对值",
+        "value": "0.03",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞绝对值",
+        "value": "0.30",
+        "unit": "×10^9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4892,
+    "output_tokens": 762
+  }
+}

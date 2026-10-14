@@ -3,9 +3,11 @@ import hashlib
 import json
 from types import SimpleNamespace
 
+import cv2
+import numpy as np
 import pytest
 
-from bench import degrade, extract, prompts, render, responses
+from bench import degrade, extract, medrepbench, prompts, render, responses
 from bench.spec import RENDER_SPEC, RenderSpec
 from lab2clock.stage1 import RawItem, RawReport
 
@@ -228,8 +230,12 @@ def test_a_response_records_what_it_was_read_from_and_its_cost():
 def test_a_rerun_makes_no_api_call(tmp_path):
     dev = [s for s in specs() if s.split == "dev"]
     first, second = client(), client()
-    assert extract.run(first, MODEL, prompts.load(), dev, 1, tmp_path) == (5, 0)
-    assert extract.run(second, MODEL, prompts.load(), dev, 1, tmp_path) == (0, 5)
+    assert extract.run(
+        first, MODEL, prompts.load(), extract.synthetic_jobs(dev), 1, tmp_path
+    ) == (5, 0)
+    assert extract.run(
+        second, MODEL, prompts.load(), extract.synthetic_jobs(dev), 1, tmp_path
+    ) == (0, 5)
     assert len(first.messages.calls) == 5
     assert second.messages.calls == []
     out = tmp_path / "claude-haiku-5-5_extract_v1" / "1"
@@ -240,7 +246,9 @@ def test_each_run_is_read_separately(tmp_path):
     [r01] = [s for s in specs() if s.report == "R01"]
     fake = client()
     for number in (1, 2, 3):
-        assert extract.run(fake, MODEL, prompts.load(), [r01], number, tmp_path) == (
+        assert extract.run(
+            fake, MODEL, prompts.load(), extract.synthetic_jobs([r01]), number, tmp_path
+        ) == (
             1,
             0,
         )
@@ -270,12 +278,16 @@ def test_the_key_changes_with_anything_that_can_change_the_answer(tmp_path):
 
 def test_a_saved_response_read_from_other_inputs_stops_the_run(tmp_path):
     [r01] = [s for s in specs() if s.report == "R01"]
-    extract.run(client(), MODEL, prompts.load(), [r01], 1, tmp_path)
+    extract.run(
+        client(), MODEL, prompts.load(), extract.synthetic_jobs([r01]), 1, tmp_path
+    )
     path = tmp_path / "claude-haiku-5-5_extract_v1" / "1" / "R01.json"
     saved = responses.read(path)
     responses.write("R01", saved.model_copy(update={"key": "stale"}), path.parent)
     with pytest.raises(SystemExit, match="different inputs"):
-        extract.run(client(), MODEL, prompts.load(), [r01], 1, tmp_path)
+        extract.run(
+            client(), MODEL, prompts.load(), extract.synthetic_jobs([r01]), 1, tmp_path
+        )
 
 
 # The test set waits for the frozen prompt.
@@ -286,13 +298,80 @@ def test_no_test_report_is_read_before_the_prompt_is_frozen(tmp_path, monkeypatc
     test = [s for s in specs() if s.split == "test"][:1]
     fake = client()
     with pytest.raises(SystemExit, match="not frozen"):
-        extract.run(fake, MODEL, prompts.load(), test, 1, tmp_path)
+        extract.run(
+            fake, MODEL, prompts.load(), extract.synthetic_jobs(test), 1, tmp_path
+        )
     assert fake.messages.calls == []
     prompts.freeze(prompts.load())
-    assert extract.run(fake, MODEL, prompts.load(), test, 1, tmp_path) == (1, 0)
+    assert extract.run(
+        fake, MODEL, prompts.load(), extract.synthetic_jobs(test), 1, tmp_path
+    ) == (1, 0)
 
 
 def test_development_reports_are_read_before_the_freeze(tmp_path, monkeypatch):
     monkeypatch.setattr(prompts, "FROZEN", tmp_path / "frozen.json")
     dev = [s for s in specs() if s.split == "dev"][:1]
-    assert extract.run(client(), MODEL, prompts.load(), dev, 1, tmp_path) == (1, 0)
+    assert extract.run(
+        client(), MODEL, prompts.load(), extract.synthetic_jobs(dev), 1, tmp_path
+    ) == (1, 0)
+
+
+# Real reports.
+
+
+def test_a_real_report_goes_as_its_image_labelled_page_1(tmp_path, monkeypatch):
+    monkeypatch.setattr(medrepbench, "CACHE", tmp_path)
+    (tmp_path / "censored").mkdir()
+    (tmp_path / "censored" / "a.png").write_bytes(b"\x89PNG stand-in")
+    sent = extract.real_input("a.png")
+    assert (sent.form, sent.files) == ("image", [tmp_path / "censored" / "a.png"])
+    label, image = sent.content
+    assert label == {"type": "text", "text": "Page 1"}
+    assert image["source"]["media_type"] == "image/png"
+    assert base64.b64decode(image["source"]["data"]) == b"\x89PNG stand-in"
+
+
+def test_an_image_too_large_for_the_api_is_reencoded_at_the_same_size(
+    tmp_path, monkeypatch
+):
+    pixels = np.random.default_rng(0).integers(0, 255, (300, 400, 3), np.uint8)
+    path = tmp_path / "big.png"
+    cv2.imwrite(str(path), pixels)
+    monkeypatch.setattr(
+        extract, "MAX_IMAGE", len(base64.b64encode(path.read_bytes())) - 1
+    )
+    data, media = extract._image(path)
+    assert media == "image/jpeg"
+    assert len(base64.b64encode(data)) <= extract.MAX_IMAGE
+    decoded = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+    assert decoded.shape == pixels.shape
+
+
+def test_an_image_within_the_limit_is_sent_as_it_is(tmp_path):
+    path = tmp_path / "a.jpeg"
+    path.write_bytes(b"\xff\xd8 stand-in")
+    assert extract._image(path) == (b"\xff\xd8 stand-in", "image/jpeg")
+
+
+def test_every_real_report_is_a_job_by_its_id():
+    jobs = extract.real_jobs()
+    assert [j.report for j in jobs] == [f"M{i:02d}" for i in range(1, 40)]
+    assert {j.split for j in jobs} == {"real"}
+
+
+def test_no_real_report_is_read_before_the_prompt_is_frozen(tmp_path, monkeypatch):
+    monkeypatch.setattr(prompts, "FROZEN", tmp_path / "frozen.json")
+    job = extract.Job("M01", "real", pages)
+    fake = client()
+    with pytest.raises(SystemExit, match="not frozen"):
+        extract.run(fake, MODEL, prompts.load(), [job], 1, tmp_path)
+    assert fake.messages.calls == []
+
+
+def test_an_image_type_comes_from_its_bytes_not_its_name(tmp_path):
+    path = tmp_path / "named.jpg"
+    path.write_bytes(b"\x89PNG actually")
+    assert extract._image(path)[1] == "image/png"
+    path.write_bytes(b"GIF89a")
+    with pytest.raises(ValueError, match="not a PNG or JPEG"):
+        extract._image(path)

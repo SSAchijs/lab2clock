@@ -1,0 +1,202 @@
+{
+  "key": "9e7b75f9bac63b311d8df0d2b244ca4991705b5028f8ff3abf157750c7d58ef7",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1693928910011490304.jpg": "9b1d87c02678875c2d8d5bcdc6031bc2bb9c605f38e71ba5a6d0a43672782752"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "ALT",
+        "value": "11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST",
+        "value": "13",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "AST/ALT",
+        "value": "1.18",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "GGT",
+        "value": "12",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "ALP",
+        "value": "59",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "TBA",
+        "value": "3.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "TBIL",
+        "value": "13.10",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "DBIL",
+        "value": "3.50",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "IBIL",
+        "value": "9.60",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "TP",
+        "value": "73.50",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "ALB",
+        "value": "46.80",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "GLOB",
+        "value": "26.70",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "A/G",
+        "value": "1.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "AFU",
+        "value": "24",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "CO2",
+        "value": "28",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "UREA",
+        "value": "7.3 ↑",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "CREA",
+        "value": "56",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "UA",
+        "value": "243",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "Cysc",
+        "value": "0.87",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "GLU",
+        "value": "5.19",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "TG",
+        "value": "1.02",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "CHOL",
+        "value": "4.78",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "HDL-C",
+        "value": "1.69",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "LDL-C",
+        "value": "2.16",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "APO-A1",
+        "value": "1.40",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "APO-B",
+        "value": "0.73",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "HCY",
+        "value": "10.8",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "β2-M2",
+        "value": "2.1",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "PA",
+        "value": "327",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2912,
+    "output_tokens": 1406
+  }
+}

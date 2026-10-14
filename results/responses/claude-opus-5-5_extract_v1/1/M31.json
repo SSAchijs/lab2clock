@@ -1,0 +1,184 @@
+{
+  "key": "b0cc98589a03278241301b4acf704e7ca56c3a88d9882331d36fc8ff6d741ddf",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1648984312311881642.png": "909f1250ccdef00b8ce96726f9b95dcadaa78b942a9a33862c5cd6e4055f5260"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "WBC 白细胞",
+        "value": "6.72",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "RBC 红细胞",
+        "value": "3.78",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "HGB 血红蛋白",
+        "value": "101.00↓",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "HCT 红细胞压积",
+        "value": "29.40↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MCV 红细胞平均体积",
+        "value": "77.80↓",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "MCH 平均血红蛋白量",
+        "value": "25.90↓",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "MCHC 平均血红蛋白浓度",
+        "value": "333.00",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "PLT 血小板",
+        "value": "247.00",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "RDW-SD 红细胞分布宽度",
+        "value": "36.60↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "RDW-CV 红细胞体积分布宽度-CV",
+        "value": "13.30",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PDW 血小板分布宽度",
+        "value": "10.80",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "MPV 平均血小板体积",
+        "value": "9.50",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "P-LCR 大型血小板比率",
+        "value": "21.70",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PCT 血小板压积",
+        "value": "0.23",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "NEUT# 中性细胞数",
+        "value": "2.89",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "LYMPH# 淋巴细胞",
+        "value": "3.15",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "MONO# 单核细胞",
+        "value": "0.63",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "EO# 嗜酸性粒细胞",
+        "value": "0.04↓",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "BASO# 嗜碱性粒细胞",
+        "value": "0.01",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "NEUT% 中性细胞比率",
+        "value": "43.04↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "LYMPH% 淋巴细胞比率",
+        "value": "46.94↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MONO% 单核细胞比率",
+        "value": "9.44↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "EO% 嗜酸性粒细胞比率",
+        "value": "0.60",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "BASO% 嗜碱性粒细胞比率",
+        "value": "0.10",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "hs-CRP 超敏C反应蛋白",
+        "value": ">5.0↑",
+        "unit": "mg/l",
+        "page": 1
+      },
+      {
+        "name": "CRP C反应蛋白",
+        "value": "5.5",
+        "unit": "mg/l",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3460,
+    "output_tokens": 1480
+  }
+}

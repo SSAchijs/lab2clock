@@ -1,0 +1,166 @@
+{
+  "key": "4719e142b6d608a9060e2eca31528d1639514c7cf6b1920f7b8d4f2d213d16b8",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1659697561357836288.jpg": "17bd0351b8b55f186119a7b8a74cb3bd48dc4fdc76af320a902968c0ca7428df"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "36",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "40",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "59",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰基转移酶",
+        "value": "26",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "腺苷脱氨酶",
+        "value": "10.9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "4.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "66.2",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "ALB",
+        "value": "38.6",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "21.9",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "6.8",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "179",
+        "unit": "U/l",
+        "page": 1
+      },
+      {
+        "name": "UREA",
+        "value": "4.14",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "202",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "50.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "5.29",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "4.02",
+        "unit": "mmol/l",
+        "page": 1
+      },
+      {
+        "name": "甘油三酯",
+        "value": "0.63",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "高密度脂蛋白胆固醇",
+        "value": "1.69",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "低密度脂蛋白胆固醇",
+        "value": "2.00 ↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "AST/ALT",
+        "value": "1.1",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "27.6",
+        "unit": "g/l",
+        "page": 1
+      },
+      {
+        "name": "A/G",
+        "value": "1.4",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "15.10",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2030,
+    "output_tokens": 1410
+  }
+}

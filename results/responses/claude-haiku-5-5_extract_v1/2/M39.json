@@ -1,0 +1,166 @@
+{
+  "key": "e8aba11746e7f240a8cc00870f215cdd706a1265c5a3f8a94c1f83a9d2971909",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1678873265630271523.png": "d78e181950db537cb1bbd5a45b7412aa51e1ef8d3f29477de14aed4a6370ff1e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "NE%",
+        "value": "73.8 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "LY%",
+        "value": "18.7",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MO%",
+        "value": "4.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "EO%",
+        "value": "2.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "BA%",
+        "value": "0.7",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "NE#",
+        "value": "4.5",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "LY#",
+        "value": "1.1",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "MO#",
+        "value": "0.3",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "EO#",
+        "value": "0.12",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "BA#",
+        "value": "0.04",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "RBC",
+        "value": "4.5",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "HGB",
+        "value": "141",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "HCT",
+        "value": "41.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MCV",
+        "value": "92",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "MCH",
+        "value": "31.7",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "MCHC",
+        "value": "344",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "RDW",
+        "value": "12.5",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PLT",
+        "value": "174",
+        "unit": "10⁹/L",
+        "page": 1
+      },
+      {
+        "name": "MPV",
+        "value": "8.3",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "PCT",
+        "value": "0.14",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PDW",
+        "value": "16.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "NRBC%",
+        "value": "0.41",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "NRBC#",
+        "value": "0.025",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4308,
+    "output_tokens": 645
+  }
+}

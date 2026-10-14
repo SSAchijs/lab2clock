@@ -1,0 +1,124 @@
+{
+  "key": "4006a0cd118ec9110667bf82981171fd5f6319d1216c9c0eb44dad8a0a502e69",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1647735730848937941.png": "4decf934f5e040b83e9540ea3c6355bd4e3bca6a631372828ade9e30452f689c"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "平均红细胞血红蛋白含量",
+        "value": "28.4",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞血红蛋白浓度",
+        "value": "338",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白细胞数目",
+        "value": "8.69",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞数目",
+        "value": "0.00",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板数目",
+        "value": "278",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分比",
+        "value": "34.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "56.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞百分比",
+        "value": "0.7",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "嗜碱性粒细胞百分比",
+        "value": "0.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞数目",
+        "value": "2.98",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞数目",
+        "value": "4.88",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "单核细胞数目",
+        "value": "0.77",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "嗜酸性粒细胞数目",
+        "value": "0.06",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞压积",
+        "value": "41.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度变异系数",
+        "value": "11.5",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "红细胞分布宽度标准差",
+        "value": "35.8",
+        "unit": "fL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3635,
+    "output_tokens": 703
+  }
+}

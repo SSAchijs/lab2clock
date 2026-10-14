@@ -1,0 +1,124 @@
+{
+  "key": "dbd5156a2559eea29ab66d6c31ada95f1112580050137cfd8b569466a6fe5773",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1703271292806852608.jpg": "b7e49f27227c844c8016ba81a58437a33de85020d84c0319429b15de4ac0dd9e"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "碱性磷酸酶",
+        "value": "81.0",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "谷氨酰转肽酶",
+        "value": "32.7",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "18.7",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "24.8",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "148.1",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "3.1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "19.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "7.1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "72.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[illegible]",
+        "value": "46.9",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "25.7",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "/球比",
+        "value": "1.8",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "4.03",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "油三酯",
+        "value": "1.27",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "岩藻糖 酶",
+        "value": "43.1 ↑",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "5.09",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3334,
+    "output_tokens": 962
+  }
+}

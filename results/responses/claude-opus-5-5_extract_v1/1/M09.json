@@ -1,0 +1,118 @@
+{
+  "key": "4c26a8b37f1c23b9ab6a1007ca1ae7db2a4b39303570c85db42f7670931545b0",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1658310187618181120.png": "ce1332e85746a8a0f0703ebead50af37d84abd1d8111b14217c763d21acc6258"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "*丙氨酸氨基转移酶",
+        "value": "15.2",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "*天门冬氨酸氨基转移酶",
+        "value": "17.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "*总蛋白",
+        "value": "73.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "ALB",
+        "value": "45.9",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "12.7",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "1.8",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "123.0",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "*γ-谷氨酰基转移酶",
+        "value": "14.8",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "*葡萄糖",
+        "value": "8.50 ↑",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "*尿素",
+        "value": "7.32",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "*肌酐",
+        "value": "43.1",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "*尿酸",
+        "value": "277.1",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "*总胆固醇",
+        "value": "5.48",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "*油三酯",
+        "value": "1.45",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "*高密度脂蛋白",
+        "value": "1.79 ↑",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3830,
+    "output_tokens": 833
+  }
+}

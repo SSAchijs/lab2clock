@@ -1,0 +1,94 @@
+{
+  "key": "db6efcf395bad7ff53b9c35ea512f4e01e100e8faabed1177393136ec383eaad",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1628083645487833548.png": "31e3704ee46871e87c87688ed5d861a25867f605428c717a1eb8de9a823f2dc9"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖",
+        "value": "4.98",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "56",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "天冬氨酸氨基转移酶",
+        "value": "32",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "79",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶",
+        "value": "41",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "9.9",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "74.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白",
+        "value": "46.2",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白/球 比值",
+        "value": "1.63",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷草/谷丙",
+        "value": "0.57",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "309",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3606,
+    "output_tokens": 1204
+  }
+}

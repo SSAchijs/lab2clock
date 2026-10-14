@@ -1,0 +1,154 @@
+{
+  "key": "b92d2c9d0ac791003a221e9f8c9fe2bc04a9775574e24d31a606468dda21b349",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1635967024781791232.jpg": "1c0c641090607ccf71cf80528ebbe653c0b4ca31ca583adcff22b6ecc677e9cb"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素（急）",
+        "value": "12.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "结合胆红素（急）",
+        "value": "<1",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白（急）",
+        "value": "72",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[obscured]（急）",
+        "value": "31 ↓",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白(急)",
+        "value": "41 ↑",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "[obscured]球比值（急）",
+        "value": "0.8 ↓",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "门冬氨酸氨基转移酶(急)",
+        "value": "19",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶（急）",
+        "value": "117",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转移酶",
+        "value": "41",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶（急）",
+        "value": "119",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖（急）",
+        "value": "16.1 ↑",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钠（急）",
+        "value": "139",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "钾（急）",
+        "value": "4.7",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "氯（急）",
+        "value": "105",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "二氧化碳（急）",
+        "value": "29",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "阴离子隙（急）",
+        "value": "5 ↓",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿素（急）",
+        "value": "4.8",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐（急）",
+        "value": "63",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "酮体",
+        "value": "阴性",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白（急）",
+        "value": "16.0 ↑",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2552,
+    "output_tokens": 1553
+  }
+}

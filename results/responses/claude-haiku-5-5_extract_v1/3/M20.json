@@ -1,0 +1,94 @@
+{
+  "key": "ff7d0193dbdc9f2454536b942b7e9ca099f0195013edaa0826c232dea0366ffb",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1700641709732220928.png": "dc052c068785b1a2a4e95d1e3c5d99fd44013f1bb19e5028fc443ac695146b77"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "直接胆红素",
+        "value": "5.40",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "15.50",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "12",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷酰转肽酶",
+        "value": "20",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "70",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "尿素",
+        "value": "3.10",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "65.10",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "396.70",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "β2微球蛋白",
+        "value": "1.03",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "血糖",
+        "value": "5.44",
+        "unit": "mmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2530,
+    "output_tokens": 354
+  }
+}

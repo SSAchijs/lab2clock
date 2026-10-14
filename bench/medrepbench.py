@@ -24,9 +24,11 @@ nine clock markers, as the core's synonym dictionary maps its item names, and
 whose image is not empty. Fewer markers would give too little clock-relevant
 data per call. At this revision that is 39 reports, all of them, so nothing is
 left to sample: the set follows from the labels, the dictionary and the
-revision alone. bench/medrepbench.csv fixes it, committed: each report's image
-name, the image's SHA-256 and the markers it prints, which is metadata about
-the dataset, not its content.
+revision alone. bench/medrepbench.csv fixes it, committed: each report's ID,
+image name, the image's SHA-256 and the markers it prints. Its labelled marker
+rows, name, value and unit, are committed in bench/medrepbench_labels.csv, so
+the real set is scored, and rescored in CI, without the dataset. Both files
+are derived from MedRepBench and are CC BY-NC 4.0.
 
     uv run python -m bench.medrepbench select
 
@@ -61,6 +63,13 @@ LABELS_SHA256 = "f918df98f68124fe344641aa7e986ec596e1d1078d61a2fc05fe2755b13a9fb
 
 # The scored reports, committed.
 SET = Path(__file__).resolve().parent / "medrepbench.csv"
+
+# Their labelled marker rows, committed, so the real set is scored without
+# the dataset.
+LABELLED = Path(__file__).resolve().parent / "medrepbench_labels.csv"
+
+# The hand check of 10 reports' labels; see bench.audit.
+AUDIT = Path(__file__).resolve().parent / "medrepbench_audit.csv"
 
 # A report is scored only if it prints at least this many clock markers.
 MIN_MARKERS = 3
@@ -122,18 +131,33 @@ def image(name: str, sha256: str, cache: Path = CACHE) -> Path:
     return fetch(f"censored/{name}", sha256, cache)
 
 
+def marker_rows(items: str) -> list[dict[str, str]]:
+    """Every labelled row that maps to a clock marker, in printed order."""
+    rows = []
+    for item in json.loads(items):
+        unit = item["item_unit"] or None
+        marker = match(item["item_name"], unit)
+        if marker in MARKERS:
+            rows.append(
+                {
+                    "marker": marker,
+                    "name": item["item_name"],
+                    "value": item["item_value"],
+                    "unit": item["item_unit"] or "",
+                }
+            )
+    return rows
+
+
 def markers(items: str) -> list[str]:
     """The clock markers a report's labelled items map to, in clock order."""
-    found = set()
-    for item in json.loads(items):
-        marker = match(item["item_name"], item["item_unit"] or None)
-        if marker in MARKERS:
-            found.add(marker)
+    found = {row["marker"] for row in marker_rows(items)}
     return [marker for marker in MARKERS if marker in found]
 
 
 def eligible(labelled: pd.DataFrame, hashes: dict[str, str]) -> pd.DataFrame:
-    """Every labelled report with enough markers and an image to read."""
+    """Every labelled report with enough markers and an image to read, each
+    given an ID, M01 onwards, in image order."""
     rows = []
     for image, items in zip(labelled["image"], labelled["items"], strict=True):
         found = markers(items)
@@ -141,16 +165,31 @@ def eligible(labelled: pd.DataFrame, hashes: dict[str, str]) -> pd.DataFrame:
             rows.append(
                 {"image": image, "sha256": hashes[image], "markers": ";".join(found)}
             )
-    return pd.DataFrame(rows).sort_values("image", ignore_index=True)
+    chosen = pd.DataFrame(rows).sort_values("image", ignore_index=True)
+    chosen.insert(0, "report", [f"M{i:02d}" for i in range(1, len(chosen) + 1)])
+    return chosen
 
 
-def select(cache: Path = CACHE) -> pd.DataFrame:
+def labelled_rows(labelled: pd.DataFrame, chosen: pd.DataFrame) -> pd.DataFrame:
+    """The marker rows of every chosen report, as labelled, in printed order."""
+    items = labelled.set_index("image")["items"]
+    rows = [
+        {"report": report, "image": image, **row}
+        for report, image in zip(chosen["report"], chosen["image"], strict=True)
+        for row in marker_rows(items[image])
+    ]
+    return pd.DataFrame(rows)
+
+
+def select(cache: Path = CACHE) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """The scored reports, and their labelled marker rows."""
     labelled = pd.read_csv(labels(cache)).dropna(subset=["items"])
     names = list(labelled["image"])
     hashes = {}
     for start in range(0, len(names), 400):
         hashes |= published(names[start : start + 400])
-    return eligible(labelled, hashes)
+    chosen = eligible(labelled, hashes)
+    return chosen, labelled_rows(labelled, chosen)
 
 
 def read_set(path: Path = SET) -> list[dict[str, str]]:
@@ -158,11 +197,27 @@ def read_set(path: Path = SET) -> list[dict[str, str]]:
         return list(csv.DictReader(file))
 
 
+def read_labelled(path: Path = LABELLED) -> dict[str, list[dict[str, str]]]:
+    """Per report ID, its labelled marker rows in printed order."""
+    out: dict[str, list[dict[str, str]]] = {}
+    with path.open(newline="", encoding="utf-8") as file:
+        for row in csv.DictReader(file):
+            out.setdefault(row["report"], []).append(row)
+    return out
+
+
+def read_audit(path: Path = AUDIT) -> list[dict[str, str]]:
+    """The hand check's rows: each label, its verdict and what is printed."""
+    with path.open(newline="", encoding="utf-8") as file:
+        return list(csv.DictReader(file))
+
+
 def main() -> None:
     if sys.argv[1:] == ["select"]:
-        chosen = select()
+        chosen, rows = select()
         chosen.to_csv(SET, index=False, lineterminator="\n")
-        print(f"wrote {len(chosen)} reports to {SET}")
+        rows.to_csv(LABELLED, index=False, lineterminator="\n")
+        print(f"wrote {len(chosen)} reports to {SET}, {len(rows)} rows to {LABELLED}")
     elif sys.argv[1:]:
         raise SystemExit("usage: python -m bench.medrepbench [select]")
     print(f"labels: {labels()}")

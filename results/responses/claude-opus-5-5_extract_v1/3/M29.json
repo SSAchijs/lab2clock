@@ -1,0 +1,88 @@
+{
+  "key": "49d6b6aab3913cbe0687ba13db46716f15069ad9990b077b6aa2affdef09b1e4",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1640581886324906516.png": "07e5aa1070b9379074fccf0780202378301c055900146b5f893716f956248e79"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷草转氨酶",
+        "value": "33.90",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "38.90",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "61.80",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "r-谷氨酰转肽酶",
+        "value": "53.10",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆汁酸",
+        "value": "3.10",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "谷草/谷丙转氨酶",
+        "value": "0.87 ↓",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "8.20",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "4.52",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "87.40",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "260.10",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3564,
+    "output_tokens": 321
+  }
+}

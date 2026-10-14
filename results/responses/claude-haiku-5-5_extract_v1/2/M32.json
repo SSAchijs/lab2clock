@@ -1,0 +1,94 @@
+{
+  "key": "36289dc3e05430d2b1740d9b9681116469e91527e82fa2229e01dcff37a3d5d3",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1649588474030138882.png": "c72d9862b6e08c33c5d6cc54eca66d997a605a8488829d9eb559fd105d94fb49"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白细胞",
+        "value": "8.16",
+        "unit": "*10`9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "5.09",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "149",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞平均体积",
+        "value": "93",
+        "unit": "fl.",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白量",
+        "value": "29",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "315",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞体积分布宽度",
+        "value": "12.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板总数",
+        "value": "260.0",
+        "unit": "*10`9/L",
+        "page": 1
+      },
+      {
+        "name": "血小板平均体积",
+        "value": "9.6",
+        "unit": "fl.",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞",
+        "value": "59.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "淋巴细胞百分比",
+        "value": "32.3",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 5767,
+    "output_tokens": 827
+  }
+}

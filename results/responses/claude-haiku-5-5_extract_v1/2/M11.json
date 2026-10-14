@@ -1,0 +1,118 @@
+{
+  "key": "81b66241e5d270e0b7e0e6adcbe1c4efebc0b170872266118e5be2de587e4b4e",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1664193060297588736.jpg": "4d7600f90e259d8d5112d306db8303bdc99478644183b14848007a690b82d074"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "WBC 白细胞数",
+        "value": "11.81 ↑",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Neu# 中性粒细胞数",
+        "value": "9.13 ↑",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Lym# 淋巴细胞数",
+        "value": "1.76",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Mon# 单核细胞数",
+        "value": "0.81",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Eos# 嗜酸性粒细胞数",
+        "value": "0.09",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Bas# 嗜碱性粒细胞数",
+        "value": "0.02",
+        "unit": "*10^9/L",
+        "page": 1
+      },
+      {
+        "name": "Neu% 中性粒细胞百分比",
+        "value": "77.20 ↑",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Lym% 淋巴细胞百分比",
+        "value": "14.9 ↓",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Mon% 单核细胞百分比",
+        "value": "6.9",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Eos% 嗜酸性粒细胞百分比",
+        "value": "0.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "Bas% 嗜碱性粒细胞百分比",
+        "value": "0.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "RBC 红细胞数",
+        "value": "5.32",
+        "unit": "*10^12/L",
+        "page": 1
+      },
+      {
+        "name": "HGB 血红蛋白",
+        "value": "154",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "MCV 平均红细胞体积",
+        "value": "88.2",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "HCT 红细胞压积",
+        "value": "46.9",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2430,
+    "output_tokens": 2117
+  }
+}

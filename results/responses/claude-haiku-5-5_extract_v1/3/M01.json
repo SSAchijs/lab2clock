@@ -1,0 +1,184 @@
+{
+  "key": "f7789d30631ede846b675839a29e9e830f6f5648613bfc22d1a576f5ed9898b0",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1634844059591491589.jpg": "aa09568c258b6b98ef8639e98a2c4a5b33cf189842036f70d58ad8d7a38dc340"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "WBC",
+        "value": "9.9",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "NEUT%",
+        "value": "61.7",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "LYM%",
+        "value": "32.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MONO%",
+        "value": "5.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "EO%",
+        "value": "0.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "BASO%",
+        "value": "0.3",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "NEUT#",
+        "value": "6.1",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "LYM#",
+        "value": "3.2",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "MONO#",
+        "value": "0.52",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "EO#",
+        "value": "0.06",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "BASO#",
+        "value": "0.03",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "RBC",
+        "value": "4.00",
+        "unit": "×10^12/L",
+        "page": 1
+      },
+      {
+        "name": "Hb",
+        "value": "111",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "HCT",
+        "value": "0.36",
+        "unit": "L/L",
+        "page": 1
+      },
+      {
+        "name": "MCV",
+        "value": "89.8",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "MCH",
+        "value": "27.90",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "MCHC",
+        "value": "310",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "RDW-CV",
+        "value": "11.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "RDW-SD",
+        "value": "38.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PLT",
+        "value": "448",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "PCT",
+        "value": "0.306",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MPV",
+        "value": "6.80",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "PDW",
+        "value": "15.4",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "P-LCR",
+        "value": "11.80",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "DXXB",
+        "value": "53",
+        "unit": "×10^9/L",
+        "page": 1
+      },
+      {
+        "name": "hsCRP",
+        "value": "42.8",
+        "unit": "mg/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3130,
+    "output_tokens": 2607
+  }
+}

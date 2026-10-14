@@ -1,0 +1,94 @@
+{
+  "key": "8a9acd025eabf0f7fecc7b6de48bfe49b0c17bdc7bf994b44ddd6de8199d2e98",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1633151868459390171.png": "6325cc0dbb2cc6e96e67a9778248fbddd91abd163d55d022b6583f504db2c696"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "总胆红素",
+        "value": "12.9",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "70.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "███",
+        "value": "47.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "3.5",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐",
+        "value": "83",
+        "unit": "µmol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "4.12",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "403 ↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-█████转肽酶",
+        "value": "285 ↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "142 ↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "23.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白",
+        "value": "2.0",
+        "unit": null,
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2617,
+    "output_tokens": 375
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "key": "9c4c2f214b05b37ac7f191405c5304ac1b95f5bf10f306aa40d4c6cc77413b71",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1682949882563919872.jpg": "cfecd75beca70491ebcf66a4fe14561140c64495c60a11516a872c642b95b2b6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "白蛋白",
+        "value": "37.7↓",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "前白蛋白",
+        "value": "145.0↓",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶",
+        "value": "68↑",
+        "unit": "IU/L",
+        "page": 1
+      },
+      {
+        "name": "天门冬氨酸氨基转移酶",
+        "value": "50↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "228↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ谷氨酰基转移酶",
+        "value": "160↑",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "3.30",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "15.1",
+        "unit": "umol/",
+        "page": 1
+      },
+      {
+        "name": "血红蛋白",
+        "value": "154",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血小板计数",
+        "value": "110↓",
+        "unit": "x10^9/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 3334,
+    "output_tokens": 620
+  }
+}

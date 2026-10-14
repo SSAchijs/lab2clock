@@ -1,0 +1,130 @@
+{
+  "key": "0c7c452293f81ce3967e1ce08def6715e57faf089959cd4c2f423c9c59200fc1",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1646721166932332544.png": "d2b7c2f5f663516959a73be19ea2db91bc0d32c3ee2b8b254364fe55c28549f0"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "肌酐",
+        "value": "83",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "17",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "4.1",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "20",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "尿素氮",
+        "value": "6.81",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白",
+        "value": "47.4",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶",
+        "value": "63",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "氯",
+        "value": "106.0",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸",
+        "value": "404",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖",
+        "value": "4.97",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "r-谷氨酰基转移酶",
+        "value": "14",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "68.8",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "5.7",
+        "unit": "μmol/L",
+        "page": 1
+      },
+      {
+        "name": "白蛋白/球蛋白比值",
+        "value": "2.2",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "镁",
+        "value": "0.85",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆固醇",
+        "value": "3.98",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "1.6",
+        "unit": "μmol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 4978,
+    "output_tokens": 548
+  }
+}

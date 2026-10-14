@@ -1,0 +1,118 @@
+{
+  "key": "d2c574ded35748071e4bc85314c9a959b8a932c2811e9881b9914d0b42300588",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1685923867654508547.png": "ba469add93b144820d0c1b701ab65449704544e22101a6a264cb540143131dd3"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "平均血红蛋白量",
+        "value": "30.0",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "322.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "平均红细胞体积",
+        "value": "93.1",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "单核细胞计数",
+        "value": "0.39",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "单核细胞百分率",
+        "value": "5.6",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "平均血小板体积",
+        "value": "10.40",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞计数",
+        "value": "4.09",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "中性粒细胞百分率",
+        "value": "59.0",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板压积",
+        "value": "0.20",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板分布宽度",
+        "value": "12.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "血小板",
+        "value": "191",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞",
+        "value": "4.67",
+        "unit": "10^12/L",
+        "page": 1
+      },
+      {
+        "name": "红细胞体积分布宽度",
+        "value": "13.8",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "白细胞",
+        "value": "6.93",
+        "unit": "10^9/L",
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白",
+        "value": "7.01↑",
+        "unit": "ug/mL",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2522,
+    "output_tokens": 494
+  }
+}

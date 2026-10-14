@@ -1,0 +1,112 @@
+{
+  "key": "96f77c5f6bcbee67d7daaf8dc161ba756e51d1899eb159afaa07c7ace0bd2661",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1636242318917860796.png": "0bdeb98c28cf060f453b7d01060b433bf760e0df1295cb741cc1790a789964b0"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "谷丙转氨酶 ALT",
+        "value": "4.7",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶 AST",
+        "value": "12.3",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素 TBil",
+        "value": "8.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素 DBIL",
+        "value": "0.0",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素 IBIL",
+        "value": "8.7",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "葡萄糖 GLU",
+        "value": "5.72",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "BUN",
+        "value": "2.80",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐 Crea",
+        "value": "71.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸 UA",
+        "value": "349.3",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "抗链球菌溶血素 ASO",
+        "value": "81.4",
+        "unit": "U/ml",
+        "page": 1
+      },
+      {
+        "name": "β2微球蛋白 β2MG",
+        "value": "2.31",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "类风湿因子 RF",
+        "value": "8.5",
+        "unit": "U/ml",
+        "page": 1
+      },
+      {
+        "name": "CRP",
+        "value": "12.13 ↑",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "抗环瓜氨酸肽抗体 CCP",
+        "value": "137.70 ↑",
+        "unit": "U/ml",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2618,
+    "output_tokens": 732
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "key": "a93a5753dffa21af099af618c0ac671a5df227704532a9cd19b5a3ec23d4bfd0",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "b1634438762410900637.png": "e5e842a26da3fadc406fc7d24115badbe5d213ae66e14bae43b9e84f5546aae2"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "[redacted]",
+        "value": "1.54",
+        "unit": null,
+        "page": 1
+      },
+      {
+        "name": "[redacted]",
+        "value": "45.68",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "谷丙转氨酶",
+        "value": "11.90",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "谷草转氨酶",
+        "value": "18.11",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血尿素氮",
+        "value": "3.70",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶",
+        "value": "71.80",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌酸激酶同工酶",
+        "value": "12.32",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "血肌酐",
+        "value": "82.29",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "C反应蛋白",
+        "value": "2.30",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "钙",
+        "value": "2.44",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "氯",
+        "value": "103.00",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素",
+        "value": "2.79",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "球蛋白",
+        "value": "29.64",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "间接胆红素",
+        "value": "9.22",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "钾",
+        "value": "4.40",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "乳酸脱氢酶",
+        "value": "138.66",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "肌红蛋白",
+        "value": "21.10",
+        "unit": "ng/mL",
+        "page": 1
+      },
+      {
+        "name": "钠",
+        "value": "142.00",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素",
+        "value": "12.01",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "[redacted]肌钙蛋白I",
+        "value": "0.002",
+        "unit": "mL",
+        "page": 1
+      },
+      {
+        "name": "总蛋白",
+        "value": "75.32",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "血尿酸",
+        "value": "507.56↑",
+        "unit": "umol/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2612,
+    "output_tokens": 1415
+  }
+}

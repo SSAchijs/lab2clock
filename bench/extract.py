@@ -36,21 +36,26 @@ every time from one it makes by chance.
     uv run python -m bench.extract cheap --split dev
 
 reads every development report three times with Claude Haiku 5.5, into
-results/responses/claude-haiku-5-5_extract_v1/1/ to 3/.
+results/responses/claude-haiku-5-5_extract_v1/1/ to 3/. With --split real it
+reads the MedRepBench reports, M01 to M39, each sent as the one image it came
+as, behind the same frozen-prompt lock as the test set.
 """
 
 import argparse
 import base64
 import hashlib
 import json
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import anthropic
+import cv2
+import numpy as np
 from pydantic import ValidationError
 
-from bench import degrade, prompts, render, responses
+from bench import degrade, medrepbench, prompts, render, responses
 from bench.models import MODELS
 from bench.prompts import Prompt
 from bench.responses import RESPONSES, Failure, Form, Response, Usage
@@ -121,6 +126,73 @@ def report_input(spec: RenderSpec) -> Input:
             {"type": "image", "source": source | {"data": _base64(photo)}},
         ]
     return Input("photo", files, content)
+
+
+# The API refuses an image over 10 MB once base64-encoded.
+MAX_IMAGE = 10 * 1024 * 1024
+
+# An image's type by its first bytes, not its name: some of the dataset's
+# .jpg files are PNGs, and the API checks.
+SIGNATURES = {b"\x89PNG": "image/png", b"\xff\xd8": "image/jpeg"}
+
+
+def _media_type(data: bytes) -> str:
+    for signature, media in SIGNATURES.items():
+        if data.startswith(signature):
+            return media
+    raise ValueError(f"not a PNG or JPEG image: {data[:8]!r}")
+
+
+def _image(path: Path) -> tuple[bytes, str]:
+    """An image's bytes and media type as sent. One too large for the API is
+    re-encoded as a JPEG at the same size, less compressed each time, as a
+    real app would have to."""
+    data = path.read_bytes()
+    media = _media_type(data)
+    quality = 95
+    while len(base64.b64encode(data)) > MAX_IMAGE:
+        pixels = cv2.imdecode(
+            np.frombuffer(path.read_bytes(), np.uint8), cv2.IMREAD_COLOR
+        )
+        _, encoded = cv2.imencode(".jpg", pixels, [cv2.IMWRITE_JPEG_QUALITY, quality])
+        data, media, quality = encoded.tobytes(), "image/jpeg", quality - 5
+    return data, media
+
+
+def real_input(image: str) -> Input:
+    """A real report, sent as the one image it came as."""
+    path = medrepbench.CACHE / "censored" / image
+    data, media = _image(path)
+    source = {
+        "type": "base64",
+        "media_type": media,
+        "data": base64.standard_b64encode(data).decode("ascii"),
+    }
+    content = [
+        {"type": "text", "text": "Page 1"},
+        {"type": "image", "source": source},
+    ]
+    return Input("image", [path], content)
+
+
+@dataclass(frozen=True)
+class Job:
+    """One report to read: its ID, its split and how to build what is sent."""
+
+    report: str
+    split: str
+    sent: Callable[[], Input]
+
+
+def synthetic_jobs(specs: list[RenderSpec]) -> list[Job]:
+    return [Job(s.report, s.split, lambda s=s: report_input(s)) for s in specs]
+
+
+def real_jobs() -> list[Job]:
+    return [
+        Job(row["report"], "real", lambda image=row["image"]: real_input(image))
+        for row in medrepbench.read_set()
+    ]
 
 
 def _report(message: Any) -> RawReport:
@@ -205,25 +277,26 @@ def run(
     client: anthropic.Anthropic,
     model: str,
     prompt: Prompt,
-    specs: list[RenderSpec],
+    jobs: list[Job],
     number: int,
     root: Path = RESPONSES,
 ) -> tuple[int, int]:
     """Read every report not already saved; how many were read and cached.
 
-    A test report is read only with the frozen prompt, so the test set is
-    never seen while the prompt can still change.
+    A test or real report is read only with the frozen prompt, so neither set
+    is seen while the prompt can still change.
     """
-    if any(spec.split == "test" for spec in specs) and not prompts.is_frozen(prompt):
+    scored = any(job.split in {"test", "real"} for job in jobs)
+    if scored and not prompts.is_frozen(prompt):
         raise SystemExit(
             f"{prompt.version} is not frozen; tune it on the development reports, "
             "then freeze it with python -m bench.prompts freeze"
         )
     out = root / extractor(model, prompt) / str(number)
     read_count = cached = 0
-    for spec in specs:
-        sent = report_input(spec)
-        path = out / f"{spec.report}.json"
+    for job in jobs:
+        sent = job.sent()
+        path = out / f"{job.report}.json"
         if path.exists():
             if responses.read(path).key != key(model, prompt, sent, number):
                 raise SystemExit(
@@ -232,7 +305,7 @@ def run(
                 )
             cached += 1
             continue
-        responses.write(spec.report, read(client, model, prompt, sent, number), out)
+        responses.write(job.report, read(client, model, prompt, sent, number), out)
         read_count += 1
     return read_count, cached
 
@@ -240,20 +313,22 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Read the reports with a model.")
     parser.add_argument("model", choices=sorted(MODELS))
-    parser.add_argument("--split", choices=["dev", "test"], required=True)
+    parser.add_argument("--split", choices=["dev", "test", "real"], required=True)
     parser.add_argument("--runs", type=int, default=RUNS)
     args = parser.parse_args()
     load_env()
     model, prompt = MODELS[args.model].id, prompts.load()
-    specs = [
-        spec
-        for path in sorted(RENDER_SPEC.glob("*.json"))
-        if (spec := RenderSpec.model_validate_json(path.read_text())).split
-        == args.split
-    ]
+    if args.split == "real":
+        jobs = real_jobs()
+    else:
+        specs = [
+            RenderSpec.model_validate_json(path.read_text())
+            for path in sorted(RENDER_SPEC.glob("*.json"))
+        ]
+        jobs = synthetic_jobs([s for s in specs if s.split == args.split])
     client = anthropic.Anthropic()
     for number in range(1, args.runs + 1):
-        read_count, cached = run(client, model, prompt, specs, number)
+        read_count, cached = run(client, model, prompt, jobs, number)
         print(
             f"{extractor(model, prompt)} run {number}: read {read_count} reports, "
             f"{cached} from the cache"

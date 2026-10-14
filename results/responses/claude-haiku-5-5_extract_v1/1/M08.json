@@ -1,0 +1,106 @@
+{
+  "key": "e3dfaa67f41fa0e19566d952213e45e77304f4591509959fd61fd2c3d74fb68f",
+  "model": "claude-haiku-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1658118678720225283.png": "2eb4cac9c13a22ffb3d93e17f4e2e6510e64b0aebe367b6ad5ab9053bc2891c6"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "葡萄糖(酶法)",
+        "value": "4.59",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "碳酸氢根(酶法)",
+        "value": "22.7",
+        "unit": "mmol/l",
+        "page": 1
+      },
+      {
+        "name": "尿素(酶促动力学法)",
+        "value": "2.90",
+        "unit": "mmol/L",
+        "page": 1
+      },
+      {
+        "name": "肌酐(酶促动力学法)",
+        "value": "45.2",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "尿酸(尿酸酶法)",
+        "value": "265.4",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "胱抑素C(免疫比浊法)",
+        "value": "0.67",
+        "unit": "mg/L",
+        "page": 1
+      },
+      {
+        "name": "丙氨酸氨基转移酶(速率法)*",
+        "value": "9",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "■■化学法)*",
+        "value": "70.5",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "■■■化学法)*",
+        "value": "44.6",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "总胆红素(化学法)",
+        "value": "29.0↑",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "直接胆红素(化学法)",
+        "value": "6.5",
+        "unit": "umol/L",
+        "page": 1
+      },
+      {
+        "name": "碱性磷酸酶(速率法)*",
+        "value": "41",
+        "unit": "U/L",
+        "page": 1
+      },
+      {
+        "name": "γ-谷氨酰转肽酶(γ-GT化学法)*",
+        "value": "22",
+        "unit": "U/L",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 2457,
+    "output_tokens": 1096
+  }
+}

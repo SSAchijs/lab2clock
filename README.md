@@ -251,7 +251,7 @@ At the pinned revision, 819 reports have item labels, but 387 of the images are 
 
 The scored set is every labelled report that prints at least three of the nine clock markers, matched by the core's synonym dictionary, and has an image. With fewer markers, a call yields too little clock-relevant data. Only 39 reports qualify: most labelled reports are other tests, such as urinalysis, coagulation or hormones, and most that print a marker print one or two. So all 39 are scored, not a sample of 40, and no seed is needed: the set follows from the labels, the dictionary and the revision alone. They print 146 marker values, which at 85% accuracy gives a margin of about ±5.8 points. The dictionary is not why there are so few. The names it leaves unmapped that look like markers are lookalikes it excludes on purpose, such as platelet distribution width (血小板分布宽度), RDW-SD, prealbumin (前白蛋白) and urine tests, or a lymphocyte row with no unit, which could be the count or the percent.
 
-`bench/medrepbench.csv` fixes the set, committed: each report's image name, the image's SHA-256 and the markers it prints. That is metadata about the dataset, not its content.
+`bench/medrepbench.csv` fixes the set, committed: each report's ID (M01 to M39), image name, the image's SHA-256 and the markers it prints. Its labelled marker rows, 149 of them (some reports print two rows for one marker, such as CRP and hs-CRP), are committed in `bench/medrepbench_labels.csv`, so the real set can be scored, and rescored in CI, without the dataset.
 
 ```bash
 uv run python -m bench.medrepbench select   # rebuild bench/medrepbench.csv from the labels
@@ -276,6 +276,27 @@ uv run python -m bench.audit score   # the error rate from bench/medrepbench_aud
 - `mg/l` read as `mg/1`, twice, where the font draws a lowercase L like a 1.
 
 So on these reports the labels can be trusted for values, but a unit disagreement between a model and a label may be the label's fault. The labels also treat a unit printed only inside the reference range inconsistently, taking it as the unit on some rows and leaving it out on others. Stage 1 on the real set is scored with both in mind.
+
+### Scoring stage 1 on the real set
+
+Each report is read three times by each model with the frozen prompt, behind the same lock as the synthetic test set, and sent as the one image it came as. The image type is taken from the file's bytes, since every one of the 39 is a PNG although 16 are named `.jpg` or `.jpeg`. The API refuses an image over 10 MB once base64-encoded, so the one image that exceeds it is re-encoded as a JPEG at the same size, as a real app would have to.
+
+```bash
+uv run python -m bench.extract cheap --split real
+uv run python -m bench.extract frontier --split real
+```
+
+Only stage 1 is scored. The labels record what was printed, which is exactly stage 1's contract, but there is no patient-level truth behind them to score a conversion against. Each labelled marker row is lined up with the item read from it as on the synthetic reports, by name first and then by value and unit, and scored on its value as printed and its unit as labelled. The four labels the hand check found wrong are scored as what is printed. Since the labels were right on every value checked but wrong on 9% of units, the value rate is the one to trust, and the unit rate is a lower bound. The rows go into `results.csv` with the split `real`, and `summary.md` reports them in their own table.
+
+The reports are all Chinese and mostly in SI units, so this set does not test US units; the synthetic set covers that.
+
+### License of the derived files
+
+MedRepBench is licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), by Xia, Shang et al. ([arXiv 2508.16674](https://arxiv.org/abs/2508.16674)). No image and not the label file are in this repository, but these files are derived from it and are under CC BY-NC 4.0, not the MIT license of the rest:
+
+- `bench/medrepbench.csv`, `bench/medrepbench_labels.csv` and `bench/medrepbench_audit.csv`;
+- the responses to the real reports, `results/responses/*/*/M*.json`;
+- the rows of `results/results.csv` whose split is `real`, and the real-world table in `results/summary.md`.
 
 ## Usage
 

@@ -1,0 +1,172 @@
+{
+  "key": "fc06aab4a429099a4ca99972a7e08d6f0df374d11a82ac29b84252893639c82c",
+  "model": "claude-opus-5-5",
+  "prompt": "extract_v1",
+  "prompt_sha256": "c40cc29c53419ddf001e26a07b1724c9d1e908ee27de8b01eb7c990c565c0381",
+  "settings": {
+    "max_tokens": 16000,
+    "effort": "medium",
+    "thinking": {
+      "type": "adaptive"
+    },
+    "attempts": 2,
+    "schema_sha256": "f7a4ab97de644563a82037d401dc59218603ce77745b48eaa0bc628f5a50b31d"
+  },
+  "form": "image",
+  "files": {
+    "1000_b_image_1668447422945345538.jpg": "06447e011ef92d74baebc4ea1875e1b1c63c81ede21ce5a943f888037af60639"
+  },
+  "report": {
+    "items": [
+      {
+        "name": "*WBC 白细胞绝对值",
+        "value": "8.63",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "LY# 淋巴细胞群绝对值",
+        "value": "2.87",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "MONO# 单核细胞群绝对值",
+        "value": "0.46",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "NEUT# 中性粒细胞绝对值",
+        "value": "5.15",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "EO# 嗜酸性细胞绝对值",
+        "value": "0.14",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "BA# 嗜碱性细胞绝对值",
+        "value": "0.01",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "LY 淋巴细胞群相对值",
+        "value": "33.1",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "MO 单核细胞群相对值",
+        "value": "5.40",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "GR 中性粒细胞相对值",
+        "value": "59.70",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "EO% 嗜酸性细胞相对值",
+        "value": "1.60",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "BA% 嗜碱性细胞相对值",
+        "value": "0.20",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "*RBC 红细胞绝对值",
+        "value": "5.27",
+        "unit": "10E12/L",
+        "page": 1
+      },
+      {
+        "name": "*HGB 血红蛋白",
+        "value": "153",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "*HCT 红细胞压积",
+        "value": "0.44",
+        "unit": "L/L",
+        "page": 1
+      },
+      {
+        "name": "*MCV 红细胞平均体积",
+        "value": "83.7",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "*MCH 平均血红蛋白量",
+        "value": "29.1",
+        "unit": "pg",
+        "page": 1
+      },
+      {
+        "name": "平均血红蛋白浓度",
+        "value": "347.0",
+        "unit": "g/L",
+        "page": 1
+      },
+      {
+        "name": "RDW 红细胞分布宽度SD",
+        "value": "36.40",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "RDW-CV 红细胞分布宽度CV",
+        "value": "12.4",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "*PLT 血小板绝对值",
+        "value": "230",
+        "unit": "10E9/L",
+        "page": 1
+      },
+      {
+        "name": "PDW 血小板分布宽度",
+        "value": "16.4",
+        "unit": "fL",
+        "page": 1
+      },
+      {
+        "name": "MPV 平均血小板体积",
+        "value": "9.5",
+        "unit": "fl",
+        "page": 1
+      },
+      {
+        "name": "P-LCR 大血小板比率",
+        "value": "24.2",
+        "unit": "%",
+        "page": 1
+      },
+      {
+        "name": "PCT 血小板压积",
+        "value": "0.22",
+        "unit": "%",
+        "page": 1
+      }
+    ]
+  },
+  "failures": [],
+  "usage": {
+    "input_tokens": 1592,
+    "output_tokens": 1066
+  }
+}
