@@ -35,11 +35,14 @@ class ParsedValue:
         is often below detection and PhenoAge takes its log, so zero would be
         unusable; the limit stands in, and this flag keeps that visible.
     flags: the abnormal-result flags printed after the number, in order.
+    decimals: digits printed after the decimal mark. The printed value was
+        rounded to them, which the cross-field checks need to know.
     """
 
     value: float
     censored: bool = False
     flags: tuple[str, ...] = ()
+    decimals: int = 0
 
 
 # Trailing flags. Letters may be wrapped in brackets, as in 1.2 (H).
@@ -53,7 +56,8 @@ def _grouped(digits: str, sep: str) -> bool:
     return re.fullmatch(rf"\d{{1,3}}(?:{re.escape(sep)}\d{{3}})+", digits) is not None
 
 
-def _to_float(number: str) -> float:
+def _to_float(number: str) -> tuple[float, int]:
+    """The number and its count of decimals."""
     sign = "-" if number.startswith("-") else ""
     digits = number.lstrip("+-")
 
@@ -78,7 +82,8 @@ def _to_float(number: str) -> float:
     if separators and not _grouped(integer, separators.pop()):
         raise ValueParseError("thousands separators not in groups of three")
 
-    return float(f"{sign}{re.sub(r'\D', '', integer)}.{fraction or '0'}")
+    value = float(f"{sign}{re.sub(r'\D', '', integer)}.{fraction or '0'}")
+    return value, len(fraction)
 
 
 def parse_value(printed: str) -> ParsedValue:
@@ -102,7 +107,7 @@ def parse_value(printed: str) -> ParsedValue:
     if not _NUMBER.match(text):
         raise ValueParseError(f"not a number: {printed!r}")
     try:
-        number = _to_float(text)
+        number, decimals = _to_float(text)
     except ValueParseError as error:
         raise ValueParseError(f"{error}: {printed!r}") from None
-    return ParsedValue(number, censored, tuple(flags))
+    return ParsedValue(number, censored, tuple(flags), decimals)
