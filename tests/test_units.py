@@ -61,6 +61,9 @@ from lab2clock.units import UNITS, UnitError, normalise_unit
         ("10^3/mm³", "10^3/uL"),
         ("10^3/mm^3", "10^3/uL"),
         ("cells/mm³", "/uL"),
+        # NHANES codebooks.
+        ("1000 cells/uL", "10^3/uL"),
+        ("1000 cells/µL", "10^3/uL"),
         # Spaces, and full-width characters as on Chinese reports.
         (" mmol / L ", "mmol/L"),
         ("x 10^9 / L", "10^3/uL"),

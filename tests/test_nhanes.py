@@ -4,7 +4,16 @@ import pandas as pd
 import pytest
 
 from bench import nhanes
-from bench.nhanes import FILES, REQUIRED, UNITS, VARIABLES, build, download
+from bench.nhanes import (
+    FILES,
+    REQUIRED,
+    UNITS,
+    VARIABLES,
+    build,
+    check_si,
+    download,
+    to_clock_units,
+)
 from lab2clock.clock_spec import FIELD_NAMES
 
 # A complete adult, in NHANES units.
@@ -99,3 +108,60 @@ def test_download_reuses_a_cached_file(tmp_path, monkeypatch):
     (tmp_path / "CBC_J.xpt").write_bytes(content)
     monkeypatch.setitem(FILES, "CBC_J", hashlib.sha256(content).hexdigest())
     assert download("CBC_J", tmp_path) == tmp_path / "CBC_J.xpt"
+
+
+def test_converts_to_clock_units():
+    clock = to_clock_units(build(frames({1: ADULT})))
+    assert list(clock.columns) == [*FIELD_NAMES, "crp_below_lod"]
+    row = clock.loc[1]
+    assert row["age"] == 52
+    assert row["albumin"] == pytest.approx(42)
+    assert row["creatinine"] == pytest.approx(79.56, rel=1e-4)
+    assert row["glucose"] == pytest.approx(5.27, abs=0.01)
+    # mg/L to mg/dL: the trap the CRP codebook sets.
+    assert row["c_reactive_protein"] == pytest.approx(0.18)
+    assert row["white_blood_cell_count"] == 6.5
+    assert row["alkaline_phosphatase"] == 70
+
+
+# Published values (SEQN: albumin g/dL, g/L; creatinine mg/dL, umol/L; glucose
+# mg/dL, mmol/L): the first three adults, and the rows where our factors come
+# furthest from NHANES's rounded ones.
+REAL = {
+    93705: (4.4, 44.0, 0.92, 81.33, 85.0, 4.72),
+    93708: (3.9, 39.0, 0.58, 51.27, 116.0, 6.44),
+    93709: (3.7, 37.0, 1.32, 116.69, 96.0, 5.33),
+    93735: (3.8, 38.0, 11.46, 1013.06, 79.0, 4.39),
+    95358: (3.8, 38.0, 1.08, 95.47, 353.0, 19.6),
+}
+
+
+def real_table() -> pd.DataFrame:
+    columns = ("LBXSAL", "LBDSALSI", "LBXSCR", "LBDSCRSI", "LBXSGL", "LBDSGLSI")
+    rows = {
+        seqn: {**ADULT, **dict(zip(columns, values, strict=True))}
+        for seqn, values in REAL.items()
+    }
+    return build(frames(rows))
+
+
+def test_agrees_with_nhanes_si_columns():
+    table = real_table()
+    check_si(table, to_clock_units(table))
+
+
+@pytest.mark.parametrize(
+    ("marker", "factor"),
+    [
+        ("albumin", 0.1),  # left in g/dL
+        ("glucose", 18.016),  # left in mg/dL
+        ("creatinine", 1 / 88.4),  # left in mg/dL
+        ("creatinine", 1.01),  # a 1% wrong factor
+    ],
+)
+def test_si_check_catches_a_wrong_conversion(marker, factor):
+    table = real_table()
+    clock = to_clock_units(table)
+    clock[marker] *= factor
+    with pytest.raises(ValueError, match=marker):
+        check_si(table, clock)

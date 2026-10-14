@@ -64,6 +64,8 @@ UNITS: dict[str, tuple[str, ...]] = {
         "K/uL",
         "K/µL",
         "thou/uL",
+        # As in the NHANES codebooks. Not cells/uL, which is 1000 times smaller.
+        "1000 cells/uL",
         "10^3/mm³",
         "K/mm³",
     ),

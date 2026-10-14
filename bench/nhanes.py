@@ -2,8 +2,9 @@
 
 Joins four public files on the respondent number (SEQN) into one table: age plus
 the nine PhenoAge markers for every adult with all ten present. Values stay in
-the units NHANES publishes; converting them is the job of lab2clock's own
-conversion table, so this table is also a test of it.
+the units NHANES publishes. to_clock_units then converts them with lab2clock's
+own unit normaliser and conversion table, and check_si compares the result with
+the SI columns NHANES computed itself: the first real test of that table.
 
 Every variable name and unit below was checked against its codebook, the .htm
 page beside each .xpt file. Two codebook facts shape the table:
@@ -18,6 +19,9 @@ silently revised file fails instead of changing the truth. Needs network access
 to wwwn.cdc.gov on the first run:
 
     uv run python -m bench.nhanes
+
+This writes the table as published (nhanes_adults.csv) and in clock units
+(nhanes_clock.csv), after the SI check passes.
 """
 
 import hashlib
@@ -27,11 +31,14 @@ from pathlib import Path
 
 import pandas as pd
 
-from lab2clock.clock_spec import MARKERS
+from lab2clock.clock_spec import BY_NAME, FIELD_NAMES, MARKERS
+from lab2clock.conversions import convert
+from lab2clock.units import normalise_unit
 
 DATA = Path(__file__).resolve().parent / "data"
 CACHE = DATA / "nhanes"
 OUT = DATA / "nhanes_adults.csv"
+CLOCK_OUT = DATA / "nhanes_clock.csv"
 
 BASE_URL = "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles"
 
@@ -92,6 +99,21 @@ UNITS: dict[str, str] = {v.column: v.unit for v in VARIABLES}
 # The columns a respondent must have to count as complete.
 REQUIRED: tuple[str, ...] = ("age", *MARKERS)
 
+# Marker -> the SI column NHANES derived from it. The BIOPRO_J codebook gives
+# the factors: albumin x 10, creatinine x 88.4, glucose x 0.0555.
+SI_COLUMNS: dict[str, str] = {
+    "albumin": "albumin_si",
+    "creatinine": "creatinine_si",
+    "glucose": "glucose_si",
+}
+
+# How close a converted value must come to NHANES's SI column. Our molar-mass
+# factors (88.40 and 0.055506) differ from NHANES's rounded ones by 0.002% and
+# 0.011%, and the SI columns are printed to two decimals; NHANES's own factors
+# reproduce its glucose column only to 0.0085. A unit slip is off by 10x or more.
+SI_RTOL = 2e-4
+SI_ATOL = 0.01
+
 # SAS transport files store 0 as a tiny float that pandas reads as about 5e-79.
 _SAS_ZERO = 1e-70
 
@@ -146,13 +168,50 @@ def load(cache: Path = CACHE) -> pd.DataFrame:
     return build({stem: read(stem, cache) for stem in FILES})
 
 
+def to_clock_units(table: pd.DataFrame) -> pd.DataFrame:
+    """The ten clock inputs in the clock's units, plus crp_below_lod.
+
+    Each published unit goes through lab2clock's unit normaliser and conversion
+    table, exactly as a printed unit on a report would.
+    """
+    if UNITS["age"] != BY_NAME["age"].unit:
+        raise ValueError(f"age is in {UNITS['age']}, the clock takes years")
+    clock = pd.DataFrame({"age": table["age"]}, index=table.index)
+    for marker in MARKERS:
+        unit = normalise_unit(UNITS[marker])
+        clock[marker] = table[marker].map(lambda v, m=marker, u=unit: convert(m, v, u))
+    clock["crp_below_lod"] = table["crp_below_lod"]
+    return clock[[*FIELD_NAMES, "crp_below_lod"]]
+
+
+def check_si(table: pd.DataFrame, clock: pd.DataFrame) -> None:
+    """Raise if any converted value disagrees with NHANES's own SI column."""
+    for marker, si in SI_COLUMNS.items():
+        diff = (clock[marker] - table[si]).abs()
+        bad = diff > SI_ATOL + SI_RTOL * table[si].abs()
+        if bad.any():
+            seqn = diff[bad].idxmax()
+            raise ValueError(
+                f"{marker}: {bad.sum()} of {len(bad)} converted values disagree "
+                f"with {si}; worst SEQN {seqn}: {table.at[seqn, marker]} "
+                f"{UNITS[marker]} -> {clock.at[seqn, marker]}, NHANES says "
+                f"{table.at[seqn, si]} {UNITS[si]}"
+            )
+
+
 def main() -> None:
     table = load()
+    clock = to_clock_units(table)
+    check_si(table, clock)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w") as f:
         f.write(f"# NHANES 2017-2018 adults with all clock inputs; units: {UNITS}\n")
         table.to_csv(f)
-    print(f"wrote {len(table)} adults to {OUT}")
+    units = {name: BY_NAME[name].unit for name in FIELD_NAMES}
+    with CLOCK_OUT.open("w") as f:
+        f.write(f"# The same adults in clock units: {units}\n")
+        clock.to_csv(f)
+    print(f"wrote {len(table)} adults to {OUT} and {CLOCK_OUT}")
 
 
 if __name__ == "__main__":
