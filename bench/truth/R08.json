@@ -1,0 +1,17 @@
+{
+  "report": "R08",
+  "split": "test",
+  "seqn": 102359,
+  "age": 39,
+  "values": {
+    "albumin": 43.0,
+    "creatinine": 53.04101838755304,
+    "glucose": 4.8845470692717585,
+    "c_reactive_protein": 0.078,
+    "lymphocyte_percent": 30.8,
+    "mean_cell_volume": 89.1,
+    "red_cell_distribution_width": 13.0,
+    "alkaline_phosphatase": 31.0,
+    "white_blood_cell_count": 5.3
+  }
+}

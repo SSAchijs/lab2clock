@@ -1,0 +1,93 @@
+{
+  "report": "R18",
+  "split": "test",
+  "conditions": {
+    "layout": "table",
+    "language": "en",
+    "unit_system": "si"
+  },
+  "degradation": null,
+  "rows": [
+    {
+      "name": "WBC",
+      "value": "3.3",
+      "unit": "10^9/L",
+      "page": 1,
+      "analyte": "white_blood_cell_count",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Lymphocytes %",
+      "value": "42.4",
+      "unit": "%",
+      "page": 1,
+      "analyte": "lymphocyte_percent",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "MCV",
+      "value": "89.9",
+      "unit": "fL",
+      "page": 1,
+      "analyte": "mean_cell_volume",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "RDW-CV",
+      "value": "12.3",
+      "unit": "%",
+      "page": 1,
+      "analyte": "red_cell_distribution_width",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Albumin",
+      "value": "44",
+      "unit": "g/L",
+      "page": 1,
+      "analyte": "albumin",
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Creatinine",
+      "value": "58",
+      "unit": "µmol/L",
+      "page": 1,
+      "analyte": "creatinine",
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "Glucose",
+      "value": "4.5",
+      "unit": "mmol/L",
+      "page": 1,
+      "analyte": "glucose",
+      "decimals": 1,
+      "planted": null
+    },
+    {
+      "name": "Alkaline Phosphatase",
+      "value": "52",
+      "unit": "U/L",
+      "page": 1,
+      "analyte": "alkaline_phosphatase",
+      "decimals": 0,
+      "planted": null
+    },
+    {
+      "name": "hs-CRP",
+      "value": "1.0",
+      "unit": "mg/L",
+      "page": 1,
+      "analyte": "c_reactive_protein",
+      "decimals": 1,
+      "planted": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "report": "R17",
+  "split": "test",
+  "seqn": 101620,
+  "age": 29,
+  "values": {
+    "albumin": 42.0,
+    "creatinine": 56.57708628005658,
+    "glucose": 4.8845470692717585,
+    "c_reactive_protein": 0.046,
+    "lymphocyte_percent": 28.6,
+    "mean_cell_volume": 93.9,
+    "red_cell_distribution_width": 11.8,
+    "alkaline_phosphatase": 55.0,
+    "white_blood_cell_count": 6.5
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "report": "R21",
+  "split": "test",
+  "seqn": 99210,
+  "age": 71,
+  "values": {
+    "albumin": 37.0,
+    "creatinine": 106.96605374823196,
+    "glucose": 16.429840142095916,
+    "c_reactive_protein": 0.8230000000000001,
+    "lymphocyte_percent": 23.7,
+    "mean_cell_volume": 90.0,
+    "red_cell_distribution_width": 14.9,
+    "alkaline_phosphatase": 67.0,
+    "white_blood_cell_count": 8.4
+  }
+}

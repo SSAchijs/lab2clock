@@ -71,13 +71,23 @@ Two codebook facts to know:
 
 ### The 25 patients
 
-`bench/sample.py` draws the 25 patients behind the fake reports from that table with a fixed seed, so rerunning it gives the same file, `bench/patients.csv`, which is committed. Five are for developing the prompt and twenty for the scored test set, so the prompt is never tuned on a report it is scored on.
+`bench/sample.py` draws the 25 patients behind the fake reports from that table with a fixed seed, so rerunning it gives the same file, `bench/patients.csv`, which is committed. It reads the table from `bench/data/`, so on a fresh clone run `bench.nhanes` first. Five are for developing the prompt and twenty for the scored test set, so the prompt is never tuned on a report it is scored on.
 
 ```bash
 uv run python -m bench.sample
 ```
 
 A purely random draw rarely contains large values: twenty random adults have fewer than three CRPs above 10 mg/L about 65% of the time, and fewer than three glucoses of 11.1 mmol/L (200 mg/dL) or more 96% of the time. So the test set is forced to hold at least three of each, and the development set one of each; the rest are random. Each row records why it was drawn. Ages run from 20 to 79, because NHANES records everyone 80 or older as 80 and their true age is unknown.
+
+### Truth and render spec
+
+Each report has two files. `bench/truth/R07.json` holds what is true about the patient: age and the nine markers in clock units, unrounded. `bench/render_spec/R07.json` holds what the report prints: its conditions (layout, language, unit system) and every row as printed, in the same shape stage 1 returns. Stage 1 is scored against the rows, because a reader can only be asked to copy what was printed. The truth is needed where the printout cannot say what the patient really has: what a planted wrong value or a missing marker should have been, and how far the lab's rounding alone moves the clock. The conditions let errors be sliced by condition.
+
+```bash
+uv run python -m bench.spec
+```
+
+A printed value is the truth converted into the display unit by lab2clock's own conversion table and rounded half up to the display decimals, as a lab rounds. The tests feed every render spec's rows through the whole pipeline, as a perfect reader would, and require each value to come back to the truth within half a printed step, in every layout, language and unit system. Until the variation matrix assigns conditions, every report is printed in English, SI units and the single-table layout.
 
 ## Usage
 

@@ -1,0 +1,17 @@
+{
+  "report": "R24",
+  "split": "test",
+  "seqn": 95160,
+  "age": 66,
+  "values": {
+    "albumin": 39.0,
+    "creatinine": 74.25742574257426,
+    "glucose": 6.327708703374778,
+    "c_reactive_protein": 0.584,
+    "lymphocyte_percent": 54.0,
+    "mean_cell_volume": 87.2,
+    "red_cell_distribution_width": 14.0,
+    "alkaline_phosphatase": 68.0,
+    "white_blood_cell_count": 6.5
+  }
+}

@@ -1,0 +1,260 @@
+"""Two files per report: what is true about the patient, and what was printed.
+
+truth/R07.json holds the patient: age and the nine markers in clock units, the
+unrounded values from bench/patients.csv. The clock effect of an error is
+computed from it.
+
+render_spec/R07.json holds the report: its conditions (layout, language, unit
+system, photo degradation, planted errors) and every row exactly as printed,
+in the stage-1 shape. Stage 1 is scored against these rows, and the generator
+renders them, so the two cannot disagree. The conditions also let errors be
+sliced by condition.
+
+A printed value is the truth converted into the display unit with lab2clock's
+own conversion table, then rounded half up to the display decimals, as a lab
+rounds.
+
+    uv run python -m bench.spec
+
+regenerates both folders from bench/patients.csv. The variation matrix sets each
+report's conditions; until it exists, every report gets BASELINE.
+"""
+
+import json
+from decimal import ROUND_HALF_UP, Decimal
+from pathlib import Path
+from typing import Literal
+
+import pandas as pd
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+from bench.sample import OUT as PATIENTS
+from lab2clock.clock_spec import MARKERS
+from lab2clock.conversions import convert
+from lab2clock.stage1 import RawItem, RawReport
+from lab2clock.units import normalise_unit
+
+BENCH = Path(__file__).resolve().parent
+TRUTH = BENCH / "truth"
+RENDER_SPEC = BENCH / "render_spec"
+
+Layout = Literal["table", "two_column", "multi_page"]
+Language = Literal["en", "zh"]
+UnitSystem = Literal["si", "us", "mixed"]
+
+
+class Truth(BaseModel):
+    """What is true about one patient."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    report: str = Field(pattern=r"^R\d{2}$")
+    split: Literal["dev", "test"]
+    seqn: int = Field(description="The NHANES respondent the values come from.")
+    age: int = Field(ge=20, le=79)
+    values: dict[str, float] = Field(
+        description="The nine markers in clock units, unrounded."
+    )
+
+    @field_validator("values")
+    @classmethod
+    def _nine_markers(cls, values: dict[str, float]) -> dict[str, float]:
+        if set(values) != set(MARKERS):
+            raise ValueError(f"values must hold exactly {MARKERS}")
+        return values
+
+
+class Conditions(BaseModel):
+    """How one report is printed: the tags errors are sliced by."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    layout: Layout
+    language: Language
+    unit_system: UnitSystem
+
+
+class PrintedRow(RawItem):
+    """One row as printed: the stage-1 fields, plus what the row really is.
+
+    analyte: the clock marker the row feeds, or None for a distractor.
+    decimals: digits printed after the decimal mark.
+    planted: None, or why the printed value differs from the truth.
+    """
+
+    analyte: str | None
+    decimals: int = Field(ge=0)
+    planted: str | None = None
+
+
+class Degradation(BaseModel):
+    """A photo-like degradation of the rendered page; Phase 4 sets the steps."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    seed: int
+
+
+class RenderSpec(BaseModel):
+    """What one report prints."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    report: str = Field(pattern=r"^R\d{2}$")
+    split: Literal["dev", "test"]
+    conditions: Conditions
+    degradation: Degradation | None = None
+    rows: list[PrintedRow]
+
+    def stage1(self) -> RawReport:
+        """What a perfect reader returns for this report."""
+        return RawReport(
+            items=[
+                RawItem(**row.model_dump(include=set(RawItem.model_fields)))
+                for row in self.rows
+            ]
+        )
+
+
+# Per marker, the name printed in each language. Each maps to its marker in
+# lab2clock's synonym dictionary.
+NAMES: dict[Language, dict[str, str]] = {
+    "en": {
+        "white_blood_cell_count": "WBC",
+        "lymphocyte_percent": "Lymphocytes %",
+        "mean_cell_volume": "MCV",
+        "red_cell_distribution_width": "RDW-CV",
+        "albumin": "Albumin",
+        "creatinine": "Creatinine",
+        "glucose": "Glucose",
+        "alkaline_phosphatase": "Alkaline Phosphatase",
+        "c_reactive_protein": "hs-CRP",
+    },
+    "zh": {
+        "white_blood_cell_count": "白细胞计数",
+        "lymphocyte_percent": "淋巴细胞百分比",
+        "mean_cell_volume": "平均红细胞体积",
+        "red_cell_distribution_width": "红细胞分布宽度",
+        "albumin": "白蛋白",
+        "creatinine": "肌酐",
+        "glucose": "葡萄糖",
+        "alkaline_phosphatase": "碱性磷酸酶",
+        "c_reactive_protein": "超敏C反应蛋白",
+    },
+}
+
+# Per marker, (unit as printed, decimals) in each unit system: SI as on a
+# European or Chinese report, US as on an American one. The blood count prints
+# the same in both, bar the white-cell unit.
+DISPLAY: dict[str, dict[str, tuple[str, int]]] = {
+    "si": {
+        "white_blood_cell_count": ("10^9/L", 1),
+        "lymphocyte_percent": ("%", 1),
+        "mean_cell_volume": ("fL", 1),
+        "red_cell_distribution_width": ("%", 1),
+        "albumin": ("g/L", 0),
+        "creatinine": ("µmol/L", 0),
+        "glucose": ("mmol/L", 1),
+        "alkaline_phosphatase": ("U/L", 0),
+        "c_reactive_protein": ("mg/L", 1),
+    },
+    "us": {
+        "white_blood_cell_count": ("x10^3/uL", 1),
+        "lymphocyte_percent": ("%", 1),
+        "mean_cell_volume": ("fL", 1),
+        "red_cell_distribution_width": ("%", 1),
+        "albumin": ("g/dL", 1),
+        "creatinine": ("mg/dL", 2),
+        "glucose": ("mg/dL", 0),
+        "alkaline_phosphatase": ("IU/L", 0),
+        "c_reactive_protein": ("mg/dL", 2),
+    },
+}
+
+# A mixed report prints the blood count and albumin in SI, and the rest in US
+# units, as some labs do after switching analysers for part of the panel.
+MIXED_US = ("creatinine", "glucose", "c_reactive_protein")
+
+# Printed order: the blood count, then the chemistry, which a multi-page report
+# puts on page 2.
+CBC = (
+    "white_blood_cell_count",
+    "lymphocyte_percent",
+    "mean_cell_volume",
+    "red_cell_distribution_width",
+)
+CHEMISTRY = (
+    "albumin",
+    "creatinine",
+    "glucose",
+    "alkaline_phosphatase",
+    "c_reactive_protein",
+)
+
+BASELINE = Conditions(layout="table", language="en", unit_system="si")
+
+
+def display(marker: str, unit_system: UnitSystem) -> tuple[str, int]:
+    """The (unit as printed, decimals) of `marker` in a unit system."""
+    if unit_system == "mixed":
+        unit_system = "us" if marker in MIXED_US else "si"
+    return DISPLAY[unit_system][marker]
+
+
+def printed_value(marker: str, value: float, unit: str, decimals: int) -> str:
+    """`value`, in clock units, as a lab prints it in `unit`."""
+    factor = convert(marker, 1.0, normalise_unit(unit))
+    # Drop float noise (0.2259999999 is 0.226) before rounding half up.
+    exact = Decimal(repr(round(float(value) / factor, 10)))
+    text = str(exact.quantize(Decimal(1).scaleb(-decimals), ROUND_HALF_UP))
+    if Decimal(text) == 0:
+        raise ValueError(f"{marker} {value} rounds to 0 in {unit}")
+    return text
+
+
+def truth(patient: pd.Series) -> Truth:
+    return Truth(
+        report=patient.name,
+        split=patient["split"],
+        seqn=int(patient["SEQN"]),
+        age=int(patient["age"]),
+        values={marker: float(patient[marker]) for marker in MARKERS},
+    )
+
+
+def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
+    rows = []
+    for marker in (*CBC, *CHEMISTRY):
+        unit, decimals = display(marker, conditions.unit_system)
+        page = 2 if conditions.layout == "multi_page" and marker in CHEMISTRY else 1
+        rows.append(
+            PrintedRow(
+                analyte=marker,
+                name=NAMES[conditions.language][marker],
+                value=printed_value(marker, patient[marker], unit, decimals),
+                unit=unit,
+                page=page,
+                decimals=decimals,
+            )
+        )
+    return RenderSpec(
+        report=patient.name, split=patient["split"], conditions=conditions, rows=rows
+    )
+
+
+def write(model: BaseModel, folder: Path) -> None:
+    folder.mkdir(exist_ok=True)
+    text = json.dumps(model.model_dump(), indent=2, ensure_ascii=False)
+    (folder / f"{model.report}.json").write_text(text + "\n")
+
+
+def main() -> None:
+    patients = pd.read_csv(PATIENTS, index_col="report")
+    for _, patient in patients.iterrows():
+        write(truth(patient), TRUTH)
+        write(render_spec(patient, BASELINE), RENDER_SPEC)
+    print(f"wrote {len(patients)} reports to {TRUTH} and {RENDER_SPEC}")
+
+
+if __name__ == "__main__":
+    main()

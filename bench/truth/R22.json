@@ -1,0 +1,17 @@
+{
+  "report": "R22",
+  "split": "test",
+  "seqn": 95149,
+  "age": 48,
+  "values": {
+    "albumin": 33.0,
+    "creatinine": 59.22913719943423,
+    "glucose": 5.439609236234459,
+    "c_reactive_protein": 1.318,
+    "lymphocyte_percent": 22.7,
+    "mean_cell_volume": 84.0,
+    "red_cell_distribution_width": 13.2,
+    "alkaline_phosphatase": 96.0,
+    "white_blood_cell_count": 12.1
+  }
+}

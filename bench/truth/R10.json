@@ -1,0 +1,17 @@
+{
+  "report": "R10",
+  "split": "test",
+  "seqn": 97928,
+  "age": 56,
+  "values": {
+    "albumin": 41.0,
+    "creatinine": 91.93776520509194,
+    "glucose": 5.606127886323268,
+    "c_reactive_protein": 0.043,
+    "lymphocyte_percent": 31.6,
+    "mean_cell_volume": 90.1,
+    "red_cell_distribution_width": 13.6,
+    "alkaline_phosphatase": 59.0,
+    "white_blood_cell_count": 6.5
+  }
+}

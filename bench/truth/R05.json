@@ -1,0 +1,17 @@
+{
+  "report": "R05",
+  "split": "dev",
+  "seqn": 96951,
+  "age": 36,
+  "values": {
+    "albumin": 41.0,
+    "creatinine": 69.83734087694484,
+    "glucose": 5.051065719360569,
+    "c_reactive_protein": 0.525,
+    "lymphocyte_percent": 28.1,
+    "mean_cell_volume": 87.2,
+    "red_cell_distribution_width": 13.6,
+    "alkaline_phosphatase": 67.0,
+    "white_blood_cell_count": 7.9
+  }
+}

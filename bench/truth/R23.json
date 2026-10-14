@@ -1,0 +1,17 @@
+{
+  "report": "R23",
+  "split": "test",
+  "seqn": 101470,
+  "age": 57,
+  "values": {
+    "albumin": 37.0,
+    "creatinine": 62.76520509193776,
+    "glucose": 5.273090586145648,
+    "c_reactive_protein": 0.238,
+    "lymphocyte_percent": 36.3,
+    "mean_cell_volume": 100.4,
+    "red_cell_distribution_width": 12.3,
+    "alkaline_phosphatase": 65.0,
+    "white_blood_cell_count": 5.0
+  }
+}

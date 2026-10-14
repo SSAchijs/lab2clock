@@ -1,0 +1,17 @@
+{
+  "report": "R13",
+  "split": "test",
+  "seqn": 99353,
+  "age": 30,
+  "values": {
+    "albumin": 38.0,
+    "creatinine": 70.72135785007072,
+    "glucose": 5.106571936056838,
+    "c_reactive_protein": 1.5570000000000002,
+    "lymphocyte_percent": 33.3,
+    "mean_cell_volume": 67.9,
+    "red_cell_distribution_width": 16.9,
+    "alkaline_phosphatase": 120.0,
+    "white_blood_cell_count": 7.8
+  }
+}

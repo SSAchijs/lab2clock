@@ -1,0 +1,17 @@
+{
+  "report": "R18",
+  "split": "test",
+  "seqn": 99924,
+  "age": 21,
+  "values": {
+    "albumin": 44.0,
+    "creatinine": 58.345120226308346,
+    "glucose": 4.496003552397869,
+    "c_reactive_protein": 0.097,
+    "lymphocyte_percent": 42.4,
+    "mean_cell_volume": 89.9,
+    "red_cell_distribution_width": 12.3,
+    "alkaline_phosphatase": 52.0,
+    "white_blood_cell_count": 3.3
+  }
+}
