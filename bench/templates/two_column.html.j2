@@ -1,0 +1,33 @@
+{#- One page: the panels side by side as lists, each result on one line with
+    its flag in the result cell and the reference interval beneath. -#}
+{% extends "base.html.j2" %}
+{% from "macros.html.j2" import header, footer %}
+{% block style %}
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22pt; }
+  .item { display: grid; grid-template-columns: 1fr auto 5.2em;
+          gap: 0 6pt; padding: 3pt 0; border-bottom: 1px dotted #bbb; }
+  .item .result { text-align: right; }
+  .item .unit { color: #333; }
+  .item .reference { grid-column: 1 / -1; font-size: 7.5pt; color: #666; }
+{% endblock %}
+{% block pages %}
+<div class="page">
+  {{ header(spec, t) }}
+  <div class="columns">
+    {% for panel in ("cbc", "chemistry") %}
+    <div>
+      <h2>{{ t[panel] }}</h2>
+      {% for row in spec.rows if row.panel == panel %}
+      <div class="item" data-row="{{ spec.rows.index(row) }}">
+        <span class="name">{{ row.name }}</span>
+        <span class="result{{ ' flagged' if row.flag }}">{{ row.value }}{{ ' ' ~ row.flag if row.flag }}</span>
+        <span class="unit">{{ row.unit }}</span>
+        <span class="reference">{{ t.reference }}: {{ row.reference }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ footer(spec, t, 1, 1) }}
+</div>
+{% endblock %}

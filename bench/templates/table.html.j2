@@ -1,0 +1,13 @@
+{#- One page: both panels as tables with flags and reference intervals. -#}
+{% extends "base.html.j2" %}
+{% from "macros.html.j2" import header, footer, results %}
+{% block pages %}
+<div class="page">
+  {{ header(spec, t) }}
+  {% for panel in ("cbc", "chemistry") %}
+  <h2>{{ t[panel] }}</h2>
+  {{ results(spec, t, spec.rows | selectattr("panel", "eq", panel) | list) }}
+  {% endfor %}
+  {{ footer(spec, t, 1, 1) }}
+</div>
+{% endblock %}

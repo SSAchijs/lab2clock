@@ -1,0 +1,20 @@
+{#- One page per printed page number, the header repeated on each, as a
+    cumulative report prints it. The previous column appears when the report
+    has one. -#}
+{% extends "base.html.j2" %}
+{% from "macros.html.j2" import header, footer, results %}
+{% block pages %}
+{% for number in pages %}
+<div class="page">
+  {{ header(spec, t) }}
+  {% for panel in ("cbc", "chemistry") %}
+  {% set rows = spec.rows | selectattr("page", "eq", number) | selectattr("panel", "eq", panel) | list %}
+  {% if rows %}
+  <h2>{{ t[panel] }}</h2>
+  {{ results(spec, t, rows) }}
+  {% endif %}
+  {% endfor %}
+  {{ footer(spec, t, loop.index, pages | length) }}
+</div>
+{% endfor %}
+{% endblock %}

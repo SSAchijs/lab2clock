@@ -1,0 +1,57 @@
+{#- The header printed at the top of every page. -#}
+{% macro header(spec, t) %}
+<div class="lab">
+  <div class="name">{{ spec.identity.facility }}</div>
+  <div class="title">{{ t.title }}</div>
+</div>
+<div class="patient">
+  <div class="field"><span class="label">{{ t.patient }}</span>{{ spec.identity.name }}</div>
+  <div class="field"><span class="label">{{ t.patient_id }}</span>{{ spec.identity.patient_id }}</div>
+  <div class="field"><span class="label">{{ t.accession }}</span>{{ spec.identity.specimen_id }}</div>
+  <div class="field"><span class="label">{{ t.dob }}</span>{{ spec.identity.date_of_birth | day(t) }}</div>
+  <div class="field"><span class="label">{{ t.collected }}</span>{{ spec.identity.collected | day(t) }}</div>
+  <div class="field"><span class="label">{{ t.reported }}</span>{{ spec.identity.reported | day(t) }}</div>
+  <div class="field"><span class="label">{{ t.physician }}</span>{{ spec.identity.physician }}</div>
+</div>
+{% endmacro %}
+
+{#- The footer printed at the bottom of every page. -#}
+{% macro footer(spec, t, number, total) %}
+<div class="footer">
+  <span>{{ t.synthetic }}</span>
+  <span>{{ t.page.format(number=number, total=total) }}</span>
+</div>
+{% endmacro %}
+
+{#- A results table: one row per result, with a previous column when the
+    report has one. data-row numbers each printed row for the self-check. -#}
+{% macro results(spec, t, rows) %}
+<table class="results">
+  <thead>
+    <tr>
+      <th class="test">{{ t.test }}</th>
+      <th class="result">{{ t.result }}</th>
+      <th class="flag">{{ t.flag }}</th>
+      {% if spec.previous_collected %}
+      <th class="previous">{{ t.previous }}<br>{{ spec.previous_collected | day(t) }}</th>
+      {% endif %}
+      <th class="units">{{ t.units }}</th>
+      <th class="reference">{{ t.reference }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr data-row="{{ spec.rows.index(row) }}">
+      <td>{{ row.name }}</td>
+      <td class="result{{ ' flagged' if row.flag }}">{{ row.value }}</td>
+      <td class="flag">{{ row.flag or '' }}</td>
+      {% if spec.previous_collected %}
+      <td class="previous">{{ row.previous }}</td>
+      {% endif %}
+      <td>{{ row.unit }}</td>
+      <td>{{ row.reference }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}

@@ -125,12 +125,18 @@ class PrintedRow(RawItem):
     analyte: the clock marker the row feeds, lymphocyte_count for the absolute
         count the cross-check reads, or None for a distractor.
     decimals: digits printed after the decimal mark.
+    panel: the blood count or the chemistry, the section the row is printed in.
+    reference: the reference interval as printed: "low-high", or "<high".
+    flag: H or L when the printed value is outside the reference interval.
     planted: None, or the planted kind when the printed value is a slip.
     previous: the previous result, as printed, when the report has that column.
     """
 
     analyte: str | None
     decimals: int = Field(ge=0)
+    panel: Literal["cbc", "chemistry"]
+    reference: str
+    flag: Literal["H", "L"] | None = None
     planted: Planted | None = None
     previous: str | None = None
 
@@ -157,13 +163,18 @@ class RenderSpec(BaseModel):
     rows: list[PrintedRow]
 
     def stage1(self) -> RawReport:
-        """What a perfect reader returns for this report."""
-        return RawReport(
-            items=[
-                RawItem(**row.model_dump(include=set(RawItem.model_fields)))
-                for row in self.rows
-            ]
-        )
+        """What a perfect reader returns for this report.
+
+        A two-column list prints the flag in the result cell (146 H), so it is
+        part of the value as printed; the other layouts give it its own column.
+        """
+        items = []
+        for row in self.rows:
+            item = RawItem(**row.model_dump(include=set(RawItem.model_fields)))
+            if row.flag and self.conditions.layout == "two_column":
+                item.value = f"{row.value} {row.flag}"
+            items.append(item)
+        return RawReport(items=items)
 
 
 # Per marker, the name printed in each language. Each maps to its marker in
@@ -315,6 +326,40 @@ EXTRAS: dict[str, Extra] = {
     ),
 }
 
+# Per printed row, its reference interval in each unit system: (low, high) as
+# printed, low None for an upper limit only. Illustrative adult intervals of the
+# kind large labs print, not clinical guidance: they decorate the report and set
+# its H/L flags. One interval for both sexes, since no sex is printed, and the
+# two unit systems agree after conversion.
+REFERENCE: dict[str, dict[str, tuple[str | None, str]]] = {
+    "white_blood_cell_count": {"si": ("4.0", "11.0"), "us": ("4.0", "11.0")},
+    "red_blood_cell_count": {"si": ("4.20", "5.80"), "us": ("4.20", "5.80")},
+    "hemoglobin": {"si": ("120", "170"), "us": ("12.0", "17.0")},
+    "hematocrit": {"si": ("36.0", "50.0"), "us": ("36.0", "50.0")},
+    "mean_cell_volume": {"si": ("80.0", "100.0"), "us": ("80.0", "100.0")},
+    "red_cell_distribution_width": {"si": ("11.5", "14.5"), "us": ("11.5", "14.5")},
+    "platelet_count": {"si": ("150", "400"), "us": ("150", "400")},
+    "neutrophil_percent": {"si": ("40.0", "75.0"), "us": ("40.0", "75.0")},
+    "lymphocyte_percent": {"si": ("20.0", "45.0"), "us": ("20.0", "45.0")},
+    "lymphocyte_count": {"si": ("1.0", "4.0"), "us": ("1.0", "4.0")},
+    "sodium": {"si": ("135", "145"), "us": ("135", "145")},
+    "potassium": {"si": ("3.5", "5.1"), "us": ("3.5", "5.1")},
+    # 7-20 mg/dL of urea nitrogen is 2.5-7.1 mmol/L.
+    "urea": {"si": ("2.5", "7.1"), "us": ("7", "20")},
+    # 0.60-1.30 mg/dL is 53-115 umol/L.
+    "creatinine": {"si": ("53", "115"), "us": ("0.60", "1.30")},
+    # 70-99 mg/dL is 3.9-5.5 mmol/L.
+    "glucose": {"si": ("3.9", "5.5"), "us": ("70", "99")},
+    "total_protein": {"si": ("64", "83"), "us": ("6.4", "8.3")},
+    "albumin": {"si": ("35", "52"), "us": ("3.5", "5.2")},
+    # 0.2-1.2 mg/dL is 3.4-20.5 umol/L.
+    "total_bilirubin": {"si": ("3.4", "20.5"), "us": ("0.2", "1.2")},
+    "alkaline_phosphatase": {"si": ("40", "130"), "us": ("40", "130")},
+    "alanine_aminotransferase": {"si": ("7", "56"), "us": ("7", "56")},
+    # hs-CRP for cardiovascular risk: below 3 mg/L.
+    "c_reactive_protein": {"si": (None, "3.0"), "us": (None, "0.30")},
+}
+
 # Printed order: the blood count, then the chemistry, which a multi-page report
 # puts on page 2. Markers and extras are interleaved, as on a real panel.
 CBC = (
@@ -348,9 +393,7 @@ BASELINE = Conditions(layout="table", language="en", unit_system="si")
 
 def display(marker: str, unit_system: UnitSystem) -> tuple[str, int]:
     """The (unit as printed, decimals) of `marker` in a unit system."""
-    if unit_system == "mixed":
-        unit_system = "us" if marker in MIXED_US else "si"
-    return DISPLAY[unit_system][marker]
+    return DISPLAY[system(marker, unit_system)][marker]
 
 
 def shifted(printed: str, power: int) -> tuple[str, int]:
@@ -378,10 +421,34 @@ def printed_value(marker: str, value: float, unit: str, decimals: int) -> str:
     return rounded(float(value) / factor, decimals)
 
 
+def system(key: str, unit_system: UnitSystem) -> Literal["si", "us"]:
+    """The unit system one row is printed in. A mixed report prints extras in
+    SI, and the markers in MIXED_US in US units."""
+    if unit_system == "mixed":
+        return "us" if key in MIXED_US else "si"
+    return unit_system
+
+
+def reference(key: str, unit_system: UnitSystem) -> str:
+    """The reference interval of a row, as printed."""
+    low, high = REFERENCE[key][system(key, unit_system)]
+    return f"<{high}" if low is None else f"{low}-{high}"
+
+
+def flag(value: str, key: str, unit_system: UnitSystem) -> Literal["H", "L"] | None:
+    """H or L when the printed `value` is outside the reference interval."""
+    low, high = REFERENCE[key][system(key, unit_system)]
+    if Decimal(value) > Decimal(high):
+        return "H"
+    if low is not None and Decimal(value) < Decimal(low):
+        return "L"
+    return None
+
+
 def extra_row(key: str, patient: pd.Series, conditions: Conditions) -> PrintedRow:
-    """The printed row of an extra result. A mixed report prints extras in SI."""
+    """The printed row of an extra result."""
     extra = EXTRAS[key]
-    us = conditions.unit_system == "us"
+    us = system(key, conditions.unit_system) == "us"
     column, unit, factor, decimals = extra.us if us else extra.si
     name = extra.names[conditions.language]
     if us and conditions.language == "en" and extra.us_name:
@@ -393,6 +460,8 @@ def extra_row(key: str, patient: pd.Series, conditions: Conditions) -> PrintedRo
         unit=unit,
         page=1,
         decimals=decimals,
+        panel="cbc" if key in CBC else "chemistry",
+        reference=reference(key, conditions.unit_system),
     )
 
 
@@ -435,6 +504,8 @@ def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
                 unit=unit,
                 page=1,
                 decimals=decimals,
+                panel="cbc" if key in CBC else "chemistry",
+                reference=reference(key, conditions.unit_system),
             )
         if conditions.layout == "multi_page" and key in CHEMISTRY:
             row.page = 2
@@ -445,6 +516,7 @@ def render_spec(patient: pd.Series, conditions: Conditions) -> RenderSpec:
         if conditions.planted and PLANTED[conditions.planted][0] == key:
             row.value, row.decimals = shifted(row.value, PLANTED[conditions.planted][1])
             row.planted = conditions.planted
+        row.flag = flag(row.value, key, conditions.unit_system)
         rows.append(row)
     previous_collected = None
     if conditions.previous:

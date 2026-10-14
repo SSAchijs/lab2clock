@@ -105,6 +105,22 @@ Each report prints a full blood count and metabolic panel, not only the nine mar
 
 The identity is made by [Faker](https://faker.readthedocs.io/) from a seed, in the report's language: a patient name, patient and specimen numbers, dates, a physician and a facility. It is distractor text, as on a real report, and involves no real person. The date of birth is drawn so the patient is exactly the truth's age on the collection date, and no identity text maps to a clock marker.
 
+## Reports
+
+`bench/render.py` lays each render spec out as an HTML report with [Jinja2](https://jinja.palletsprojects.com/) templates in `bench/templates/`, one per layout:
+
+- **Table**: both panels as tables, with a flag column and reference intervals.
+- **Two-column**: the panels side by side as lists, with the flag printed in the result cell (`146 H`), so a perfect reader's value includes it.
+- **Multi-page**: one panel per page with the header repeated, as a cumulative report prints it.
+
+The table and multi-page layouts add a previous-results column when the report has one. Every printed string comes from the render spec, including each row's reference interval and its H/L flag, so the templates only arrange it. The intervals are illustrative adult intervals of the kind large labs print, not clinical guidance; they set the flags and agree between unit systems. Every report says in its footer that it is synthetic.
+
+```bash
+uv run python -m bench.render
+```
+
+This writes `bench/data/reports/R01.html` and so on. Each results row carries `data-row`, its index in the spec, and the tests check that every row prints its own name, value, unit, interval, flag and previous result, not merely somewhere on the page. Chinese reports wait for the Chinese template.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ spec.conditions.language }}">
+<head>
+<meta charset="utf-8">
+<title>{{ t.title }} {{ spec.identity.specimen_id }}</title>
+<style>
+  @page { size: {{ page_size }}; margin: 0; }
+  * { box-sizing: border-box; }
+  html { background: #e8e8e8; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+  }
+  .page {
+    width: {{ page_width }};
+    height: {{ page_height }};
+    margin: 0.3in auto;
+    padding: 0.5in 0.6in 0.45in;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  @media print {
+    html { background: none; }
+    .page { margin: 0; box-shadow: none; break-after: page; }
+    .page:last-child { break-after: auto; }
+  }
+  .lab { display: flex; justify-content: space-between; align-items: flex-end;
+         border-bottom: 2px solid #1f4e79; padding-bottom: 6pt; }
+  .lab .name { font-size: 15pt; font-weight: bold; color: #1f4e79; }
+  .lab .title { font-size: 11pt; text-transform: uppercase; letter-spacing: 0.08em; }
+  .patient { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3pt 18pt;
+             margin: 8pt 0 10pt; padding: 6pt 8pt; background: #f3f6f9;
+             border: 1px solid #d5dde6; }
+  .patient .field { white-space: nowrap; }
+  .patient .label { color: #555; margin-right: 4pt; }
+  h2 { font-size: 10.5pt; margin: 12pt 0 4pt; padding: 2pt 4pt;
+       background: #1f4e79; color: #fff; }
+  /* Fixed widths, so every panel's columns line up. */
+  table.results { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.results .test { width: 32%; }
+  table.results .result { width: 11%; }
+  table.results .flag { width: 7%; }
+  table.results .previous { width: 13%; }
+  table.results .units { width: 14%; }
+  table.results th { text-align: left; font-weight: bold; color: #333;
+                     border-bottom: 1px solid #888; padding: 2pt 4pt; }
+  table.results td { padding: 2.5pt 4pt; border-bottom: 1px solid #e3e3e3; }
+  table.results td.result, table.results td.previous { text-align: right; }
+  table.results th.result, table.results th.previous { text-align: right; }
+  .flagged { font-weight: bold; }
+  .flag { text-align: center; }
+  td.flag { font-weight: bold; }
+  .footer { position: absolute; left: 0.6in; right: 0.6in; bottom: 0.3in;
+            display: flex; justify-content: space-between; font-size: 7.5pt;
+            color: #666; border-top: 1px solid #ccc; padding-top: 3pt; }
+  {% block style %}{% endblock %}
+</style>
+</head>
+<body>
+{% block pages %}{% endblock %}
+</body>
+</html>

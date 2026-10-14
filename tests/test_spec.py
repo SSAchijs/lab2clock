@@ -11,10 +11,12 @@ from bench.spec import (
     BASELINE,
     CBC,
     CHEMISTRY,
+    DISPLAY,
     MATRIX,
     PLANTED,
     PREVIOUS_DAYS,
     PREVIOUS_DRIFT,
+    REFERENCE,
     RENDER_SPEC,
     TRUTH,
     Conditions,
@@ -336,3 +338,36 @@ def test_a_slip_moves_the_decimal_point_and_keeps_the_digits(printed, power, exp
 def test_incoherent_conditions_are_refused(fields):
     with pytest.raises(ValidationError):
         Conditions(**{**BASELINE.model_dump(), **fields})
+
+
+# Reference intervals and flags.
+
+
+@pytest.mark.parametrize("report", REPORTS)
+def test_flags_follow_the_printed_value_and_interval(report):
+    spec = load(RenderSpec, RENDER_SPEC, report)
+    for row in spec.rows:
+        low, _, high = row.reference.lstrip("<").rpartition("-")
+        value = float(row.value)
+        expected = None
+        if value > float(high):
+            expected = "H"
+        elif low and value < float(low):
+            expected = "L"
+        assert row.flag == expected, (report, row.name)
+
+
+@pytest.mark.parametrize("marker", MARKERS)
+def test_marker_intervals_agree_across_unit_systems(marker):
+    # The same interval, printed in two units, to within rounding.
+    si, us = DISPLAY["si"][marker][0], DISPLAY["us"][marker][0]
+    for si_limit, us_limit in zip(*REFERENCE[marker].values(), strict=True):
+        if si_limit is None:
+            continue
+        in_us = convert(marker, float(us_limit), normalise_unit(us))
+        in_si = convert(marker, float(si_limit), normalise_unit(si))
+        assert in_us == pytest.approx(in_si, rel=0.02)
+
+
+def test_every_printed_row_has_an_interval():
+    assert set(REFERENCE) == set(CBC) | set(CHEMISTRY)

@@ -30,6 +30,9 @@
       "page": 1,
       "analyte": "white_blood_cell_count",
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "4.0-11.0",
+      "flag": null,
       "planted": null,
       "previous": "9.5"
     },
@@ -40,6 +43,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 2,
+      "panel": "cbc",
+      "reference": "4.20-5.80",
+      "flag": "L",
       "planted": null,
       "previous": "4.18"
     },
@@ -50,6 +56,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
+      "panel": "cbc",
+      "reference": "120-170",
+      "flag": null,
       "planted": null,
       "previous": "141"
     },
@@ -60,6 +69,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "36.0-50.0",
+      "flag": null,
       "planted": null,
       "previous": "41.5"
     },
@@ -70,6 +82,9 @@
       "page": 1,
       "analyte": "mean_cell_volume",
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "80.0-100.0",
+      "flag": null,
       "planted": null,
       "previous": "101.8"
     },
@@ -80,6 +95,9 @@
       "page": 1,
       "analyte": "red_cell_distribution_width",
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "11.5-14.5",
+      "flag": null,
       "planted": null,
       "previous": "13.2"
     },
@@ -90,6 +108,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
+      "panel": "cbc",
+      "reference": "150-400",
+      "flag": null,
       "planted": null,
       "previous": "206"
     },
@@ -100,6 +121,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "40.0-75.0",
+      "flag": null,
       "planted": null,
       "previous": "56.6"
     },
@@ -110,6 +134,9 @@
       "page": 1,
       "analyte": "lymphocyte_percent",
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "20.0-45.0",
+      "flag": null,
       "planted": null,
       "previous": "32.7"
     },
@@ -120,6 +147,9 @@
       "page": 1,
       "analyte": "lymphocyte_count",
       "decimals": 1,
+      "panel": "cbc",
+      "reference": "1.0-4.0",
+      "flag": null,
       "planted": null,
       "previous": "2.8"
     },
@@ -130,6 +160,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "135-145",
+      "flag": null,
       "planted": null,
       "previous": "124"
     },
@@ -140,6 +173,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
+      "panel": "chemistry",
+      "reference": "3.5-5.1",
+      "flag": null,
       "planted": null,
       "previous": "3.9"
     },
@@ -150,6 +186,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
+      "panel": "chemistry",
+      "reference": "2.5-7.1",
+      "flag": "H",
       "planted": null,
       "previous": "11.0"
     },
@@ -160,6 +199,9 @@
       "page": 1,
       "analyte": "creatinine",
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "53-115",
+      "flag": null,
       "planted": null,
       "previous": "90"
     },
@@ -170,6 +212,9 @@
       "page": 1,
       "analyte": "glucose",
       "decimals": 1,
+      "panel": "chemistry",
+      "reference": "3.9-5.5",
+      "flag": null,
       "planted": null,
       "previous": "5.7"
     },
@@ -180,6 +225,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "64-83",
+      "flag": null,
       "planted": null,
       "previous": "67"
     },
@@ -190,6 +238,9 @@
       "page": 1,
       "analyte": "albumin",
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "35-52",
+      "flag": null,
       "planted": null,
       "previous": "40"
     },
@@ -200,6 +251,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 1,
+      "panel": "chemistry",
+      "reference": "3.4-20.5",
+      "flag": null,
       "planted": null,
       "previous": "5.3"
     },
@@ -210,6 +264,9 @@
       "page": 1,
       "analyte": "alkaline_phosphatase",
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "40-130",
+      "flag": null,
       "planted": null,
       "previous": "106"
     },
@@ -220,6 +277,9 @@
       "page": 1,
       "analyte": null,
       "decimals": 0,
+      "panel": "chemistry",
+      "reference": "7-56",
+      "flag": null,
       "planted": null,
       "previous": "25"
     },
@@ -230,6 +290,9 @@
       "page": 1,
       "analyte": "c_reactive_protein",
       "decimals": 1,
+      "panel": "chemistry",
+      "reference": "<3.0",
+      "flag": null,
       "planted": null,
       "previous": "2.2"
     }
