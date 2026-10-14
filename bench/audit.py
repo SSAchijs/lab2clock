@@ -244,7 +244,9 @@ def page(checked: list[tuple[str, list[dict]]]) -> str:
 
 
 def score(path: Path = RESULTS) -> dict[str, object]:
-    """The label error rate: wrong rows over judged rows, and missed markers."""
+    """The label error rate: wrong rows over judged rows, which fields were
+    wrong in them, and printed markers missing from the labels. A wrong row
+    gives every field as printed, an empty unit where none is printed."""
     with path.open(newline="", encoding="utf-8") as file:
         rows = list(csv.DictReader(file))
     judged = [row for row in rows if row["verdict"] in {"correct", "wrong"}]
@@ -257,6 +259,13 @@ def score(path: Path = RESULTS) -> dict[str, object]:
         "reports": len({row["image"] for row in rows}),
         "judged": len(judged),
         "wrong": len(wrong),
+        "fields": {
+            field: sum(
+                row[f"printed_{field}"].strip() != row[f"label_{field}"].strip()
+                for row in wrong
+            )
+            for field in ("name", "value", "unit")
+        },
         "missing": len(missing),
         "interval": wilson(len(wrong), len(judged)),
     }
@@ -272,6 +281,8 @@ def main() -> None:
             f"Wilson 95% {low:.1%} to {high:.1%}); "
             f"{result['missing']} printed markers missing from the labels"
         )
+        fields = ", ".join(f"{n} {f}" for f, n in result["fields"].items())
+        print(f"wrong fields: {fields}")
         return
     if sys.argv[1:]:
         raise SystemExit("usage: python -m bench.audit [score]")

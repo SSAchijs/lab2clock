@@ -71,8 +71,13 @@ def test_the_error_rate_counts_wrong_rows_over_judged_rows(tmp_path):
         {
             "image": "a.png",
             "marker": "glucose",
+            "label_name": "GLU",
+            "label_value": "5.0",
+            "label_unit": "mmol/1",
             "verdict": "wrong",
+            "printed_name": "GLU",
             "printed_value": "5.2",
+            "printed_unit": "mmol/l",
         },
         {"image": "b.png", "marker": "creatinine", "verdict": "correct"},
         {"image": "b.png", "verdict": "missing", "note": "白蛋白 40 g/L"},
@@ -91,6 +96,7 @@ def test_the_error_rate_counts_wrong_rows_over_judged_rows(tmp_path):
     )
     low, high = result["interval"]
     assert 0 < low < 1 / 3 < high < 1
+    assert result["fields"] == {"name": 0, "value": 1, "unit": 1}
 
 
 def test_a_row_left_unjudged_stops_the_score(tmp_path):

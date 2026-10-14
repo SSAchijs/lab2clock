@@ -258,6 +258,25 @@ uv run python -m bench.medrepbench select   # rebuild bench/medrepbench.csv from
 uv run python -m bench.medrepbench          # fetch the labels and the 39 images
 ```
 
+### How often the labels are wrong
+
+MedRepBench's labels were produced by OCR and an LLM; the authors report about 97% agreement in their own audit. Before a model is blamed for disagreeing with a label, the label itself has to be right. So 10 of the 39 reports, drawn with a fixed seed, were checked by hand against their images: every labelled row that maps to a clock marker, 44 in all, its name, value and unit.
+
+The check was done by a person, not a model, because the models scored are Claude models and a misreading shared with the checker would pass unseen. `bench/audit.py` writes a local review page showing each image beside its rows, and the verdicts are committed in `bench/medrepbench_audit.csv`. A second, independent pass by Claude found four rows the first pass had accepted, and the person checking agreed on all four after looking again.
+
+```bash
+uv run python -m bench.audit         # write the review page
+uv run python -m bench.audit score   # the error rate from bench/medrepbench_audit.csv
+```
+
+4 of the 44 marker labels are wrong: 9.1%, with a Wilson 95% interval of 3.6% to 21.2%. No printed marker is missing from the labels. Every error is in the unit; no value or name is wrong:
+
+- a unit the label supplies that the row does not print, where the reference range is blacked out and there is no units column;
+- a unit the label leaves out, where the units column prints `%`;
+- `mg/l` read as `mg/1`, twice, where the font draws a lowercase L like a 1.
+
+So on these reports the labels can be trusted for values, but a unit disagreement between a model and a label may be the label's fault. The labels also treat a unit printed only inside the reference range inconsistently, taking it as the unit on some rows and leaving it out on others. Stage 1 on the real set is scored with both in mind.
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):
