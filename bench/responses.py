@@ -3,6 +3,10 @@
 Each extractor's responses live in results/responses/<extractor>/<run>/, one
 file per report, where the scorer reads them. The oracle reads without a
 prompt, so it records none.
+
+An answer that breaks the stage-1 schema is kept as a failure, with what the
+model wrote, even when a retry then succeeds. After a second failure there is
+no report, and the scorer counts the response as invalid.
 """
 
 from pathlib import Path
@@ -15,24 +19,44 @@ from lab2clock.stage1 import RawReport
 RESPONSES = Path(__file__).resolve().parent.parent / "results" / "responses"
 
 
+class Failure(BaseModel):
+    """One answer that did not fit the stage-1 schema, and why."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    reason: str
+    output: str
+
+
 class Response(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     prompt: str | None
     prompt_sha256: str | None
-    report: RawReport
+    report: RawReport | None
+    failures: list[Failure] = []
 
     @model_validator(mode="after")
-    def _prompt_and_hash_together(self) -> "Response":
+    def _complete(self) -> "Response":
         if (self.prompt is None) != (self.prompt_sha256 is None):
             raise ValueError("a prompt version needs its hash, and a hash its version")
+        if self.report is None and not self.failures:
+            raise ValueError("a response without a report must say why it failed")
         return self
 
     @classmethod
-    def of(cls, report: RawReport, prompt: Prompt | None = None) -> "Response":
-        if prompt is None:
-            return cls(prompt=None, prompt_sha256=None, report=report)
-        return cls(prompt=prompt.version, prompt_sha256=prompt.sha256, report=report)
+    def of(
+        cls,
+        report: RawReport | None,
+        prompt: Prompt | None = None,
+        failures: list[Failure] | None = None,
+    ) -> "Response":
+        return cls(
+            prompt=prompt.version if prompt else None,
+            prompt_sha256=prompt.sha256 if prompt else None,
+            report=report,
+            failures=failures or [],
+        )
 
 
 def write(report: str, response: Response, out: Path) -> Path:

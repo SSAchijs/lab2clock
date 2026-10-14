@@ -40,6 +40,7 @@ normal-approximation interval runs past 100%; Wilson's stays inside 0 to 100%.
 Every marker that is not fully correct is attributed to the first stage that
 went wrong, in pipeline order, so each error says which stage to fix:
 
+- invalid: the response broke the stage-1 schema twice, so nothing was read.
 - omitted: the printed row was not transcribed.
 - value: its value was misread.
 - unit: its unit was misread.
@@ -64,7 +65,7 @@ import math
 import re
 import unicodedata
 from collections.abc import Iterable
-from dataclasses import asdict, dataclass, fields
+from dataclasses import asdict, dataclass, fields, replace
 from itertools import groupby
 from pathlib import Path
 from statistics import NormalDist
@@ -151,7 +152,7 @@ def same_input(got: float, expected: float) -> bool:
 
 # Attribution.
 
-Stage = Literal["omitted", "value", "unit", "mapping", "conversion", "flag"]
+Stage = Literal["invalid", "omitted", "value", "unit", "mapping", "conversion", "flag"]
 
 # Issues raised while reading a row into the clock's unit; the rest are checks.
 _READING_CHECKS = {"value", "unit", "conversion"}
@@ -320,6 +321,15 @@ def score_report(spec: RenderSpec, response: RawReport, age: float) -> list[Outc
     return outcomes
 
 
+def score_invalid(spec: RenderSpec, age: float) -> list[Outcome]:
+    """Score a response that broke the schema twice: nothing was read, so
+    every printed marker is lost to the invalid response, not omitted."""
+    return [
+        replace(o, error="invalid") if o.error == "omitted" else o
+        for o in score_report(spec, RawReport(items=[]), age)
+    ]
+
+
 def _attribute_core(marker, out, item, delivered, spec, item_for) -> Stage:
     """Why the core got a correctly read and mapped marker wrong."""
     if delivered is None:
@@ -454,7 +464,11 @@ def score_responses(directory: Path = RESPONSES) -> list[dict[str, object]]:
             "split": spec.split,
             **spec.conditions.model_dump(),
         }
-        for outcome in score_report(spec, response.report, truth.age):
+        if response.report is None:
+            outcomes = score_invalid(spec, truth.age)
+        else:
+            outcomes = score_report(spec, response.report, truth.age)
+        for outcome in outcomes:
             rows.append({**context, **asdict(outcome)})
     return rows
 

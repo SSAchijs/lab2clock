@@ -173,6 +173,7 @@ Every marker that is not fully correct is blamed on the first stage that went wr
 
 | Stage | What went wrong |
 | --- | --- |
+| invalid | the response broke the stage-1 schema twice, so nothing was read |
 | omitted | the printed row was not transcribed |
 | value | its value was misread |
 | unit | its unit was misread |
@@ -221,6 +222,12 @@ uv run python -m bench.models
 The prompt that asks a model for the stage-1 transcription is a plain text file, [`prompts/extract_v1.txt`](prompts/extract_v1.txt). It asks for every current result exactly as printed, on every page and in printed order. The model must not convert, translate or rename anything, must copy units verbatim, and must leave out previous results, reference intervals and patient details. It describes lab reports in general, not the layouts of this generator, so it is not tuned to the reports it is scored on.
 
 Results from different prompts are not comparable, so once a response has been recorded with a prompt, the file is never edited. A change is a new file, `extract_v2.txt`. Every saved response records the prompt's version and the SHA-256 of its text, and every row of `results.csv` records the version. The scorer refuses an extractor whose responses disagree on either, so a prompt edited in place cannot mix two prompts' results silently.
+
+## Reading a report
+
+`bench/extract.py` sends one report per call, with the prompt as the system message. The API's structured-output mode holds the answer to the stage-1 JSON schema from `lab2clock/stage1.py`, the same definition the core validates, so the model and the code cannot drift apart. The API cannot enforce every rule in that schema. It drops the length and range limits, such as a name of at least one character or a page from 1, and an answer that was refused or cut off at the token limit need not fit at all. So every answer is validated again against the full schema.
+
+An answer that fails is retried once. Each failure is saved in the response, with what the model wrote, even when the retry succeeds. After a second failure the response has no report, and the scorer blames every printed marker in it on the `invalid` stage. A broken output is a failure mode worth counting, and retrying until the model complies would hide it.
 
 ## Usage
 
