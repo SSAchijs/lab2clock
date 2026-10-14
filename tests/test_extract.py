@@ -1,11 +1,11 @@
 import base64
+import hashlib
 import json
-from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
-from bench import degrade, extract, prompts, render
+from bench import degrade, extract, prompts, render, responses
 from bench.spec import RENDER_SPEC, RenderSpec
 from lab2clock.stage1 import RawItem, RawReport
 
@@ -13,23 +13,25 @@ REPORT = RawReport(items=[RawItem(name="CRP", value="2,4", unit="mg/L", page=1)]
 VALID = REPORT.model_dump_json()
 PAGES = extract.Input(
     "pdf",
-    [Path("R01.pdf")],
+    [render.OUT / "R01.pdf"],
     [{"type": "text", "text": "a stand-in for the report's pages"}],
 )
 
 
 class FakeMessages:
-    """Answers each call with the next (stop reason, text) in the script."""
+    """Answers each call with the next (stop reason, text) in the script, or
+    with a valid answer once the script runs out."""
 
-    def __init__(self, script):
+    def __init__(self, script=()):
         self.script = list(script)
         self.calls = []
 
     def create(self, **request):
         self.calls.append(request)
-        stop_reason, text = self.script.pop(0)
+        stop_reason, text = self.script.pop(0) if self.script else ("end_turn", VALID)
         return SimpleNamespace(
             stop_reason=stop_reason,
+            usage=SimpleNamespace(input_tokens=1000, output_tokens=200),
             content=[
                 SimpleNamespace(type="thinking", thinking=""),
                 SimpleNamespace(type="text", text=text),
@@ -40,7 +42,7 @@ class FakeMessages:
 def read(*script):
     messages = FakeMessages(script)
     client = SimpleNamespace(messages=messages)
-    response = extract.read(client, "claude-haiku-5-5", prompts.load(), PAGES)
+    response = extract.read(client, "claude-haiku-5-5", prompts.load(), PAGES, 1)
     return response, messages.calls
 
 
@@ -81,7 +83,8 @@ def test_a_failed_answer_is_retried_once_and_the_failure_kept():
 def test_the_response_records_the_form_and_files_sent():
     for script in [[("end_turn", VALID)], [("end_turn", "{"), ("end_turn", "{")]]:
         response, _ = read(*script)
-        assert (response.form, response.files) == ("pdf", ["R01.pdf"])
+        assert response.form == "pdf"
+        assert list(response.files) == ["R01.pdf"]
 
 
 def test_a_second_failure_is_recorded_not_retried():
@@ -159,3 +162,77 @@ def test_every_report_has_the_files_it_is_sent_as(report):
     sent = extract.report_input(spec(report))
     assert sent.form == ("photo" if spec(report).conditions.photo else "pdf")
     assert all(path.exists() for path in sent.files)
+
+
+# The cache.
+
+MODEL = "claude-haiku-5-5"
+
+
+def client():
+    return SimpleNamespace(messages=FakeMessages())
+
+
+def test_a_response_records_what_it_was_read_from_and_its_cost():
+    response, _ = read(("end_turn", "{"), ("end_turn", VALID))
+    assert response.model == MODEL
+    assert response.settings == extract.SETTINGS
+    assert response.files == {
+        "R01.pdf": hashlib.sha256((render.OUT / "R01.pdf").read_bytes()).hexdigest()
+    }
+    assert response.key == extract.key(MODEL, prompts.load(), PAGES, 1)
+    # Both attempts were billed.
+    assert (response.usage.input_tokens, response.usage.output_tokens) == (2000, 400)
+
+
+def test_a_rerun_makes_no_api_call(tmp_path):
+    dev = [s for s in specs() if s.split == "dev"]
+    first, second = client(), client()
+    assert extract.run(first, MODEL, prompts.load(), dev, 1, tmp_path) == (5, 0)
+    assert extract.run(second, MODEL, prompts.load(), dev, 1, tmp_path) == (0, 5)
+    assert len(first.messages.calls) == 5
+    assert second.messages.calls == []
+    out = tmp_path / "claude-haiku-5-5_extract_v1" / "1"
+    assert sorted(p.stem for p in out.glob("*.json")) == [s.report for s in dev]
+
+
+def test_each_run_is_read_separately(tmp_path):
+    [r01] = [s for s in specs() if s.report == "R01"]
+    fake = client()
+    for number in (1, 2, 3):
+        assert extract.run(fake, MODEL, prompts.load(), [r01], number, tmp_path) == (
+            1,
+            0,
+        )
+    assert len(fake.messages.calls) == 3
+
+
+def test_the_key_changes_with_anything_that_can_change_the_answer(tmp_path):
+    prompt = prompts.load()
+    base = extract.key(MODEL, prompt, PAGES, 1)
+    edited = prompts.Prompt(prompt.version, prompt.text + " ")
+    copy = tmp_path / "R01.pdf"
+    copy.write_bytes(PAGES.files[0].read_bytes() + b"%")
+    other_file = extract.Input("pdf", [copy], PAGES.content)
+    assert (
+        len(
+            {
+                base,
+                extract.key("claude-opus-5-5", prompt, PAGES, 1),
+                extract.key(MODEL, edited, PAGES, 1),
+                extract.key(MODEL, prompt, other_file, 1),
+                extract.key(MODEL, prompt, PAGES, 2),
+            }
+        )
+        == 5
+    )
+
+
+def test_a_saved_response_read_from_other_inputs_stops_the_run(tmp_path):
+    [r01] = [s for s in specs() if s.report == "R01"]
+    extract.run(client(), MODEL, prompts.load(), [r01], 1, tmp_path)
+    path = tmp_path / "claude-haiku-5-5_extract_v1" / "1" / "R01.json"
+    saved = responses.read(path)
+    responses.write("R01", saved.model_copy(update={"key": "stale"}), path.parent)
+    with pytest.raises(SystemExit, match="different inputs"):
+        extract.run(client(), MODEL, prompts.load(), [r01], 1, tmp_path)

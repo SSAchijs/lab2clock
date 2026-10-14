@@ -231,6 +231,12 @@ Each report is sent in its native form, as a real app would receive it. A digita
 
 An answer that fails is retried once. Each failure is saved in the response, with what the model wrote, even when the retry succeeds. After a second failure the response has no report, and the scorer blames every printed marker in it on the `invalid` stage. A broken output is a failure mode worth counting, and retrying until the model complies would hide it.
 
+Every response is saved where the scorer reads it, in `results/responses/<model>_<prompt>/<run>/`, and the saved responses are the cache. Each one holds a key, the SHA-256 of everything it was read from: every file sent, the model, the prompt version and text, the settings and the run number. A rerun skips every report whose saved key matches, so rescoring makes no API call, and spending is bounded to one call per report per run. The run number is part of the key, so repeated runs of one report are read separately rather than copied from the first. If a saved response was read from something else, such as a regenerated PDF or a changed setting, the run stops rather than mix old and new answers. Each response also records the tokens billed, over every attempt, for the cost comparison. Because the raw responses are committed, anyone can rescore them without an API key.
+
+```bash
+uv run python -m bench.extract cheap --split dev --run 1
+```
+
 ## Usage
 
 Run the code stages on a stage-1 JSON file, which lists every row as printed (name, value, unit, page):

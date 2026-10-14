@@ -1,8 +1,11 @@
 {
+  "key": null,
+  "model": null,
   "prompt": null,
   "prompt_sha256": null,
+  "settings": {},
   "form": null,
-  "files": [],
+  "files": {},
   "report": {
     "items": [
       {
@@ -127,5 +130,6 @@
       }
     ]
   },
-  "failures": []
+  "failures": [],
+  "usage": null
 }

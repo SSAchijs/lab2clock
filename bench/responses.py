@@ -2,9 +2,12 @@
 
 Each extractor's responses live in results/responses/<extractor>/<run>/, one
 file per report, where the scorer reads them. The oracle reads without a
-prompt, so it records none. A model's response also records the form the
-report was sent in, a PDF or photos, and the files sent; the oracle reads the
-render spec, so it records neither.
+prompt, so it records none. A model's response also records what it was
+read from: the model, the settings, the form the report was sent in, a PDF or
+photos, and each file sent with its SHA-256, all folded into one key. The
+saved responses are the cache: a rerun skips a report whose saved key matches,
+so rescoring never calls the API. The oracle reads the render spec, so it
+records none of these.
 
 An answer that breaks the stage-1 schema is kept as a failure, with what the
 model wrote, even when a retry then succeeds. After a second failure there is
@@ -12,7 +15,7 @@ no report, and the scorer counts the response as invalid.
 """
 
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
@@ -34,15 +37,28 @@ class Failure(BaseModel):
     output: str
 
 
+class Usage(BaseModel):
+    """Tokens billed for a response, over every attempt."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    input_tokens: int
+    output_tokens: int
+
+
 class Response(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    key: str | None = None
+    model: str | None = None
     prompt: str | None
     prompt_sha256: str | None
+    settings: dict[str, Any] = {}
     form: Form | None = None
-    files: list[str] = []
+    files: dict[str, str] = {}
     report: RawReport | None
     failures: list[Failure] = []
+    usage: Usage | None = None
 
     @model_validator(mode="after")
     def _complete(self) -> "Response":
@@ -58,14 +74,10 @@ class Response(BaseModel):
         report: RawReport | None,
         prompt: Prompt | None = None,
         failures: list[Failure] | None = None,
-        form: Form | None = None,
-        files: list[str] | None = None,
     ) -> "Response":
         return cls(
             prompt=prompt.version if prompt else None,
             prompt_sha256=prompt.sha256 if prompt else None,
-            form=form,
-            files=files or [],
             report=report,
             failures=failures or [],
         )
